@@ -19,7 +19,7 @@ template_eu <- template_us %>%
   select(-location_name) %>%
   filter(endsWith(target, target_variables_eu)) %>%
   drop_na(location) %>%
-  rename(forecast_date = model_projection_date)
+  rename(origin_date = model_projection_date)
 
 write_csv(template_eu, "template/2020-12-21-example-model.csv")
 

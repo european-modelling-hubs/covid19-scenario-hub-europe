@@ -6,7 +6,7 @@ description: >
   for more info.
 type: object
 properties:
-  forecast_date:
+  origin_date:
     description: The date at which the forecasts were established and submitted
     type: array
     items:

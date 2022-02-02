@@ -1,4 +1,4 @@
-scenario_id,forecast_date,target,target_end_date,quantile,type,value,location
+scenario_id,origin_date,target,target_end_date,quantile,type,value,location
 A-2020-12-22,2020-12-21,1 wk ahead inc death,2020-12-26,NA,point,288,AT
 A-2020-12-22,2020-12-21,4 wk ahead inc death,2021-01-16,NA,point,414,AT
 A-2020-12-22,2020-12-21,7 wk ahead inc death,2021-02-06,NA,point,595,AT
