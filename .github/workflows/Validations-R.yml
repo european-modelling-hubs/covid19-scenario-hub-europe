@@ -51,7 +51,7 @@ jobs:
       - name: Install validation package
         run: |
           install.packages("remotes")
-          remotes::install_github("epiforecasts/ForecastHubValidations")
+          remotes::install_github("epiforecasts/ForecastHubValidations@origin-date")
         shell: Rscript {0}
 
       - name: Run validations
