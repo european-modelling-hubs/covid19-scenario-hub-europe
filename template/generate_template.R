@@ -4,22 +4,48 @@ library(EuroForecastHub)
 locations_names_eu <- get_hub_config("forecast_locations")
 locations_eu <- read_csv("data-locations/locations_eu.csv")[, c("location_name", "location")]
 target_variables_eu <- get_hub_config("target_variables")
+quantiles <- get_hub_config("forecast_type")[["quantiles"]]
 
-template_us <- read_csv("https://raw.githubusercontent.com/midas-network/covid19-scenario-modeling-hub/fca8bc2d86553c5bd605341cfe073a048658a6be/data-processed/MyTeam-MyModel/2020-12-21-MyTeam-MyModel.csv")
+today <- lubridate::today()
 
-template_eu <- template_us %>%
-  mutate(location = as.factor(location),
-         location_name = locations_names_eu[as.numeric(location)],
-         # We only only integers
-         value = round(value)) %>%
-  # We remove this column because it's redundant with the scenario_id column
-  select(-scenario_name) %>%
-  select(-location) %>%
-  left_join(locations_eu) %>%
-  select(-location_name) %>%
-  filter(endsWith(target, target_variables_eu)) %>%
-  drop_na(location) %>%
-  rename(origin_date = model_projection_date)
+scenarios <- c(glue::glue("A-{today}"), glue::glue("B-{today}"))
 
-write_csv(template_eu, "template/2020-12-21-example-model.csv")
+truth_eu <- covidHubUtils::load_truth(
+  truth_source = "JHU",
+  temporal_resolution = "weekly",
+  truth_end_date = today,
+  hub = "ECDC"
+)
+
+template_eu <- truth_eu %>%
+  select(location, target_end_date, target_variable, value) %>%
+  filter(target_end_date == max(target_end_date)) %>%
+  left_join(data.frame(scenario_id = scenarios), by = character()) %>%
+  mutate(
+    origin_date = target_end_date,
+    target_end_date = target_end_date + lubridate::weeks(1),
+    target = glue::glue("1 wk ahead {target_variable}"),
+    value = round(value * runif(2, min = 0.8, max = 1.2)),
+    type = "quantile",
+    .keep = "unused"
+  )
+
+template_eu <- rbind(
+  template_eu,
+  template_eu %>%
+    mutate(
+      target = gsub("^1", "2", target),
+      value = round(value * runif(2, min = 0.8, max = 1.2)),
+      target_end_date = target_end_date + lubridate::weeks(1),
+    )
+)
+
+template_eu <- template_eu %>%
+  group_by(across()) %>%
+  summarise(
+    quantile = quantiles,
+    value = round(qnorm(quantiles, mean = value, sd = value / 5))
+  )
+
+write_csv(template_eu, glue::glue("template/{today}-example-model.csv"))
 
