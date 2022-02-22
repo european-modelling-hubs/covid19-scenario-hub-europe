@@ -1,4 +1,4 @@
-# Comparison of COVID-19 scenario projections across European countries
+# European COVID-19 Scenario hub
 
 ## Background
 
@@ -52,7 +52,7 @@ For each scenario round, after defining the variables we will collaborate with t
 
 ### Contributing and combining scenario projections
 
-We focus on weekly incident targets, for any of the following COVID-19 outcomes: infections, cases, and deaths. To align with other Hubs we ask for quantile intervals at 0.01, 0.025, 0.05, every 5% to 0.95, 0.975, and 0.99. Inclusion in ensemble models requires a full set of quantiles from 0.01 to 0.99. We will collect metadata from teams in the form of a structured abstract. This will vary slightly with each round of scenarios. See the project Wiki for specific details.
+We focus on weekly incident targets, for any of the following COVID-19 outcomes: infections, cases, and deaths. To align with other Hubs we ask for quantile intervals at 0.01, 0.025, 0.05, every 5% to 0.95, 0.975, and 0.99. Inclusion in ensemble models requires a full set of quantiles from 0.01 to 0.99. We will collect metadata from teams in the form of a structured abstract. This will vary slightly with each round of scenarios. See the [technical Wiki](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki) for more details on the submission process and requirements.
 
 We will create ensembles from the individual models for each scenario round separately. As an initial choice we will create a median ensemble by taking the median of the given predictive quantiles of the different models for each scenario. Other ensemble choices will be considered and differences between outcomes presented by different models discussed with the modellers in order to avoid hiding differences from structural or parametric assumptions by taking the ensemble.  
 
