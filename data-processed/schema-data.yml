@@ -62,6 +62,7 @@ properties:
       type: integer
 required:
   - origin_date
+  - scenario_id
   - target_type
   - horizon
   - target_end_date
