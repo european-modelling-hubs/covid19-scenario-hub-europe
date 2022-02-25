@@ -1,5 +1,13 @@
 # European COVID-19 Scenario hub
 
+### Round 0
+
+We are currently working on and welcoming modelling contributions to a pilot round (Round 0). The details for this round identically match those of the [US Scenario Hub](https://covid19scenariomodelinghub.org/viz.html), applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the European Hub.
+- [Scenario details](https://github.com/midas-network/covid19-scenario-modeling-hub#round-13-scenarios)
+- [Data links](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/tree/main/data-truth#readme)
+- [Formatting and submission](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki)
+- Please aim to submit by March 22, 2022; [let us know](mail@covid19scenariohub.eu) if you need more time
+
 ## Background
 
 Scenario models for COVID-19 aim to bound the uncertainty around future outcomes over some time frame. Each potential scenario is composed of one or more variables (which could be, for example, biological parameters such as the rate of immunity waning, or assumed future changes in contact behaviours) deemed plausible. The scenario models encode the influence of these variables on COVID-19 outcomes, and results from scenario models show possible outcomes within the given timeframe assuming that present causal relationships hold in the future. The definition of scenario variables and values depends on the intended use of scenario results. One purpose of scenario modelling is to support comparisons of possible actions taken in the present with long term effects. Separately, scenarios can also be used to understand the sensitivity of future outcomes to varying parameter conditions. 
