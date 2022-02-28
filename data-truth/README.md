@@ -15,6 +15,6 @@ Testing | [Our World in Data](https://github.com/owid/covid-19-data/tree/master/
 Variants | [ECDC](https://www.ecdc.europa.eu/en/publications-data/data-virus-variants-covid-19-eueea) | [csv](https://opendata.ecdc.europa.eu/covid19/virusvariant/csv/data.csv) | No | Missing** GR, GB, CH. More countries available at: [GISAID](https://www.gisaid.org/) |
 Response measures | [ECDC](https://www.ecdc.europa.eu/en/publications-data/download-data-response-measures-covid-19) | [csv](https://www.ecdc.europa.eu/sites/default/files/documents/response_graphs_data_2022-02-24.csv) | No | Missing** GR, GB, CH. More countries available at alternative source: [OxCGRT](https://www.bsg.ox.ac.uk/research/research-projects/covid-19-government-response-tracker)
 Contact matrices | [CoMix](http://www.socialcontactdata.org/data/) |  | No | Includes 14 hub countries
-Population | [Euro Scenario Hub](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) | [csv](https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/main/data-locations/locations_eu.csv) | |
+Population | [Euro Scenario Hub](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) | [csv](https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/main/data-locations/locations_eu.csv) | Yes |
 
 ** Missing: Greece (GR), United Kingdom (GB), Switzerland (CH)
