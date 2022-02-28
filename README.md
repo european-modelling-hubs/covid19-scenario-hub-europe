@@ -2,7 +2,7 @@
 
 ### Round 0
 
-We are currently working on and welcoming modelling contributions to a pilot round (Round 0). The details for this round identically match those of the [US Scenario Hub](https://covid19scenariomodelinghub.org/viz.html), applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the European Hub.
+We are currently working on and welcoming modelling contributions to a pilot round (Round 0). The details for this round identically match those of the [US Scenario Hub](https://covid19scenariomodelinghub.org/viz.html), applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the European Hub. We request submission of model results by **22 March 2022**.
 - For updates, please [request to join the mailing list](https://groups.google.com/u/0/g/euro-covid19-scenario-hub) including your name/introduction
 - [Round 0 overview](https://docs.google.com/presentation/d/1MiQsN0p-nvDF8km-OLjHOaEAqxMDwmxlOuDPu3POxnk/edit?usp=sharing)
 - [Full scenario details](https://github.com/midas-network/covid19-scenario-modeling-hub#round-13-scenarios)
