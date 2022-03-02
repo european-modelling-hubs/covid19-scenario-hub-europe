@@ -24,7 +24,7 @@ template_eu <- truth_eu %>%
   mutate(
     origin_date = target_end_date,
     target_end_date = target_end_date + lubridate::weeks(1),
-    target = glue::glue("1 wk ahead {target_variable}"),
+    horizon = "1 wk",
     value = round(value * runif(2, min = 0.8, max = 1.2)),
     type = "quantile",
     .keep = "unused"
@@ -34,7 +34,7 @@ template_eu <- rbind(
   template_eu,
   template_eu %>%
     mutate(
-      target = gsub("^1", "2", target),
+      horizon = gsub("^1", "2", horizon),
       value = round(value * runif(2, min = 0.8, max = 1.2)),
       target_end_date = target_end_date + lubridate::weeks(1),
     )
