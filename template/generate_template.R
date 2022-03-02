@@ -1,6 +1,8 @@
 library(tidyverse)
 library(EuroForecastHub)
 
+set.seed(20220302)
+
 locations_names_eu <- get_hub_config("forecast_locations")
 locations_eu <- read_csv("data-locations/locations_eu.csv")[, c("location_name", "location")]
 target_variables_eu <- get_hub_config("target_variables")
