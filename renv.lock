@@ -505,10 +505,10 @@
     },
     "dbplyr": {
       "Package": "dbplyr",
-      "Version": "2.1.1.9000",
+      "Version": "2.1.1",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "35a2b90464be3eb5a8e1e8de9840d018",
+      "Hash": "1f37fa4ab2f5f7eded42f78b9a887182",
       "Requirements": [
         "DBI",
         "R6",
@@ -529,18 +529,13 @@
     },
     "desc": {
       "Package": "desc",
-      "Version": "1.4.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "desc",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "c0f72b452a2613b62795ac6c0441bc895252ba3b",
-      "RemoteHost": "api.github.com",
-      "Hash": "df9c79b3091f36c176318e1ff0acc063",
+      "Version": "1.4.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "28763d08fadd0b733e3cee9dab4e12fe",
       "Requirements": [
         "R6",
-        "cli",
+        "crayon",
         "rprojroot"
       ]
     },
@@ -822,10 +817,10 @@
     },
     "gh": {
       "Package": "gh",
-      "Version": "1.3.0.9000",
+      "Version": "1.3.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "875a5b71e5c0ffb9cce5dafd43f86f10",
+      "Hash": "38c2580abbda249bd6afeec00d14f531",
       "Requirements": [
         "cli",
         "gitcreds",
@@ -836,10 +831,10 @@
     },
     "gitcreds": {
       "Package": "gitcreds",
-      "Version": "0.1.1.9000",
+      "Version": "0.1.1",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "c47d4c24019d2c42d1d8fed2ca237d0c",
+      "Hash": "f3aefccc1cc50de6338146b62f115de8",
       "Requirements": []
     },
     "glue": {
@@ -883,16 +878,10 @@
     },
     "googlesheets4": {
       "Package": "googlesheets4",
-      "Version": "1.0.0.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "tidyverse",
-      "RemoteRepo": "googlesheets4",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "4f719d198237079efe8aefe5b6caf8883c1a4c8f",
-      "RemoteHost": "api.github.com",
-      "Remotes": "r-lib/gargle",
-      "Hash": "4eef616ae4bc0e68dc58790aa45018b2",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "9a6564184dc4a81daea4f1d7ce357c6a",
       "Requirements": [
         "cellranger",
         "cli",
@@ -1002,6 +991,24 @@
         "jsonlite",
         "mime",
         "openssl"
+      ]
+    },
+    "httr2": {
+      "Package": "httr2",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "a34ecedb1ec10651b77e89863edb9fae",
+      "Requirements": [
+        "R6",
+        "cli",
+        "curl",
+        "glue",
+        "magrittr",
+        "openssl",
+        "rappdirs",
+        "rlang",
+        "withr"
       ]
     },
     "ids": {
@@ -1198,10 +1205,10 @@
     },
     "modelr": {
       "Package": "modelr",
-      "Version": "0.1.8.9000",
+      "Version": "0.1.8",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "b2925a03e8475cd50ee8b983d6156d03",
+      "Hash": "9fd59716311ee82cba83dc2826fc5577",
       "Requirements": [
         "broom",
         "magrittr",
@@ -1344,10 +1351,10 @@
     },
     "progress": {
       "Package": "progress",
-      "Version": "1.2.2.9000",
+      "Version": "1.2.2",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "6deacacbde8c03046c7a9b56608a9328",
+      "Hash": "14dc9f7a3c91ebb14ec5bb9208a07061",
       "Requirements": [
         "R6",
         "crayon",
@@ -1425,10 +1432,10 @@
     },
     "rematch2": {
       "Package": "rematch2",
-      "Version": "2.1.2.9000",
+      "Version": "2.1.2",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "8ea86b824bfb8b62831c7e33a636d408",
+      "Hash": "76c9e04c712a05848ae7a23d2f170a40",
       "Requirements": [
         "tibble"
       ]
@@ -1518,10 +1525,10 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.13.0-9000",
+      "Version": "0.13",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "9f4b1f2c6edca06a0127f2c79918b9bc",
+      "Hash": "06c85365a03fdaf699966cc1d3cf53ea",
       "Requirements": []
     },
     "rvest": {
@@ -1542,10 +1549,10 @@
     },
     "sass": {
       "Package": "sass",
-      "Version": "0.4.0.9000",
+      "Version": "0.4.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "ec941ccc62223da111b35d19b791ae7f",
+      "Hash": "50cf822feb64bb3977bda0b7091be623",
       "Requirements": [
         "R6",
         "fs",
