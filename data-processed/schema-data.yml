@@ -60,6 +60,7 @@ properties:
     type: array
     items:
       type: integer
+additionalProperties: false
 required:
   - origin_date
   - scenario_id

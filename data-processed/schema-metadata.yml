@@ -92,6 +92,7 @@ properties:
     type: string
   spatial_structure:
     type: string
+additionalProperties: false
 required:
   - team_name
   - model_name
