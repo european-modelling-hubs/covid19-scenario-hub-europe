@@ -1,0 +1,25 @@
+team_name: Example
+model_name: Example Model
+model_abbr: example-model
+model_contributors: Hugo Gruson
+team_model_designation: primary
+website_url: https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe
+license: mit
+methods: Random
+modeling_NPI: Not applicable
+compliance_NPI: Not applicable
+contact_tracing: Not applicable
+testing: Not applicable
+vaccine_efficacy_transmission: Not applicable
+vaccine_efficacy_delay: Not applicable
+vaccine_hesitancy: Not applicable
+vaccine_immunity_duration: Not applicable
+natural_immunity_duration: Not applicable
+case_fatality_rate: Not applicable
+infection_fatality_rate: Not applicable
+asymptomatics: Not applicable
+age_groups: Not applicable
+importations: Not applicable
+confidence_interval_method: Not applicable
+calibration: Not applicable
+spatial_structure: Not applicable
