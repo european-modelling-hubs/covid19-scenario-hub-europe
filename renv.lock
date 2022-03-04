@@ -981,10 +981,10 @@
     },
     "httr": {
       "Package": "httr",
-      "Version": "1.4.2.9000",
+      "Version": "1.4.2",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "694f90abc4d39c9a06ca63b058da7521",
+      "Hash": "a525aba14184fec243f9eaec62fbed43",
       "Requirements": [
         "R6",
         "curl",
