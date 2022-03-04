@@ -49,18 +49,26 @@
         "yaml"
       ]
     },
-    "ForecastHubValidations": {
-      "Package": "ForecastHubValidations",
+    "HDInterval": {
+      "Package": "HDInterval",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "3b986a53325a1d95610b8d86a284dac0",
+      "Requirements": []
+    },
+    "HubValidations": {
+      "Package": "HubValidations",
       "Version": "0.0.0.9000",
       "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteUsername": "covid19-forecast-hub-europe",
-      "RemoteRepo": "ForecastHubValidations",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "a2a96f69adbfb6c55be24bd65ba444c5718b1da3",
-      "RemoteHost": "api.github.com",
       "Remotes": "r-lib/rlang",
-      "Hash": "11bda384dbf31a0724ff408b203effe7",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "HubValidations",
+      "RemoteUsername": "covid19-forecast-hub-europe",
+      "RemoteRef": "origin-date",
+      "RemoteSha": "c3472b6b381cf51c072a2028969dd4703df77992",
+      "Hash": "756e16e96e30a62497717f6999823726",
       "Requirements": [
         "dplyr",
         "fs",
@@ -73,14 +81,6 @@
         "rlang",
         "yaml"
       ]
-    },
-    "HDInterval": {
-      "Package": "HDInterval",
-      "Version": "0.2.2",
-      "Source": "Repository",
-      "Repository": "RSPM",
-      "Hash": "3b986a53325a1d95610b8d86a284dac0",
-      "Requirements": []
     },
     "KernSmooth": {
       "Package": "KernSmooth",
@@ -1480,12 +1480,12 @@
       "Version": "1.0.2",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteUsername": "r-lib",
-      "RemoteRepo": "rlang",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "df2752751c4cde5810485b6593c3ebefbd5c6594",
       "RemoteHost": "api.github.com",
-      "Hash": "5ff00cc96f2c1d735639f57086504f98",
+      "RemoteRepo": "rlang",
+      "RemoteUsername": "r-lib",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "34b04a8a731b054de950ce885627898617e8b297",
+      "Hash": "e0f2865470be9a017e97ba8c5839bac7",
       "Requirements": []
     },
     "rmarkdown": {
