@@ -10,7 +10,7 @@ quantiles <- get_hub_config("forecast_type")[["quantiles"]]
 
 today <- lubridate::today()
 
-scenarios <- c(glue::glue("A-{today}"), glue::glue("B-{today}"))
+scenarios <- c(glue::glue("A-2022-02-25"), glue::glue("B-2022-02-25"))
 
 truth_eu <- covidHubUtils::load_truth(
   truth_source = "JHU",

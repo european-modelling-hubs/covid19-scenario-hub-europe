@@ -17,7 +17,7 @@ properties:
     type: array
     items:
       type: string
-      pattern: ^[ABCD]\-\d{4}\-\d{2}\-\d{2}$
+      pattern: ^[ABCD]\-2022\-02\-25$
   target_variable:
     description: '"inc case" or "inc death"'
     type: array
