@@ -50,5 +50,7 @@ template_eu <- template_eu %>%
     value = round(qnorm(quantiles, mean = value, sd = value / 5))
   )
 
-write_csv(template_eu, glue::glue("template/{today}-example-model.csv"))
+origin_date <- unique(template_eu$origin_date)
+
+write_csv(template_eu, glue::glue("template/{origin_date}-example-model.csv"))
 
