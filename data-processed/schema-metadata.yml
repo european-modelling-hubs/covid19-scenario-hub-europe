@@ -48,7 +48,7 @@ properties:
     type: boolean
   citation:
     type: string
-  instituation_affil:
+  institution_affil:
     type: string
   team_funding:
     type: string
