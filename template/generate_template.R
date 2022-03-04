@@ -15,6 +15,7 @@ scenarios <- c(glue::glue("A-{today}"), glue::glue("B-{today}"))
 truth_eu <- covidHubUtils::load_truth(
   truth_source = "JHU",
   temporal_resolution = "weekly",
+  target_variable = target_variables_eu,
   truth_end_date = today,
   hub = "ECDC"
 )
