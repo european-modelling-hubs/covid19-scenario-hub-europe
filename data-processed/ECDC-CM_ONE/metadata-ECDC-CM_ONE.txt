@@ -1,0 +1,25 @@
+team_name: ECDC
+model_name: CM_ONE
+model_abbr: ECDC-CM_ONE
+model_contributors: Rok Grah (ECDC) rok.grah@ecdc.europa.eu, Rene Niehus (ECDC) rene.niehus@ecdc.europa.eu, Bastian Prasse (ECDC) bastian.prasse@ecdc.europa.eu, Frank.Sandmann (ECDC) frank.sandmann@ecdc.europa.eu
+website_url: Not applicable
+license: cc-by-nc-4.0
+team_model_designation: Primary
+methods: We use a discrete-time, deterministic, mean-field compartmental model to describe the spread of COVID-19 on a metapopulation level in a given country. The population is divided into ten age groups, four vaccination groups (0, 1, 2, or 3 vaccine doses), and two recovery groups (recovered from a pre-Omicron variant of concern or not). Hence, there are 80 population groups in total. To estimate the contact network between age groups, we make use of POLYMOD contact data. For every group, the disease progression follows an SEIR-type model, with additional compartments that correspond to individuals in a pre-symptomatic, mild infectious, severe infectious, hospitalised, or deceased state. We obtain the average of the infection rate between population groups by fitting the model to past data with a MCMC method. For the remaining parameters, we specified the prior distribution based on values from literature and expert opinions.
+modeling_NPI: Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour
+compliance_NPI: Not applicable
+contact_tracing: Not applicable
+testing: Not applicable
+vaccine_efficacy_transmission: See vaccine_immunity_duration
+vaccine_efficacy_delay: Not applicable
+vaccine_hesitancy: Not applicable
+vaccine_immunity_duration: We assume exponential waning of neutralisation levels that is related to vaccine efficacy (VE) against infection via the following paper: https://doi.org/10.1038/s41591-021-01377-8. The starting VEs against infections for each vaccine product and age group is obtained from literature. The exponential decay time of neutralisation levels is then defined in such a way to obtain 40% (or 60%) decrease VE against infection after 10 (or 4) months. We assume no plateau.
+natural_immunity_duration: We assume exponential waning of natural immunity; the exponential time is obtained from definition that natural immunity protection lowers by 40% (or 60%) within 10 (or 4) months. We assume no plateau.
+case_fatality_rate: Depending on age and vaccination status, ranging from 2.71e-9 to 1.3e-2
+infection_fatality_rate: Depending on age and vaccination status, ranging from 8.14e-9 to 3.9e-2
+asymptomatics: Not applicable
+age_groups: [0-4, 5-9, 10-14, 15-17, 18-24, 25-49, 50-59, 60-69, 70-79, 80+]
+importations: Not considered relevant for this submission round, but model does provide the functionality to specify importation of cases
+confidence_interval_method: Quantiles followed from MCMC and prior distribution of parameters
+calibration: Markov chain Monte Carlo 
+spatial_structure: Not applicable
