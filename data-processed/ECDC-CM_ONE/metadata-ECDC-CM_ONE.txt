@@ -2,11 +2,11 @@ team_name: ECDC
 model_name: CM_ONE
 model_abbr: ECDC-CM_ONE
 model_contributors: Rok Grah (ECDC) rok.grah@ecdc.europa.eu, Rene Niehus (ECDC) rene.niehus@ecdc.europa.eu, Bastian Prasse (ECDC) bastian.prasse@ecdc.europa.eu, Frank.Sandmann (ECDC) frank.sandmann@ecdc.europa.eu
-website_url: Not applicable
+website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
-team_model_designation: Primary
-methods: We use a discrete-time, deterministic, mean-field compartmental model to describe the spread of COVID-19 on a metapopulation level in a given country. The population is divided into ten age groups, four vaccination groups (0, 1, 2, or 3 vaccine doses), and two recovery groups (recovered from a pre-Omicron variant of concern or not). Hence, there are 80 population groups in total. To estimate the contact network between age groups, we make use of POLYMOD contact data. For every group, the disease progression follows an SEIR-type model, with additional compartments that correspond to individuals in a pre-symptomatic, mild infectious, severe infectious, hospitalised, or deceased state. We obtain the average of the infection rate between population groups by fitting the model to past data with a MCMC method. For the remaining parameters, we specified the prior distribution based on values from literature and expert opinions.
-modeling_NPI: Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour
+team_model_designation: primary
+methods: A discrete-time, deterministic, mean-field SEIR-type compartmental model to describe COVID-19 on a metapopulation level. The population is divided by age, vaccination status, and previous recovery. 
+modeling_NPI: 'Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour'
 compliance_NPI: Not applicable
 contact_tracing: Not applicable
 testing: Not applicable
@@ -18,7 +18,7 @@ natural_immunity_duration: We assume exponential waning of natural immunity; the
 case_fatality_rate: Depending on age and vaccination status, ranging from 2.71e-9 to 1.3e-2
 infection_fatality_rate: Depending on age and vaccination status, ranging from 8.14e-9 to 3.9e-2
 asymptomatics: Not applicable
-age_groups: [0-4, 5-9, 10-14, 15-17, 18-24, 25-49, 50-59, 60-69, 70-79, 80+]
+age_groups: '[0-4, 5-9, 10-14, 15-17, 18-24, 25-49, 50-59, 60-69, 70-79, 80+]'
 importations: Not considered relevant for this submission round, but model does provide the functionality to specify importation of cases
 confidence_interval_method: Quantiles followed from MCMC and prior distribution of parameters
 calibration: Markov chain Monte Carlo 
