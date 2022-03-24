@@ -5,7 +5,7 @@ model_contributors: Rok Grah (ECDC) rok.grah@ecdc.europa.eu, Rene Niehus (ECDC) 
 website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
 team_model_designation: primary
-methods: A discrete-time, deterministic, mean-field SEIR-type compartmental model to describe COVID-19 on a metapopulation level. The population is divided by age, vaccination status, and previous recovery. 
+methods: 'Discrete-time, deterministic, mean-field SEIR-type compartmental model on metapopulation level. Population divided by age, vaccination status, and previous recovery; incl. seasonality, BA2 & behavior.'
 modeling_NPI: 'Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour'
 compliance_NPI: Not applicable
 contact_tracing: Not applicable
@@ -23,3 +23,4 @@ importations: Not considered relevant for this submission round, but model does 
 confidence_interval_method: Quantiles followed from MCMC and prior distribution of parameters
 calibration: Markov chain Monte Carlo 
 spatial_structure: Not applicable
+methods_long: 'We use a discrete-time, deterministic, mean-field compartmental model to describe the spread of COVID-19 on a metapopulation level in a given country. The population is divided into ten age groups, four vaccination groups (0, 1, 2, or 3 vaccine doses), and two recovery groups (recovered from a pre-Omicron variant of concern or not). Hence, there are 80 population groups in total. To estimate the contact network between age groups, we make use of POLYMOD contact data. For every group, the disease progression follows an SEIR-type model, with additional compartments that correspond to individuals in a pre-symptomatic, mild infectious, severe infectious, hospitalised, or deceased state. We obtain the average of the infection rate between population groups by fitting the model to past data with a MCMC method. For the remaining parameters, we specified the prior distribution based on values from literature and expert opinions. The model includes seasonality, BA2 and behaviour.'
