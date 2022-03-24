@@ -13,7 +13,7 @@ testing: Not applicable
 vaccine_efficacy_transmission: See vaccine_immunity_duration
 vaccine_efficacy_delay: Not applicable
 vaccine_hesitancy: Not applicable
-vaccine_immunity_duration: We assume exponential waning of neutralisation levels that is related to vaccine efficacy (VE) against infection via the following paper: https://doi.org/10.1038/s41591-021-01377-8. The starting VEs against infections for each vaccine product and age group is obtained from literature. The exponential decay time of neutralisation levels is then defined in such a way to obtain 40% (or 60%) decrease VE against infection after 10 (or 4) months. We assume no plateau.
+vaccine_immunity_duration: 'We assume exponential waning of neutralisation levels that is related to vaccine efficacy (VE) against infection via the following paper: https://doi.org/10.1038/s41591-021-01377-8. The starting VEs against infections for each vaccine product and age group is obtained from literature. The exponential decay time of neutralisation levels is then defined in such a way to obtain 40% (or 60%) decrease VE against infection after 10 (or 4) months. We assume no plateau.'
 natural_immunity_duration: We assume exponential waning of natural immunity; the exponential time is obtained from definition that natural immunity protection lowers by 40% (or 60%) within 10 (or 4) months. We assume no plateau.
 case_fatality_rate: Depending on age and vaccination status, ranging from 2.71e-9 to 1.3e-2
 infection_fatality_rate: Depending on age and vaccination status, ranging from 8.14e-9 to 3.9e-2
