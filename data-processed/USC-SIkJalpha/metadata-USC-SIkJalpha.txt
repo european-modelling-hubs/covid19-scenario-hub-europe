@@ -14,7 +14,7 @@ testing: Not applicable.
 vaccine_efficacy_transmission: Not explicitly modeled
 vaccine_efficacy_delay: 14 days
 vaccine_hesitancy: A "suceptible-infected"model. Boosters are modeled such that the "susceptible" population is the eligible population who are yet to get a booster. To achieve the desired saturation level to create sub-scenarios, we increase the adoption rate over time.
-vaccine_immunity_duration: Only waning immunity is considered! The probability of transferring to partially immune state by at time t is modeled as a gamma distribution such that: (i) the median is as per the scenario; (ii) the efficacy (given the partial immune protection against infection) after the first 60 days is the "initial" vaccine efficacy.
+vaccine_immunity_duration: 'Only waning immunity is considered! The probability of transferring to partially immune state by at time t is modeled as a gamma distribution such that: (i) the median is as per the scenario; (ii) the efficacy (given the partial immune protection against infection) after the first 60 days is the "initial" vaccine efficacy.'
 natural_immunity_duration: Same as above
 case_fatality_rate: Learned from recent data.
 infection_fatality_rate: Learned from recent data.
