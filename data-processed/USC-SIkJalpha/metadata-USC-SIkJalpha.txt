@@ -9,7 +9,7 @@ team_model_designation: primary
 methods: Uses SIKJalpha which models temporally varying infection, death, and hospitalization rates. Learning is performed by reducing the problem to multiple simple linear regression problems. Effects of variants are modeled separately as competing contagions.
 modeling_NPI: No NPI included, contact changes over time derived from Cuebiq data.
 compliance_NPI: Not modeled.
-contract_tracing: Not applicable.
+contact_tracing: Not applicable.
 testing: Not applicable.
 vaccine_efficacy_transmission: Not explicitly modeled
 vaccine_efficacy_delay: 14 days
