@@ -28,7 +28,8 @@ team_funding: National Science Foundation Award # 2135784
 data_inputs: Cases and deaths - JHU
 citation: 
 	[1] Ajitesh Srivastava, Tianjian Xu and Viktor K. Prasanna, "Fast and Accurate Forecasting of COVID-19 Deaths using the SIkJalpha Model". https://arxiv.org/abs/2007.05180.
-methods_long: [Note that this is general description. Hospitalizaitons and age-groups are not applicable to European Scenario Modeling Hub] We use our own epidemic model called SI-kJalpha, preliminary version
+methods_long: |
+  [Note that this is general description. Hospitalizaitons and age-groups are not applicable to European Scenario Modeling Hub] We use our own epidemic model called SI-kJalpha, preliminary version
   of which we have successfully used during DARPA Grand Challenge 2014. Our model
   can consider the effect of many complexities of the epidemic process and yet be
   simplified to a few parameters that are learned using fast linear regressions. Therefore,
