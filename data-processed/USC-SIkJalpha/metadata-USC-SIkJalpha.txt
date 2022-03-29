@@ -6,7 +6,7 @@ model_contributors: Ajitesh Srivastava <ajiteshs@usc.edu>
 website_url: https://scc-usc.github.io/ReCOVER-COVID-19
 license: mit
 team_model_designation: primary
-methods: Uses SIKJalpha which models temporally varying infection, death, and hospitalization rates. Learning is performed by reducing the problem to multiple simple linear regression problems. Effects of variants are modeled separately as competing contagions.
+methods: Uses SIKJalpha which models temporally varying infection, death, and hospitalization rates. Learning is performed by reducing the problem to multiple simple linear regression problems.
 modeling_NPI: No NPI included, contact changes over time derived from Cuebiq data.
 compliance_NPI: Not modeled.
 contact_tracing: Not applicable.
