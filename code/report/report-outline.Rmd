@@ -21,12 +21,7 @@ round <- 0
 origin_date <- as.Date("2022-03-13") 
 
 # Load results
-models <- list.dirs(here("data-processed"), full.names = FALSE)
-models <- models[grepl(".", models)]
-results <- map2_dfr(.x = models, .y = origin_date,
-                    ~ read_csv(here("data-processed", .x,
-                                    paste0(.y, "-", .x, ".csv"))) %>%
-                      mutate(model = .x))
+
 ```
 
 # Round `r round` report
