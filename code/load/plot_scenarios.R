@@ -1,11 +1,16 @@
 # Plot with location as each row in a facet grid
 library(ggplot2)
+library(forcats)
 library(tidyr)
 theme_set(theme_bw())
 
 plot_scenarios <- function(results, scenario_caption,
                            target_variable,
                            columns = "model") {
+
+  # Set model as a factor
+  plot_data <- results %>%
+    mutate(model = fct_infreq(model))
 
   # Target variable
   variable_labels <- c("inc death" = "Weekly incident deaths",
@@ -25,14 +30,12 @@ plot_scenarios <- function(results, scenario_caption,
 
   # Plot
   plot <- plot_data %>%
-    mutate(model = forcats::fct_infreq(model)) %>%
     ggplot(aes(x = target_end_date)) +
     labs(x = NULL, y = NULL,
-         subtitle = variable_subtitle,
-         caption = scenario_caption) +
+         subtitle = paste0(variable_subtitle, "\n", scenario_caption)) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(labels = scales::label_comma()) +
-    theme(legend.position = "bottom")
+    theme(legend.position = "top")
 
 
   if (columns == "model") {

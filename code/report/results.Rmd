@@ -1,0 +1,44 @@
+---
+title: European COVID-19 Scenario Modelling Hub
+output:
+  html_document: default
+---
+
+```{r set-up, include=FALSE}
+# Packages
+library(here)
+library(dplyr)
+library(ggplot2)
+# Settings
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE,
+                      eval.after = "fig.cap")
+round <- 0
+origin_date <- as.Date("2022-03-13") 
+```
+
+### Model projections for Round `r round` {.tabset}
+
+- Reporting projections from `r origin_date`
+
+- Report created `r Sys.Date()`
+
+- Results showing 95% model projections across 4 scenarios and 32 locations
+
+- Read the [full scenario details](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-0)
+
+#### By scenario {.tabset .tabset-pills}
+
+##### Cases
+![](`r here("reports", "round-0", "cross-scenario-cases.png")`)
+
+##### Deaths
+![](`r here("reports", "round-0", "cross-scenario-deaths.png")`)
+
+#### By model {.tabset}
+
+##### Cases
+![](`r here("reports", "round-0", "cross-model-cases.png")`)
+
+##### Deaths
+![](`r here("reports", "round-0", "cross-model-deaths.png")`)

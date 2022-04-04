@@ -4,7 +4,6 @@ library(dplyr)
 library(purrr)
 library(readr)
 source(here("code", "load", "scenarios.R"))
-source(here("code", "summarise", "plot_scenarios.R"))
 
 models <- list.dirs(here("data-processed"), full.names = FALSE)
 models <- models[grepl(".", models)]

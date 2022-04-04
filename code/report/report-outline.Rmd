@@ -2,11 +2,8 @@
 title: European COVID-19 Scenario Modelling Hub
 output:
   html_document: default
-bibliography: references.bib
-link-citations: yes
-csl: ieee.csl
-always_allow_html: yes
 ---
+
 ```{r set-up, include=FALSE}
 # Packages
 library(here)
@@ -16,18 +13,9 @@ library(ggplot2)
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
                       message = FALSE, warning = FALSE,
                       eval.after = "fig.cap")
-theme_set(theme_bw())
 round <- 0
 origin_date <- as.Date("2022-03-13") 
-
-# Load results
-
 ```
-
-# Round `r round` report
-European COVID-19 Scenario Hub Modelling team
-Reporting projections from `r origin_date`
-Report created `r Sys.Date()`
 
 ## Exective summary
 
@@ -56,5 +44,3 @@ Report created `r Sys.Date()`
 ## Teams and models
 
 ## Scenario hub team
-
-

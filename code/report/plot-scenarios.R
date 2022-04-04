@@ -7,7 +7,7 @@ library(readr)
 # get scenario metadata
 source(here("code", "load", "scenarios.R"))
 # get model projections
-source(here("code", "load", "load-from-local.R"))
+source(here("code", "load", "local-results.R"))
 # get plotting function
 source(here("code", "load", "plot_scenarios.R"))
 
