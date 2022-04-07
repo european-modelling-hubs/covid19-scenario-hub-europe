@@ -20,7 +20,7 @@ natural_immunity_duration: 30 days after infection or (if the individual was alr
 case_fatality_rate: Age-dependant values and dependent on whether the individual has acquired immunity. Not subjected to waning. 
 infection_fatality_rate: Age-dependant values and dependent on whether the individual has acquired immunity. Not subjected to waning. 
 asymptomatics: We assume that 25% of the infected are asymptomatic
-age_groups: [0-5, 6-10, 10-15, 15-20, 20-30, 30-40, 40-50, 50-60, 60-70, 80-90, 90-100+],
+age_groups: 0-5, 6-10, 10-15, 15-20, 20-30, 30-40, 40-50, 50-60, 60-70, 80-90, 90-100+
 Importations: We use data provided the by Spanish National Health service. We scale the detected cases in order to estimate the real ones. 
 confidence_interval_method: Based on calibration and statistical analysis of multiple executions. 
 Calibration: We calibrate the model using the time interval from July 2021 and March 2022
