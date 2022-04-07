@@ -8,7 +8,7 @@ team_model_designation: primary
 methods: Agent-based parallel simulator that models individual interactions extracted from social networks and demographical data.
 team_funding: U3CM, Instituto de Salud Carlos III, Gobierno de España, European Commission
 citation: https://doi.org/10.3389/fpubh.2021.636023
-modeling_NPI:In this simulation we consider use of facemasks. With no changing conditions in their use for the period between 	March 13th 2022 and March 7th  2022 
+modeling_NPI: In this simulation we consider use of facemasks. With no changing conditions in their use for the period between March 13th 2022 and March 7th  2022 
 compliance_NPI: We assume that the NPI do not change during the period from March 2022 to March 2023
 contact_tracing: We consider that a certain percentage of the infected individuals are self-quarantined at home.
 testing: Not considered for this version of the code (we will include it in future versions)
