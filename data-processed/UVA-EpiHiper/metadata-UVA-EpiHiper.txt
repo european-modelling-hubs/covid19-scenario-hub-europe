@@ -8,7 +8,7 @@ license: cc-by-4.0
 team_model_designation: primary
 
 methods: Our agent-based model EpiHiper simulates disease transmissions in a synthetic network. It models immune waning, immune escape, and NPIs; and is initialized with age stratified ground truth data.
-modeling_NPI: We have modeled the following NPIs: (i) A fraction of the population chooses to reduce non-essential (shopping, religion, and other) activities. (ii) All K-12 schools are closed from mid-June 2022 to mid-August 2022 and again from mid-December 2022 to the beginning of 2023. (iii) A fraction of symptomatic people choose to self-isolate themselves at home.
+modeling_NPI: (i) A fraction of the population chooses to reduce non-essential (shopping, religion, and other) activities. (ii) All K-12 schools are closed from mid-June 2022 to mid-August 2022 and again from mid-December 2022 to the beginning of 2023. (iii) A fraction of symptomatic people choose to self-isolate themselves at home.
 compliance_NPI: Compliances are 15% on average for (i), 100% for (ii), and 75% for (iii).
 contact_tracing: Not applicable.
 testing: Not applicable.
