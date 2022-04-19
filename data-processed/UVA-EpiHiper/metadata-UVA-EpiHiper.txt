@@ -1,0 +1,28 @@
+team_name: Biocomplexity Institute at University of Virginia
+model_name: EpiHiper
+model_abbr: UVA-EpiHiper
+model_version: 2022-04-14
+model_contributors: Jiangzhuo Chen (UVA) <chenj@virginia.edu>, Stefan Hoops (UVA) <shoops@virginia.edu>, Parantapa Bhattacharya (UVA) <parantapa@virginia.edu>, Dustin Machi (UVA) <dm8qs@virginia.edu>, Madhav Marathe (UVA) <marathe@virginia.edu>
+website_url: http://not.available.yet
+license: cc-by-4.0
+team_model_designation: primary
+
+methods: Our agent-based model EpiHiper simulates disease transmissions in a synthetic network. It models immune waning, immune escape, and NPIs; and is initialized with age stratified ground truth data.
+modeling_NPI: (i) A fraction of the population chooses to reduce non-essential (shopping, religion, and other) activities. (ii) All K-12 schools are closed from mid-June 2022 to mid-August 2022 and again from mid-December 2022 to the beginning of 2023. (iii) A fraction of symptomatic people choose to self-isolate themselves at home.
+compliance_NPI: Compliances are 15% on average for (i), 100% for (ii), and 75% for (iii).
+contact_tracing: Not applicable.
+testing: Not applicable.
+vaccine_efficacy_transmission: Not applicable.
+vaccine_efficacy_delay: as specified in the scenario description.
+vaccine_hesitancy: as specified in the scenario description.
+vaccine_immunity_duration: vaccinated people go to a partially immune state after a period that is sampled from an exponential distribution with either 10-month or 4-month median.
+natural_immunity_duration: recovered (from infections) people go to a partially immune state after a period that is sampled from an exponential distribution with either 10-month or 4-month median.
+case_fatality_rate: age stratified, specified based on recent COVID-19 literatures.
+infection_fatality_rate: age stratified, specified based on recent COVID-19 literatures.
+asymptomatics: 60% for naively susceptible people (without immunity), increased for people with immunity (from natural infection and/or vaccination).
+age_groups: preschool (0-4 years), students (5-17), adults (18-49), older adults (50-64) and seniors (65+).
+importations: Not applicable.
+confidence_interval_method: estimated from multiple replicates of simulations.
+calibration: For each state, we calibrate the transmissibility parameter in our disease model targeting daily confirmed cases in the recent weeks until the last date of fitting data.
+spatial_structure: embedded in our synthetic contact network model.
+methods_long: We use our agent-based model, called EpiHiper, which computes stochastic transmissions of a disease in a synthetic contact network between individuals and stochastic state transitions within each individual following a disease model. Our disease model is stratified by age group. The disease model is extended to have waning immunity. The immune waning has an exponential distribution with median of 10 months or 4 months, depending on the scenario, for the time to transition to a partially susceptible state; the protection on nodes in the partially susceptible state is as specified in the scenario description. Our simulations are initialized with prior infections (part of which have waned immunity), recent daily confirmed case counts, and prior vaccinations (part of which have waned immunity). Prior infections are derived from cumulative confirmed cases. We run EpiHiper simulations to produce daily infections, hospitalizations, and deaths; and each simulation runs for multiple replicates. We aggregate daily data to get weekly data and compute quantiles for each target from the multiple replicates.
