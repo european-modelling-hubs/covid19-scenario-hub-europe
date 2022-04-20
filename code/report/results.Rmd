@@ -15,6 +15,7 @@ knitr::opts_chunk$set(eval = TRUE, echo = FALSE,
                       eval.after = "fig.cap")
 round <- 0
 origin_date <- as.Date("2022-03-13") 
+source(here("code", "report", "plot-scenarios.R"))
 ```
 
 ### Model projections for Round `r round` {.tabset}
