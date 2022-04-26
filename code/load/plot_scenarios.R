@@ -12,6 +12,11 @@ plot_scenarios <- function(results, scenario_caption,
   plot_data <- results %>%
     mutate(model = fct_infreq(model))
 
+  # Set consistent model colours across all target variables
+  model_colours <- palette.colors(palette = "Dark 2")
+  names(model_colours) <- unique(plot_data$model)
+  model_colours <- model_colours[!is.na(names(model_colours))]
+
   # Target variable
   variable_labels <- c("inc death" = "Weekly incident deaths",
                        "inc case" = "Weekly incident cases")
@@ -49,9 +54,6 @@ plot_scenarios <- function(results, scenario_caption,
       facet_grid(rows = vars(location), cols = vars(model),
                  scales = "free_y")
   } else {
-    model_colours <- palette.colors(palette = "Accent")
-    names(model_colours) <- unique(plot_data$model)
-    model_colours <- model_colours[!is.na(names(model_colours))]
     plot <- plot +
       geom_ribbon(aes(fill = model,
                       ymin = q0.05, ymax = q0.95), alpha = 0.4) +

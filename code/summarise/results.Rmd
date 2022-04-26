@@ -2,6 +2,8 @@
 title: European COVID-19 Scenario Modelling Hub
 output:
   html_document: default
+params:
+  round: 0
 ---
 
 ```{r set-up, include=FALSE}
@@ -13,18 +15,16 @@ library(ggplot2)
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
                       message = FALSE, warning = FALSE,
                       eval.after = "fig.cap")
-round <- 0
-origin_date <- as.Date("2022-03-13") 
-source(here("code", "report", "plot-scenarios.R"))
+source(here("code", "load", "scenarios.R"))
 ```
 
 # Round `r round`
 
-- Reporting projections from `r origin_date`
+- Reporting projections originating `r scenarios[[paste0("round_", round)]][["origin_date"]]`
 
 - Report created `r Sys.Date()`
 
-- Read the [full scenario details](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-0)
+- Read the [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", round)`)
 
 ### Models
 
