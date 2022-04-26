@@ -18,15 +18,38 @@ origin_date <- as.Date("2022-03-13")
 source(here("code", "report", "plot-scenarios.R"))
 ```
 
-### Model projections for Round `r round` {.tabset}
+# Round `r round`
 
 - Reporting projections from `r origin_date`
 
 - Report created `r Sys.Date()`
 
-- Results showing 95% model projections across 4 scenarios and 32 locations
-
 - Read the [full scenario details](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-0)
+
+### Models
+
+```{r models}
+models_summary <- results %>%
+  group_by(model) %>%
+  summarise(Locations = n_distinct(location),
+            scenarios = n_distinct(scenario_id),
+            variables = n_distinct(target_variable),
+            quantiles = "quantile" %in% type,
+            max_date = max(target_end_date),
+            Weeks = max(as.numeric(gsub(" wk", "", horizon))))
+
+models_summary %>%
+  select(Model = model, Locations, Weeks) %>%
+  arrange(desc(Weeks)) %>%
+  arrange(desc(Locations)) %>%
+  knitr::kable(caption = "Available model results")
+
+```
+
+
+### Projections {.tabset}
+
+Results show 95% model projections across 4 scenarios and 32 locations.
 
 #### By scenario {.tabset .tabset-pills}
 
@@ -36,7 +59,7 @@ source(here("code", "report", "plot-scenarios.R"))
 ##### Deaths
 ![](`r here("reports", "round-0", "cross-scenario-deaths.png")`)
 
-#### By model {.tabset}
+#### By model {.tabset .tabset-pills}
 
 ##### Cases
 ![](`r here("reports", "round-0", "cross-model-cases.png")`)

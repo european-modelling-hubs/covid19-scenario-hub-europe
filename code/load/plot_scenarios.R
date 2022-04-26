@@ -41,6 +41,7 @@ plot_scenarios <- function(results, scenario_caption,
   if (columns == "model") {
     scenario_colours <- c("#e66101", "#ca0020", "#0571b0", "#5e3c99")
     names(scenario_colours) <- unique(plot_data$scenario)
+
     plot <- plot +
       geom_ribbon(aes(fill = scenario,
                       ymin = q0.05, ymax = q0.95), alpha = 0.4) +
@@ -48,9 +49,13 @@ plot_scenarios <- function(results, scenario_caption,
       facet_grid(rows = vars(location), cols = vars(model),
                  scales = "free_y")
   } else {
+    model_colours <- palette.colors(palette = "Accent")
+    names(model_colours) <- unique(plot_data$model)
+    model_colours <- model_colours[!is.na(names(model_colours))]
     plot <- plot +
       geom_ribbon(aes(fill = model,
                       ymin = q0.05, ymax = q0.95), alpha = 0.4) +
+      scale_fill_manual(values = model_colours) +
       facet_grid(rows = vars(location), cols = vars(scenario),
                  scales = "free_y")
   }
