@@ -54,7 +54,7 @@ models_summary %>%
 
 ### Comparative projections {.tabset}
 
-Results show 95% model projections across 4 scenarios and 32 locations.
+Results show the median (line) and 5-95% (shaded area) model projections across 4 scenarios and 32 locations.
 
 #### By scenario {.tabset .tabset-pills}
 
