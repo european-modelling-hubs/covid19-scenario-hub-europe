@@ -1,7 +1,11 @@
 ---
 title: European COVID-19 Scenario Modelling Hub
 output:
-  html_document: default
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
 params:
   round: 0
 ---
@@ -11,6 +15,7 @@ params:
 library(here)
 library(dplyr)
 library(ggplot2)
+library(purrr)
 # Settings
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
                       message = FALSE, warning = FALSE,
@@ -26,7 +31,7 @@ source(here("code", "load", "scenarios.R"))
 
 - Read the [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", round)`)
 
-### Models
+### Model availability
 
 ```{r models}
 models_summary <- results %>%
@@ -47,7 +52,7 @@ models_summary %>%
 ```
 
 
-### Projections {.tabset}
+### Comparative projections {.tabset}
 
 Results show 95% model projections across 4 scenarios and 32 locations.
 
@@ -66,3 +71,39 @@ Results show 95% model projections across 4 scenarios and 32 locations.
 
 ##### Deaths
 ![](`r here("reports", "round-0", "cross-model-deaths.png")`)
+
+### Individual model projections {.tabset}
+
+```{r individual-models}
+models_cases <- list.files(here('reports', 'round-0', 'inc case'))
+models_cases <- gsub("\\.png", "", models_cases)
+models_deaths <- list.files(here('reports', 'round-0', 'inc death'))
+models_deaths <- gsub("\\.png", "", models_deaths)
+```
+
+```{r plot-individual-models, results = 'asis'}
+for (model in unique(results$model)){
+  cat("\n")
+  cat("#### ", model, "{.tabset .tabset-pills}", "\n")
+  
+  if (model %in% models_cases) {
+    cat("\n")
+    cat("##### Cases \n")
+    cat("\n")
+    cat("![](", here('reports', 'round-0', 'inc case', 
+                     paste0(model, '.png')), ")")
+    cat("\n")
+    }
+  
+  if (model %in% models_deaths) {
+    cat("\n")
+    cat("##### Deaths \n")
+    cat("\n")
+    cat("![](", here('reports', 'round-0', 'inc death', 
+                     paste0(model, '.png')), ")")
+    cat("\n")
+  }
+}
+```
+
+
