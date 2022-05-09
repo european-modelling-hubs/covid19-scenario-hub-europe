@@ -43,13 +43,21 @@ template_eu <- rbind(
     )
 )
 
-template_eu <- bind_rows(replicate(100, {
+samples <- replicate(100, {
 
   template_eu$value <- as.integer(template_eu$value * rnorm(nrow(template_eu), mean = 5))
 
   return(template_eu)
 
-}, simplify = FALSE))
+}, simplify = FALSE)
+
+samples <- lapply(seq_along(samples), function(i) {
+  d <- samples[[i]]
+  d$sample <- i
+  return(d)
+})
+
+samples <- bind_rows(samples)
 
 
 origin_date <- unique(template_eu$origin_date)

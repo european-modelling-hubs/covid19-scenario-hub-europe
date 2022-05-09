@@ -55,6 +55,11 @@ properties:
     items:
       type: integer
       minimum: 0
+  sample:
+    type: array
+    items:
+      type: integer
+      minimum: 0
 additionalProperties: false
 required:
   - origin_date
@@ -65,3 +70,4 @@ required:
   - location
   - type
   - value
+  - sample
