@@ -59,8 +59,7 @@ samples <- lapply(seq_along(samples), function(i) {
 
 samples <- bind_rows(samples)
 
-
 origin_date <- unique(template_eu$origin_date)
 
-write_csv(template_eu, glue::glue("template/{origin_date}-example-sample.csv"))
+write_csv(samples, glue::glue("template/{origin_date}-example-sample.csv"))
 
