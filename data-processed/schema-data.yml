@@ -19,13 +19,14 @@ properties:
       type: string
       pattern: ^[ABCD]\-2022\-02\-25$
   target_variable:
-    description: '"inc case" or "inc death"'
+    description: '"inc case" or "inc death" or "inc hosp"'
     type: array
     items:
       type: string
       enum:
         - inc case
         - inc death
+        - inc hosp
   horizon:
     description: The time horizon for the projections
     type: array
