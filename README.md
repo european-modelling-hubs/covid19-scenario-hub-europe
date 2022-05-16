@@ -41,17 +41,17 @@ This protocol addresses the first four of the short-term aims of the Scenario Hu
 
 ### Identifying scenarios and setting parameters
 
-We will create scenarios at 4-8 week intervals with each set of scenarios (a round) projecting over a future 3-12 months. As a starting point, our framework for setting scenarios in each round is a 2x2 matrix composed of two variables, each with optimistic and pessimistic parameter values for its influence on COVID-19 outcomes. 
+We are creating scenarios at 4-8 week intervals with each set of scenarios (a round) projecting over a future 3-12 months. Our framework for setting scenarios in each round is usually a 2x2 matrix composed of two variables, each with optimistic and pessimistic parameter values for its influence on COVID-19 outcomes. 
 
 #### Variables
 
-We aim to include one variable that is biologically intrinsic to COVID-19, and one variable that can be influenced extrinsically by national-level policy action. For each variable we will identify one or more observable parameters that represent the causal pathway from the variable to the outcome. 
+We aim to include one variable that is biologically intrinsic to COVID-19, and one variable that can be influenced extrinsically by national-level policy action. For each variable we identify one or more observable parameters that represent the causal pathway from the variable to the outcome. 
 
-For each scenario round, we will collaborate with the ECDC to define the extrinsic variable, based on their interactions with national policy-makers and assessment of possible policy options. We will draw on the epidemiology of COVID-19 in Europe to suggest themes for the biologically intrinsic variable. After an initial consultation with the ECDC, we will share and seek suggestions for the scenario variables from participating teams. 
+For each scenario round, we collaborate with the European Centre for Disease Prevention and Contorl (ECDC) to define the relevant variables, based on their interactions with national policy-makers and assessment of possible policy options. We will draw on the epidemiology of COVID-19 in Europe to suggest themes for the biologically intrinsic variable. After an initial consultation with the ECDC, we share and seek suggestions for the scenario variables from participating teams. 
 
 #### Parameters
 
-Each of the two variables can be expressed using one or multiple parameters representing an observable value on the causal pathway between the variable and outcome. We can explore the uncertain impact of each parameter by identifying the two most plausible parameter values that would create either the best possible (optimistic) or worst possible (pessimistic) COVID-19 outcome.
+Each of the two variables can be expressed using one or multiple parameters representing an observable value on the causal pathway between the variable and outcome. We can explore the uncertain impact of each parameter by identifying the two most plausible parameter values that would create either the best possible (optimistic) or worst plausible (pessimistic) COVID-19 outcome.
 
 Modelling teams do not have to include the underlying variables in their model, but the model structure should be able to include each explicit parameter value. Additional implicit parameters may be relevant to each variable but not quantitatively specified in the scenario definition.  Whether these parameters are included in a model is at each teams’ discretion.
 
@@ -60,9 +60,9 @@ For each scenario round, after defining the variables we will collaborate with t
 
 ### Contributing and combining scenario projections
 
-We focus on weekly incident targets, for any of the following COVID-19 outcomes: infections, cases, and deaths. To align with other Hubs we ask for quantile intervals at 0.01, 0.025, 0.05, every 5% to 0.95, 0.975, and 0.99. Inclusion in ensemble models requires a full set of quantiles from 0.01 to 0.99. We will collect metadata from teams in the form of a structured abstract. This will vary slightly with each round of scenarios. See the [technical Wiki](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki) for more details on the submission process and requirements.
+We focus on weekly incident numbers for any of the three following COVID-19 outcomes: cases, hospitalisations and deaths. We collate simulated trajectories from contributing scenario models as samples that are equally likely given the conditions laid out in the identified scenarios described above. We collect metadata from teams in the form of a structured abstract. This may vary slightly with each round of scenarios. See the [technical Wiki](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki) for more details on the submission process and requirements.
 
-We will create ensembles from the individual models for each scenario round separately. As an initial choice we will create a median ensemble by taking the median of the given predictive quantiles of the different models for each scenario. Other ensemble choices will be considered and differences between outcomes presented by different models discussed with the modellers in order to avoid hiding differences from structural or parametric assumptions by taking the ensemble.  
+We synthesise results both by exploring differences between and within models, and by creating ensembles from the combination of all the models. Different ensemble choices will be considered and differences between outcomes presented by different models discussed with the modellers in order to avoid hiding differences from structural or parametric assumptions by taking the ensemble.  
 
 
 ### Reporting and interpreting projections
