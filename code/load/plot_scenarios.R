@@ -3,13 +3,27 @@ library(ggplot2)
 library(forcats)
 library(tidyr)
 theme_set(theme_bw())
-
+##
+##' Plot scenarios
+##'
+##' @param data modelled data as submitted
+##' @param truth truth data (if given)
+##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
+##' @param scenario_caption a cpation for the scenario
+##' @param target_variable target variable to plot (cases, hospitalisations, or deaths)
+##' @param columns the columns in the facet plot returned
+##' @param model_colours colour palette to be used for models
+##' @param scenario_colours colour palette to be used for scenarios
+##' @return a facet plot of scenarios
+##' @author Katharine Sherratt
 plot_scenarios <- function(data,
+                           truth = NULL,
                            scenario_caption = NULL,
                            target_variable = "inc case",
                            columns = "model",
                            model_colours = NULL,
-                           scenario_colours = NULL) {
+                           scenario_colours = NULL,
+                           all_truth = TRUE) {
 
   # Relabel target variable
   variable_labels <- c("inc death" = "Weekly incident deaths",
@@ -65,6 +79,21 @@ plot_scenarios <- function(data,
                         ymin = q0.05, ymax = q0.95), alpha = 0.4) +
         scale_fill_manual(values = model_colours)
     }
+  }
+
+  if (!is.null(truth)) {
+    ## show 12 weeks of data
+    truth <- truth |>
+      filter(target_variable == !!target_variable,
+             target_end_date > min(plot_data$target_end_date) - 7 * 12,
+             location %in% unique(plot_data$location))
+    if (!all_truth) {
+      truth <- truth |>
+        filter(target_end_date < min(plot_data$target_end_date))
+    }
+
+    plot <- plot +
+      geom_point(data = truth, aes(y = value), alpha = 0.5, shape = 16)
   }
 
   return(plot)

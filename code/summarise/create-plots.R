@@ -1,6 +1,8 @@
 # Create all plots
 library(dplyr)
 library(ggplot2)
+library(here)
+library(covidHubUtils)
 # get scenario metadata
 source(here("code", "load", "scenarios.R"))
 # get model projections
@@ -16,6 +18,14 @@ if (!exists("round")) {round <- 0}
 # Set up ------------------------------------------------------------------
 # Get results
 results <- load_local_results(round = round)
+## Get data
+truth <- load_truth(
+  truth_source = "JHU",
+  temporal_resolution = "weekly",
+  hub = "ECDC"
+) |>
+  select(-model)
+
 # Create reporting directory
 report_dir <- paste0(here("reports"), "/round-", round)
 if(!dir.exists(report_dir)){
@@ -28,7 +38,8 @@ palette <- plot_palettes(results)
 
 # Plot by scenario --------------------------------------------------------
 cross_scenario_deaths <- plot_scenarios(results,
-                                        scenario_round$scenario_caption,
+                                        truth,
+                                        scenario_caption = scenario_round$scenario_caption,
                                         target_variable = "inc death",
                                         columns = "scenario",
                                         model_colours = palette$models,
@@ -38,7 +49,8 @@ ggsave(here(report_dir, "cross-scenario-deaths.png"),
 
 
 cross_scenario_cases <- plot_scenarios(results,
-                                       scenario_round$scenario_caption,
+                                       truth,
+                                       scenario_caption = scenario_round$scenario_caption,
                                        target_variable = "inc case",
                                        columns = "scenario",
                                        model_colours = palette$models,
@@ -48,7 +60,8 @@ ggsave(here(report_dir, "cross-scenario-cases.png"),
 
 # Plot by model --------------------------------------------------------
 cross_model_deaths <- plot_scenarios(results,
-                                     scenario_round$scenario_caption,
+                                     truth,
+                                     scenario_caption = scenario_round$scenario_caption,
                                      target_variable = "inc death",
                                      columns = "model",
                                      model_colours = palette$models,
@@ -57,7 +70,8 @@ ggsave(here(report_dir, "cross-model-deaths.png"),
        height = 40, width = 15)
 
 cross_model_cases <- plot_scenarios(results,
-                                    scenario_round$scenario_caption,
+                                    truth,
+                                    scenario_caption = scenario_round$scenario_caption,
                                     target_variable = "inc case",
                                     columns = "model",
                                     model_colours = palette$models,
@@ -86,6 +100,7 @@ if (!dir.exists(here(report_dir, "inc case"))) {
 # Plot
 plots_by_model <- map(results_by_model,
                       ~ plot_scenarios(data = .x,
+                                       truth = truth,
                                             target_variable = unique(.x$target_variable),
                                             columns = "model",
                                             model_colours = palette$models,
