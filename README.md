@@ -1,8 +1,8 @@
-# European COVID-19 Scenario hub
+# European COVID-19 Scenario Hub
 
-> ### Round 0
-> We are currently welcoming modelling contributions to a pilot round. The details for this round identically match those of the [US Scenario Hub](https://covid19scenariomodelinghub.org/viz.html), applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the European Hub. For the full scenario specifications in this round, please see:
-> - [Scenario details: Round 0](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-0)
+> ### Round 1
+> Following completion of the pilot round we are now welcoming modelling contributions to round 1. For the full scenario specifications in this round, applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the Hub, see:
+> - [Scenario details: Round 1](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-1)
 >
 >  For updates, please [request to join the mailing list](https://groups.google.com/u/0/g/euro-covid19-scenario-hub) including your name/introduction.
 
