@@ -60,40 +60,62 @@ properties:
     type: string
   methods_long:
     type: string
-  modeling_NPI:
-    type: string
-  compliance_NPI:
-    type: string
-  contact_tracing:
-    type: string
-  testing:
-    type: string
-  vaccine_efficacy_transmission:
-    type: string
-  vaccine_efficacy_delay:
-    type: string
-  vaccine_hesitancy:
-    type: string
-  vaccine_immunity_duration:
-    type: string
-  natural_immunity_duration:
-    type: string
-  case_fatality_rate:
-    type: string
-  infection_fatality_rate:
-    type: string
-  asymptomatics:
-    type: string
-  age_groups:
-    type: string
-  importations:
-    type: string
-  confidence_interval_method:
-    type: string
-  calibration:
-    type: string
-  spatial_structure:
-    type: string
+  model_details:
+    type: object
+    properties:
+      modeling_NPI:
+        type: string
+      compliance_NPI:
+        type: string
+      contact_tracing:
+        type: string
+      testing:
+        type: string
+      vaccine_efficacy_transmission:
+        type: string
+      vaccine_efficacy_delay:
+        type: string
+      vaccine_hesitancy:
+        type: string
+      vaccine_immunity_duration:
+        type: string
+      natural_immunity_duration:
+        type: string
+      case_fatality_rate:
+        type: string
+      infection_fatality_rate:
+        type: string
+      asymptomatics:
+        type: string
+      age_groups:
+        type: string
+      importations:
+        type: string
+      confidence_interval_method:
+        type: string
+      calibration:
+        type: string
+      spatial_structure:
+        type: string
+    required:
+      - modeling_NPI
+      - compliance_NPI
+      - contact_tracing
+      - testing
+      - vaccine_efficacy_transmission
+      - vaccine_efficacy_delay
+      - vaccine_hesitancy
+      - vaccine_immunity_duration
+      - natural_immunity_duration
+      - case_fatality_rate
+      - infection_fatality_rate
+      - asymptomatics
+      - age_groups
+      - importations
+      - confidence_interval_method
+      - calibration
+      - spatial_structure
+    additionalProperties: false
 additionalProperties: false
 required:
   - team_name
@@ -104,20 +126,3 @@ required:
   - license
   - team_model_designation
   - methods
-  - modeling_NPI
-  - compliance_NPI
-  - contact_tracing
-  - testing
-  - vaccine_efficacy_transmission
-  - vaccine_efficacy_delay
-  - vaccine_hesitancy
-  - vaccine_immunity_duration
-  - natural_immunity_duration
-  - case_fatality_rate
-  - infection_fatality_rate
-  - asymptomatics
-  - age_groups
-  - importations
-  - confidence_interval_method
-  - calibration
-  - spatial_structure
