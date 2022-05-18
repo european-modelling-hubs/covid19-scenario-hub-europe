@@ -8,20 +8,21 @@ team_model_designation: primary
 methods: 'Heavily modified infection-age SIR-X model with waning immunity, vaccinations, seasonality and undetected cases. '
 data_inputs: See GitHub for full description
 methods_long: See GitHub for full description
-modeling_NPI: Not applicable
-compliance_NPI: Not applicable
-contact_tracing: Not applicable
-testing: Not applicable
-vaccine_efficacy_transmission: 'Initial vaccine effectiveness (full dose): 90 %; Initial vaccine effectiveness (booster): 50 %' 
-vaccine_efficacy_delay: 7 days
-vaccine_hesitancy: Not applicable
-vaccine_immunity_duration: '105/70 days '
-natural_immunity_duration: '202/135 days ' 
-case_fatality_rate: Not applicable
-infection_fatality_rate: Not applicable
-asymptomatics: 'Probability of diagnosis given symptoms: 75.00 %; Symptomatic proportion: 54.60 % '
-age_groups: Not applicable
-importations: Not applicable
-confidence_interval_method: Nonparametric
-calibration: Not applicable
-spatial_structure: Not applicable
+model_details:
+  modeling_NPI: Not applicable
+  compliance_NPI: Not applicable
+  contact_tracing: Not applicable
+  testing: Not applicable
+  vaccine_efficacy_transmission: 'Initial vaccine effectiveness (full dose): 90 %; Initial vaccine effectiveness (booster): 50 %'
+  vaccine_efficacy_delay: 7 days
+  vaccine_hesitancy: Not applicable
+  vaccine_immunity_duration: '105/70 days '
+  natural_immunity_duration: '202/135 days '
+  case_fatality_rate: Not applicable
+  infection_fatality_rate: Not applicable
+  asymptomatics: 'Probability of diagnosis given symptoms: 75.00 %; Symptomatic proportion: 54.60 % '
+  age_groups: Not applicable
+  importations: Not applicable
+  confidence_interval_method: Nonparametric
+  calibration: Not applicable
+  spatial_structure: Not applicable
