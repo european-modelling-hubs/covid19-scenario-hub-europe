@@ -1,4 +1,4 @@
-Scenario model projections can offer multiple interpretations. As an expert in your own model, your qualitative commentary is a key to your quantitative results. Please include any information or comments that might be relevant to interpreting your model projections. 
+As an expert in your own model, your qualitative commentary is a key to your quantitative results. Please include any information or comments that might be relevant to interpreting your model projections. 
 
 _Usage: Please copy this file and save in your team's `data-processed` folder, renaming the file as appropriate (`2022-05-22-Team-Model.md`). Add your team's comments and include when [submitting your results](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Submission-via-GitHub)._
 
