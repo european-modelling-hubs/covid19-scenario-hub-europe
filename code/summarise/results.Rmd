@@ -23,13 +23,13 @@ knitr::opts_chunk$set(eval = TRUE, echo = FALSE,
 source(here("code", "load", "scenarios.R"))
 ```
 
-# Round `r round`
+# Round `r params$round`
 
-- Reporting projections originating `r scenarios[[paste0("round_", round)]][["origin_date"]]`
+_Report created `r Sys.Date()`_
 
-- Report created `r Sys.Date()`
+- Reporting projections originating `r scenarios[[paste0("round_", params$round)]][["origin_date"]]`
 
-- Read the [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", round)`)
+- See [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`)
 
 ### Model availability
 
