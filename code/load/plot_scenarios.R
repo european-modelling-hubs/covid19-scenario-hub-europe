@@ -1,4 +1,5 @@
 # Plot with location as each row in a facet grid
+library(dplyr)
 library(ggplot2)
 library(forcats)
 library(tidyr)
@@ -70,7 +71,8 @@ plot_scenarios <- function(data,
       geom_line(aes(colour = model,
                     y = q0.5), alpha = 0.8) +
       scale_colour_manual(values = model_colours) +
-      facet_grid(rows = vars(location), cols = vars(scenario),
+      facet_grid(drop = TRUE,
+                 rows = vars(location), cols = vars(scenario),
                  scales = "free_y")
 
     if(all(c("q0.05", "q0.95") %in% names(plot_data))) {
@@ -83,12 +85,12 @@ plot_scenarios <- function(data,
 
   if (!is.null(truth)) {
     ## show 12 weeks of data
-    truth <- truth |>
+    truth <- truth %>%
       filter(target_variable == !!target_variable,
              target_end_date > min(plot_data$target_end_date) - 7 * 12,
              location %in% unique(plot_data$location))
     if (!all_truth) {
-      truth <- truth |>
+      truth <- truth %>%
         filter(target_end_date < min(plot_data$target_end_date))
     }
 

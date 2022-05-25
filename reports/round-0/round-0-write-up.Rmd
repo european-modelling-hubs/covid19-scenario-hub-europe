@@ -69,6 +69,8 @@ In three of four scenarios, models projected repeated outbreaks of COVID-19 acro
 
 In contrast, we observed most epidemic activity when models assumed a faster rate of waning, regardless of whether models introduced a new variant. With a median time to reduced protection against infection of only 4 months, possible surges were projected over both summer and winter. Model results showed no consistent timing or magnitude of activity, with variation both within scenarios across models and within each model across scenarios even within the scenarios of either maintaining the current mix of viral strains or the introduction of a new more transmissible variant. 
 
+_Figure 1. Projections of weekly incident deaths across 32 European countries under varying scenarios of waning protection against infection (“strong” long-lasting immunity / “weak”, rapidly waning immunity) and the introduction of a new variant (“none”, no variant / “new”, a variant with 30% increase in immune escape)._
+
 ![](`r here::here("reports", "round-0", "cross-scenario-deaths.png")`)
 
 # Discussion
