@@ -33,6 +33,8 @@ properties:
         email:
           type: string
           format: email
+        twitter:
+          type: string
         additionalProperties: false
   website_url:
     type: string
@@ -65,11 +67,7 @@ properties:
     type: boolean
   citation:
     type: string
-  institution_affil:
-    type: string
   team_funding:
-    type: string
-  twitter_handles:
     type: string
   data_inputs:
     type: string
