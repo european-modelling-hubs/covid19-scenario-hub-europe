@@ -29,7 +29,7 @@ properties:
         orcid:
           type: string
           # This is a quite loose pattern. See https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
-          pattern: ^\d{4}\-\d{4}\-\d{4}\-\d{4}$
+          pattern: ^\d{4}\-\d{4}\-\d{4}\-[\dX]{4}$
         email:
           type: string
           format: email
