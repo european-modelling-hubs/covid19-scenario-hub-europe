@@ -2,7 +2,22 @@ team_name: Biocomplexity Institute at University of Virginia
 model_name: EpiHiper
 model_abbr: UVA-EpiHiper
 model_version: 2022-04-14
-model_contributors: Jiangzhuo Chen (UVA) <chenj@virginia.edu>, Stefan Hoops (UVA) <shoops@virginia.edu>, Parantapa Bhattacharya (UVA) <parantapa@virginia.edu>, Dustin Machi (UVA) <dm8qs@virginia.edu>, Madhav Marathe (UVA) <marathe@virginia.edu>
+model_contributors:
+  - name: Jiangzhuo Chen
+    affiliation: UVA
+    email: chenj@virginia.edu
+  - name: Stefan Hoops
+    affiliation: UVA
+    email: shoops@virginia.edu
+  - name: Parantapa Bhattacharya
+    affiliation: UVA
+    email: parantapa@virginia.edu
+  - name: Dustin Machi
+    affiliation: UVA
+    email: dm8qs@virginia.edu
+  - name: Madhav Marathe
+    affiliation: UVA
+    email: marathe@virginia.edu
 website_url: http://not.available.yet
 license: cc-by-4.0
 team_model_designation: primary
