@@ -9,24 +9,25 @@ team_model_designation: primary
 methods: Agent-based model
 team_funding: The model and this document were created as part of the "ICM Epidemiological Model development" project, funded by the Ministry of Science and Higher Education of Poland with grants 51/WFSN/2020T and 28/WFSN/2021 to the University of Warsaw.
 data_inputs: "Polish Ministry of Health (general epidemic data: number of cases, deaths, etc.) and Polish National Institute for Public Health (Detailed epidemic data: time of hospitalization, age, symptoms, contact tracing etc.)"
-citation:  Niedzielewski, Karol and Nowosielski, Jędrzej and Bartczuk, Rafał and Dreger, Filip and Górski, Łukasz and Gruziel-Słomka, Magdalena and Kaczorek, Artur and Kisielewski, Jan and Krupa, Bartosz and Moszyński, Antoni and Radwan, Maciej and Semeniuk, Marcin and Zieliński, Jakub and Rakowski, Franciszek, The Overview, Design Concepts and Details Protocol of ICM Epidemiological Model (Pdyn 1.5) (February 21, 2022). Available at SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4039054
+citation: 'Niedzielewski, Karol and Nowosielski, Jędrzej and Bartczuk, Rafał and Dreger, Filip and Górski, Łukasz and Gruziel-Słomka, Magdalena and Kaczorek, Artur and Kisielewski, Jan and Krupa, Bartosz and Moszyński, Antoni and Radwan, Maciej and Semeniuk, Marcin and Zieliński, Jakub and Rakowski, Franciszek, The Overview, Design Concepts and Details Protocol of ICM Epidemiological Model (Pdyn 1.5) (February 21, 2022). Available at SSRN: https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4039054'
 methods_long: "The main idea behind our agent-based model is a representation of the social structure of population of Poland to the level of individual citizen and its social contacts. Our model has resolution in space and contexts. It means it can follow development of epidemic on geographical grid in 1x1km resolution as well as through physical contact in various characteristic contexts of social life."
-modelling_NPI: NPIs are represented in the model by variation (in time and space) of agent contacting rates in appropriate contexts such as schools, workplaces etc.
-compliance_NPI: NPIs are represented in the model by variation (in time and space) of agent contacting rates in appropriate contexts such as schools, workplaces etc.
-contact_tracing: Not applicable
-testing: simple scaling of the real infections to theconfirmed cases
-vaccine_efficacy_transmission: VE is expressed as the reduction of daily probability of infection. In simple terms, the reduction constitutes partial immunity which is expressed as the product of some maximum immunity level and the profile of immunity variation in time.
-vaccine_efficacy_delay: 14 days since first dose or booster dose
-vaccine_hesitancy: vaccinations in model consistent with official data for powiats (counties) and age groups 
-vaccine_immunity_duration: The immunity builds up to the maximum level for first 14 days, next it stays at maximum until 3 months after vaccination, finally the immunity decays gradually to predefined level.
-natural_immunity_duration: Maximum immunity within 3 months since recovery (total immunity in case of the same variant as in previous infection), after 3 months immunity decays gradually to predefined level.
-case_fatality_rate: Not applicable
-infection_fatality_rate: derived from probabilities of transitions between agent states 
-asymptomatics: dependent on the agent age
-age_groups: one-year groups
-importations: seed agents introduced for each virus variant
-confidence_interval_method: Not applicable
-calibration: The hybrid approach is utilised. Many model parameters are based on literature (e.g. duration of latent state) The absolute infectivity of the wild type (parameter alpha ) and  the reference (assuming usual behaviour) fraction of symptomatic agents contributing to their non-household contexts (parameter f) is optimised using Bayesian search and historic confirmed cases data. Finally, some parameters, most notably multipliers of context contacting rates, are calibrated using the trial and error method.   
-spatial_structure: model agents are geo-referenced
+model_details:
+  modeling_NPI: NPIs are represented in the model by variation (in time and space) of agent contacting rates in appropriate contexts such as schools, workplaces etc.
+  compliance_NPI: NPIs are represented in the model by variation (in time and space) of agent contacting rates in appropriate contexts such as schools, workplaces etc.
+  contact_tracing: Not applicable
+  testing: simple scaling of the real infections to theconfirmed cases
+  vaccine_efficacy_transmission: VE is expressed as the reduction of daily probability of infection. In simple terms, the reduction constitutes partial immunity which is expressed as the product of some maximum immunity level and the profile of immunity variation in time.
+  vaccine_efficacy_delay: 14 days since first dose or booster dose
+  vaccine_hesitancy: vaccinations in model consistent with official data for powiats (counties) and age groups
+  vaccine_immunity_duration: The immunity builds up to the maximum level for first 14 days, next it stays at maximum until 3 months after vaccination, finally the immunity decays gradually to predefined level.
+  natural_immunity_duration: Maximum immunity within 3 months since recovery (total immunity in case of the same variant as in previous infection), after 3 months immunity decays gradually to predefined level.
+  case_fatality_rate: Not applicable
+  infection_fatality_rate: derived from probabilities of transitions between agent states
+  asymptomatics: dependent on the agent age
+  age_groups: one-year groups
+  importations: seed agents introduced for each virus variant
+  confidence_interval_method: Not applicable
+  calibration: The hybrid approach is utilised. Many model parameters are based on literature (e.g. duration of latent state) The absolute infectivity of the wild type (parameter alpha ) and  the reference (assuming usual behaviour) fraction of symptomatic agents contributing to their non-household contexts (parameter f) is optimised using Bayesian search and historic confirmed cases data. Finally, some parameters, most notably multipliers of context contacting rates, are calibrated using the trial and error method.
+  spatial_structure: model agents are geo-referenced
 
 
