@@ -10,7 +10,7 @@ quantiles <- get_hub_config("forecast_type")[["quantiles"]]
 
 today <- lubridate::today()
 
-scenarios <- c(glue::glue("A-2022-02-25"), glue::glue("B-2022-02-25"))
+scenarios <- c(glue::glue("A-2022-05-22"), glue::glue("B-2022-05-22"))
 
 truth_eu <- covidHubUtils::load_truth(
   truth_source = "JHU",
@@ -29,7 +29,6 @@ template_eu <- truth_eu %>%
     target_end_date = target_end_date + lubridate::weeks(1),
     horizon = "1 wk",
     value = round(value * runif(length(scenarios), min = 0.8, max = 1.2)),
-    type = "sample",
     .keep = "unused"
   )
 
