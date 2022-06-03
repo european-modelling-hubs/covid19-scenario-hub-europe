@@ -1,7 +1,7 @@
 team_name: TU Wien, dwh GmbH, DEXHELPP
 model_name: Austrian Agent-Based COVID-19 Model
-model_abbr: AustrianCoVABM
-model_contributors: Martin Bicher <martin.bicher@tuwien.ac.at>, Claire Rippinger <claire.rippinger@dwh.at>, Dominik Brunmeir <dominik.brunmeir@dwh.at>, Christoph Urach <christoph.urach@dwh.at>, Melanie Zechmeister <melanie.zechmeister@dwh.at>, Niki Popper <nikolas.popper@tuwien.ac.at>
+model_abbr: TUWien-AustrianCoVABM
+model_contributors: Martin Bicher (TU Wien) <martin.bicher@tuwien.ac.at>, Claire Rippinger (dwh GmbH) <claire.rippinger@dwh.at>, Dominik Brunmeir (dwh GmbH) <dominik.brunmeir@dwh.at>, Christoph Urach (dwh GmbH) <christoph.urach@dwh.at>, Melanie Zechmeister (dwh GmbH) <melanie.zechmeister@dwh.at>, Niki Popper (TU Wien, DEXHELPP) <nikolas.popper@tuwien.ac.at>
 website_url: https://www.dwh.at/en/projects/covid-19/
 license: cc-by-4.0
 designation: primary
