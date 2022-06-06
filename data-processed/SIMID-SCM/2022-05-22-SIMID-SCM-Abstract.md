@@ -27,7 +27,7 @@ Uptake based on Belgium data up to May 21 2022, then performing a campaign as in
    - ##### Vaccine effectiveness assumptions
 
 Vaccine type | Alpha Infection | Alpha severe | Delta Infection | Delta severe | Omicron Infection | Omicron severe
-:---:Adeno: 1st dose | 49% | 76% | 43% | 76% | 18% | 65%Adeno: 2nd dose | 74% | 86% | 83% | 95% | 49% | 81%mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
+:---: | :---: | :---: | :---: | :---: | :---: | :---: | Adeno: 1st dose | 49% | 76% | 43% | 76% | 18% | 65%Adeno: 2nd dose | 74% | 86% | 83% | 95% | 49% | 81%mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
 2nd Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
 
 - #### Waning immunity 
