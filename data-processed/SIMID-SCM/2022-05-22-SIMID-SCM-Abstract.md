@@ -28,28 +28,44 @@ Uptake based on Belgium data up to May 21 2022, then performing a campaign as in
 
 Vaccine type | Alpha Infection | Alpha severe | Delta Infection | Delta severe | Omicron Infection | Omicron severe
 :---: | :---: | :---: | :---: | :---: | :---: | :---: | Adeno: 1st dose | 49% | 76% | 43% | 76% | 18% | 65%Adeno: 2nd dose | 74% | 86% | 83% | 95% | 49% | 81%mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
-2nd Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
+2nd Booster | - | - | 95% | 99% | 67% | 90%
 
 - #### Waning immunity 
 
    - ##### Details of waning protection against infection (e.g., distribution used)
    
+   Continuous decrease using exponential law according to scenarios
+   
    - ##### Waning protection against severe disease
+   
+    Continuous decrease using exponential law according to scenarios (using months conversion)
 
 ### Additional assumptions
 
 - #### Number/type of immune classes considered
 
+Immune classes are the following ones: previously infected, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA) and vaccinated and previously infected.
+
+The administration of a second booster dose is considered by taking the individual back the the booster vaccinated class with full protection (according to the table).
+
+All 1st dose, 2nd dose and booster dose classes are merged into a single classe vaccinated and previously infected after an infection.
+
    - ##### _if applicable:_ Initial distribution of susceptibility
 
-      - Proportion of people that are naïve at start of projection (not vaccinated or infected)
-
-      - Other
+Derived from the evolution from March 2020
 
 - #### Seasonality implementation
 
+ 	A reduction in contacts (social contact matrices) and transmission (proportionality q-parameters) is performed during the period July-August 2022 according to the current contacts and estimated transmission (Omicron variant) as base level, using the relative reduction observed during the period July-August 2021 (delta variant) in comparison to the contacts and transmission observed during the period September-October 2021 (also delta variant).
+
 - #### Contact rate and/or behaviour assumptions
 
+Cf. Seasonality implementation
+
    - ##### Non-pharmaceutical interventions
+   
+   No new NPI considered here.
 
    - ##### _if applicable:_ Behaviour in response to case notification rates
+   
+   Not considered.
