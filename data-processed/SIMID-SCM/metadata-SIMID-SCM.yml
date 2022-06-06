@@ -14,20 +14,20 @@ data_inputs: The model uses hospitalisation, mortality and serological data, as 
 citation: https://doi.org/10.1016/j.epidem.2021.100449
 methods_long: Several details and updates of the model and previous forecasts are presented in different technical reports at https://covid-en-wetenschap.github.io
 model_details:
-modeling_NPI: NPI are modelled using CoMix social contact data collected every 2 weeks and additional age-specific proportionality factors detecting the transmission
-compliance_NPI: Compliance to the intervention measures taken is assumed to be gradual over 5 days
-contact_tracing: Not applicable
-testing: Not applicable
-vaccine_efficacy_transmission: We use a “leaky” vaccination approach. For example, vaccination with 50% effectiveness, implies that for a vaccinated individual the likelihood to acquire infection is 50% less compared to a non-vaccinated individual of the same age. The levels of protection against infection and hospital admissions after infection for different VOCs are presented in Page 5 Table 1 of https://covid-en-wetenschap.github.io/assets/20220415_technical_note_SIMID.pdf
-vaccine_efficacy_delay: Vaccine-induced immunity against infection is implemented as a step function with a switch from, e.g., 0% to 50% protection against infection 21 days after the first vaccine dose. Vaccine-induced protection against hospital admission is implemented incrementally on top of the protection against infection. Protection induced by the second and booster vaccine doses is assumed to be achieved fully (i.e., depending on the maximal vaccine effectiveness) 7 days after administration.
-vaccine_hesitancy: Not applicable, uptake based on reported data
-vaccine_immunity_duration: Waning as in scenarios, using exponential law
-natural_immunity_duration: 100% protection vs infection just after recovery, with waning as in scenarios using exponential law
-case_fatality_rate: Not applicable, the model is not based on confirmed cases
-infection_fatality_rate: Calibrated
-asymptomatics: Calibrated
-age_groups: 10 years age groups
-importations: No importation, except a seed for each new variant
-confidence_interval_method: Samples coming from independent MCMC chains, plus stochastic realisation on transmissions
-calibration: MCMC Random-Walk Metropolis algorithm performed on a deterministic version of the model 
-spatial_structure: Not applicable
+  modeling_NPI: NPI are modelled using CoMix social contact data collected every 2 weeks and additional age-specific proportionality factors detecting the transmission
+  compliance_NPI: Compliance to the intervention measures taken is assumed to be gradual over 5 days
+  contact_tracing: Not applicable
+  testing: Not applicable
+  vaccine_efficacy_transmission: We use a “leaky” vaccination approach. For example, vaccination with 50% effectiveness, implies that for a vaccinated individual the likelihood to acquire infection is 50% less compared to a non-vaccinated individual of the same age. The levels of protection against infection and hospital admissions after infection for different VOCs are presented in Page 5 Table 1 of https://covid-en-wetenschap.github.io/assets/20220415_technical_note_SIMID.pdf
+  vaccine_efficacy_delay: Vaccine-induced immunity against infection is implemented as a step function with a switch from, e.g., 0% to 50% protection against infection 21 days after the first vaccine dose. Vaccine-induced protection against hospital admission is implemented incrementally on top of the protection against infection. Protection induced by the second and booster vaccine doses is assumed to be achieved fully (i.e., depending on the maximal vaccine effectiveness) 7 days after administration.
+  vaccine_hesitancy: Not applicable, uptake based on reported data
+  vaccine_immunity_duration: Waning as in scenarios, using exponential law
+  natural_immunity_duration: 100% protection vs infection just after recovery, with waning as in scenarios using exponential law
+  case_fatality_rate: Not applicable, the model is not based on confirmed cases
+  infection_fatality_rate: Calibrated
+  asymptomatics: Calibrated
+  age_groups: 10 years age groups
+  importations: No importation, except a seed for each new variant
+  confidence_interval_method: Samples coming from independent MCMC chains, plus stochastic realisation on transmissions
+  calibration: MCMC Random-Walk Metropolis algorithm performed on a deterministic version of the model 
+  spatial_structure: Not applicable
