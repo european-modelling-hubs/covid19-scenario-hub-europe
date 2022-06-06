@@ -1,6 +1,6 @@
 team_name: SIMID
 model_name: Stochastic model
-model_abbr: SCM
+model_abbr: SIMID-SCM
 model_version: 24.0 (eu_hub branch)
 model_contributors: Nicolas Franco <nicolas.franco@unamur.be>, Lander Willem <lander.willem@uantwerpen.be>, Steven Abrams <steven.abrams@uhasselt.be>, The SIMID COVID-19 team, Christel Faes, Philippe Beutels, Niel Hens <niel.hens@uhasselt.be>
 website_url: https://github.com/lwillem/stochastic_model_BE
