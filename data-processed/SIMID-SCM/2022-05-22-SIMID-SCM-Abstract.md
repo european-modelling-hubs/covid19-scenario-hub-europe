@@ -10,9 +10,9 @@ Infections, and therefore hospital admissions and deaths, typically reach a long
 
 The hypothesis on the waning rate has an important impact of the level of the equilibrium. Each time a change in contact behaviour/seasonality is assumed, there is a temporary divergence form the equilibrium during 2-4 months.
 
-Under the Pessimistic fast immune waning assumption, a small new wave appear during summer due to the waning from the last omicron wave. Such summer wave is not present with the Optimistic slow immune waning.
+Under the Pessimistic fast immune waning assumption, a small new wave appear during summer due to the waning from the last omicron waves. Such summer wave is not present with the Optimistic slow immune waning.
 
-Each scenario project a small temporary increase of transmission in September-October, which depends on the level reached during summer.
+Each scenario project a small temporary increase of transmission in September-October, which depends on the level reached during summer (increased set of susceptibles).
 
 ## (b) Model assumptions
 
@@ -38,17 +38,17 @@ Vaccine type | Alpha Infection | Alpha severe | Delta Infection | Delta severe |
    
    - ##### Waning protection against severe disease
    
-    Continuous decrease using exponential law according to scenarios (using months conversion)
+    Continuous decrease using exponential law according to scenarios (using monthly conversion)
 
 ### Additional assumptions
 
 - #### Number/type of immune classes considered
 
-Immune classes are the following ones: previously infected, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA) and vaccinated and previously infected.
+Immune classes are the following ones: previously infected, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA) and "vaccinated and previously infected".
 
-The administration of a second booster dose is considered by taking the individual back the the booster vaccinated class with full protection (according to the table).
+The administration of a second booster dose is considered by taking an individual back to the booster vaccinated class with full protection restarted (according to the table).
 
-All 1st dose, 2nd dose and booster dose classes are merged into a single classe vaccinated and previously infected after an infection.
+All 1st dose, 2nd dose and booster dose classes are merged into a single classe "vaccinated and previously infected" after an infection, with no distinction on the number of doses.
 
    - ##### _if applicable:_ Initial distribution of susceptibility
 
