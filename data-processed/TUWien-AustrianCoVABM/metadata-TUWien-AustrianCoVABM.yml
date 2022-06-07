@@ -4,7 +4,7 @@ model_abbr: TUWien-AustrianCoVABM
 model_contributors: Martin Bicher (TU Wien) <martin.bicher@tuwien.ac.at>, Claire Rippinger (dwh GmbH) <claire.rippinger@dwh.at>, Dominik Brunmeir (dwh GmbH) <dominik.brunmeir@dwh.at>, Christoph Urach (dwh GmbH) <christoph.urach@dwh.at>, Melanie Zechmeister (dwh GmbH) <melanie.zechmeister@dwh.at>, Niki Popper (TU Wien, DEXHELPP) <nikolas.popper@tuwien.ac.at>
 website_url: https://www.dwh.at/en/projects/covid-19/
 license: cc-by-4.0
-designation: primary
+team_model_designation: primary
 methods: time-continuous agent-based epidemics model supported by three meta-models - vaccination model, immunity waning model, hospitalization model.
 team_funding: model development and regular forecasts were and still are funded by various research funding agencies (FFG, WWTF, SMDM), the Austrian Ministry of Health and the Gesundheit Österreich GmbH
 twitter_handles: niki_popper
