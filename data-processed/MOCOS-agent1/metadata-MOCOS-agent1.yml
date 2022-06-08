@@ -21,7 +21,7 @@ model_details:
  infection_fatality_rate: age dependend, empirical data based
  asymptomatics: age dependend
  age_groups: one-year
- importations: Can be defined explicitly as input to the model. Available options include: - InstantOutsideCases (constant number of imports at a given time), - CyclicOutsideCases (constant number of imports during the specified period and with a specified frequency). Each of the importations events include the variant type.
+ importations: Can be defined explicitly as input to the model. Available options include 1) InstantOutsideCases (constant number of imports at a given time), 2) CyclicOutsideCases (constant number of imports during the specified period and with a specified frequency). Each of the importations events include the variant type.
  confidence_interval_method: Samples based
  calibration: Grid search samples around most likely points fitted to last 4 weeks of observed values
  spatial_structure: Not applicable
