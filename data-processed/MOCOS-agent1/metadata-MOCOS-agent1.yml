@@ -1,0 +1,10 @@
+team_name: MOCOS (Modelling Coronavirus) group
+model_name: agent1
+model_abbr: MOCOS-agent1
+model_contributors: 
+website_url: https://mocos.pl/
+repo_url: https://github.com/MOCOS-COVID19/MocosSim
+license: mit
+team_model_designation: primary
+methods:
+model_details:
