@@ -6,7 +6,9 @@ library(purrr)
 library(readr)
 source(here("code", "load", "scenarios.R"))
 
-load_local_results <- function(round = NULL, subdir = "data-processed") {
+load_local_results <- function(round = NULL, subdir = NULL) {
+
+  if (is.null(subdir)) {subdir <- "data-processed"}
 
   # get csv paths
   model_results <- list.files(here(subdir),
@@ -18,6 +20,7 @@ load_local_results <- function(round = NULL, subdir = "data-processed") {
   model_names <- str_extract(model_names, "\\/(.+)\\/")
   model_names <- str_remove_all(model_names, "\\/")
   names(model_results) <- model_names
+  model_names <- model_names[!is.na(model_names)]
 
   # get results by model
   results <- imap_dfr(.x = model_results,
@@ -27,13 +30,21 @@ load_local_results <- function(round = NULL, subdir = "data-processed") {
 
   # round specific results
   if (!is.null(round)) {
+    # get scenario metadata
+    source(here("code", "load", "scenarios.R"))
     round_number <- paste0("round_", round)
+
+    # filter to round specific dates
     results <- results %>%
       filter(between(origin_date,
                      left = scenarios[[round_number]][["origin_date"]],
-                     right = scenarios[[round_number]][["submission_window_end"]])) %>%
+                     right = scenarios[[round_number]][["submission_window_end"]]))
+
+    # add scenario labels
+    results <- results %>%
       mutate(scenario_label = recode(scenario_id,
-                               !!!scenarios[[round_number]][["scenario_labels"]]))
+                                     !!!scenarios[[round_number]][["scenario_labels"]]))
+
   }
 
   return(results)

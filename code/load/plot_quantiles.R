@@ -3,8 +3,6 @@ library(dplyr)
 library(ggplot2)
 library(forcats)
 library(tidyr)
-# get plotting colours
-source(here("code", "load", "plot_palettes.R"))
 theme_set(theme_bw())
 ##
 ##' Plot scenarios
@@ -28,27 +26,21 @@ plot_scenarios <- function(data,
                            scenario_colours = NULL,
                            all_truth = TRUE) {
 
-  # TODO remove
-  plot_data <- filter(data, target_variable == "inc case")
-  ########################
-
   # Relabel target variable
   variable_labels <- c("inc death" = "Weekly incident deaths",
-                       "inc case" = "Weekly incident cases",
-                       "inc infection" = "Weekly incident infections")
+                       "inc case" = "Weekly incident cases")
   plot_data <- data %>%
     filter(target_variable == !!target_variable) %>%
     mutate(variable_label = recode(target_variable, !!!variable_labels))
+  variable_subtitle = unique(plot_data$variable_label)[1]
 
-# set plot subtitle
-variable_subtitle = unique(plot_data$variable_label)[1]
-
-  # Plot with all samples...
-  # plot_data <- plot_data %>%
-  #   select(-type) %>%
-  #   pivot_wider(values_from = value,
-  #               names_prefix = "q", names_from = quantile)
-  #
+  # Specific quantiles
+  plot_data <- plot_data %>%
+    mutate(quantile = ifelse(type == "point", 0.5, quantile)) %>%
+    filter(quantile %in% c(0.05, 0.95) | type == "point") %>%
+    select(-type) %>%
+    pivot_wider(values_from = value,
+                names_prefix = "q", names_from = quantile)
 
   # Plot
   plot <- plot_data %>%
@@ -59,27 +51,36 @@ variable_subtitle = unique(plot_data$variable_label)[1]
     scale_y_continuous(labels = scales::label_comma()) +
     theme(legend.position = "top")
 
+
   if (columns == "model") {
     plot <- plot +
-      geom_point(aes(y = value,
-                     colour = scenario_id),
-                alpha = 0.7) +
+      geom_line(aes(colour = scenario,
+                    y = q0.5), alpha = 0.8) +
       scale_colour_manual(values = scenario_colours) +
-      facet_grid(rows = vars(location),
-                 cols = vars(model),
-                 scales = "free_y",
-                 drop = TRUE)
+      facet_grid(rows = vars(location), cols = vars(model),
+                 scales = "free_y")
 
+    if(all(c("q0.05", "q0.95") %in% names(plot_data))) {
+      plot <- plot +
+        geom_ribbon(aes(fill = scenario,
+                        ymin = q0.05, ymax = q0.95), alpha = 0.4) +
+        scale_fill_manual(values = scenario_colours)
+    }
   } else {
     plot <- plot +
-      geom_point(aes(y = value,
-                     colour = model),
-                 alpha = 0.7) +
+      geom_line(aes(colour = model,
+                    y = q0.5), alpha = 0.8) +
       scale_colour_manual(values = model_colours) +
-      facet_grid(rows = vars(location),
-                 cols = vars(scenario_id),
-                 scales = "free_y",
-                 drop = TRUE)
+      facet_grid(drop = TRUE,
+                 rows = vars(location), cols = vars(scenario),
+                 scales = "free_y")
+
+    if(all(c("q0.05", "q0.95") %in% names(plot_data))) {
+      plot <- plot +
+        geom_ribbon(aes(fill = model,
+                        ymin = q0.05, ymax = q0.95), alpha = 0.4) +
+        scale_fill_manual(values = model_colours)
+    }
   }
 
   if (!is.null(truth)) {

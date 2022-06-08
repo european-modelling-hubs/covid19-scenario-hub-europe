@@ -12,7 +12,7 @@ plot_palettes <- function(data) {
 
   # set scenario colours
   scenario_colours <- c("#e66101", "#ca0020", "#0571b0", "#5e3c99")
-  names(scenario_colours) <- unique(data$scenario)
+  names(scenario_colours) <- unique(data$scenario_id)
 
   plot_palettes <- list(models = model_colours,
                        scenarios = scenario_colours)

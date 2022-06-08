@@ -3,8 +3,7 @@ library(dplyr)
 library(ggplot2)
 library(here)
 library(covidHubUtils)
-# get scenario metadata
-source(here("code", "load", "scenarios.R"))
+
 # get model projections
 source(here("code", "load", "load_local_results.R"))
 # get plotting colours
@@ -13,11 +12,17 @@ source(here("code", "load", "plot_palettes.R"))
 source(here("code", "load", "plot_scenarios.R"))
 
 # Set round or pass through environment
-round <- 0
+round <- 1
 
 # Set up ------------------------------------------------------------------
+# get scenario metadata
+source(here("code", "load", "scenarios.R"))
+# load only specific scenario meta-data
+scenario_round_metadata <- scenarios[[paste0("round_", round)]]
+
 # Get results
 results <- load_local_results(round = round)
+
 ## Get data
 truth <- load_truth(
   truth_source = "JHU",
@@ -31,7 +36,6 @@ report_dir <- paste0(here("reports"), "/round-", round)
 if(!dir.exists(report_dir)){
   dir.create(report_dir)
 }
-scenario_round <- scenarios[[paste0("round_", round)]]
 
 # create consistent model and scenario colour palettes
 palette <- plot_palettes(results)
@@ -46,8 +50,7 @@ multi_country <- distinct(results, model, location) %>%
 results_multi_country <- filter(results, location %in% multi_country)
 
 results_a_b_cases <- filter(results_multi_country,
-                             scenario_id %in% c("A-2022-02-25",
-                                                "B-2022-02-25"))
+                             grepl("A|B", scenario_id))
 scenario_a_b_cases <- plot_scenarios(results_a_b_cases,
                                         truth,
                                         scenario_caption = NULL,
@@ -61,8 +64,7 @@ ggsave(here(report_dir, "scenario-a-b-cases.png"),
        height = 5, width = 8)
 
 results_c_d_cases <- filter(results_multi_country,
-                             scenario_id %in% c("C-2022-02-25",
-                                                "D-2022-02-25"))
+                            grepl("C|D", scenario_id))
 scenario_c_d_cases <- plot_scenarios(results_c_d_cases,
                                       truth,
                                       scenario_caption = NULL,
