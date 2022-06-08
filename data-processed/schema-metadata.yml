@@ -97,6 +97,8 @@ properties:
         type: string
       spatial_structure:
         type: string
+      data_inputs:
+        type: string
     required:
       - modeling_NPI
       - compliance_NPI
