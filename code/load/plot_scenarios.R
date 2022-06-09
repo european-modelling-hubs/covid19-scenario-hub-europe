@@ -5,14 +5,17 @@ library(forcats)
 library(tidyr)
 # get plotting colours
 source(here("code", "load", "plot_palettes.R"))
+# get target variables
+source(here("code", "load", "scenarios.R"))
 theme_set(theme_bw())
+theme_replace(strip.background = element_blank())
 ##
 ##' Plot scenarios
 ##'
 ##' @param data modelled data as submitted
 ##' @param truth truth data (if given)
 ##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
-##' @param scenario_caption a cpation for the scenario
+##' @param scenario_caption a caption for the scenario
 ##' @param target_variable target variable to plot (cases, hospitalisations, or deaths)
 ##' @param columns the columns in the facet plot returned
 ##' @param model_colours colour palette to be used for models
@@ -21,21 +24,18 @@ theme_set(theme_bw())
 ##' @author Katharine Sherratt
 plot_scenarios <- function(data,
                            truth = NULL,
-                           scenario_caption = NULL,
+                           round = 1,
                            target_variable = "inc case",
                            columns = "model",
                            model_colours = NULL,
                            scenario_colours = NULL,
                            all_truth = TRUE) {
 
-  # TODO remove
-  plot_data <- filter(data, target_variable == "inc case")
-  ########################
-
   # Relabel target variable
-  variable_labels <- c("inc death" = "Weekly incident deaths",
-                       "inc case" = "Weekly incident cases",
-                       "inc infection" = "Weekly incident infections")
+  variable_labels <- names(scenarios$targets)
+  new_names <- unname(scenarios$targets)
+  names(variable_labels) <- new_names
+
   plot_data <- data %>%
     filter(target_variable == !!target_variable) %>%
     mutate(variable_label = recode(target_variable, !!!variable_labels))
@@ -54,7 +54,8 @@ variable_subtitle = unique(plot_data$variable_label)[1]
   plot <- plot_data %>%
     ggplot(aes(x = target_end_date)) +
     labs(x = NULL, y = NULL,
-         subtitle = paste0(variable_subtitle, "\n", scenario_caption)) +
+         subtitle = paste0(variable_subtitle, "\n\n",
+                           scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(labels = scales::label_comma()) +
     theme(legend.position = "top")
@@ -63,7 +64,10 @@ variable_subtitle = unique(plot_data$variable_label)[1]
     plot <- plot +
       geom_point(aes(y = value,
                      colour = scenario_id),
-                alpha = 0.7) +
+                alpha = 0.5) +
+      # geom_line(aes(y = value,
+      #                colour = scenario_id),
+      #            alpha = 0.7) +
       scale_colour_manual(values = scenario_colours) +
       facet_grid(rows = vars(location),
                  cols = vars(model),
@@ -74,7 +78,10 @@ variable_subtitle = unique(plot_data$variable_label)[1]
     plot <- plot +
       geom_point(aes(y = value,
                      colour = model),
-                 alpha = 0.7) +
+                 alpha = 0.5) +
+      # geom_line(aes(y = value,
+      #                colour = model),
+      #            alpha = 0.7) +
       scale_colour_manual(values = model_colours) +
       facet_grid(rows = vars(location),
                  cols = vars(scenario_id),

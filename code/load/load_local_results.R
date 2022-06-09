@@ -32,18 +32,18 @@ load_local_results <- function(round = NULL, subdir = NULL) {
   if (!is.null(round)) {
     # get scenario metadata
     source(here("code", "load", "scenarios.R"))
-    round_number <- paste0("round_", round)
+    round_text <- paste0("round-", round)
 
     # filter to round specific dates
     results <- results %>%
       filter(between(origin_date,
-                     left = scenarios[[round_number]][["origin_date"]],
-                     right = scenarios[[round_number]][["submission_window_end"]]))
+                     left = scenarios[[round_text]][["origin_date"]],
+                     right = scenarios[[round_text]][["submission_window_end"]]))
 
     # add scenario labels
     results <- results %>%
       mutate(scenario_label = recode(scenario_id,
-                                     !!!scenarios[[round_number]][["scenario_labels"]]))
+                                     !!!scenarios[[round_text]][["scenario_labels"]]))
 
   }
 
