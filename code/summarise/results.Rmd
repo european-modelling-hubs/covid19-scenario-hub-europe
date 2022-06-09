@@ -7,7 +7,7 @@ output:
     toc_float:
       collapsed: false
 params:
-  round: 0
+  round: 1
 ---
 
 ```{r set-up, include=FALSE}
@@ -16,18 +16,25 @@ library(here)
 library(dplyr)
 library(ggplot2)
 library(purrr)
+source(here("code", "load", "scenarios.R"))
+source(here("code", "load", "load_local_results.R"))
 # Settings
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
                       message = FALSE, warning = FALSE,
                       eval.after = "fig.cap")
-source(here("code", "load", "scenarios.R"))
+# Get results
+results <- load_local_results(round = params$round)
+round_text <- paste0("round-", params$round)
+target_dirs <- gsub("inc ", "", scenarios$targets)
+names(target_dirs) <- gsub("Weekly ", "", names(target_dirs))
+names(target_dirs) <- tools::toTitleCase(names(target_dirs))
 ```
 
 # Round `r params$round`
 
 _Report created `r Sys.Date()`_
 
-- Reporting projections originating `r scenarios[[paste0("round_", params$round)]][["origin_date"]]`
+- Reporting projections originating `r scenarios[[round_text]][["origin_date"]]`
 
 - See [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`)
 
@@ -39,7 +46,6 @@ models_summary <- results %>%
   summarise(Locations = n_distinct(location),
             scenarios = n_distinct(scenario_id),
             variables = n_distinct(target_variable),
-            quantiles = "quantile" %in% type,
             max_date = max(target_end_date),
             Weeks = max(as.numeric(gsub(" wk", "", horizon))))
 
@@ -48,62 +54,57 @@ models_summary %>%
   arrange(desc(Weeks)) %>%
   arrange(desc(Locations)) %>%
   knitr::kable(caption = "Available model results")
-
 ```
 
 
 ### Comparative projections {.tabset}
 
-Results show the median (line) and 5-95% (shaded area) model projections across 4 scenarios and 32 locations.
+Results show model projections across 4 scenarios and 32 locations.
 
 #### By scenario {.tabset .tabset-pills}
 
-##### Cases
-![](`r here("reports", "round-0", "cross-scenario-cases.png")`)
-
-##### Deaths
-![](`r here("reports", "round-0", "cross-scenario-deaths.png")`)
+```{r plot-scenario-comparison, results = 'asis'}
+for (target in target_dirs){
+  cat("\n")
+  cat("##### ", names(target_dirs[target_dirs==target])) 
+  cat("\n",
+      "![](", here("reports", round_text, target, "cross-scenario.png)"),
+      "\n")
+}
+```
 
 #### By model {.tabset .tabset-pills}
 
-##### Cases
-![](`r here("reports", "round-0", "cross-model-cases.png")`)
-
-##### Deaths
-![](`r here("reports", "round-0", "cross-model-deaths.png")`)
-
-### Individual model projections {.tabset}
-
-```{r individual-models}
-models_cases <- list.files(here('reports', 'round-0', 'inc case'))
-models_cases <- gsub("\\.png", "", models_cases)
-models_deaths <- list.files(here('reports', 'round-0', 'inc death'))
-models_deaths <- gsub("\\.png", "", models_deaths)
-```
-
-```{r plot-individual-models, results = 'asis'}
-for (model in unique(results$model)){
+```{r plot-model-comparison, results = 'asis'}
+for (target in target_dirs){
   cat("\n")
-  cat("#### ", model, "{.tabset .tabset-pills}", "\n")
-  
-  if (model %in% models_cases) {
-    cat("\n")
-    cat("##### Cases \n")
-    cat("\n")
-    cat("![](", here('reports', 'round-0', 'inc case', 
-                     paste0(model, '.png')), ")")
-    cat("\n")
-    }
-  
-  if (model %in% models_deaths) {
-    cat("\n")
-    cat("##### Deaths \n")
-    cat("\n")
-    cat("![](", here('reports', 'round-0', 'inc death', 
-                     paste0(model, '.png')), ")")
-    cat("\n")
-  }
+  cat("##### ", names(target_dirs[target_dirs==target]))
+  cat("\n", 
+      "![](", here("reports", round_text, target, "cross-model.png)"),
+      "\n")
 }
 ```
 
 
+### Individual model projections {.tabset}
+
+```{r plot-individual-models, results = 'asis'}
+for (model in unique(results$model)){
+  cat("\n", "\n")
+  cat("#### ", model, " {.tabset .tabset-pills}")
+  cat("\n")
+  
+  for (target in target_dirs){
+    model_target_plot <- here("reports", round_text, target, "models", 
+                              paste0(model, ".png"))
+    
+    if (file.exists(model_target_plot)) {
+      cat("\n")
+      cat("##### ", names(target_dirs[target_dirs==target])) 
+      cat("\n")
+      cat("![](", model_target_plot, ")")
+      cat("\n")
+    }
+  }
+}
+```
