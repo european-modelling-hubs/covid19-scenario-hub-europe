@@ -2,6 +2,7 @@
 title: European COVID-19 Scenario Modelling Hub
 output:
   html_document:
+    self_contained: false
     toc: true
     toc_depth: 5
     toc_float:
