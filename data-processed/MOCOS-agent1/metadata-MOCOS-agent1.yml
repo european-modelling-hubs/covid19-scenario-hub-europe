@@ -1,0 +1,27 @@
+team_name: MOCOS (Modelling Coronavirus) group
+model_name: agent1
+model_abbr: MOCOS-agent1
+model_contributors: Tyll Krueger <tyll.krueger{at}googlemail.com>, Marcin Bodych <marcin.bodych{at}pwr.edu.pl>, Tomasz Ożański <tomasz.ozanski{at}pwr.edu.pl>, Radosław Idzikowski <radoslaw.idzikowski{at}pwr.edu.pl>, Piotr Szymański <piotr.szymanski{at}pwr.edu.pl>, Agata Migalska <agata{at}migalska.com>, Barbara Pabjan <barbara.pabjan{at}uwr.edu.pl>, Maciej Filiński <maciej.filinski{at}pwr.edu.pl>, Marek Bawiec <marek.bawiec{at}pwr.edu.pl>
+website_url: https://mocos.pl/
+repo_url: https://github.com/MOCOS-COVID19/MocosSim
+license: mit
+team_model_designation: primary
+methods: Agent-based microsimulation model
+model_details:
+ modeling_NPI: NPI as represented through the input parameter to the model controlling intensity of infection kernels
+ compliance_NPI: NPI as represented through the input parameter to the model controlling intensity of infection kernels
+ contact_tracing: input parameter to the model understood as a probability that any of secondary infected persons for a positively tested individual will be detected
+ testing: input parameter to the model understood as a probability that given infected person will be tested positively
+ vaccine_efficacy_transmission: vaccine can protects from infection and from severe progression / death
+ vaccine_efficacy_delay: no delay
+ vaccine_hesitancy: vaccinations in model distributed among agents consistently with official data for age groups
+ vaccine_immunity_duration: waning function based on empirical data / scenario constraints
+ natural_immunity_duration: waning function based on empirical data / scenario constraints
+ case_fatality_rate: age dependend, empirical data based
+ infection_fatality_rate: age dependend, empirical data based
+ asymptomatics: age dependend
+ age_groups: one-year
+ importations: Can be defined explicitly as input to the model. Available options include 1) InstantOutsideCases (constant number of imports at a given time), 2) CyclicOutsideCases (constant number of imports during the specified period and with a specified frequency). Each of the importations events include the variant type.
+ confidence_interval_method: Samples based
+ calibration: Grid search samples around most likely points fitted to last 4 weeks of observed values
+ spatial_structure: Not applicable
