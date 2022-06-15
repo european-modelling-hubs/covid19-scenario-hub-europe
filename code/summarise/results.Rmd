@@ -65,6 +65,11 @@ models_summary %>%
 
 ### Comparative projections {.tabset}
 
+```{r short-scenario-description, results = 'asis'}
+cat(paste0("Scenarios include: ",
+           scenarios[[round_text]][["scenario_caption"]]))
+```
+
 #### By scenario {.tabset .tabset-pills}
 
 ```{r plot-scenario-comparison, results = 'asis'}

@@ -13,7 +13,9 @@ source(here("code", "load", "plot_palettes.R"))
 # get plotting function
 source(here("code", "load", "plot_scenarios.R"))
 
-create_plots <- function(round) {
+create_plots <- function(round,
+                         scenario_reds = c("A", "C"),
+                         scenario_blues = c("B", "D")) {
   # Set up ------------------------------------------------------------------
   # Create reporting directory
   report_dir <- paste0(here("reports"), "/round-", round)
@@ -34,8 +36,8 @@ create_plots <- function(round) {
   results <- load_local_results(round = round)
   # create consistent model and scenario colour palettes
   palette <- plot_palettes(results,
-                           scenario_reds = c("A", "C"),
-                           scenario_blues = c("B", "D"))
+                           scenario_reds = scenario_reds,
+                           scenario_blues = scenario_blues)
 
   ## Get observed
   truth <- load_truth(

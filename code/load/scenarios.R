@@ -57,10 +57,10 @@ scenarios <- list(
       </ul>
     </td>
     <td>
-      Scenario A
+      Scenario A (<i>'Strong/Summer'</i>)
     </td>
     <td>
-      Scenario B
+      Scenario B (<i>'Strong/Autumn'</i>)
     </td>
   </tr>
   <tr>
@@ -72,10 +72,10 @@ scenarios <- list(
       </ul>
     </td>
     <td>
-      Scenario C
+      Scenario C (<i>'Weak/Summer'</i>)
     </td>
     <td>
-      Scenario D
+      Scenario D (<i>'Weak/Summer'</i>)
     </td>
   </tr>
 </table>
