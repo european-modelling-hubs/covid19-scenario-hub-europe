@@ -29,7 +29,8 @@ plot_scenarios <- function(data,
                            columns = "model",
                            model_colours = NULL,
                            scenario_colours = NULL,
-                           all_truth = TRUE) {
+                           all_truth = TRUE,
+                           fixed_sample_alpha = 0.3) {
 
   # Relabel target variable
   variable_labels <- names(scenarios$targets)
@@ -38,53 +39,72 @@ plot_scenarios <- function(data,
 
   plot_data <- data %>%
     filter(target_variable == !!target_variable) %>%
-    mutate(variable_label = recode(target_variable, !!!variable_labels))
+    mutate(variable_label = recode(target_variable, !!!variable_labels),
+           model_sample = paste0(model, sample),
+           scenario_sample = paste0(scenario_label, sample)) %>%
+    left_join(enframe(model_colours,
+                      name = "model", value = "model_colour"),
+              by = "model") %>%
+    left_join(enframe(scenario_colours,
+                      name = "scenario_label", value = "scenario_colour"),
+              by = "scenario_label")
 
 # set plot subtitle
 variable_subtitle = unique(plot_data$variable_label)[1]
 
-  # Plot with all samples...
-  # plot_data <- plot_data %>%
-  #   select(-type) %>%
-  #   pivot_wider(values_from = value,
-  #               names_prefix = "q", names_from = quantile)
-  #
-
   # Plot
-  plot <- plot_data %>%
+  plot_base <- plot_data %>%
     ggplot(aes(x = target_end_date)) +
     labs(x = NULL, y = NULL,
-         subtitle = paste0(variable_subtitle, "\n\n",
+         caption = paste0(variable_subtitle, " | ",
+                          "Round ", round, " scenarios: \n",
                            scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(labels = scales::label_comma()) +
-    theme(legend.position = "top")
+    guides(colour = guide_legend(override.aes = list(alpha = 1,
+                                                     size = 3))) +
+    theme(legend.position = "top",
+          legend.text=element_text(size=rel(1.5)))
 
   if (columns == "model") {
-    plot <- plot +
-      geom_point(aes(y = value,
-                     colour = scenario_id),
-                alpha = 0.5) +
-      # geom_line(aes(y = value,
-      #                colour = scenario_id),
-      #            alpha = 0.7) +
-      scale_colour_manual(values = scenario_colours) +
+    # construct legend
+    scenario_sample_colours <- deframe(distinct(plot_data,
+                                                scenario_sample, scenario_colour))
+    scenario_sample_breaks <- paste0(names(scenario_colours), "1")
+    names(scenario_sample_breaks) <- names(scenario_colours)
+
+    # plot
+    plot <- plot_base +
+      geom_line(aes(y = value,
+                     colour = scenario_sample),
+                 alpha = fixed_sample_alpha) +
+      scale_colour_manual(values = scenario_sample_colours,
+                          breaks = scenario_sample_breaks,
+                          labels = names(scenario_sample_breaks),
+                          name = "Scenario") +
       facet_grid(rows = vars(location),
                  cols = vars(model),
                  scales = "free_y",
                  drop = TRUE)
 
   } else {
-    plot <- plot +
-      geom_point(aes(y = value,
-                     colour = model),
-                 alpha = 0.5) +
-      # geom_line(aes(y = value,
-      #                colour = model),
-      #            alpha = 0.7) +
-      scale_colour_manual(values = model_colours) +
+    # construct legend
+    model_sample_colours <- deframe(distinct(plot_data,
+                                     model_sample, model_colour))
+    model_sample_breaks <- paste0(names(model_colours), "1")
+    names(model_sample_breaks) <- names(model_colours)
+
+    # plot
+    plot <- plot_base +
+      geom_line(aes(y = value,
+                     colour = model_sample),
+                alpha = fixed_sample_alpha) +
+      scale_colour_manual(values = model_sample_colours,
+                          breaks = model_sample_breaks,
+                          labels = names(model_sample_breaks),
+                          name = "Model") +
       facet_grid(rows = vars(location),
-                 cols = vars(scenario_id),
+                 cols = vars(scenario_label),
                  scales = "free_y",
                  drop = TRUE)
   }

@@ -33,7 +33,9 @@ create_plots <- function(round) {
   # Get results
   results <- load_local_results(round = round)
   # create consistent model and scenario colour palettes
-  palette <- plot_palettes(results)
+  palette <- plot_palettes(results,
+                           scenario_reds = c("A", "C"),
+                           scenario_blues = c("B", "D"))
 
   ## Get observed
   truth <- load_truth(
@@ -56,7 +58,8 @@ create_plots <- function(round) {
                                 gsub("inc ", "", .x),
                                 "cross-scenario.png"),
                 height = length(unique(results$location)) * 1.75,
-                width = 15))
+                width = 15,
+                limitsize = FALSE))
 
   # Plot by model --------------------------------------------------------
   walk(scenarios$targets,
@@ -71,7 +74,8 @@ create_plots <- function(round) {
                                 gsub("inc ", "", .x),
                                 "cross-model.png"),
                 height = length(unique(results$location)) * 1.75,
-                width = 15))
+                width = 15,
+                limitsize = FALSE))
 
   # Individual model plots --------------------------------------------------
   plots_by_model <- walk(results %>%

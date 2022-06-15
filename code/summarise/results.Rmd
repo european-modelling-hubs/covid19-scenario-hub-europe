@@ -31,35 +31,39 @@ names(target_dirs) <- tools::toTitleCase(names(target_dirs))
 ```
 
 # Round `r params$round`
-
 _Report created `r Sys.Date()`_
 
-- Reporting projections originating `r scenarios[[round_text]][["origin_date"]]`
+### Scenarios
 
-- See [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`)
+We asked teams of researchers across Europe to use quantitative models to project COVID-19 outcomes for 32 European countries over the next year. In order to explore different sets of assumptions about drivers of the pandemic, we asked teams to vary four sets of parameters. We can describe this in a 2x2 scenario specification:
 
-### Model availability
+```{r table-scenario, results = 'asis'}
+cat(scenarios[[round_text]][["table"]])
+```
+
+See also the [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`) for more detail on the common set of assumptions teams used to create their models.
+
+In Round `r params$round`, we asked modellers to start their projections from the `r scenarios[[round_text]][["origin_date"]]`. Data after this date were not included, and as a result, model projections are unlikely to fully account for later information on the changing variants or behavioural patterns.
+
+### Participating teams
 
 ```{r models}
 models_summary <- results %>%
   group_by(model) %>%
-  summarise(Locations = n_distinct(location),
+  summarise(Countries = n_distinct(location),
             scenarios = n_distinct(scenario_id),
             variables = n_distinct(target_variable),
             max_date = max(target_end_date),
             Weeks = max(as.numeric(gsub(" wk", "", horizon))))
 
 models_summary %>%
-  select(Model = model, Locations, Weeks) %>%
+  select(Team = model, Countries, Weeks) %>%
   arrange(desc(Weeks)) %>%
-  arrange(desc(Locations)) %>%
-  knitr::kable(caption = "Available model results")
+  arrange(desc(Countries)) %>%
+  knitr::kable(caption = "Participating teams by number of countries and horizon")
 ```
 
-
 ### Comparative projections {.tabset}
-
-Results show model projections across 4 scenarios and 32 locations.
 
 #### By scenario {.tabset .tabset-pills}
 

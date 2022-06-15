@@ -11,9 +11,10 @@ source(here("code", "load", "load_local_results.R"))
 source(here("code", "summarise", "create_plots.R"))
 
 # Set round
-round <- 1
+round <- purrr::transpose(scenarios[!grepl("targets", names(scenarios))])
+round <- max(unlist(round$round))
 
-# Create plots
+# Create plots ------------------------------------------------------------
 create_plots(round = round)
 
 # Render report ----------------------------------------------------------
