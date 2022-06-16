@@ -15,6 +15,7 @@ params:
 # Settings
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
                       message = FALSE, warning = FALSE)
+knitr::knit_hooks$set(fig.width = knitr::hook_pngquant)
 ```
 
 ```{r prep}
