@@ -11,24 +11,43 @@ params:
   round: 1
 ---
 
-```{r set-up, include=FALSE}
+```{r setup, include = FALSE}
+# Settings
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE)
+```
+
+```{r prep}
 # Packages
 library(here)
 library(dplyr)
 library(ggplot2)
 library(purrr)
+library(covidHubUtils)
 source(here("code", "load", "scenarios.R"))
 source(here("code", "load", "load_local_results.R"))
-# Settings
-knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
-                      message = FALSE, warning = FALSE,
-                      eval.after = "fig.cap")
+source(here("code", "load", "plot_scenarios.R"))
+source(here("code", "load", "plot_palettes.R"))
+
 # Get results
 results <- load_local_results(round = params$round)
+
+# create consistent model and scenario colour palettes
+palette <- plot_palettes(results,
+                         scenario_reds = c("A", "C"),
+                         scenario_blues = c("B", "D"))
+
 round_text <- paste0("round-", params$round)
 target_dirs <- gsub("inc ", "", scenarios$targets)
 names(target_dirs) <- gsub("Weekly ", "", names(target_dirs))
 names(target_dirs) <- tools::toTitleCase(names(target_dirs))
+
+truth <- load_truth(
+  truth_source = "JHU",
+  temporal_resolution = "weekly",
+  hub = "ECDC"
+) |>
+  select(-model)
 ```
 
 # Round `r params$round`
@@ -73,48 +92,72 @@ cat(paste0("Scenarios include: ",
 
 #### By scenario {.tabset .tabset-pills}
 
-```{r plot-scenario-comparison, results = 'asis'}
-for (target in target_dirs){
+```{r plot-scenario-comparison, results = 'asis', fig.width = 8, fig.height = length(unique(results$location)) * 0.75}
+for (target in scenarios$targets) {
   cat("\n")
-  cat("##### ", names(target_dirs[target_dirs==target])) 
-  cat("\n",
-      "![](", here("reports", round_text, target, "cross-scenario.png)"),
-      "\n")
+  cat("##### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
+  print(
+    plot_scenarios(
+      results, truth,
+      round = params$round,
+      target_variable = target,
+      columns = "scenario",
+      model_colours = palette$models,
+      scenario_colours = palette$scenarios
+    )
+  )
+  cat("\n")
 }
 ```
 
 #### By model {.tabset .tabset-pills}
 
-```{r plot-model-comparison, results = 'asis'}
-for (target in target_dirs){
+```{r plot-model-comparison, results = 'asis', fig.width = 8, fig.height = length(unique(results$location)) * 0.75}
+for (target in scenarios$targets) {
   cat("\n")
-  cat("##### ", names(target_dirs[target_dirs==target]))
-  cat("\n", 
-      "![](", here("reports", round_text, target, "cross-model.png)"),
-      "\n")
+  cat("##### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
+  print(
+    plot_scenarios(
+      results, truth,
+      round = params$round,
+      target_variable = target,
+      columns = "model",
+      model_colours = palette$models,
+      scenario_colours = palette$scenarios
+    ) 
+  )
+  cat("\n")
 }
 ```
 
-
 ### Individual model projections {.tabset}
 
-```{r plot-individual-models, results = 'asis'}
-for (model in unique(results$model)){
-  cat("\n", "\n")
+```{r plot-individual-models, results = 'asis', fig.width = 8, fig.height = length(unique(results$location)) * 0.75}
+for (model in unique(results$model)) {
+  cat("\n\n")
   cat("#### ", model, " {.tabset .tabset-pills}")
-  cat("\n")
+
   
-  for (target in target_dirs){
-    model_target_plot <- here("reports", round_text, target, "models", 
-                              paste0(model, ".png"))
+  res_model <- results |> 
+    filter(model == .env$model)
+  
+  for (target in unique(res_model$target_variable)) {
+    cat("\n")
+    cat("##### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
     
-    if (file.exists(model_target_plot)) {
-      cat("\n")
-      cat("##### ", names(target_dirs[target_dirs==target])) 
-      cat("\n")
-      cat("![](", model_target_plot, ")")
-      cat("\n")
-    }
+    print(
+      res_model |> 
+        filter(target_variable == .env$target) |> 
+        plot_scenarios(
+          truth = truth,
+          target_variable = target,
+          columns = "model",
+          model_colours = palette$models,
+          scenario_colours = palette$scenarios
+        )
+    )
+
+    cat("\n")
   }
 }
 ```
