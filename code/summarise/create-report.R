@@ -14,11 +14,6 @@ source(here("code", "summarise", "create_plots.R"))
 round <- purrr::transpose(scenarios[!grepl("targets", names(scenarios))])
 round <- max(unlist(round$round))
 
-# Create plots ------------------------------------------------------------
-create_plots(round = round,
-             scenario_reds = c("A", "C"),
-             scenario_blues = c("B", "D"))
-
 # Render report ----------------------------------------------------------
 rmarkdown::render(here("code", "summarise", "results.Rmd"),
                   output_file = here("reports",
