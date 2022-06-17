@@ -6,6 +6,8 @@ output:
     toc_depth: 5
     toc_float:
       collapsed: false
+  pdf_document:
+    default
 ---
 ```{r write-up, echo=FALSE, include=FALSE}
 # Create plots and report
@@ -30,7 +32,7 @@ report_dir <- paste0(here("reports"), "/round-", round)
 if(!dir.exists(report_dir)){ dir.create(report_dir) }
 
 # Create plots
-source(here("code", "summarise", "create-plots.R"))
+source(here("code", "summarise", "create_plots.R"))
 ```
 
 # Summary
@@ -43,27 +45,29 @@ source(here("code", "summarise", "create-plots.R"))
 
 - Overall, the speed of waning protection against infection was a more significant factor in future outbreaks compared to a new variant with some immune escape. 
 
-- However, we found substantial variation between models as well as between countries and scenarios. We strongly qualify this interpretation with both submission constraints on accuracy and the potential confounding of scenario parameter values.
+- However, we found substantial variation between models as well as between countries and scenarios. We strongly caution any interpretation of results here as this was clearly communicated as a pilot round with the main purpose of familiarising contributors with the set up.
 
 # Background
 
-The European Scenario Modelling Hub aims to explore and bound the uncertainty around future COVID-19 outcomes across 32 European countries over the next twelve months.  The scenarios focus on fundamental drivers of COVID-19 dynamics, while models encode their influence on COVID-19 outcomes under current knowledge of causal relationships.
+The European Scenario Modelling Hub aims to explore and bound the uncertainty around future COVID-19 outcomes across 32 European countries over the next twelve months.  The scenarios focus on fundamental drivers of COVID-19 dynamics, while models aim to encode their influence on COVID-19 outcomes under current knowledge of causal relationships.
 
-In March 2022 we conducted a pilot round of the Scenario Hub. Here we consider four scenarios comparing waning protection against infection and emergence of an immune escape variant. We describe results from each individual model and note variations in the projected number and timing of COVID-19 outbreaks across Europe. 
+In March 2022 we conducted a pilot round of the Scenario Hub. We considered four scenarios comparing waning protection against infection and emergence of an immune escape variant. We describe results from each individual model and note variations in the projected number and timing of COVID-19 outbreaks across Europe. 
 
 # Scenarios
 
 In the pilot round we adopted identical scenarios to the US Scenario Hub Round 13, outlined below.
 
-In one set of scenarios, we considered a waning protection against infection over time. Starting from a baseline level of immunity, i.e. that immediately after exposure to either infection or vaccination, we assume that protection wanes over some length of time until reaching a long-term plateau (minimum level) of immunity. We adopted two scenarios of waning protection. Within each scenario we specified two parameters: first, the median time to reach a plateau of immunity, and second, the long-term level of immunity when a plateau had been reached. 
+In one set of scenarios, we considered waning protection against infection over time. Starting from a baseline level of immunity, i.e. that obtained immediately after exposure to either infection or vaccination, we assumed that protection wanes over some length of time until reaching a long-term plateau (minimum level) of immunity. We formulated two scenarios of waning protection. Within each scenario we specified two parameters: first, the median time to reach a plateau of immunity, and second, the long-term level of immunity when a plateau had been reached. 
 
-In an optimistic scenario, we set the median time to reach a plateau as 10 months, with only 40% reduction in protection against infection compared to a baseline level. In a pessimistic scenario we specified a median time of 4 months to reach a plateau of immunity at 60% less than a baseline level. Across all scenarios, modellers were asked to use their own judgement to set how much protection was conferred at a baseline level of immunity (i.e. protection following exposure as infection or vaccination); and could choose any method to model the distribution of waning over time (for example, exponential or gamma distribution). We asked all modellers to assume that protection against severity stays the same (doesn’t wane).
+In  a first, *optimistic* scenario, we set the median time to reach a plateau as 10 months, with only 40% reduction in protection against infection compared to a baseline level. In a second, *pessimistic* scenario we specified a median time of 4 months to reach a plateau of immunity at 60% lower than a baseline level. Across all scenarios, modellers were asked to use their own judgement to set how much protection was conferred at a baseline level of immunity (i.e. protection following exposure as infection or vaccination); and could choose any method to model the distribution of waning over time (for example, exponential or gamma distribution). We asked all modellers to assume that protection against severity conditional on infection stays the same, i.e. does not wane.
 
 In a second set of scenarios, we considered the introduction of a new viral variant. In one scenario we specified that a new variant was introduced with a 30% increase in immune escape (reduction of immunity) compared to the Omicron strain. We asked all modellers to introduce this variant to the population from 1st May, with a continuous influx of 50 weekly infections over sixteen weeks. In the alternative scenario we asked modellers to maintain the current mix of viral strains over the projection period, with no changes to viral characteristics.
 
+By combining the two scenarios of waning protection with the two scenarios of new variant introduction, we obtained a total of four scenarios.
+
 # Results
 
-We received projections from six models, of which two included results for nearly all (30 and 32) of the 32 available countries. One model contributed results for three countries (Austria, Germany, the UK), and the remainder contributed projections for one country only (Denmark, Spain, and Poland). Two of the six models modelled only case projections, while others included incident weekly deaths. 
+We received projections from six models, of which two included results for nearly all (30 and 32) of the 32 available countries. One model contributed results for three countries (Austria, Germany, the UK), and the remainder contributed projections for one country only (Denmark, Spain, and Poland, respectively). Two of the six models modelled only case projections, while others included incident weekly deaths. 
 
 In three of four scenarios, models projected repeated outbreaks of COVID-19 across Europe continuing over the next twelve months. Models projected no further major outbreaks of COVID-19 across Europe in the most optimistic scenario that maintained a substantial level of protection against infection over a 10 month period, with no new viral strain. In contrast, even with this long-lasting protection, a new viral strain occurring in May created some outbreaks over the following summer months, although with variation among models (for example, one model suggesting a delayed winter wave in Denmark). 
 
@@ -72,6 +76,22 @@ In contrast, we observed most epidemic activity when models assumed a faster rat
 _Figure 1. Projections of weekly incident deaths across 32 European countries under varying scenarios of waning protection against infection (“strong” long-lasting immunity / “weak”, rapidly waning immunity) and the introduction of a new variant (“none”, no variant / “new”, a variant with 30% increase in immune escape)._
 
 ![](`r here::here("reports", "round-0", "cross-scenario-deaths.png")`)
+
+# Ensemble methods
+
+Given the variation between results from individual models, and the small samples size (no more than 3 models in any one country), we decided not to combine model results into an ensemble for this round. This will be reconsidered in round 1, where a move to sample-based submissions may facilitate creation of sensible ensembles and more models may be available for some countries. We will consider the following ensembles:
+
+## Median
+
+At each time point, take the median of each sample, across models.
+
+## Mean
+
+At each time point, take the arithmetic mean of each sample, across models.
+
+## Scenario weighted
+
+Time permitting, we would like to try a novel assessmenet of models and scenarios. At each time point, train a linear combination of scenarios and models to optimise the Ranked Probability Score, a proper scoring rule for evaluating probabilistic predictions. The corresponding coefficients for scenarios could give an indication of which scenario is "closest" to the truth. Weights will probably have to be constrained to be strictly positive and sum to 1.
 
 # Discussion
 
@@ -86,105 +106,3 @@ We may have misspecified the parameter values and therefore failed to meet the a
 Similarly, we set scenarios for a new variant introduction in terms of presence or absence. While we observed that the presence of a new variant was less important than the duration of immunity, this result is likely to be sensitive to the specification of a 30% increase in immune escape of the new variant. This meant we cannot offer insight into the mechanism of how a more transmissible variant interacts with existing immunity and waning protection against infection. 
 
 In conclusion, we suggest the results from Round 0 are consistent with viewing the speed of waning protection against infection as a more significant factor in future outbreaks compared to a new variant with some immune escape. In policy terms, this could imply the need to carefully consider the timing of vaccination programmes relative to waning protection, rather than as a response to new variant introductions. However, we found substantial variation between models as well as between countries and scenarios, and we strongly qualify this interpretation with both submission constraints on accuracy and the potential confounding of scenario parameter values.
-
----
-
-# Appendix: Model details
-
-```{r appendix, include=FALSE}
-# Packages
-library(here)
-library(dplyr)
-library(ggplot2)
-library(purrr)
-# Settings
-knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
-                      message = FALSE, warning = FALSE,
-                      eval.after = "fig.cap")
-
-params <- list("round" = 0)
-
-source(here("code", "load", "scenarios.R"))
-```
-
-_Report created `r Sys.Date()`_
-
-- Reporting projections originating `r scenarios[[paste0("round_", params$round)]][["origin_date"]]`
-
-- See [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`)
-
-### Model availability
-
-```{r models}
-models_summary <- results %>%
-  group_by(model) %>%
-  summarise(Locations = n_distinct(location),
-            scenarios = n_distinct(scenario_id),
-            variables = n_distinct(target_variable),
-            quantiles = "quantile" %in% type,
-            max_date = max(target_end_date),
-            Weeks = max(as.numeric(gsub(" wk", "", horizon))))
-
-models_summary %>%
-  select(Model = model, Locations, Weeks) %>%
-  arrange(desc(Weeks)) %>%
-  arrange(desc(Locations)) %>%
-  knitr::kable(caption = "Available model results")
-
-```
-
-
-### Comparative projections {.tabset}
-
-Results show the median (line) and 5-95% (shaded area) model projections across 4 scenarios and 32 locations.
-
-#### By scenario {.tabset .tabset-pills}
-
-##### Cases
-![](`r here("reports", "round-0", "cross-scenario-cases.png")`)
-
-##### Deaths
-![](`r here("reports", "round-0", "cross-scenario-deaths.png")`)
-
-#### By model {.tabset .tabset-pills}
-
-##### Cases
-![](`r here("reports", "round-0", "cross-model-cases.png")`)
-
-##### Deaths
-![](`r here("reports", "round-0", "cross-model-deaths.png")`)
-
-### Individual model projections {.tabset}
-
-```{r individual-models}
-models_cases <- list.files(here('reports', 'round-0', 'inc case'))
-models_cases <- gsub("\\.png", "", models_cases)
-models_deaths <- list.files(here('reports', 'round-0', 'inc death'))
-models_deaths <- gsub("\\.png", "", models_deaths)
-```
-
-```{r plot-individual-models, results = 'asis'}
-for (model in unique(results$model)){
-  cat("\n")
-  cat("#### ", model, "{.tabset .tabset-pills}", "\n")
-  
-  if (model %in% models_cases) {
-    cat("\n")
-    cat("##### Cases \n")
-    cat("\n")
-    cat("![](", here('reports', 'round-0', 'inc case', 
-                     paste0(model, '.png')), ")")
-    cat("\n")
-    }
-  
-  if (model %in% models_deaths) {
-    cat("\n")
-    cat("##### Deaths \n")
-    cat("\n")
-    cat("![](", here('reports', 'round-0', 'inc death', 
-                     paste0(model, '.png')), ")")
-    cat("\n")
-  }
-}
-```
-
