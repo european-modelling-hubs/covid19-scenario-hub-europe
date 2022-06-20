@@ -1,7 +1,25 @@
 team_name: MOCOS (Modelling Coronavirus) group
 model_name: agent1
 model_abbr: MOCOS-agent1
-model_contributors: Tyll Krueger <tyll.krueger{at}googlemail.com>, Marcin Bodych <marcin.bodych{at}pwr.edu.pl>, Tomasz Ożański <tomasz.ozanski{at}pwr.edu.pl>, Radosław Idzikowski <radoslaw.idzikowski{at}pwr.edu.pl>, Piotr Szymański <piotr.szymanski{at}pwr.edu.pl>, Agata Migalska <agata{at}migalska.com>, Barbara Pabjan <barbara.pabjan{at}uwr.edu.pl>, Maciej Filiński <maciej.filinski{at}pwr.edu.pl>, Marek Bawiec <marek.bawiec{at}pwr.edu.pl>
+model_contributors:
+  - name: Tyll Krueger
+    email: tyll.krueger@googlemail.com
+  - name: Marcin Bodych
+    email: marcin.bodych@pwr.edu.pl
+  - name: Tomasz Ożański
+    email: tomasz.ozanski@pwr.edu.pl
+  - name: Radosław Idzikowski
+    email: radoslaw.idzikowski@pwr.edu.pl
+  - name: Piotr Szymański
+    email: piotr.szymanski@pwr.edu.pl
+  - name: Agata Migalska
+    email: agata@migalska.com
+  - name: Barbara Pabjan
+    email: barbara.pabjan@uwr.edu.pl
+  - name: Maciej Filiński
+    email: maciej.filinski@pwr.edu.pl
+  - name: Marek Bawiec
+    email: marek.bawiec@pwr.edu.pl
 website_url: https://mocos.pl/
 repo_url: https://github.com/MOCOS-COVID19/MocosSim
 license: mit
