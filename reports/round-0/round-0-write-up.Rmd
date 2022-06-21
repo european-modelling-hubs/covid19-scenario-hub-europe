@@ -1,0 +1,105 @@
+---
+title: European COVID-19 Scenario Modelling Hub Round 0
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+  pdf_document:
+    default
+---
+```{r write-up, echo=FALSE, include=FALSE}
+# Create plots and report
+library(here)
+library(dplyr)
+library(purrr)
+library(readr)
+# get scenario metadata
+source(here("code", "load", "scenarios.R"))
+# get model projections
+source(here("code", "load", "load_local_results.R"))
+
+# Set round
+round <- 0
+
+# Get results
+scenario_round <- scenarios[[paste0("round_", round)]]
+results <- load_local_results(round = round)
+
+# Create reporting directory
+report_dir <- paste0(here("reports"), "/round-", round)
+if(!dir.exists(report_dir)){ dir.create(report_dir) }
+```
+
+# Summary
+
+- In March 2022 we conducted a pilot round of the European Scenario Hub. We considered four scenarios for COVID-19 dynamics over the next twelve months, comparing the speed and extent of waning protection against infection as well as the emergence of a variant with immune escape.
+
+- We received projections from six models, of which two included results for nearly all (30 and 32) of the available countries.
+
+- In three of four scenarios, models projected repeated outbreaks of COVID-19 across Europe continuing over the next twelve months. 
+
+- Overall, the speed of waning protection against infection was a more significant factor in future outbreaks compared to a new variant with some immune escape. 
+
+- However, we found substantial variation between models as well as between countries and scenarios. We strongly caution any interpretation of results here as this was clearly communicated as a pilot round with the main purpose of familiarising contributors with the set up.
+
+# Background
+
+The European Scenario Modelling Hub aims to explore and bound the uncertainty around future COVID-19 outcomes across 32 European countries over the next twelve months.  The scenarios focus on fundamental drivers of COVID-19 dynamics, while models aim to encode their influence on COVID-19 outcomes under current knowledge of causal relationships.
+
+In March 2022 we conducted a pilot round of the Scenario Hub. We considered four scenarios comparing waning protection against infection and emergence of an immune escape variant. We describe results from each individual model and note variations in the projected number and timing of COVID-19 outbreaks across Europe. 
+
+# Scenarios
+
+In the pilot round we adopted identical scenarios to the US Scenario Hub Round 13, outlined below.
+
+In one set of scenarios, we considered waning protection against infection over time. Starting from a baseline level of immunity, i.e. that obtained immediately after exposure to either infection or vaccination, we assumed that protection wanes over some length of time until reaching a long-term plateau (minimum level) of immunity. We formulated two scenarios of waning protection. Within each scenario we specified two parameters: first, the median time to reach a plateau of immunity, and second, the long-term level of immunity when a plateau had been reached. 
+
+In  a first, *optimistic* scenario, we set the median time to reach a plateau as 10 months, with only 40% reduction in protection against infection compared to a baseline level. In a second, *pessimistic* scenario we specified a median time of 4 months to reach a plateau of immunity at 60% lower than a baseline level. Across all scenarios, modellers were asked to use their own judgement to set how much protection was conferred at a baseline level of immunity (i.e. protection following exposure as infection or vaccination); and could choose any method to model the distribution of waning over time (for example, exponential or gamma distribution). We asked all modellers to assume that protection against severity conditional on infection stays the same, i.e. does not wane.
+
+In a second set of scenarios, we considered the introduction of a new viral variant. In one scenario we specified that a new variant was introduced with a 30% increase in immune escape (reduction of immunity) compared to the Omicron strain. We asked all modellers to introduce this variant to the population from 1st May, with a continuous influx of 50 weekly infections over sixteen weeks. In the alternative scenario we asked modellers to maintain the current mix of viral strains over the projection period, with no changes to viral characteristics.
+
+By combining the two scenarios of waning protection with the two scenarios of new variant introduction, we obtained a total of four scenarios.
+
+# Results
+
+We received projections from six models, of which two included results for nearly all (30 and 32) of the 32 available countries. One model contributed results for three countries (Austria, Germany, the UK), and the remainder contributed projections for one country only (Denmark, Spain, and Poland, respectively). Two of the six models modelled only case projections, while others included incident weekly deaths. 
+
+In three of four scenarios, models projected repeated outbreaks of COVID-19 across Europe continuing over the next twelve months. Models projected no further major outbreaks of COVID-19 across Europe in the most optimistic scenario that maintained a substantial level of protection against infection over a 10 month period, with no new viral strain. In contrast, even with this long-lasting protection, a new viral strain occurring in May created some outbreaks over the following summer months, although with variation among models (for example, one model suggesting a delayed winter wave in Denmark). 
+
+In contrast, we observed most epidemic activity when models assumed a faster rate of waning, regardless of whether models introduced a new variant. With a median time to reduced protection against infection of only 4 months, possible surges were projected over both summer and winter. Model results showed no consistent timing or magnitude of activity, with variation both within scenarios across models and within each model across scenarios even within the scenarios of either maintaining the current mix of viral strains or the introduction of a new more transmissible variant. 
+
+_Figure 1. Projections of weekly incident deaths across 32 European countries under varying scenarios of waning protection against infection (“strong” long-lasting immunity / “weak”, rapidly waning immunity) and the introduction of a new variant (“none”, no variant / “new”, a variant with 30% increase in immune escape)._
+
+![](`r here::here("reports", "round-0", "cross-scenario-deaths.png")`)
+
+# Ensemble methods
+
+Given the variation between results from individual models, and the small samples size (no more than 3 models in any one country), we decided not to combine model results into an ensemble for this round. This will be reconsidered in round 1, where a move to sample-based submissions may facilitate creation of sensible ensembles and more models may be available for some countries. We will consider the following ensembles:
+
+## Median
+
+At each time point, take the median of each sample, across models.
+
+## Mean
+
+At each time point, take the arithmetic mean of each sample, across models.
+
+## Scenario weighted
+
+Time permitting, we would like to try a novel assessmenet of models and scenarios. At each time point, train a linear combination of scenarios and models to optimise the Ranked Probability Score, a proper scoring rule for evaluating probabilistic predictions. The corresponding coefficients for scenarios could give an indication of which scenario is "closest" to the truth. Weights will probably have to be constrained to be strictly positive and sum to 1.
+
+# Discussion
+
+Overall, we attributed the greatest amount of variation among results to the scenarios that differentiated waning protection against infection. This variation was greater than that between scenarios considering a variant with immune escape, and we observed this relative difference both across models and between countries. We might conclude that this demonstrates that population protection against infection is a greater contributor to driving new COVID-19 outbreaks than the introduction of a new variant, even one with significant immune escape. 
+
+This partly matches results from the US Scenario Hub, with a set of nine models produced from identical scenarios. In a median ensemble of case projections, the most likely (50% probability) result was a steady level of incidence. Meanwhile, at lower probabilities the timing and magnitude of outbreaks substantially varied between scenarios, while the faster waning scenarios saw the most variation in model projections. In the European Hub, we did not create an ensemble given the limited number of models for each country (at most three) and the experimental intention of the pilot round. However, we observe similar overall dynamics in terms of the differences between and interaction of the two sets of scenarios.
+
+We note several crucial limitations to interpreting our Round 0 results. First, we clearly identified this round as a pilot study to inform future scenario rounds, and results should be considered experimental with several models still under development. Second, we found that the timing and scale of outbreaks was highly inconsistent between models. This could have been an inaccurate interpretation resulting from the quantile-based submission format. For each model, summarising values from many simulations into quantile probabilities may blur over and obscure patterns evident in individual model runs. We intend to mitigate this in future rounds by asking for submissions of raw samples of equal probability. 
+
+We may have misspecified the parameter values and therefore failed to meet the aim of expressing the range of plausible uncertainty. The speed and extent of waning protection is a particular issue where recent data do not support the optimistic scenario for a slow waning of protection. This made it difficult for models to match to both the scenario specification and the observed data. Within at least one model estimates of disease transmissibility varied between scenarios, with a slower waning scenario requiring a higher estimate of transmissibility in order to fit the model to observed case counts. This reduces the difference between optimistic and pessimistic scenarios of waning protection and makes it more difficult to attribute any differences in scenario results to the true impact of waning protection.
+
+Similarly, we set scenarios for a new variant introduction in terms of presence or absence. While we observed that the presence of a new variant was less important than the duration of immunity, this result is likely to be sensitive to the specification of a 30% increase in immune escape of the new variant. This meant we cannot offer insight into the mechanism of how a more transmissible variant interacts with existing immunity and waning protection against infection. 
+
+In conclusion, we suggest the results from Round 0 are consistent with viewing the speed of waning protection against infection as a more significant factor in future outbreaks compared to a new variant with some immune escape. In policy terms, this could imply the need to carefully consider the timing of vaccination programmes relative to waning protection, rather than as a response to new variant introductions. However, we found substantial variation between models as well as between countries and scenarios, and we strongly qualify this interpretation with both submission constraints on accuracy and the potential confounding of scenario parameter values.
