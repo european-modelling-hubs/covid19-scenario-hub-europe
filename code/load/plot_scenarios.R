@@ -21,6 +21,7 @@ theme_replace(strip.background = element_blank())
 ##' @param scenario_colours colour palette to be used for scenarios
 ##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
 ##' @param fixed_sample_alpha alpha of lines for individual samples
+##' @param subsample proportion to subsample: 1 means plotting all samples
 ##' @param log whether to plot the y axis on the log scale; default: FALSE
 ##' @param scenario_caption a caption for the scenario
 ##' @return a facet plot of scenarios
@@ -34,6 +35,7 @@ plot_scenarios <- function(data,
                            scenario_colours = NULL,
                            all_truth = TRUE,
                            fixed_sample_alpha = 0.1,
+                           subsample = 1,
                            log = FALSE) {
 
   # Relabel target variable
@@ -51,7 +53,10 @@ plot_scenarios <- function(data,
               by = "model") %>%
     left_join(enframe(scenario_colours,
                       name = "scenario_label", value = "scenario_colour"),
-              by = "scenario_label")
+              by = "scenario_label") %>%
+    group_by(model, location, horizon) %>%
+    sample_frac(subsample)  %>%
+    ungroup()
 
 # set plot subtitle
 variable_subtitle = unique(plot_data$variable_label)[1]
