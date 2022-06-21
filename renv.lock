@@ -47,15 +47,26 @@
       "Package": "HubValidations",
       "Version": "0.0.0.9000",
       "Source": "GitHub",
+      "Remotes": "r-lib/rlang",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "covid19-forecast-hub-europe",
       "RemoteRepo": "HubValidations",
+      "RemoteUsername": "covid19-forecast-hub-europe",
       "RemoteRef": "origin-date",
-      "RemoteSha": "d5a47de2b83a101f5ad7e45eae8c4580c20c0fa9",
-      "Remotes": "r-lib/rlang",
-      "Hash": "7ee666450c483120000a47c2d0ce090e",
-      "Requirements": []
+      "RemoteSha": "98b8587ee2a16b0528a25e98d5aa29be901a196a",
+      "Hash": "6b7eb116de2bd974ed81097da1ceb72e",
+      "Requirements": [
+        "dplyr",
+        "fs",
+        "gert",
+        "gh",
+        "jsonlite",
+        "jsonvalidate",
+        "purrr",
+        "readr",
+        "rlang",
+        "yaml"
+      ]
     },
     "KernSmooth": {
       "Package": "KernSmooth",
@@ -131,11 +142,15 @@
     },
     "V8": {
       "Package": "V8",
-      "Version": "4.1.0",
+      "Version": "4.2.0",
       "Source": "Repository",
       "Repository": "RSPM",
-      "Hash": "c6bdc74e7e3a095102a6326d5a8f0224",
-      "Requirements": []
+      "Hash": "0315f0d8f1d2be81b7271a07a0ecc918",
+      "Requirements": [
+        "Rcpp",
+        "curl",
+        "jsonlite"
+      ]
     },
     "askpass": {
       "Package": "askpass",
@@ -954,11 +969,18 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.0.0",
+      "Version": "2.0.2",
       "Source": "Repository",
       "Repository": "RSPM",
+<<<<<<< HEAD
       "Hash": "cf4329aac12c2c44089974559c18e446",
       "Requirements": []
+=======
+      "Hash": "6d3bef2e305f55c705c674653c7d7d3d",
+      "Requirements": [
+        "askpass"
+      ]
+>>>>>>> 87cd4892834bf98ffe75080a09bb5f3cdc5f993c
     },
     "pillar": {
       "Package": "pillar",
@@ -996,7 +1018,7 @@
       "Package": "praise",
       "Version": "1.0.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "a555924add98c99d2f411e37e7d25e9f",
       "Requirements": []
     },
@@ -1124,8 +1146,8 @@
       "RemoteRepo": "rlang",
       "RemoteUsername": "r-lib",
       "RemoteRef": "HEAD",
-      "RemoteSha": "f527d0cf78322ce6aeed9f9521f409c5f8c01298",
-      "Hash": "8147e1cd96b9afcdf4293f3e5489021b",
+      "RemoteSha": "cce2a4b228335d5963ebfda7c0f86087610624d1",
+      "Hash": "a4a7442fe21e11e4f98e0e44d687acf2",
       "Requirements": []
     },
     "rmarkdown": {
@@ -1442,7 +1464,7 @@
       "Package": "yaml",
       "Version": "2.3.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "RSPM",
       "Hash": "458bb38374d73bf83b1bb85e353da200",
       "Requirements": []
     },

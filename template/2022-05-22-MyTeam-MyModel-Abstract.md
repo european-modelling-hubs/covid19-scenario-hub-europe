@@ -4,42 +4,70 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 
 ---
 
-## (a) Modeller commentary
+# Modeller commentary
 
-- #### Summary comments on results
+## Summary comments on results
 
-- #### Comments on observed dynamics given model assumptions
+FILL
 
-## (b) Model assumptions
+## Comments on observed dynamics given model assumptions
 
-### Round 1 scenarios
+FILL
 
-- #### Second booster campaign
+# Model assumptions
 
-   - ##### _if applicable:_ Any variation from the scenarios as specified
+## Round 1 scenarios
 
-   - ##### Vaccine effectiveness assumptions
+### Second booster campaign
 
-- #### Waning immunity 
+#### Any variation from the scenarios as specified
 
-   - ##### Details of waning protection against infection (e.g., distribution used)
-   
-   - ##### Waning protection against severe disease
+FILL (if applicable)
 
-### Additional assumptions
+#### Vaccine effectiveness assumptions
 
-- #### Number/type of immune classes considered
+FILL
 
-   - ##### _if applicable:_ Initial distribution of susceptibility
+### Waning immunity 
 
-      - Proportion of people that are naïve at start of projection (not vaccinated or infected)
+#### Details of waning protection against infection (e.g., distribution used)
 
-      - Other
+FILL
 
-- #### Seasonality implementation
+#### Waning protection against severe disease
 
-- #### Contact rate and/or behaviour assumptions
+FILL
 
-   - ##### Non-pharmaceutical interventions
+## Additional assumptions
 
-   - ##### _if applicable:_ Behaviour in response to case notification rates
+### Number/type of immune classes considered
+
+FILL
+
+#### Initial distribution of susceptibility 
+
+##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
+
+FILL (if applicable)
+
+##### Other
+
+FILL (if applicable)
+
+### Seasonality implementation
+
+FILL (if applicable)
+
+### Contact rate and/or behaviour assumptions
+
+#### Non-pharmaceutical interventions
+
+FILL (if applicable)
+
+#### Behaviour in response to case notification rates
+
+FILL (if applicable)
+
+### Other
+
+FILL 

@@ -1,5 +1,5 @@
 $schema: "http://json-schema.org/draft-07/schema"
-title: ForecastHub model data
+title: ScenarioHub model data
 description: >
   This is the schema of the scenario files, please refer to
   https://github.com/epiforecasts/covid19-scenario-hub-europe/wiki/Submission-format
@@ -19,7 +19,7 @@ properties:
       type: string
       pattern: ^[ABCD]\-2022\-05\-22$
   target_variable:
-    description: '"inc case" or "inc death" or "inc hosp"'
+    description: '"inc case" or "inc death" or "inc hosp" or "inc infection" or "inc icu"'
     type: array
     items:
       type: string
@@ -27,6 +27,9 @@ properties:
         - inc case
         - inc death
         - inc hosp
+        - inc infection
+        - inc icu
+        - inc hosp_icu
   horizon:
     description: The time horizon for the projections
     type: array
@@ -44,7 +47,7 @@ properties:
     type: array
     items:
       type: string
-      enum: ["AT", "BE", "BG", "CH", "CY", "CZ", "DK", "DE", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "NO", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
+      enum: ["H0", "AT", "BE", "BG", "CH", "CY", "CZ", "DK", "DE", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "NO", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
   value:
     type: array
     items:
