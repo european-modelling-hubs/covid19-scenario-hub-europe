@@ -14,7 +14,7 @@ model_details:
   vaccine_efficacy_transmission: Depends on vaccine product and dose
   vaccine_efficacy_delay: Depends on vaccine product and dose but typically between 7-14 days
   vaccine_hesitancy: Not applicable
-  vaccine_immunity_duration:'We assume vaccine effectiveness (VE) against transmission, infection, and hospitalisation wane at the same rate and follow a logistic function parameterized so that after 6 months vaccine-induced protection is reduced by 50% and reduced by 100% after 1 year (assuming no additional doses are received).'
+  vaccine_immunity_duration: 'We assume vaccine effectiveness (VE) against transmission, infection, and hospitalisation wane at the same rate and follow a logistic function parameterized so that after 6 months vaccine-induced protection is reduced by 50% and reduced by 100% after 1 year (assuming no additional doses are received).'
   natural_immunity_duration: We assume waning of natural immunity follows an Erlang distribution
   case_fatality_rate: Not applicable
   infection_fatality_rate: Depends on age and vaccination status
@@ -24,13 +24,14 @@ model_details:
   confidence_interval_method: Quantiles from multiple simulations
   calibration: The baseline (non-seasonal) transmission rate and initial conditions for forward simulations are calibrated by fitting the model to daily confirmed cases from the national notification database Osiris. The model is fitted to data piecewise to correspond with the correct contact patterns associated with different non-pharmaceutical interventions within each time window.
   spatial_structure: Not applicable
-team_funding: The study was financed by the Netherlands Ministry of Health, Welfare and
-Sport. This project has received funding from the European Union’s
-Horizon 2020 research and innovation programme - project EpiPose (grant
-agreement number 101003688).
+team_funding: |
+  The study was financed by the Netherlands Ministry of Health, Welfare and
+  Sport. This project has received funding from the European Union’s
+  Horizon 2020 research and innovation programme - project EpiPose (grant
+  agreement number 101003688).
 repo_url: https://github.com/kylieainslie/vacamole
 twitter_handles: DrKAinslie
 data_inputs: Contact matrices, daily cases, vaccination uptake - RIVM
-citation: [1] Kylie E. C. Ainslie,  Jantien Backer, Pieter de Boer, Albert Jan van Hoek, Don Klinkenberg, Hester Korthals Altes,  Ka Yin Leung, Hester de Melker, Fuminari Miura, and Jacco Wallinga. "The impact of vaccinating adolescents and children on COVID-19 disease outcomes". https://www.medrxiv.org/content/10.1101/2021.10.21.21265318v1
+citation: '[1] Kylie E. C. Ainslie,  Jantien Backer, Pieter de Boer, Albert Jan van Hoek, Don Klinkenberg, Hester Korthals Altes,  Ka Yin Leung, Hester de Melker, Fuminari Miura, and Jacco Wallinga. "The impact of vaccinating adolescents and children on COVID-19 disease outcomes". https://www.medrxiv.org/content/10.1101/2021.10.21.21265318v1'
 methods_long: We developed a deterministic age-structured compartmental SEIR model extended to include states for severe disease outcomes and vaccination status. The population is partitioned into 10-year age groups (0-9, 10-19, …, 70-79, 80+). The model is designed to incorporate a single vaccine product that 1) reduces susceptibility to infection, 2) reduces risk of hospitalization if a vaccinated individual is infected, and 3) reduces risk of infecting others (transmission) if a vaccinated person is infected. When a person is vaccinated, they first enter a hold state where they are vaccinated, but not yet (fully) protected. After a delay period, they enter the vaccinated and protected state for the dose they have received. We incorporate different vaccine products by taking the daily weighted average of the number of people with each vaccine product (and dose), the corresponding delay to protection of each vaccine product, and the vaccine effectiveness against each outcome. Vaccine-induced protection is assumed to wane following a logistic function parameterized so that after 6 months vaccine-induced protection is reduced by 50% and reduced by 100% after 1 year. Natural immunity is assumed to wane following an Erlang distribution. The model uses different contact matrices from the Pienter Corona Study (https://www.rivm.nl/pienter-corona-studie) estimated throughout 2020 and 2021 to approximate contact patterns under different levels of non-pharmaceutical interventions within and between age groups. These contact matrices are converted to transmission matrices by multiplying rows and columns by estimates of the relative susceptibility and infectiousness of each age group compared to the 0-9 years age group. To account for the seasonal pattern of SARS-CoV-2 transmission, we define the transmission rate at time t as a sinusoidal function of seasonality as in https://doi.org/10.1016/j.envres.2021.110874.
 
