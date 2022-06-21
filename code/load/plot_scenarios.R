@@ -14,12 +14,14 @@ theme_replace(strip.background = element_blank())
 ##'
 ##' @param data modelled data as submitted
 ##' @param truth truth data (if given)
-##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
-##' @param scenario_caption a caption for the scenario
+##' @param round scenario hub round
 ##' @param target_variable target variable to plot (cases, hospitalisations, or deaths)
 ##' @param columns the columns in the facet plot returned
 ##' @param model_colours colour palette to be used for models
 ##' @param scenario_colours colour palette to be used for scenarios
+##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
+##' @param fixed_sample_alpha alpha of lines for individual samples
+##' @param scenario_caption a caption for the scenario
 ##' @return a facet plot of scenarios
 ##' @author Katharine Sherratt
 plot_scenarios <- function(data,
