@@ -5,7 +5,7 @@ model_contributors: Kylie Ainslie (RIVM) <kylie.ainslie@rivm.nl>
 website_url: https://github.com/kylieainslie/vacamole
 license: cc-by-4.0
 team_model_designation: primary
-methods: We developed a deterministic, age-structured SEIR model with vaccination, which accounts for differences in susceptibility/infectiousness by age, seasonality, contact patterns, modes of vaccine protection, and waning immunity.
+methods: Deterministic, age-structured SEIR model, accounting for differences in susceptibility/infectiousness by age, seasonality, contact patterns, modes of vaccine protection, and waning immunity.
 model_details:
   modeling_NPI: The model uses different contact matrices from the Pienter Corona Study (https://www.rivm.nl/pienter-corona-studie) estimated throughout 2020 and 2021 to approximate contact patterns under different levels of non-pharmaceutical interventions within and between age groups.
   compliance_NPI: Not applicable
