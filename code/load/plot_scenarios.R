@@ -14,12 +14,16 @@ theme_replace(strip.background = element_blank())
 ##'
 ##' @param data modelled data as submitted
 ##' @param truth truth data (if given)
-##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
-##' @param scenario_caption a caption for the scenario
+##' @param round scenario hub round
 ##' @param target_variable target variable to plot (cases, hospitalisations, or deaths)
 ##' @param columns the columns in the facet plot returned
 ##' @param model_colours colour palette to be used for models
 ##' @param scenario_colours colour palette to be used for scenarios
+##' @param all_truth logical; whether to show all truth data (TRUE; default) or only up to the start of the scenarios (FALSE)
+##' @param fixed_sample_alpha alpha of lines for individual samples
+##' @param subsample proportion to subsample: 1 means plotting all samples
+##' @param log whether to plot the y axis on the log scale; default: FALSE
+##' @param scenario_caption a caption for the scenario
 ##' @return a facet plot of scenarios
 ##' @author Katharine Sherratt
 plot_scenarios <- function(data,
@@ -30,7 +34,9 @@ plot_scenarios <- function(data,
                            model_colours = NULL,
                            scenario_colours = NULL,
                            all_truth = TRUE,
-                           fixed_sample_alpha = 0.3) {
+                           fixed_sample_alpha = 0.1,
+                           subsample = 1,
+                           log = FALSE) {
 
   # Relabel target variable
   variable_labels <- names(scenarios$targets)
@@ -47,10 +53,19 @@ plot_scenarios <- function(data,
               by = "model") %>%
     left_join(enframe(scenario_colours,
                       name = "scenario_label", value = "scenario_colour"),
-              by = "scenario_label")
+              by = "scenario_label") %>%
+    group_by(model, location, horizon) %>%
+    sample_frac(subsample)  %>%
+    ungroup()
 
-# set plot subtitle
-variable_subtitle = unique(plot_data$variable_label)[1]
+  # set plot subtitle
+  variable_subtitle <- unique(plot_data$variable_label)[1]
+
+  if (log) {
+    y_scale <- ggplot2::scale_y_log10
+  } else {
+    y_scale <- ggplot2::scale_y_continuous
+  }
 
   # Plot
   plot_base <- plot_data %>%
@@ -60,7 +75,7 @@ variable_subtitle = unique(plot_data$variable_label)[1]
                           "Round ", round, " scenarios: \n",
                            scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     scale_x_date(date_labels = "%b") +
-    scale_y_continuous(labels = scales::label_comma()) +
+    y_scale(labels = scales::label_comma()) +
     guides(colour = guide_legend(override.aes = list(alpha = 1,
                                                      size = 3))) +
     theme(legend.position = "top",
