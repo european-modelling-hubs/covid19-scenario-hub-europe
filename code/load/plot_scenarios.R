@@ -54,7 +54,7 @@ variable_subtitle = unique(plot_data$variable_label)[1]
 
   # Plot
   plot_base <- plot_data %>%
-    ggplot(aes(x = target_end_date)) +
+    ggplot(aes(x = target_end_date, y = value)) +
     labs(x = NULL, y = NULL,
          caption = paste0(variable_subtitle, " | ",
                           "Round ", round, " scenarios: \n",
@@ -64,7 +64,7 @@ variable_subtitle = unique(plot_data$variable_label)[1]
     guides(colour = guide_legend(override.aes = list(alpha = 1,
                                                      size = 3))) +
     theme(legend.position = "top",
-          legend.text=element_text(size=rel(1.5)))
+          legend.text=element_text(size=rel(1.2)))
 
   if (columns == "model") {
     # construct legend
@@ -75,8 +75,7 @@ variable_subtitle = unique(plot_data$variable_label)[1]
 
     # plot
     plot <- plot_base +
-      geom_line(aes(y = value,
-                     colour = scenario_sample),
+      geom_line(aes(colour = scenario_sample),
                  alpha = fixed_sample_alpha) +
       scale_colour_manual(values = scenario_sample_colours,
                           breaks = scenario_sample_breaks,
@@ -96,8 +95,7 @@ variable_subtitle = unique(plot_data$variable_label)[1]
 
     # plot
     plot <- plot_base +
-      geom_line(aes(y = value,
-                     colour = model_sample),
+      geom_line(aes(colour = model_sample),
                 alpha = fixed_sample_alpha) +
       scale_colour_manual(values = model_sample_colours,
                           breaks = model_sample_breaks,

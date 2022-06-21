@@ -24,7 +24,7 @@ load_local_results <- function(round = NULL, subdir = NULL) {
 
   # get results by model
   results <- imap_dfr(.x = model_results,
-                      ~ read_csv(.x) %>%
+                      ~ read_csv(.x, show_col_types = FALSE) %>%
                         mutate(model = .y) %>%
                         filter(!is.na(value)))
 
