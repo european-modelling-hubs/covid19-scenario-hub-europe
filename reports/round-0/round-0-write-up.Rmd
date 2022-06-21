@@ -30,9 +30,6 @@ results <- load_local_results(round = round)
 # Create reporting directory
 report_dir <- paste0(here("reports"), "/round-", round)
 if(!dir.exists(report_dir)){ dir.create(report_dir) }
-
-# Create plots
-source(here("code", "summarise", "create_plots.R"))
 ```
 
 # Summary
