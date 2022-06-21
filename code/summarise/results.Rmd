@@ -104,7 +104,8 @@ for (target in scenarios$targets) {
       target_variable = target,
       columns = "scenario",
       model_colours = palette$models,
-      scenario_colours = palette$scenarios
+      scenario_colours = palette$scenarios,
+      subsample = 0.2
     )
   )
   cat("\n")
@@ -124,7 +125,8 @@ for (target in scenarios$targets) {
       target_variable = target,
       columns = "model",
       model_colours = palette$models,
-      scenario_colours = palette$scenarios
+      scenario_colours = palette$scenarios,
+      subsample = 0.2
     ) 
   )
   cat("\n")
@@ -138,7 +140,6 @@ for (model in unique(results$model)) {
   cat("\n\n")
   cat("#### ", model, " {.tabset .tabset-pills}")
 
-  
   res_model <- results |> 
     filter(model == .env$model)
   

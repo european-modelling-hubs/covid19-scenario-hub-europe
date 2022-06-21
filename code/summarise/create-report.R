@@ -7,8 +7,6 @@ library(readr)
 source(here("code", "load", "scenarios.R"))
 # get model projections
 source(here("code", "load", "load_local_results.R"))
-# get plots
-source(here("code", "summarise", "create_plots.R"))
 
 # Set round
 round <- purrr::transpose(scenarios[!grepl("targets", names(scenarios))])
