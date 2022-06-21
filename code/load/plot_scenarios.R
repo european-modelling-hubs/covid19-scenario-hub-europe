@@ -58,8 +58,8 @@ plot_scenarios <- function(data,
     sample_frac(subsample)  %>%
     ungroup()
 
-# set plot subtitle
-variable_subtitle = unique(plot_data$variable_label)[1]
+  # set plot subtitle
+  variable_subtitle <- unique(plot_data$variable_label)[1]
 
   if (log) {
     y_scale <- ggplot2::scale_y_log10
