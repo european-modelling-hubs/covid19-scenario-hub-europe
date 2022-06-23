@@ -1,7 +1,19 @@
 team_name: ECDC
 model_name: CM_ONE
 model_abbr: ECDC-CM_ONE
-model_contributors: Rok Grah (ECDC) rok.grah@ecdc.europa.eu, Rene Niehus (ECDC) rene.niehus@ecdc.europa.eu, Bastian Prasse (ECDC) bastian.prasse@ecdc.europa.eu, Frank.Sandmann (ECDC) frank.sandmann@ecdc.europa.eu
+model_contributors:
+  - name: Rok Grah
+    affiliation: ECDC
+    email: rok.grah@ecdc.europa.eu
+  - name: Rene Niehus
+    affiliation: ECDC
+    email: rene.niehus@ecdc.europa.eu
+  - name: Bastian Prasse
+    affiliation: ECDC
+    email: bastian.prasse@ecdc.europa.eu
+  - name: Frank Sandmann
+    affiliation: ECDC
+    email: frank.sandmann@ecdc.europa.eu
 website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
 team_model_designation: primary
