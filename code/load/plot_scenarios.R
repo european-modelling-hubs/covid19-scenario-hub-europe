@@ -23,6 +23,7 @@ theme_replace(strip.background = element_blank())
 ##' @param fixed_sample_alpha alpha of lines for individual samples
 ##' @param subsample proportion to subsample: 1 means plotting all samples
 ##' @param log whether to plot the y axis on the log scale; default: FALSE
+##' @param per_100k plot values per 100k population
 ##' @param scenario_caption a caption for the scenario
 ##' @return a facet plot of scenarios
 ##' @author Katharine Sherratt
@@ -36,7 +37,8 @@ plot_scenarios <- function(data,
                            all_truth = TRUE,
                            fixed_sample_alpha = 0.1,
                            subsample = 1,
-                           log = FALSE) {
+                           log = FALSE,
+                           per_100k = TRUE) {
 
   # Relabel target variable
   variable_labels <- names(scenarios$targets)
@@ -67,15 +69,27 @@ plot_scenarios <- function(data,
     y_scale <- ggplot2::scale_y_continuous
   }
 
+  if (per_100k) {
+    plot_data <- plot_data %>%
+      select(-value) %>%
+      rename("value" = "value_100k")
+    truth <- truth %>%
+      mutate(value = value / population * 100000)
+    y_label <- "Incidence per 100,000"
+  } else {
+    y_label <- "Incidence"
+  }
+
   # Plot
   plot_base <- plot_data %>%
     ggplot(aes(x = target_end_date, y = value)) +
-    labs(x = NULL, y = NULL,
+    labs(x = NULL,
+         y = y_label,
          caption = paste0(variable_subtitle, " | ",
                           "Round ", round, " scenarios: \n",
                            scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     scale_x_date(date_labels = "%b") +
-    y_scale(labels = scales::label_comma()) +
+    scale_y_continuous(labels = scales::label_comma()) +
     guides(colour = guide_legend(override.aes = list(alpha = 1,
                                                      size = 3))) +
     theme(legend.position = "top",
