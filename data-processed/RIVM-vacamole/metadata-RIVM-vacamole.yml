@@ -1,7 +1,10 @@
 team_name: Dutch National Institute of Public Health and the Environment (RIVM)
 model_name: vacamole
 model_abbr: RIVM-vacamole
-model_contributors: Kylie Ainslie (RIVM) <kylie.ainslie@rivm.nl>
+model_contributors:
+  - author: Kylie Ainslie
+    affiliation: RIVM
+    email: kylie.ainslie@rivm.nl
 website_url: https://github.com/kylieainslie/vacamole
 license: cc-by-4.0
 team_model_designation: primary
