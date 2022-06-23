@@ -1,10 +1,11 @@
 ---
-title: European COVID-19 Scenario Modelling Hub
+title: "Round `r params$round`"
 output:
   html_document:
     self_contained: false
     toc: true
     toc_depth: 5
+date: "Report created `r Sys.Date()`"
 params:
   round: 1
 ---
@@ -48,9 +49,6 @@ truth <- load_truth(
 ) |>
   select(-model)
 ```
-
-# Round `r params$round`
-_Report created `r Sys.Date()`_
 
 ### Scenarios
 
