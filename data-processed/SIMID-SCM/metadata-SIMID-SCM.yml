@@ -2,13 +2,27 @@ team_name: SIMID
 model_name: Stochastic model
 model_abbr: SIMID-SCM
 model_version: 24.0 (eu_hub branch)
-model_contributors: Nicolas Franco <nicolas.franco@unamur.be>, Lander Willem <lander.willem@uantwerpen.be>, Steven Abrams <steven.abrams@uhasselt.be>, The SIMID COVID-19 team, Christel Faes, Philippe Beutels, Niel Hens <niel.hens@uhasselt.be>
+model_contributors:
+  - name: Nicolas Franco
+    email: nicolas.franco@unamur.be
+    affiliation: University of Namur (Belgium)
+  - name: Lander Willem
+    email: lander.willem@uantwerpen.be
+    affiliation: University of Antwerp (Belgium)
+  - name: Steven Abrams
+    email: steven.abrams@uhasselt.be
+    affiliation: University of Hasselt (Belgium)
+  - name: The SIMID COVID-19 team
+  - name: Christel Faes
+  - name: Philippe Beutels
+  - name: Niel Hens
+    email: niel.hens@uhasselt.be
+    affiliation: University of Hasselt (Belgium)
 website_url: https://github.com/lwillem/stochastic_model_BE
 license: gpl-3.0
 team_model_designation: primary
 methods: Stochastic age-structured discrete time extended compartmental model
-institution_affil: University of Hasselt (Belgium), University of Antwerp (Belgium), University of Namur (Belgium)
-team_funding: This project received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation program (grant number 101003688 – EpiPose project). 
+team_funding: This project received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation program (grant number 101003688 – EpiPose project).
 repo_url: https://github.com/lwillem/stochastic_model_BE
 data_inputs: The model uses hospitalisation, mortality and serological data, as provided by the Belgian Scientific Institute for Public Health, Sciensano. Social contact data are provided by the CoMix project.
 citation: https://doi.org/10.1016/j.epidem.2021.100449
@@ -29,5 +43,5 @@ model_details:
   age_groups: 10 years age groups
   importations: No importation, except a seed for each new variant
   confidence_interval_method: Samples coming from independent MCMC chains, plus stochastic realisation on transmissions
-  calibration: MCMC Random-Walk Metropolis algorithm performed on a deterministic version of the model 
+  calibration: MCMC Random-Walk Metropolis algorithm performed on a deterministic version of the model
   spatial_structure: Not applicable

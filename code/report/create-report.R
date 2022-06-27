@@ -14,7 +14,6 @@ round <- max(unlist(round$round))
 
 # Render report ----------------------------------------------------------
 rmarkdown::render(here("code", "summarise", "results.Rmd"),
-                  output_file = here("reports",
-                                     paste0("round-", round),
-                                     "report.html"),
+                  output_file = here("reports", paste0("report_round", round, ".html")),
+                  output_options = list(lib_dir = here("reports", "site_libs")),
                   params = list("round" = round))
