@@ -1,0 +1,152 @@
+---
+title: European COVID-19 Scenario Modelling Hub
+output:
+  html_document:
+    self_contained: false
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+params:
+  round: 1
+---
+
+```{r setup, include = FALSE}
+# Settings
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE)
+knitr::knit_hooks$set(fig.width = knitr::hook_pngquant)
+```
+
+```{r prep}
+library(here)
+source(here("code", "report", "prep.R"))
+```
+
+# Round `r params$round`
+_Report created `r Sys.Date()`_
+
+### Scenarios
+
+We asked teams of researchers across Europe to use quantitative models to project COVID-19 outcomes for 32 European countries over the next year. In order to explore different sets of assumptions about drivers of the pandemic, we asked teams to vary four sets of parameters. We can describe this in a 2x2 scenario specification:
+
+```{r table-scenario, results = 'asis'}
+cat(scenarios[[round_text]][["table"]])
+```
+
+See also the [full scenario details](`r paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-", params$round)`) for more detail on the common set of assumptions teams used to create their models.
+
+In Round `r params$round`, we asked modellers to start their projections from the `r scenarios[[round_text]][["origin_date"]]`. Data after this date were not included, and as a result, model projections are unlikely to fully account for later information on the changing variants or behavioural patterns.
+
+### Participating teams
+
+```{r models}
+models_summary <- results %>%
+  group_by(model) %>%
+  summarise(Countries = n_distinct(location),
+            Weeks = max(as.numeric(gsub(" wk", "", horizon))))
+
+models_summary %>%
+  select(Team = model, Countries, Weeks) %>%
+  arrange(desc(Weeks)) %>%
+  arrange(desc(Countries)) %>%
+  knitr::kable(caption = "Participating teams by number of countries and horizon")
+```
+
+### Ensemble summary
+
+We created a "central mean ensemble", an approximation of a median ensemble, by taking the mean of only the central values among all samples submitted by each model.
+
+```{r ensemble-text}
+cat("No target had >2 models")
+```
+
+Looking only at incident deaths using the central mean ensemble:
+
+```{r ensemble, include = FALSE}
+# source(here("code", "summarise", "create_ensembles.R"))
+# ensembles <- create_ensembles(results_multi_country, 
+#                               append_to_data = FALSE)
+# plot_scenarios(ensembles %>%
+#                  filter(model == "Central mean ensemble"),
+#                truth,
+#                target_variable = "inc death",
+#                columns = "model",
+#                model_colours = palette$models,
+#                scenario_colours = palette$scenarios)
+```
+
+```{r ensemble-summary, include = FALSE}
+# source(here("code", "summarise", "create-summary-statistics.R"))
+# ensemble_summary <- create_summary_statistics(ensembles,
+#                                               summarise_location = TRUE)
+# plot <- ensemble_summary %>%
+#   filter(origin_date == min(origin_date) &
+#            model == "Central mean ensemble") %>%
+#   select(-c("q0", "q0_25", "q0_75", "q1", 
+#             "origin_date", "model", "model_type", "scenario_id")) %>%
+#   mutate(summary = factor(summary, levels = c("Initial", "Min", "Max", "Final"),
+#                           ordered = TRUE)) %>%
+#   separate(target_variable, into = c("type", "target"), sep = " ") %>%
+#   mutate(target = factor(target, levels = c("infection", "case",
+#                                             "hosp", "icu", "death"), 
+#                          ordered = TRUE)) %>%
+#   filter(summary == "Max")
+# 
+# plot %>%
+#   ggplot(aes(x = target, col = scenario_label)) +
+#   geom_point(aes(y = q0_5),
+#              position = position_dodge(0.5)) +
+#   geom_linerange(aes(ymin = q0_05, ymax = q0_95), 
+#                  position = position_dodge(0.5)) +
+#   labs(subtitle = unique(plot$summary)) +
+#   scale_y_continuous(labels = scales::label_comma()) +
+#   scale_colour_manual(values = palette$scenarios) +
+#   facet_wrap(~target, scales = "free")
+```
+
+# Multi-model summary
+
+```{r multi-model-projections}
+cases <- plot_scenarios(
+  results_multi_country, 
+  truth,
+  round = params$round,
+  target_variable = "inc case",
+  columns = "scenario",
+  model_colours = palette$models,
+  scenario_colours = palette$scenarios,
+  subsample = 0.2,
+  per_100k = TRUE
+)
+
+deaths <- plot_scenarios(
+  results_multi_country, 
+  truth,
+  round = params$round,
+  target_variable = "inc death",
+  columns = "scenario",
+  model_colours = palette$models,
+  scenario_colours = palette$scenarios,
+  subsample = 0.2,
+  per_100k = TRUE
+)
+
+library(patchwork)
+cases + 
+  deaths +
+  plot_layout(nrow = 1) +
+  theme(legend.position = "top")
+```
+
+### Cumulative outcomes {.tabset .tabset-pills}
+
+We compare the total number of outcomes projected by each model for each scenario.
+
+```{r plot-model-comparison, results = 'asis'}
+for (target in scenarios$targets) {
+  res <- knitr::knit_child(here("code", "report", "_cumulative.Rmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+

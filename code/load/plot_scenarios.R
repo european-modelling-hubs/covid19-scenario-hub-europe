@@ -3,12 +3,9 @@ library(dplyr)
 library(ggplot2)
 library(forcats)
 library(tidyr)
-# get plotting colours
-source(here("code", "load", "plot_palettes.R"))
-# get target variables
-source(here("code", "load", "scenarios.R"))
 theme_set(theme_bw())
 theme_replace(strip.background = element_blank())
+
 ##
 ##' Plot scenarios
 ##'
@@ -80,6 +77,15 @@ plot_scenarios <- function(data,
     y_label <- "Incidence"
   }
 
+  # get all-time max
+  truth_peaks <- truth |>
+    group_by(location, target_variable) |>
+    filter(value == max(value)) %>%
+    select(location, target_variable, value_alltime = value)
+
+  plot_data <- plot_data |>
+    left_join(truth_peaks, by = c("location", "target_variable"))
+
   # Plot
   plot_base <- plot_data %>%
     ggplot(aes(x = target_end_date, y = value)) +
@@ -88,12 +94,13 @@ plot_scenarios <- function(data,
          caption = paste0(variable_subtitle, " | ",
                           "Round ", round, " scenarios: \n",
                            scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
+    geom_hline(aes(yintercept = value_alltime), lty = 3) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(labels = scales::label_comma()) +
     guides(colour = guide_legend(override.aes = list(alpha = 1,
                                                      size = 3))) +
     theme(legend.position = "top",
-          legend.text=element_text(size=rel(1.2)))
+          legend.text=element_text(size=rel(1)))
 
   if (columns == "model") {
     # construct legend
