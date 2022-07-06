@@ -1,0 +1,78 @@
+---
+title: European COVID-19 Scenario Modelling Hub
+output:
+  html_document:
+    self_contained: false
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+params:
+  round: 1
+---
+
+```{r setup, include = FALSE}
+# Settings
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE)
+knitr::knit_hooks$set(fig.width = knitr::hook_pngquant)
+```
+
+```{r prep}
+library(here)
+library(patchwork)
+source(here("code", "report", "prep.R"))
+```
+### Ensemble summary
+
+We created a "central mean ensemble", an approximation of a median ensemble, by taking the mean of only the central values among all samples submitted by each model.
+
+```{r ensemble-text}
+cat("No target had >2 models")
+```
+
+Looking only at incident deaths using the central mean ensemble:
+
+```{r ensemble, include = FALSE}
+# source(here("code", "summarise", "create_ensembles.R"))
+# ensembles <- create_ensembles(results_multi_country, 
+#                               append_to_data = FALSE)
+# plot_scenarios(ensembles %>%
+#                  filter(model == "Central mean ensemble"),
+#                truth,
+#                target_variable = "inc death",
+#                columns = "model",
+#                model_colours = palette$models,
+#                scenario_colours = palette$scenarios)
+```
+
+```{r ensemble-summary, include = FALSE}
+# source(here("code", "summarise", "create-summary-statistics.R"))
+# ensemble_summary <- create_summary_statistics(ensembles,
+#                                               summarise_location = TRUE)
+# plot <- ensemble_summary %>%
+#   filter(origin_date == min(origin_date) &
+#            model == "Central mean ensemble") %>%
+#   select(-c("q0", "q0_25", "q0_75", "q1", 
+#             "origin_date", "model", "model_type", "scenario_id")) %>%
+#   mutate(summary = factor(summary, levels = c("Initial", "Min", "Max", "Final"),
+#                           ordered = TRUE)) %>%
+#   separate(target_variable, into = c("type", "target"), sep = " ") %>%
+#   mutate(target = factor(target, levels = c("infection", "case",
+#                                             "hosp", "icu", "death"), 
+#                          ordered = TRUE)) %>%
+#   filter(summary == "Max")
+# 
+# plot %>%
+#   ggplot(aes(x = target, col = scenario_label)) +
+#   geom_point(aes(y = q0_5),
+#              position = position_dodge(0.5)) +
+#   geom_linerange(aes(ymin = q0_05, ymax = q0_95), 
+#                  position = position_dodge(0.5)) +
+#   labs(subtitle = unique(plot$summary)) +
+#   scale_y_continuous(labels = scales::label_comma()) +
+#   scale_colour_manual(values = palette$scenarios) +
+#   facet_wrap(~target, scales = "free")
+```
+
+

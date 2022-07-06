@@ -49,34 +49,38 @@ multi_country <- distinct(results, model, location) %>%
 
 results_multi_country <- filter(results, location %in% multi_country)
 
-results_a_b_cases <- filter(results_multi_country,
-                             grepl("A|B", scenario_id))
-scenario_a_b_cases <- plot_scenarios(results_a_b_cases,
+results_a_c_cases <- filter(results_multi_country,
+                             grepl("A|C", scenario_id))
+scenario_a_c_cases <- plot_scenarios(results_a_c_cases,
                                         truth,
-                                        scenario_caption = NULL,
                                         target_variable = "inc case",
                                         columns = "scenario",
                                         model_colours = palette$models,
                                         scenario_colours = palette$scenarios)
 
-ggsave(here(report_dir, "scenario-a-b-cases.png"),
-      plot = scenario_a_b_cases,
-       height = 5, width = 8)
+# ggsave(here(report_dir, "scenario-a-c-cases.png"),
+#       plot = scenario_a_b_cases,
+#        height = 5, width = 8)
 
-results_c_d_cases <- filter(results_multi_country,
-                            grepl("C|D", scenario_id))
-scenario_c_d_cases <- plot_scenarios(results_c_d_cases,
+results_b_d_cases <- filter(results_multi_country,
+                            grepl("B|D", scenario_id))
+scenario_b_d_cases <- plot_scenarios(results_b_d_cases,
                                       truth,
-                                      scenario_caption = NULL,
                                       target_variable = "inc case",
                                       columns = "scenario",
                                       model_colours = palette$models,
                                       scenario_colours = palette$scenarios)
 
-ggsave(here(report_dir, "scenario-c-d-cases.png"),
-       plot = scenario_c_d_cases,
-       height = 5, width = 8)
+# ggsave(here(report_dir, "scenario-c-d-cases.png"),
+#        plot = scenario_c_d_cases,
+#        height = 5, width = 8)
 
+
+library(patchwork)
+
+scenario_a_c_cases +
+  scenario_b_d_cases +
+  plot_layout(nrow = 2, guides = "auto")
 
 
 
