@@ -1,8 +1,10 @@
 library(dplyr)
+library(lubridate)
 library(ggplot2)
 library(purrr)
 
-plot_cumulative_summary <- function(data, truth) {
+plot_cumulative_summary <- function(data, truth,
+                                    compare_last_year = TRUE) {
 
   # get cumulative [code from @sbfnk] ----------------------------------------
   ## take final cumulative values
@@ -36,7 +38,17 @@ plot_cumulative_summary <- function(data, truth) {
 
   ## add cumulative total to date
   summary_truth <- truth |>
-    filter(target_end_date <= scenarios[[round_text]][["origin_date"]]) |>
+    filter(target_end_date <= scenarios[[round_text]][["origin_date"]])
+
+  if (compare_last_year) {
+    summary_truth <- summary_truth |>
+      filter(target_end_date >
+               scenarios[[round_text]][["origin_date"]] - lubridate::weeks(52))
+    plot_caption <- paste0("Dotted line at 52 weeks' cumulative total prior to start of projections")
+  } else {
+    plot_caption <- "Dotted line at all-time cumulative total before projections start"
+  }
+  summary_truth <- summary_truth |>
     group_by(location, target_variable) |>
     arrange(target_end_date) |>
     mutate(cumulative = cumsum(value),
@@ -57,7 +69,7 @@ plot_cumulative_summary <- function(data, truth) {
     mutate(target_variable = gsub("^cum ", "", target_variable))
 
   ## set up plotting
-  plot_cumulative <- function(data, target, date_range) {
+  plot_cumulative <- function(data, target) {
     data |>
       filter(target_variable == target) |>
       ggplot(aes(x = scenario_label, col = model)) +
@@ -70,7 +82,7 @@ plot_cumulative_summary <- function(data, truth) {
       labs(x = NULL, y = "% population", col = NULL,
            subtitle = paste0("Total incident ", target,
                              " over projection period"),
-           caption = "Dotted line at cumulative total before projections start") +
+           caption = plot_caption) +
       facet_grid(rows = "location", scales = "free", drop = TRUE) +
       theme(legend.position = "top")
   }

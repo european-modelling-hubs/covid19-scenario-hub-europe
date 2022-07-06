@@ -59,6 +59,13 @@ models_summary %>%
 
 # Multi-model summary {.tabset}
 
+No country had results from more than two models. Given the low coverage, we did not produce an ensemble model.
+
+The cumulative number of projected outcomes compared to the cumulative total over one year before projections started (May 2021 - May 2022). While there was very low or no probability of deaths over the next year matching the previous year's total, 
+
+Looking at countries and targets with more than one model, we observed higher total counts of projected outcomes when immunity was modelled as weaker (a faster decline to a reduced plateau of immunity).
+
+
 ### Cumulative outcomes {.tabset .tabset-pills}
 
 For each model and scenario, we compare the total number of outcomes over the entire projection period as a % of the total country population.
@@ -66,13 +73,17 @@ For each model and scenario, we compare the total number of outcomes over the en
 ```{r plot-cumulative, results = 'asis'}
 source(here("code", "summarise", "cumulative.R"))
 cumulative_plots <- plot_cumulative_summary(data = results_multi_country,
-                                            truth = truth)
+                                            truth = truth,
+                                            compare_last_year = TRUE)
 for (target in scenarios$targets) {
   target <- gsub("^inc ", "", target)
   cat('\n')
   cat(paste0('#### ', tools::toTitleCase(target)))
   cat('\n')
   print(cumulative_plots[[target]])
+  cat('\n')
+  cat('\n')
+  cat(scenarios[["round-1"]][["scenario_caption"]])
   cat('\n')
 }
 ```
@@ -104,32 +115,72 @@ for (target in scenarios$targets) {
 
 ```{r detect-peaks}
 source(here("code", "summarise", "peaks.R"))
+autumn_winter_months <- c(9,10,11,12,1,2)
 peaks <- detect_peaks(results_multi_country)
+peaks_aw <- peaks |>
+  filter(month(target_end_date) %in% autumn_winter_months)
 ```
+### Total number of peaks {.tabset}
 
-### Size and timing of highest peak {.tabset .tabset-pills}
+We summarised the number of peaks projected by each model and show the median (with 5-95% probability) number of peaks over a given period (September to February, or the entire year's projection).
 
-```{r plot-peaks-size, results = 'asis'}
-peaks_size_plots <- plot_peak_size(peaks = peaks, truth = truth)
+#### Over autumn-winter {.tabset .tabset-pills}
+
+Peaks over September to February (inclusive).
+
+```{r plot-peaks-n-aw, results = 'asis'}
+peaks_n_plots_aw <- plot_peaks_number(peaks = peaks_aw)
 for (target in scenarios$targets) {
   cat('\n')
-  cat(paste0('#### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
-  print(peaks_size_plots[[target]])
+  print(peaks_n_plots_aw[[target]])
+  cat('\n')
+  cat('\n')
+  cat(scenarios[["round-1"]][["scenario_caption"]])
   cat('\n')
 }
 ```
 
-### Number of peaks {.tabset .tabset-pills}
+#### Over the entire projection period {.tabset .tabset-pills}
 
-```{r plot-peaks-n, results = 'asis'}
+```{r plot-peaks-n-alltime, results = 'asis'}
 peaks_n_plots <- plot_peaks_number(peaks = peaks)
 for (target in scenarios$targets) {
   cat('\n')
-  cat(paste0('#### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
   print(peaks_n_plots[[target]])
   cat('\n')
+  cat('\n')
+  cat(scenarios[["round-1"]][["scenario_caption"]])
+  cat('\n')
 }
 ```
+
+### Peaks over autumn-winter {.tabset .tabset-pills}
+
+We show the timing and value of maximum weekly incidence over September to February.
+
+Dots indicate the highest weekly incidence in each sample of each model, while violin shapes indicate the distribution within each model.
+ 
+```{r plot-peaks-size-aw, results = 'asis'}
+peaks_size_plots_aw <- plot_peak_aw(peaks = peaks_aw)
+for (target in scenarios$targets) {
+  cat('\n')
+  cat(paste0('###### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat('\n')
+  print(peaks_size_plots_aw[[target]])
+  cat('\n')
+  cat('\n')
+  cat(scenarios[["round-1"]][["scenario_caption"]])
+  cat('\n')
+}
+```
+
+
+
+
+
+
 
