@@ -44,6 +44,7 @@ plot_peaks_number <- function(peaks,
   plot_n <- map(targets,
                 ~ peaks_n |>
                     filter(target_variable == .x) |>
+                    group_by(model, scenario_label, location, target_variable) |>
                     ggplot(aes(col = model, fill = model,
                                x = scenario_label)) +
                     geom_point(aes(y = q0_5),
@@ -74,10 +75,7 @@ plot_peak_size <- function(peaks, truth) {
 
   # Summarise projected max
   peaks_max <- peaks |>
-    left_join(truth_peaks, by = c("location", "target_variable")) |>
-    group_by(sample, model, scenario_label, location, target_variable) |>
-    filter(value_100k == max(value_100k)) |>
-    ungroup()
+    left_join(truth_peaks, by = c("location", "target_variable"))
 
   # Plot: boxplot uncertainty around value per 100k at peak
   targets <- unique(peaks_max$target_variable)
@@ -85,14 +83,13 @@ plot_peak_size <- function(peaks, truth) {
                   ~ peaks_max |>
                       filter(target_variable == .x) |>
                       group_by(model, scenario_label, location, target_variable) |>
-                      ggplot(aes(x = target_end_date, col = model)) +
-                      geom_violin(aes(y = value_100k)) +
+                      ggplot(aes(x = target_end_date,
+                                 col = model)) +
                       geom_point(aes(y = value_100k), alpha = 0.1) +
                       # Add dotted line to indicate highest observed peak
                       geom_hline(aes(yintercept = value_100k_alltime), lty = 3) +
                       # Format
                       scale_colour_manual(values = palette$models, drop = TRUE) +
-                      scale_x_date() +
                       labs(x = NULL,
                            y = paste0("Peak weekly incident ",
                                       gsub("^inc ", "", .x),
@@ -128,7 +125,7 @@ plot_peak_per_month <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
                 values_from = value_100k)
 
   targets <- unique(peaks_month$target_variable)
-  peaks_month <- map(targets,
+  plot_peaks_month <- map(targets,
                       ~ peaks_month |>
                           filter(target_variable == .x) |>
                           ggplot(aes(x = yearmonth, col = model)) +
@@ -146,8 +143,8 @@ plot_peak_per_month <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
                                      cols = vars(scenario_label),
                                      scales = "free", drop = TRUE) +
                           theme(legend.position = "top"))
-  names(peaks_month) <- targets
-  return(peaks_month)
+  names(plot_peaks_month) <- targets
+  return(plot_peaks_month)
 }
 
 
