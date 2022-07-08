@@ -4,7 +4,7 @@ output:
   html_document:
     self_contained: false
     toc: true
-    toc_depth: 5
+    toc_depth: 6
     toc_float:
       collapsed: false
 params:
@@ -26,11 +26,9 @@ source(here("code", "report", "prep.R"))
 # Round `r params$round`
 _Report created `r Sys.Date()`_
 
-### Current situation
+## Scenarios {.tabset}
 
-- vaccination
-
-### Scenarios
+### Scenario description
 
 We asked teams of researchers across Europe to use quantitative models to project COVID-19 outcomes for 32 European countries over the next year. In order to explore different sets of assumptions about drivers of the pandemic, we asked teams to vary four sets of parameters. We can describe this in a 2x2 scenario specification:
 
@@ -42,14 +40,29 @@ See also the [full scenario details](`r paste0("https://github.com/covid19-forec
 
 In Round `r params$round`, we asked modellers to start their projections from the `r scenarios[[round_text]][["origin_date"]]`. Data after this date were not included, and as a result, model projections are unlikely to fully account for later information on the changing variants or behavioural patterns.
 
+### Current situation
+
+We consider vaccination rates in countries for which multiple teams of modellers contributed projections. 
+
+```{r vax}
+source(here("data-truth", "code", "vaccination-age.R"))
+plot_vax_age
+```
+
+We note that the following countries are already implementing a second booster dose among the 60+ age group:
+
+- Netherlands
+- Greece
+
 ### Participating teams
+
+`r n_distinct(results_multi_country$model)` models contributed scenario projections to Round `r params$round`.
 
 ```{r models}
 models_summary <- results %>%
   group_by(model) %>%
   summarise(Countries = n_distinct(location),
             Weeks = max(as.numeric(gsub(" wk", "", horizon))))
-
 models_summary %>%
   select(Team = model, Countries, Weeks) %>%
   arrange(desc(Weeks)) %>%
@@ -57,18 +70,21 @@ models_summary %>%
   knitr::kable(caption = "Participating teams by number of countries and horizon")
 ```
 
-# Multi-model summary {.tabset}
-
-No country had results from more than two models. Given the low coverage, we did not produce an ensemble model.
-
-The cumulative number of projected outcomes compared to the cumulative total over one year before projections started (May 2021 - May 2022). While there was very low or no probability of deaths over the next year matching the previous year's total, 
-
-Looking at countries and targets with more than one model, we observed higher total counts of projected outcomes when immunity was modelled as weaker (a faster decline to a reduced plateau of immunity).
 
 
-### Cumulative outcomes {.tabset .tabset-pills}
+## Cumulative outcomes {.tabset}
 
-For each model and scenario, we compare the total number of outcomes over the entire projection period as a % of the total country population.
+No country had results from more than two models. Given this low coverage, we did not produce an ensemble model.
+
+For each model and scenario, we compare the total number of outcomes over the entire projection period as a % of the total country population. We compared the cumulative number of projected outcomes to the cumulative total over one year before projections started (May 2021 - May 2022). 
+
+Across all scenarios, we observed very low or no probability of deaths over the next year matching the previous year's total. This was not true of other outcomes with comparative observed data (cases, hospitalisations).
+
+Comparing scenarios by immune assumptions, we observed higher total counts of projected outcomes when immunity was modelled as weaker (a faster decline to a reduced plateau of immunity). In these scenarios, in many countries the number of cases projected over the next year approached or exceeded the total observed over the last year.  
+
+However, recent data indicate the optimistic scenario of immune waning may be more likely than the pessimistic scenario. Between scenarios with strong immunity (-60% over 8 months), we observed relatively little difference in cumulative outcomes between scenarios providing a summer or an autumn booster campaign. 
+
+### Cumulative projections {.tabset .tabset-pills}
 
 ```{r plot-cumulative, results = 'asis'}
 source(here("code", "summarise", "cumulative.R"))
@@ -88,7 +104,11 @@ for (target in scenarios$targets) {
 }
 ```
 
-### Incident outcomes {.tabset .tabset-pills}
+## Incident outcomes {.tabset}
+
+We explored the incidence of COVID-19 per 100,000.
+
+### Projections {.tabset .tabset-pills}
 
 ```{r plot-projections, results = 'asis'}
 for (target in scenarios$targets) {
@@ -111,76 +131,62 @@ for (target in scenarios$targets) {
 }
 ```
 
-# Peaks {.tabset}
+### Peaks {.tabset}
+
+We summarise here both over the entire projection period, and over only the autumn-winter period (November through March). Considering the timing and maximum weekly incidence of each peak, points indicate possible timing of individual peaks, while  boxplots summarise across peaks to indicate probable size. We also summarised the projected number of peaks (as median with 5-95% probability)
+
+We saw no systematic difference in the number of peaks between scenarios modelling a booster campaign in summer versus autumn.
+
+We noted that peaks in hospitalisations rarely approached the highest level previously observed (dotted line). 
+
 
 ```{r detect-peaks}
 source(here("code", "summarise", "peaks.R"))
-autumn_winter_months <- c(9,10,11,12,1,2)
 peaks <- detect_peaks(results_multi_country)
+quantile_levels = c(0.05, 0.5, 0.95)
+
+# Create plots for whole projection
+peak_number_plot <- plot_peak_number(peaks = peaks)
+peak_size_plot <- plot_peak_size(peaks = peaks, truth = truth)
+
+# Create autumn-winter plots
+autumn_winter_months <- c(10,11,12,1,2,3)
 peaks_aw <- peaks |>
   filter(month(target_end_date) %in% autumn_winter_months)
+peak_number_plot_aw <- plot_peak_number(peaks = peaks_aw)
+peak_size_plot_aw <- plot_peak_size(peaks = peaks_aw, truth = truth)
 ```
-### Total number of peaks {.tabset}
 
-We summarised the number of peaks projected by each model and show the median (with 5-95% probability) number of peaks over a given period (September to February, or the entire year's projection).
-
-#### Over autumn-winter {.tabset .tabset-pills}
-
-Peaks over September to February (inclusive).
-
-```{r plot-peaks-n-aw, results = 'asis'}
-peaks_n_plots_aw <- plot_peaks_number(peaks = peaks_aw)
+#### Autumn-winter {.tabset .tabset-pills}
+*Projections over November through March*
+```{r plot-peaks-aw, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
   cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
-  print(peaks_n_plots_aw[[target]])
+  print(peak_size_plot_aw[[target]])
   cat('\n')
-  cat('\n')
+  print(peak_number_plot_aw[[target]])
+  cat('\n\n')
   cat(scenarios[["round-1"]][["scenario_caption"]])
   cat('\n')
 }
 ```
 
-#### Over the entire projection period {.tabset .tabset-pills}
 
-```{r plot-peaks-n-alltime, results = 'asis'}
-peaks_n_plots <- plot_peaks_number(peaks = peaks)
+#### Entire projection period {.tabset .tabset-pills}
+
+```{r plot-peaks-alltime, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
   cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
-  print(peaks_n_plots[[target]])
+  print(peak_size_plot[[target]])
   cat('\n')
-  cat('\n')
+  print(peak_number_plot[[target]])
+  cat('\n\n')
   cat(scenarios[["round-1"]][["scenario_caption"]])
   cat('\n')
 }
 ```
-
-### Peaks over autumn-winter {.tabset .tabset-pills}
-
-We show the timing and value of maximum weekly incidence over September to February.
-
-Dots indicate the highest weekly incidence in each sample of each model, while violin shapes indicate the distribution within each model.
- 
-```{r plot-peaks-size-aw, results = 'asis'}
-peaks_size_plots_aw <- plot_peak_aw(peaks = peaks_aw)
-for (target in scenarios$targets) {
-  cat('\n')
-  cat(paste0('###### ', tools::toTitleCase(gsub("^inc ", "", target))))
-  cat('\n')
-  print(peaks_size_plots_aw[[target]])
-  cat('\n')
-  cat('\n')
-  cat(scenarios[["round-1"]][["scenario_caption"]])
-  cat('\n')
-}
-```
-
-
-
-
-
-
 

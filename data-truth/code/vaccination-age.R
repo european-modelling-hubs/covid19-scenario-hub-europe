@@ -2,6 +2,8 @@
 library(dplyr)
 library(readr)
 library(tidyr)
+library(ggplot2)
+library(ggrepel)
 library(lubridate)
 
 # Set up ------------------------------------------------------------------
@@ -36,14 +38,24 @@ vax_age <- vax_age_raw %>%
     vaccine = Vaccine,
     dose_1 = FirstDose,
     dose_2 = SecondDose,
-    dose_booster_1 = DoseAdditional1,
-    dose_booster_2 = DoseAdditional2,
-    dose_unknown = UnknownDose
+    dose_3 = DoseAdditional1,
+    dose_4 = DoseAdditional2,
+    dose_0 = UnknownDose
   ) %>%
   left_join(date_series, by = "yearweek") %>%
-  pivot_longer(cols = starts_with("dose"), names_to = "dose", values_to = "value") %>%
+  pivot_longer(cols = starts_with("dose"),
+               names_to = "dose", values_to = "value") %>%
   mutate(sixty_plus = pop_group %in% c(
-    "1_Age60+", "Age60_69", "Age70_79", "Age80+"))
+    "1_Age60+", "Age60_69", "Age70_79", "Age80+"),
+    dose = factor(dose,
+                  levels = paste0("dose_", 0:4),
+                  labels = c("Unknown", "Primary 1", "Primary 2",
+                             "Booster 1", "Booster 2"),
+                  ordered = TRUE))
+
+# keep only multi-country-modelled locations
+vax_age <- vax_age |>
+  filter(location %in% multi_country)
 
 # keep only 60+ and all pop groups ----------------------------------------
 # denominators
@@ -62,7 +74,7 @@ vax_age_60 <- vax_age %>%
             .groups = "drop") %>%
   left_join(denoms, by = c("location", "sixty_plus")) %>%
   group_by(location, dose, sixty_plus) %>%
-  mutate(value_tot = cumsum(value, na.rm = TRUE),
+  mutate(value_tot = cumsum(value),
          value_tot_p = value_tot / pop_group_denom * 100) %>%
   ungroup() %>%
   mutate(value_tot_p = ifelse(value_tot_p > 100, 100, value_tot_p),
@@ -72,36 +84,35 @@ vax_age_60 <- vax_age %>%
                          ordered_result = TRUE))
 
 # plot distribution of vaccinations %
-library(ggplot2)
+dose_cols <- c("#999999", "#f1c232", "#6aa84f", "#0b5394", "#741b47")
+names(dose_cols) <- levels(vax_age$dose)
 
-which_dose <- "dose_booster_1"
-
-# Plot
-plot <- vax_age_60 %>%
+plot_vax_age <- vax_age_60 |>
   select(location, dose, date, sixty_plus, value_tot_p) %>%
-  group_by(location) %>%
-  filter(dose == which_dose &
-           date == max(date)) %>%
+  group_by(location) |>
+  filter(date == max(date) &
+           dose != "Unknown") |>
   pivot_wider(names_from = sixty_plus,
               names_prefix = "sixty_plus_",
-              values_from = value_tot_p) %>%
-  ungroup() %>%
-  mutate(sixty_over_all = factor(ifelse(sixty_plus_TRUE >= sixty_plus_FALSE, "Higher", "Lower"))) %>%
+              values_from = value_tot_p) |>
+  ungroup() |>
+  # mutate(alpha_value = )
   ggplot(aes(x = sixty_plus_FALSE,
-             y = sixty_plus_TRUE)) +
-  geom_point(aes(col = sixty_over_all)) +
+             y = sixty_plus_TRUE,
+             col = dose)) +
+  geom_point() +
   geom_abline(intercept = 1, lty = 2, alpha = 0.5) +
-  geom_text_repel(aes(label = location,
-                      col = sixty_over_all),
+  geom_text_repel(aes(label = location),
                   max.overlaps = 50,
                   size = 3, min.segment.length = 0.3) +
-  labs(x = "% total population vaccinated", y = "% 60+ population vaccinated",
-       col = "Vaccination % among 60+ population, \n relative to total population",
-       subtitle = which_dose) +
-  scale_color_brewer(type = "qual", palette = 2) +
+  labs(x = "% total population vaccinated",
+       y = "% 60+ population vaccinated",
+       col = "Dose",
+       caption = "Vaccination % among 60+ population, relative to total population") +
+  scale_color_manual(values = dose_cols) +
   theme_bw() +
   theme(legend.position = "bottom")
-plot
+
 
 # First booster dose for 60 plus age group --------------------------------
 # - note: each country has either "Age60+" or narrower age bands (but not both)

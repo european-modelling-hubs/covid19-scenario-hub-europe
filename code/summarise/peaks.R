@@ -24,9 +24,8 @@ detect_peaks <- function(data) {
 }
 
 # number of peaks ---------------------------------------------------------
-plot_peaks_number <- function(peaks,
+plot_peak_number <- function(peaks,
                               quantile_levels = c(0.05, 0.5, 0.95)) {
-
   # Summarise
   peaks_n <- peaks |>
     count(sample,
@@ -55,7 +54,7 @@ plot_peaks_number <- function(peaks,
                                         aesthetics = c("colour", "fill")) +
                     scale_y_continuous(labels = scales::label_number(accuracy = 1)) +
                     labs(y = "Number of peaks", x = NULL,
-                         caption = "Number of projected peaks over scenario period",
+                         caption = "Number of projected peaks",
                          col = NULL, fill = NULL) +
                     facet_grid(rows = "location", scales = "free", drop = TRUE) +
                     theme(legend.position = "top"))
@@ -72,112 +71,112 @@ plot_peak_size <- function(peaks, truth) {
     group_by(location, target_variable) |>
     filter(value == max(value)) %>%
     select(location, target_variable, value_100k_alltime = value_100k)
-
-  # Summarise projected max
-  peaks_max <- peaks |>
+  peaks <- peaks |>
     left_join(truth_peaks, by = c("location", "target_variable"))
 
   # Plot: boxplot uncertainty around value per 100k at peak
-  targets <- unique(peaks_max$target_variable)
-  plot_max <- map(targets,
-                  ~ peaks_max |>
+  targets <- unique(peaks$target_variable)
+  plot_size <- map(targets,
+                  ~ peaks |>
                       filter(target_variable == .x) |>
                       group_by(model, scenario_label, location, target_variable) |>
                       ggplot(aes(x = target_end_date,
                                  col = model)) +
-                      geom_point(aes(y = value_100k), alpha = 0.1) +
+                     geom_boxplot(aes(y = value_100k),
+                                   position = position_dodge(0.5)) +
+                     geom_jitter(aes(y = value_100k), alpha = 0.05,
+                                    position = position_dodge(0.5)) +
                       # Add dotted line to indicate highest observed peak
                       geom_hline(aes(yintercept = value_100k_alltime), lty = 3) +
                       # Format
                       scale_colour_manual(values = palette$models, drop = TRUE) +
+                      scale_x_date(date_breaks = "2 month", date_labels = "%b") +
                       labs(x = NULL,
                            y = paste0("Peak weekly incident ",
                                       gsub("^inc ", "", .x),
                                       " per 100k"),
                            col = NULL, fill = NULL,
-                           caption = "Estimated size and timing of largest single peak over projection period
-                           Dotted line indicates highest observed peak, 2020-start of projections") +
+                           caption = "Estimated size and timing of peaks over projection period
+                           Dotted line indicates all-time highest observed peak") +
                       theme(legend.position = "top") +
                       facet_grid(rows = vars(location),
                                  cols = vars(scenario_label),
                                  scales = "free", drop = FALSE))
-  names(plot_max) <- targets
-  return(plot_max)
+  names(plot_size) <- targets
+  return(plot_size)
 }
 
 # quantile summary size of peak weekly incidence --------------------
-plot_peak_per_month <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
-
-  peaks_month <- peaks |>
-    ungroup() |>
-    arrange(target_end_date) |>
-    mutate(yearmonth = fct_inorder(format.Date(target_end_date, "%b-%y")))
-
-  peaks_month <- peaks_month |>
-    group_by(yearmonth,
-             location, scenario_label, target_variable, model) |>
-    summarise(
-      value_100k = round(quantile(value_100k, quantile_levels)),
-      name = paste0("q", sub("\\.", "_", quantile_levels)),
-      .groups = "keep") |>
-    # pivot wide for plotting
-    pivot_wider(names_from = name,
-                values_from = value_100k)
-
-  targets <- unique(peaks_month$target_variable)
-  plot_peaks_month <- map(targets,
-                      ~ peaks_month |>
-                          filter(target_variable == .x) |>
-                          ggplot(aes(x = yearmonth, col = model)) +
-                          geom_point(aes(y = q0_5), position = position_dodge(0.5)) +
-                          geom_linerange(aes(ymin = q0_05, ymax = q0_95),
-                                         position = position_dodge(0.5)) +
-                          # geom_hline(aes(yintercept = current_p), lty = 3) +
-                          scale_colour_manual(values = palette$models) +
-                          labs(x = NULL,
-                               y = paste0("Peak weekly incident ",
-                                          gsub("^inc ", "", .x),
-                                          " per 100k"),
-                               col = NULL) +
-                          facet_grid(rows = vars(location),
-                                     cols = vars(scenario_label),
-                                     scales = "free", drop = TRUE) +
-                          theme(legend.position = "top"))
-  names(plot_peaks_month) <- targets
-  return(plot_peaks_month)
-}
-
-
-# over all winter-autumn --------------------------------------------------
-plot_peak_aw <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
-  autumn_winter_months <- c(9,10,11,12,1,2)
-  peaks_aw <- peaks |>
-    filter(month(target_end_date) %in% autumn_winter_months)
-
-  targets <- unique(peaks_aw$target_variable)
-  plot_aw <- map(targets,
-                 ~ peaks_aw |>
-                   filter(target_variable == .x) |>
-                   ggplot(aes(x = scenario_label, col = model)) +
-                   geom_boxplot(aes(y = value_100k),
-                               position = position_dodge(0.5)) +
-                   geom_jitter(aes(y = value_100k), alpha = 0.05,
-                              position = position_dodge(0.5)) +
-                   scale_color_manual(values = palette$models) +
-                   labs(x = NULL,
-                        y = paste0("Peak weekly incident ",
-                                   gsub("^inc ", "", .x),
-                                   " per 100k"),
-                        col = NULL,
-                        caption = "Peaks over September to February") +
-                   facet_grid(rows = vars(location),
-                              scales = "free", drop = TRUE) +
-                   theme(legend.position = "top"))
-
-
-  names(plot_aw) <- targets
-  return(plot_aw)
-}
+# plot_peak_per_month <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
+#
+#   peaks_month <- peaks |>
+#     ungroup() |>
+#     arrange(target_end_date) |>
+#     mutate(yearmonth = fct_inorder(format.Date(target_end_date, "%b-%y")))
+#
+#   peaks_month <- peaks_month |>
+#     group_by(yearmonth,
+#              location, scenario_label, target_variable, model) |>
+#     summarise(
+#       value_100k = round(quantile(value_100k, quantile_levels)),
+#       name = paste0("q", sub("\\.", "_", quantile_levels)),
+#       .groups = "keep") |>
+#     # pivot wide for plotting
+#     pivot_wider(names_from = name,
+#                 values_from = value_100k)
+#
+#   targets <- unique(peaks_month$target_variable)
+#   plot_peaks_month <- map(targets,
+#                       ~ peaks_month |>
+#                           filter(target_variable == .x) |>
+#                           ggplot(aes(x = yearmonth, col = model)) +
+#                           geom_point(aes(y = q0_5), position = position_dodge(0.5)) +
+#                           geom_linerange(aes(ymin = q0_05, ymax = q0_95),
+#                                          position = position_dodge(0.5)) +
+#                           # geom_hline(aes(yintercept = current_p), lty = 3) +
+#                           scale_colour_manual(values = palette$models) +
+#                           labs(x = NULL,
+#                                y = paste0("Peak weekly incident ",
+#                                           gsub("^inc ", "", .x),
+#                                           " per 100k"),
+#                                col = NULL) +
+#                           facet_grid(rows = vars(location),
+#                                      cols = vars(scenario_label),
+#                                      scales = "free", drop = TRUE) +
+#                           theme(legend.position = "top"))
+#   names(plot_peaks_month) <- targets
+#   return(plot_peaks_month)
+# }
+#
+#
+# # over all winter-autumn --------------------------------------------------
+# plot_peak_aw <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
+#   autumn_winter_months <- c(10,11,12,1,2,3)
+#
+#
+#   targets <- unique(peaks_aw$target_variable)
+#   plot_aw <- map(targets,
+#                  ~ peaks_aw |>
+#                    filter(target_variable == .x) |>
+#                    ggplot(aes(x = scenario_label, col = model)) +
+#                    geom_boxplot(aes(y = value_100k),
+#                                position = position_dodge(0.5)) +
+#                    geom_jitter(aes(y = value_100k), alpha = 0.05,
+#                               position = position_dodge(0.5)) +
+#                    scale_color_manual(values = palette$models) +
+#                    labs(x = NULL,
+#                         y = paste0("Peak weekly incident ",
+#                                    gsub("^inc ", "", .x),
+#                                    " per 100k"),
+#                         col = NULL,
+#                         caption = "Peaks over September to February") +
+#                    facet_grid(rows = vars(location),
+#                               scales = "free", drop = TRUE) +
+#                    theme(legend.position = "top"))
+#
+#   names(plot_aw) <- targets
+#   return(plot_aw)
+# }
 
 
 # quantiles ---------------------------------------------------------------
