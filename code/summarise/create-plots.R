@@ -45,7 +45,7 @@ cross_scenario_deaths <- plot_scenarios(results,
                                         model_colours = palette$models,
                                         scenario_colours = palette$scenarios)
 ggsave(here(report_dir, "cross-scenario-deaths.pdf"),
-       height = 40, width = 30)
+       height = 20, width = 15)
 
 
 cross_scenario_cases <- plot_scenarios(results,
@@ -56,7 +56,7 @@ cross_scenario_cases <- plot_scenarios(results,
                                        model_colours = palette$models,
                                        scenario_colours = palette$scenarios)
 ggsave(here(report_dir, "cross-scenario-cases.pdf"),
-       height = 40, width = 30)
+       height = 20, width = 15)
 
 # Plot by model --------------------------------------------------------
 cross_model_deaths <- plot_scenarios(results,
@@ -67,7 +67,7 @@ cross_model_deaths <- plot_scenarios(results,
                                      model_colours = palette$models,
                                      scenario_colours = palette$scenarios)
 ggsave(here(report_dir, "cross-model-deaths.pdf"),
-       height = 40, width = 30)
+       height = 20, width = 15)
 
 cross_model_cases <- plot_scenarios(results,
                                     truth,
@@ -77,7 +77,7 @@ cross_model_cases <- plot_scenarios(results,
                                     model_colours = palette$models,
                                     scenario_colours = palette$scenarios)
 ggsave(here(report_dir, "cross-model-cases.pdf"),
-       height = 40, width = 30)
+       height = 20, width = 15)
 
 
 # Individual model plots --------------------------------------------------
