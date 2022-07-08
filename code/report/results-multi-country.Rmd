@@ -56,7 +56,7 @@ We note that the following countries are already implementing a second booster d
 
 ### Participating teams
 
-`r n_distinct(results_multi_country$model)` models contributed scenario projections to Round `r params$round`.
+`r n_distinct(results_multi_country$model)` models contributed scenario projections to Round `r params$round`. No country had results from more than two models. Given this low coverage, we did not produce an ensemble model.
 
 ```{r models}
 models_summary <- results %>%
@@ -72,19 +72,17 @@ models_summary %>%
 
 
 
-## Cumulative outcomes {.tabset}
-
-No country had results from more than two models. Given this low coverage, we did not produce an ensemble model.
+## Cumulative outcomes {.tabset .tabset-pills}
 
 For each model and scenario, we compare the total number of outcomes over the entire projection period as a % of the total country population. We compared the cumulative number of projected outcomes to the cumulative total over one year before projections started (May 2021 - May 2022). 
 
-Across all scenarios, we observed very low or no probability of deaths over the next year matching the previous year's total. This was not true of other outcomes with comparative observed data (cases, hospitalisations).
+_Observations_
 
-Comparing scenarios by immune assumptions, we observed higher total counts of projected outcomes when immunity was modelled as weaker (a faster decline to a reduced plateau of immunity). In these scenarios, in many countries the number of cases projected over the next year approached or exceeded the total observed over the last year.  
+- Across all scenarios, we observed very low or no probability of deaths over the next year matching the previous year's total. This was not true of other outcomes with comparative observed data (cases, hospitalisations).
 
-However, recent data indicate the optimistic scenario of immune waning may be more likely than the pessimistic scenario. Between scenarios with strong immunity (-60% over 8 months), we observed relatively little difference in cumulative outcomes between scenarios providing a summer or an autumn booster campaign. 
+- Comparing scenarios by immune assumptions, we observed higher total counts of projected outcomes when immunity was modelled as weaker (a faster decline to a reduced plateau of immunity). In these scenarios, in many countries the number of cases projected over the next year approached or exceeded the total observed over the last year.  
 
-### Cumulative projections {.tabset .tabset-pills}
+- However, recent data indicate the optimistic scenario of immune waning may be more likely than the pessimistic scenario. Between scenarios with strong immunity (-60% over 8 months), we observed relatively little difference in cumulative outcomes between scenarios providing a summer or an autumn booster campaign. 
 
 ```{r plot-cumulative, results = 'asis'}
 source(here("code", "summarise", "cumulative.R"))
@@ -94,7 +92,7 @@ cumulative_plots <- plot_cumulative_summary(data = results_multi_country,
 for (target in scenarios$targets) {
   target <- gsub("^inc ", "", target)
   cat('\n')
-  cat(paste0('#### ', tools::toTitleCase(target)))
+  cat(paste0('### ', tools::toTitleCase(target)))
   cat('\n')
   print(cumulative_plots[[target]])
   cat('\n')
@@ -106,7 +104,15 @@ for (target in scenarios$targets) {
 
 ## Incident outcomes {.tabset}
 
-We explored the incidence of COVID-19 per 100,000.
+We explored the incidence of COVID-19 per 100,000 over the projection period and in terms of projected peaks in incidence. We summarised peaks both over the entire projection period, and over only the autumn-winter period (November through March); we considered (A) the timing and maximum weekly incidence of each peak, and (B) the total number of peaks.
+
+_Observations_
+
+- Across scenarios for hospitalisations, we noted that peak sizes rarely approached the highest level previously observed (dotted line). 
+
+- We saw no systematic difference in the number of peaks between scenarios modelling a booster campaign in summer versus autumn, but as before, differences were more clearly between a longer or shorter duration of waning immunity. 
+
+- Comparing projections for deaths, we noticed that projected peaks shift to slightly later in the year with a vaccination campaign in the summer compared to autumn, moving the likely timing of a peak from late summer/autumn into winter.
 
 ### Projections {.tabset .tabset-pills}
 
@@ -133,13 +139,6 @@ for (target in scenarios$targets) {
 
 ### Peaks {.tabset}
 
-We summarise here both over the entire projection period, and over only the autumn-winter period (November through March). Considering the timing and maximum weekly incidence of each peak, points indicate possible timing of individual peaks, while  boxplots summarise across peaks to indicate probable size. We also summarised the projected number of peaks (as median with 5-95% probability)
-
-We saw no systematic difference in the number of peaks between scenarios modelling a booster campaign in summer versus autumn.
-
-We noted that peaks in hospitalisations rarely approached the highest level previously observed (dotted line). 
-
-
 ```{r detect-peaks}
 source(here("code", "summarise", "peaks.R"))
 peaks <- detect_peaks(results_multi_country)
@@ -158,13 +157,19 @@ peak_size_plot_aw <- plot_peak_size(peaks = peaks_aw, truth = truth)
 ```
 
 #### Autumn-winter {.tabset .tabset-pills}
-*Projections over November through March*
+
+*Projections over November 2022 through March 2023*
+
 ```{r plot-peaks-aw, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
   cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
+    cat('\n')
+  cat('\n A. Size (boxplot across all peaks) and timing (points per sample) of peaks')
   cat('\n')
   print(peak_size_plot_aw[[target]])
+  cat('\n')
+  cat('\n B. Projected number of peaks (median with 5-95% probability)')
   cat('\n')
   print(peak_number_plot_aw[[target]])
   cat('\n\n')
@@ -176,12 +181,18 @@ for (target in scenarios$targets) {
 
 #### Entire projection period {.tabset .tabset-pills}
 
+*Projections over June 2022 through June 2023*
+
 ```{r plot-peaks-alltime, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
   cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
+  cat('\n A. Size (boxplot across all peaks) and timing (points per sample) of peaks')
+  cat('\n')
   print(peak_size_plot[[target]])
+  cat('\n')
+  cat('\n B. Projected number of peaks (median with 5-95% probability)')
   cat('\n')
   print(peak_number_plot[[target]])
   cat('\n\n')

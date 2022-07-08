@@ -72,9 +72,9 @@ plot_scenarios <- function(data,
       rename("value" = "value_100k")
     truth <- truth %>%
       mutate(value = value / population * 100000)
-    y_label <- "Incidence per 100,000"
+    y_label <- paste0(variable_subtitle, " per 100,000")
   } else {
-    y_label <- "Incidence"
+    y_label <- variable_subtitle
   }
 
   # get all-time max
@@ -91,9 +91,7 @@ plot_scenarios <- function(data,
     ggplot(aes(x = target_end_date, y = value)) +
     labs(x = NULL,
          y = y_label,
-         caption = paste0(variable_subtitle, " | ",
-                          "Round ", round, " scenarios: \n",
-                           scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
+         caption = paste0(scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     geom_hline(aes(yintercept = value_alltime), lty = 3) +
     scale_x_date(date_labels = "%b") +
     scale_y_continuous(labels = scales::label_comma()) +
