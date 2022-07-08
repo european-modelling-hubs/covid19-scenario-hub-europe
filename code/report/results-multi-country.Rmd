@@ -44,9 +44,10 @@ In Round `r params$round`, we asked modellers to start their projections from th
 
 We consider vaccination rates in countries for which multiple teams of modellers contributed projections. 
 
-```{r vax}
+```{r plot-vax}
 source(here("data-truth", "code", "vaccination-age.R"))
-plot_vax_age
+plot <- plot_vaccination_by_age(locations = multi_country)
+plot
 ```
 
 We note that the following countries are already implementing a second booster dose among the 60+ age group:
