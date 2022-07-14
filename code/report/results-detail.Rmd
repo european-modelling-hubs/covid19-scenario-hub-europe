@@ -1,0 +1,75 @@
+---
+title: European COVID-19 Scenario Modelling Hub
+output:
+  html_document:
+    self_contained: false
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+params:
+  round: 1
+---
+
+```{r setup, include = FALSE}
+# Settings
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE, 
+                      message = FALSE, warning = FALSE)
+knitr::knit_hooks$set(fig.width = knitr::hook_pngquant)
+```
+
+```{r prep}
+library(here)
+source(here("code", "report", "prep.R"))
+```
+
+# Round `r params$round` - expanded detail
+_Report created `r Sys.Date()`_
+
+### Comparative projections {.tabset}
+
+```{r short-scenario-description, results = 'asis'}
+cat(paste0("Scenarios include: ",
+           scenarios[[round_text]][["scenario_caption"]]))
+```
+
+#### By scenario {.tabset .tabset-pills}
+
+```{r plot-scenario-comparison, results = 'asis', fig.width = 8, fig.height = length(unique(results$location)) * 0.75}
+for (target in scenarios$targets) {
+  cat("\n")
+  cat("##### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
+  print(
+    plot_scenarios(
+      results_multi_country, 
+      truth,
+      round = params$round,
+      target_variable = "inc death",
+      columns = "scenario",
+      model_colours = palette$models,
+      scenario_colours = palette$scenarios,
+      subsample = 0.2,
+      per_100k = TRUE
+    )
+  )
+  cat("\n")
+}
+```
+
+#### By model {.tabset .tabset-pills}
+
+```{r plot-model-comparison, results = 'asis'}
+for (target in scenarios$targets) {
+  res <- knitr::knit_child(here("code", "report", "_by_model.Rmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```
+
+### Individual model projections {.tabset}
+
+```{r plot-individual-models, results = 'asis'}
+for (model in unique(results$model)) {
+  res <- knitr::knit_child(here("code", "report", "_individual_model.Rmd"), quiet = TRUE)
+  cat(res, sep = '\n')
+}
+```

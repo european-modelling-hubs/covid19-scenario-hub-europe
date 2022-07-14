@@ -27,7 +27,6 @@ plot_palettes <- function(data,
 
   scenario_colours <- deframe(select(scenario_cols, label, colour))
 
-
   # set palettes
   plot_palettes <- list(models = model_colours,
                        scenarios = scenario_colours)

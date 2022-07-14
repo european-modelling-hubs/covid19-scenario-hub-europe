@@ -27,7 +27,7 @@ scenarios <- list(
                                       "D-2022-05-22" = "Weak/Autumn"),
     "origin_date" = as.Date("2022-05-22"),
     "submission_window_end" = as.Date("2022-07-01"),
-    "scenario_caption" = "Stronger or weaker immunity maintained over time ('Strong/Weak'); \n 60+ second booster campaign starting in summer or autumn ('Summer/Autumn'",
+    "scenario_caption" = "_Guide to scenarios: Stronger or weaker immunity maintained over time ('Strong/Weak'); \n 60+ second booster campaign starting in summer or autumn ('Summer/Autumn')_",
     "table" = "<table>
   <tr>
     <td></td>
