@@ -145,7 +145,7 @@ We explored the incidence of COVID-19 per 100,000 over the projection period and
 
 **Projections**
 
-### {.tabset .tabset-pills}
+### Over time {.tabset .tabset-pills}
 
 ```{r plot-projections, results = 'asis'}
 for (target in scenarios$targets) {

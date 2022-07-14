@@ -93,7 +93,7 @@ plot_scenarios <- function(data,
          y = y_label,
          caption = paste0(scenarios[[paste0("round-", round)]][["scenario_caption"]])) +
     geom_hline(aes(yintercept = value_alltime), lty = 3) +
-    scale_x_date(date_labels = "%b") +
+    scale_x_date(date_labels = "%b", date_breaks = "2 months") +
     scale_y_continuous(labels = scales::label_comma()) +
     guides(colour = guide_legend(override.aes = list(alpha = 1,
                                                      size = 3))) +
