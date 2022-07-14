@@ -5,8 +5,6 @@ output:
     self_contained: false
     toc: true
     toc_depth: 5
-    toc_float:
-      collapsed: false
 date: "Report created `r Sys.Date()`"
 params:
   round: 1
