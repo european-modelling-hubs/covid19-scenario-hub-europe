@@ -1,12 +1,13 @@
 ---
-title: European COVID-19 Scenario Modelling Hub
+title: "Round `r params$round`"
 output:
   html_document:
     self_contained: false
     toc: true
-    toc_depth: 6
+    toc_depth: 5
     toc_float:
       collapsed: false
+date: "Report created `r Sys.Date()`"
 params:
   round: 1
 ---
@@ -24,12 +25,9 @@ library(knitr)
 source(here("code", "report", "prep.R"))
 ```
 
-# Round `r params$round`
-_Report created `r Sys.Date()`_
+# Scenarios {.tabset}
 
-## Scenarios {.tabset}
-
-### Scenario description
+## Scenario description
 
 We asked teams of researchers across Europe to use quantitative models to project COVID-19 outcomes for 32 European countries over the next year. In order to explore different sets of assumptions about drivers of the pandemic, we asked teams to vary four sets of parameters. We can describe this in a 2x2 scenario specification:
 
@@ -43,7 +41,7 @@ In Round `r params$round`, we asked modellers to start their projections from th
 
 In this report we only show results from countries with multiple models.
 
-### Current situation
+## Current situation
 
 We consider vaccination rates in countries for which multiple teams of modellers contributed projections. 
 
@@ -58,11 +56,11 @@ We note that the following countries are already implementing a second booster d
 - Netherlands
 - Greece
 
-### Participating teams {.tabset .tabset-pills}
+## Participating teams {.tabset .tabset-pills}
 
 `r n_distinct(results_multi_country$model)` models contributed scenario projections to Round `r params$round`. No country had results from more than two models. Given this low coverage, we did not produce an ensemble model. 
 
-#### Models
+### Models
 
 ```{r describe-models}
 models_summary <- results |>
@@ -76,7 +74,7 @@ models_summary |>
   knitr::kable(caption = "Participating teams by number of countries and horizon")
 ```
 
-#### Countries
+### Countries
 
 ```{r describe-countries}
 targets_summary <- results |> 
@@ -99,7 +97,7 @@ targets_summary |>
   kable(caption = "Number of independent model projections for each target variable and location")
 ```
 
-## Cumulative outcomes {.tabset .tabset-pills}
+# Cumulative outcomes {.tabset .tabset-pills}
 
 For each model and scenario, we compare the total number of outcomes over the entire projection period as a % of the total country population. We compared the cumulative number of projected outcomes to the cumulative total over one year before projections started (May 2021 - May 2022). 
 
@@ -121,7 +119,7 @@ cumulative_plots <- plot_cumulative_summary(data = results_multi_country,
 for (target in scenarios$targets) {
   target <- gsub("^inc ", "", target)
   cat('\n')
-  cat(paste0('### ', tools::toTitleCase(target)))
+  cat(paste0('## ', tools::toTitleCase(target)))
   cat('\n')
   print(cumulative_plots[[target]])
   cat('\n')
@@ -131,7 +129,7 @@ for (target in scenarios$targets) {
 }
 ```
 
-## Incident outcomes {.tabset}
+# Incident outcomes {.tabset}
 
 We explored the incidence of COVID-19 per 100,000 over the projection period and in terms of projected peaks in incidence. We summarised peaks both over the entire projection period, and over only the autumn-winter period (November through March); we considered (A) the timing and maximum weekly incidence of each peak, and (B) the total number of peaks.
 
@@ -145,12 +143,12 @@ We explored the incidence of COVID-19 per 100,000 over the projection period and
 
 **Projections**
 
-### Over time {.tabset .tabset-pills}
+## Over time {.tabset .tabset-pills}
 
 ```{r plot-projections, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
-  cat(paste0('#### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat(paste0('### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
   print(
     plot_scenarios(
@@ -168,7 +166,7 @@ for (target in scenarios$targets) {
 }
 ```
 
-### Peaks {.tabset}
+## Peaks {.tabset}
 
 ```{r detect-peaks}
 source(here("code", "summarise", "peaks.R"))
@@ -187,14 +185,14 @@ peak_number_plot_aw <- plot_peak_number(peaks = peaks_aw)
 peak_size_plot_aw <- plot_peak_size(peaks = peaks_aw, truth = truth)
 ```
 
-#### Autumn-winter {.tabset .tabset-pills}
+### Autumn-winter {.tabset .tabset-pills}
 
 *Projections over November 2022 through March 2023*
 
 ```{r plot-peaks-aw, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
-  cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat(paste0('#### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
   cat('\n A. Size and timing of peaks. Boxplots show summary of the likely value at peak incidence (median and interquartile range); points show timing and size of peaks from independent sample simulations')
   cat('\n')
@@ -210,14 +208,14 @@ for (target in scenarios$targets) {
 ```
 
 
-#### Entire projection period {.tabset .tabset-pills}
+### Entire projection period {.tabset .tabset-pills}
 
 *Projections over June 2022 through June 2023*
 
 ```{r plot-peaks-alltime, results = 'asis'}
 for (target in scenarios$targets) {
   cat('\n')
-  cat(paste0('##### ', tools::toTitleCase(gsub("^inc ", "", target))))
+  cat(paste0('#### ', tools::toTitleCase(gsub("^inc ", "", target))))
   cat('\n')
   cat('\n A. Size and timing of peaks. Boxplots show summary of the likely value at peak incidence (median and interquartile range); points show timing and size of peaks from independent sample simulations')
   cat('\n')
