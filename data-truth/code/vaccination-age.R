@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggrepel)
 library(lubridate)
 
-plot_vaccination_by_age <- function(locations) {
+plot_vaccination_by_age <- function(location_codes = NULL) {
 
   # Set up ------------------------------------------------------------------
   # date conversion for ecdc data
@@ -17,21 +17,24 @@ plot_vaccination_by_age <- function(locations) {
                         yearweek = paste0(year, "-W", ifelse(week < 10, "0", ""), week)) %>%
     select(yearweek, date)
 
-  # Get 32 Euro hub locations
-  hub <- read_csv("https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/main/data-locations/locations_eu.csv") %>%
-    select("location_name", "location", "population")
+  if (is.null(location_codes)) {
+    # Get 32 Euro hub locations
+    location_codes <- read_csv("https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/main/data-locations/locations_eu.csv") %>%
+      select("location_name", "location", "population") %>%
+      pull(unique(location))
+  }
 
   # Get vaccination data by age ------------------------------------------------
   vax_url <- "https://opendata.ecdc.europa.eu/covid19/vaccine_tracker/csv/data.csv"
   # Source: ECDC (https://www.ecdc.europa.eu/en/publications-data/data-covid-19-vaccination-eu-eea)
   # - Note age data not available for Greece (GR), Netherlands (NL), United Kingdom (GB)
-  vax_age_raw <- read_csv(vax_url)
+  vax_age_raw <- vroom::vroom(vax_url)
 
   # Clean
   vax_age <- vax_age_raw %>%
     # keep only national level data
     filter(Region == ReportingCountry &
-             ReportingCountry %in% unique(hub$location)) %>%
+             ReportingCountry %in% location_codes) %>%
     # tidy names, dates
     select(
       yearweek = YearWeekISO,
@@ -57,11 +60,7 @@ plot_vaccination_by_age <- function(locations) {
                                "Booster 1", "Booster 2"),
                     ordered = TRUE))
 
-  # keep only multi-country-modelled locations
-  vax_age <- vax_age |>
-    filter(location %in% locations)
-
-  # keep only 60+ and all pop groups ----------------------------------------
+  # keep only 60+ and all pop groups ------------------------
   # denominators
   denoms <- vax_age %>%
     group_by(location, sixty_plus) %>%

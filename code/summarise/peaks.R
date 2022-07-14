@@ -8,11 +8,6 @@ library(lubridate)
 library(forcats)
 library(ggpmisc)
 
-# params <- list("round" = 1)
-# source(here("code", "report", "prep.R"))
-# data <- results_multi_country
-
-
 # Detect peaks in each sample -----------------------------------------------
 detect_peaks <- function(data) {
   data |>
@@ -105,89 +100,3 @@ plot_peak_size <- function(peaks, truth) {
   names(plot_size) <- targets
   return(plot_size)
 }
-
-# quantile summary size of peak weekly incidence --------------------
-# plot_peak_per_month <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
-#
-#   peaks_month <- peaks |>
-#     ungroup() |>
-#     arrange(target_end_date) |>
-#     mutate(yearmonth = fct_inorder(format.Date(target_end_date, "%b-%y")))
-#
-#   peaks_month <- peaks_month |>
-#     group_by(yearmonth,
-#              location, scenario_label, target_variable, model) |>
-#     summarise(
-#       value_100k = round(quantile(value_100k, quantile_levels)),
-#       name = paste0("q", sub("\\.", "_", quantile_levels)),
-#       .groups = "keep") |>
-#     # pivot wide for plotting
-#     pivot_wider(names_from = name,
-#                 values_from = value_100k)
-#
-#   targets <- unique(peaks_month$target_variable)
-#   plot_peaks_month <- map(targets,
-#                       ~ peaks_month |>
-#                           filter(target_variable == .x) |>
-#                           ggplot(aes(x = yearmonth, col = model)) +
-#                           geom_point(aes(y = q0_5), position = position_dodge(0.5)) +
-#                           geom_linerange(aes(ymin = q0_05, ymax = q0_95),
-#                                          position = position_dodge(0.5)) +
-#                           # geom_hline(aes(yintercept = current_p), lty = 3) +
-#                           scale_colour_manual(values = palette$models) +
-#                           labs(x = NULL,
-#                                y = paste0("Peak weekly incident ",
-#                                           gsub("^inc ", "", .x),
-#                                           " per 100k"),
-#                                col = NULL) +
-#                           facet_grid(rows = vars(location),
-#                                      cols = vars(scenario_label),
-#                                      scales = "free", drop = TRUE) +
-#                           theme(legend.position = "top"))
-#   names(plot_peaks_month) <- targets
-#   return(plot_peaks_month)
-# }
-#
-#
-# # over all winter-autumn --------------------------------------------------
-# plot_peak_aw <- function(peaks, quantile_levels = c(0.05, 0.5, 0.95)) {
-#   autumn_winter_months <- c(10,11,12,1,2,3)
-#
-#
-#   targets <- unique(peaks_aw$target_variable)
-#   plot_aw <- map(targets,
-#                  ~ peaks_aw |>
-#                    filter(target_variable == .x) |>
-#                    ggplot(aes(x = scenario_label, col = model)) +
-#                    geom_boxplot(aes(y = value_100k),
-#                                position = position_dodge(0.5)) +
-#                    geom_jitter(aes(y = value_100k), alpha = 0.05,
-#                               position = position_dodge(0.5)) +
-#                    scale_color_manual(values = palette$models) +
-#                    labs(x = NULL,
-#                         y = paste0("Peak weekly incident ",
-#                                    gsub("^inc ", "", .x),
-#                                    " per 100k"),
-#                         col = NULL,
-#                         caption = "Peaks over September to February") +
-#                    facet_grid(rows = vars(location),
-#                               scales = "free", drop = TRUE) +
-#                    theme(legend.position = "top"))
-#
-#   names(plot_aw) <- targets
-#   return(plot_aw)
-# }
-
-
-# quantiles ---------------------------------------------------------------
-# peaks_aw <- peaks_aw |>
-#   group_by(location, scenario_label, target_variable, model) |>
-#   summarise(
-#     value_100k = round(quantile(value_100k, quantile_levels)),
-#     name = paste0("q", sub("\\.", "_", quantile_levels)),
-#     .groups = "drop"
-#   ) |>
-#   # pivot wide for plotting
-#   group_by(location, scenario_label, target_variable, model) |>
-#   pivot_wider(names_from = name,
-#               values_from = value_100k)

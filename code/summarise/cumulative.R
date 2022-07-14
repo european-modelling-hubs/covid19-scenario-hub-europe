@@ -27,16 +27,15 @@ plot_cumulative_summary <- function(data, truth,
       .groups = "drop"
     )
 
-  #  use population percentages --------------------------------------------
   ## calculate projected values as %
-  summary_p <- summary_quantiles |>
+  summary_proj <- summary_quantiles |>
     left_join(distinct(truth,
                        location, population),
               by = "location") |>
     mutate(value_p = value / population,
            target_variable = gsub("^inc", "cum", target_variable))
 
-  ## add cumulative total to date
+  #  previous total --------------------------------------------
   summary_truth <- truth |>
     filter(target_end_date <= scenarios[[round_text]][["origin_date"]])
 
@@ -59,7 +58,7 @@ plot_cumulative_summary <- function(data, truth,
 
   # plot ---------------------------------------------------------------
   ## reframe data to wide
-  cumulative_plot_data <- summary_p |>
+  cumulative_plot_data <- summary_proj |>
     ungroup() |>
     select(-value) |>
     group_by(location, scenario_label, target_variable, model) |>
@@ -77,13 +76,16 @@ plot_cumulative_summary <- function(data, truth,
       geom_linerange(aes(ymin = q0_05, ymax = q0_95),
                      position = position_dodge(0.5)) +
       geom_hline(aes(yintercept = current_p), lty = 3) +
+      expand_limits(y = 0) +
       scale_y_continuous(labels = scales::label_percent()) +
       scale_colour_manual(values = palette$models) +
       labs(x = NULL, y = "% population", col = NULL,
            subtitle = paste0("Total incident ", target,
                              " over projection period"),
            caption = plot_caption) +
-      facet_grid(rows = "location", scales = "free", drop = TRUE) +
+      facet_grid(rows = "location",
+                 scales = "fixed",
+                 drop = TRUE) +
       theme(legend.position = "top")
   }
 
@@ -95,4 +97,3 @@ plot_cumulative_summary <- function(data, truth,
 
   return (cumulative_plots)
 }
-
