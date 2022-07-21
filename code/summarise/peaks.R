@@ -77,10 +77,9 @@ plot_peak_size <- function(peaks, truth) {
                       group_by(model, scenario_label, location, target_variable) |>
                       ggplot(aes(x = target_end_date,
                                  col = model)) +
-                     geom_boxplot(aes(y = value_100k),
-                                   position = position_dodge(0.5)) +
-                     geom_jitter(aes(y = value_100k), alpha = 0.05,
-                                    position = position_dodge(0.5)) +
+                     # geom_boxplot(aes(y = value_100k),
+                     #               position = position_dodge(0.5)) +
+                     geom_point(aes(y = value_100k), alpha = 0.7) +
                       # Add dotted line to indicate highest observed peak
                       geom_hline(aes(yintercept = value_100k_alltime), lty = 3) +
                       # Format
@@ -93,6 +92,7 @@ plot_peak_size <- function(peaks, truth) {
                            col = NULL, fill = NULL,
                            caption = "Estimated size and timing of peaks over projection period
                            Dotted line indicates all-time highest observed peak") +
+                      guides(colour = guide_legend(override.aes = list(alpha = 1))) +
                       theme(legend.position = "top") +
                       facet_grid(rows = vars(location),
                                  cols = vars(scenario_label),
