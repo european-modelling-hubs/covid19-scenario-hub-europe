@@ -67,12 +67,13 @@ Long term goals included:
 
 ## Modelling scenarios
 
+We collaborated closely with the US Scenario Hub to design and build the European Scenario Hub. In the initial set up phase, we worked from their experience to plan the structure of each scenario round, and to design an open, cooperative format for bi-weekly technical discussions with modelling teams. We then continued to collaborate through each round of scenarios. Before setting each round, the core teams of both Hubs met to share priorities for new scenarios. During each round, members of the US Hub team joined the European Hub technical discussions, and vice versa.
+
 We created scenarios at regular 1-2 month intervals with each set of
 scenarios (a "round") projecting over a future 3-12 months. As a starting point,
 our framework for setting scenarios in each round was a 2x2 matrix composed of
 two variables, each with optimistic and pessimistic parameter values for its
-influence on COVID-19 outcomes. Based on discussion with the team running the US
-Scenario Hub and experiences there we chose this number of scenarios so as to keep
+influence on COVID-19 outcomes. We chose this number of scenarios so as to keep
 the workload of contributing teams manageable (and thus maximise participation)
 whilst retaining utility and interpretability of the scenarios explored.
 
@@ -139,7 +140,7 @@ process and requirements.
 
 Given the sample-based submissions we aimed to create ensembles from the
 individual models for each scenario-country combination with more than two
-models as averaging only two models was not considered robuts. As an initial
+models as averaging only two models was not considered robust. As an initial
 choice we planned to create a median ensemble by taking the median of the given
 predictive quantiles of the different models for each scenario, but also to
 consider other ensemble choices. We discussed differences between outcomes
