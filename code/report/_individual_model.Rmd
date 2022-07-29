@@ -1,4 +1,4 @@
-#### `r model` {.tabset .tabset-pills}
+## `r model` {.tabset .tabset-pills}
 
 ```{r}
 res_model <- results |> 
@@ -8,7 +8,7 @@ res_model <- results |>
 ```{r, results = 'asis', fig.width = 8, fig.height = length(unique(res_model$location)) * 4}
 for (target in unique(res_model$target_variable)) {
   cat("\n")
-  cat("##### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
+  cat("### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
   
   print(
     res_model |>
