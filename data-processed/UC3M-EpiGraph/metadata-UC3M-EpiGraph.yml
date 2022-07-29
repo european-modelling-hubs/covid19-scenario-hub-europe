@@ -5,6 +5,9 @@ model_contributors:
   - name: David E. Singh
     affiliation: Universidad Carlos III de Madrid
     email: dexposit@inf.uc3m.es
+  - name: Aymar Cublier
+    affiliation: Universidad Carlos III de Madrid
+    email: acublier@pa.uc3m.es
   - name: Miguel Guzman Merino
     affiliation: Universidad Carlos III de Madrid
     email: mguzman@pa.uc3m.es

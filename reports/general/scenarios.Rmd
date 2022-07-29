@@ -11,18 +11,18 @@ bibliography: references.bib
 
 Scenario models for COVID-19 aim to bound the uncertainty around future
 outcomes over some time frame. They are distinct from forecasts, which aim to
-quantify all future uncertainty and give probabilities to future outcomes.
+quantify all future uncertainty and give probabilities to possible outcomes.
 Scenarios, on the other hand, specify explicit plausible values for one or more
 uncertain variables (which could be, for example, biological parameters such as
 the rate of immunity waning, or assumed future changes in contact behaviours) .
 Because they are not aimed to make explicit verifiable predictions, they can be
-considered over a longer time frame than forecasts and therefore aid planning. Scenario
-encode the influence of the specified variables on COVID-19 outcomes, and
-results from scenario models show possible outcomes within the given
-timeframe assuming that present causal relationships hold in the future.
+considered over a longer time frame than forecasts and therefore aid planning.
+Scenarios encode the influence of the specified variables on COVID-19 outcomes,
+and results from scenario models show possible outcomes within the given
+time frame assuming that current causal relationships hold in the future.
 The definition of scenario variables and values depends on the intended
 use of scenario results. One purpose of scenario modelling is to support
-comparisons of possible actions taken in the present with long term
+comparisons of possible actions taken in the present with long-term
 effects. Separately, scenarios can also be used to understand the
 sensitivity of future outcomes to varying parameter conditions.
 
@@ -42,16 +42,18 @@ COVID-19 across Europe. This built on previous work to produce
 collaborative forecasts and scenarios in Europe and the United States [@cramer21_united_states_covid_forec_hub;@borchering2021;@sherratt2022;@reich2022].
 
 The short-term goals of the European Scenario Hub were to:
--   Create and visualise of open access scenario projections 
--   Facilitate collaboration among hub participants (that improves the quality
-    of projections) 
--   Provide results for use in policy decision-making in both the short and long term
--   Communicate scenario projections to the public in an ethical manner. 
+
+-   Create and visualise open access scenario projections
+-   Facilitate collaboration among hub participants
+-   Provide results for use in policy decision making in both the short and long
+    term
+-   Communicate scenario projections to the public in an ethical and transparent
+    manner
 -   Conduct secondary analysis of scenario hub projections including
-    -   Learning from the degree of agreement between different models for the same
-        scenario 
+    -   Learning about model uncertainty from the degree of agreement between
+        different models for the same scenario
     -   Understanding the impact of choices of model structure and complexity on
-        projected futures 
+        projected futures
     -   Developing methods for combining scenario results 
 
 Long term goals included:
@@ -65,12 +67,13 @@ Long term goals included:
 
 ## Modelling scenarios
 
+We collaborated closely with the US Scenario Hub to design and build the European Scenario Hub. In the initial set up phase, we worked from their experience to plan the structure of each scenario round, and to design an open, cooperative format for bi-weekly technical discussions with modelling teams. We then continued to collaborate through each round of scenarios. Before setting each round, the core teams of both Hubs met to share priorities for new scenarios. During each round, members of the US Hub team joined the European Hub technical discussions, and vice versa.
+
 We created scenarios at regular 1-2 month intervals with each set of
-scenarios (a round) projecting over a future 3-12 months. As a starting point,
+scenarios (a "round") projecting over a future 3-12 months. As a starting point,
 our framework for setting scenarios in each round was a 2x2 matrix composed of
 two variables, each with optimistic and pessimistic parameter values for its
-influence on COVID-19 outcomes. Based on discussion with the team running the US
-Scenario Hub and experiences there we chose this number of scenarios so as to keep
+influence on COVID-19 outcomes. We chose this number of scenarios so as to keep
 the workload of contributing teams manageable (and thus maximise participation)
 whilst retaining utility and interpretability of the scenarios explored.
 
@@ -82,13 +85,12 @@ national-level policy action. For each variable we identified one or
 more observable parameters that represented the causal pathway from the
 variable to the outcome.
 
-For each scenario round, we collaborated with ECDC to define the
-extrinsic variable, based on interactions with national
-policymakers and assessment of possible policy options. We drew on
-the epidemiology of COVID-19 in Europe to suggest themes for the
-biologically intrinsic variable. After an initial consultation with 
-ECDC, we shared and sought suggestions for the scenario variables from
-participating teams.
+For each scenario round, our team together with the ECDC Modelling team defined
+the extrinsic variables and suggestions for biologically intrinsic variables.
+The choice of extrinsic variable was based on interactions with national
+policymakers and possible policy options, and the intrinsic variables based on
+the epidemiology of COVID-19 in Europe. We then shared and sought suggestions
+for the scenario variables from participating teams.
 
 ### Parameters
 
@@ -106,52 +108,51 @@ model, but the model structure needed to be able to include each explicit
 parameter value. Additional implicit parameters may be relevant to each
 variable but not quantitatively specified in the scenario definition.
 Whether these parameters were included in a model was at each
-teams'discretion.
+teams' discretion.
 
 More generally, the choice of two axes left many biological (especially on
 vaccine efficacy and natural immunity) and behaviour-related parameters (e.g.
 mask wearing or relaxation of precautious behaviours) at the discretion of
-teams. This was retain a diversity of approaches to questions that do not have a
-single or clear answer, treating the choices of modellers as a form of expert
-elicitation [@shea20_harnes_multip_model_outbr_manag]. 
+teams. This was chosen with the aim of retaining a diversity of approaches to
+questions that do not have a single or clear answer, treating the choices of
+modellers as a form of expert elicitation
+[@shea20_harnes_multip_model_outbr_manag].
 
 For each scenario round, after defining the variables we collaborated with teams
-to define which parameters are explicitly 
-specified and at what value. Teams must be able to include the explicit
-parameters, and we do not specify any other restrictions on the type or
-structure of models that teams use.
+to define which parameters are explicitly specified and at what value. Apart
+from being able to include the explicit parameters we did not specify any other
+restrictions on the type or structure of models that teams use.
 
 ## Scenario projections
 
-We focused on weekly incident targets, for any of the following COVID-19
-outcomes: infections, cases, and deaths. To align with other Hubs we initially asked
-for quantile intervals at 0.01, 0.025, 0.05, every 5% to 0.95, 0.975,
-and 0.99. Inclusion in ensemble models requires a full set of quantiles
-from 0.01 to 0.99. Following a pilot round we decided to instead ask teams for
+We focused on weekly incident targets for any of the following COVID-19
+outcomes: infections, cases, and deaths (later extended to hospitalisations and
+intensive care unit admissions). To align with other hubs we initially
+asked for quantile intervals at 0.01, 0.025, 0.05, every 5% to 0.95, 0.975,
+and 0.99. Following a pilot round we decided to instead ask teams for
 submissions based on samples from the predictive probability distribution of
-trajectories, conditional on the specified scenarios, that is individual model
+trajectories, conditional on the specified scenarios, i.e. individual model
 trajectories. This enabled us to quantify key quantities such as the total
-expected burden or the number of peaks expected. We further collected metadata from teams in the form of a
-structured abstract, varied slightly with each round of
-scenarios. We created a technical Wiki with more details on the submission
+expected burden or the number of peaks expected. We further collected metadata
+from teams in the form of a structured abstract, varied slightly with each round
+of scenarios. We created a technical Wiki with more details on the submission
 process and requirements.
 
-Given the sample-based submissions we aimed to created ensembles from the individual
-models for each scenario-country combination with more than two models
-as averaging only two models was not considered robuts. As an initial choice we planned to create a median ensemble 
-by taking the median of the given predictive quantiles of the different
-models for each scenario, but also to consider other ensemble choices.
-We discussed differences between outcomes presented by different models 
-with the modellers in order to avoid hiding differences from structural
-or parametric assumptions by taking the ensemble.
+Given the sample-based submissions we aimed to create ensembles from the
+individual models for each scenario-country combination with more than two
+models as averaging only two models was not considered robust. As an initial
+choice we planned to create a median ensemble by taking the median of the given
+predictive quantiles of the different models for each scenario, but also to
+consider other ensemble choices. We discussed differences between outcomes
+presented by different models with the modellers in order to avoid hiding
+differences from structural or parametric assumptions by taking the ensemble.
 
 We aimed to choose plausible scenarios that can inform both short-term and
-long-term policy but did not
-expect any of them to be an exact characterisation of the future. We
-therefore did not expect data to align with any one model result.
-Moreover, observed data would not align with any scenario output if the
+long-term policy but did not expect any of them to be an exact characterisation
+of the future. We therefore did not expect data to align with any one model
+result. Moreover, observed data would not align with any scenario output if the
 scenarios excluded a parameter that operated within the relevant
-timeframe and had substantial confounding effects across all the
+time frame and had substantial confounding effects across all the
 scenarios. Because of this we decided that any visualisation of scenario results
 would have to present at least two clearly labelled scenarios so as not to
 confuse them with forecasts.
@@ -170,9 +171,9 @@ round (Round 1) as the first full submission round of the European Scenario Hub.
 We extensively discussed scenarios with the leadership of the US Scenario Hub as
 well as options for aligning scenarios, with benefits both in team engagement
 (being inclusive to teams already submitting to the US hub) and understanding
-any potenetial differences between the situation in Europe and the US. Based on
+any potential differences between the situation in Europe and the US. Based on
 these discussions we decided to adopt identical scenarios to the US Scenario Hub
-Round 13, with on axis of waning protection and another of the impact of new
+Round 13, with one axis of waning protection and another of the impact of new
 variants. These were considered the most policy-relevant questions, with a
 particular interest in which of these aspects were more relevant for determining
 future outcomes and therefore be the focus of future monitoring.
@@ -190,5 +191,6 @@ two vaccination scenarios of a slow summer or fast autumn booster campaign.
 
 The scenario hub started with an initial meeting on 22 February 2022, followed
 by two initial round of scenarios informed by policy questions relevant in the
-European context. The platform has successfully received submissions from multiple modelling
-teams and is ready for future rounds of collaborative scenario modelling.
+European context. The platform has successfully received submissions from
+multiple modelling teams and is ready for future rounds of collaborative
+scenario modelling.
