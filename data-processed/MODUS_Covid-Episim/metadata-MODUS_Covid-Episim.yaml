@@ -45,7 +45,7 @@ model_details:
   natural_immunity_duration: Waning occurs with the same rate as for vaccine induced immunity.
   case_fatality_rate: Not applicable
   infection_fatality_rate: Not applicable
-  asymptomatics: 0.2
+  asymptomatics: A rate of 0.2
   age_groups: Agents can have any age between 0 and 99, but certain parameters and analyses employ different binning systems based on the available data.
   importations: Based on disease import for 2021. Numbers were provided by the public health authorities in Cologne.
   confidence_interval_method: Not applicable
