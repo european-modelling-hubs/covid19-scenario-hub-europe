@@ -47,5 +47,14 @@ load_local_results <- function(round = NULL, subdir = NULL) {
 
   }
 
+  # Standardise values per 100k population
+  pop <- read_csv(here("data-locations", "locations_eu.csv"),
+                  show_col_types = FALSE) %>%
+    select(location, population)
+
+  results <- left_join(results, pop, by = "location") %>%
+    mutate(value_100k = value / population * 100000) %>%
+    select(-population)
+
   return(results)
 }
