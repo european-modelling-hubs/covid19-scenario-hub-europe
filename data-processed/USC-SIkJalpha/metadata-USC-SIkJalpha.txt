@@ -24,10 +24,10 @@ importations: Not applicable
 confidence_interval_method: We generate multiple trajectories by (i) Uniform sampling of the recently seen infection rates, under-reporting/asymptomatic population, vaccine coverage, waning parameters uncertainty, and variant prevelance. (ii) For each of the above case trajectories, we use multiple possibilities of death and hospitalization rates that have been seen in the recent past. The above results in multiple points for each day. Quantiles are generated based on sampling among these points for each day.
 calibration: 'All calibrations using regression. No manual-tuning other than the listed assumption and trivial settings: non-zero lag between infection and death.'
 spatial_structure: Not applicable.
-team_funding: National Science Foundation Award # 2135784
+team_funding: National Science Foundation Award # 2135784, # 2223933
 data_inputs: Cases and deaths - JHU
 citation: |
-  [1] Ajitesh Srivastava, Tianjian Xu and Viktor K. Prasanna, "Fast and Accurate Forecasting of COVID-19 Deaths using the SIkJalpha Model". https://arxiv.org/abs/2007.05180.
+  [1] Ajitesh Srivastava, "The Variations of SIkJalpha Model for COVID-19 Forecasting and Scenario Projections". https://arxiv.org/abs/2207.02919.
 methods_long: |
   [Note that this is general description. Hospitalizaitons and age-groups are not applicable to European Scenario Modeling Hub] We use our own epidemic model called SI-kJalpha, preliminary version
   of which we have successfully used during DARPA Grand Challenge 2014. Our model
