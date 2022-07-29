@@ -2,7 +2,9 @@ team_name: University of Southern California
 model_name: SI_kJalpha
 model_abbr: USC-SIkJalpha
 model_version: 2022-03-13
-model_contributors: Ajitesh Srivastava <ajiteshs@usc.edu>
+model_contributors:
+  - name: Ajitesh Srivastava
+    email: ajiteshs@usc.edu
 website_url: https://scc-usc.github.io/ReCOVER-COVID-19
 license: mit
 team_model_designation: primary

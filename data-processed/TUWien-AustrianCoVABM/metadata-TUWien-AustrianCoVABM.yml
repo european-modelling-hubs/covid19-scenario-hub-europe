@@ -1,13 +1,31 @@
 team_name: TU Wien, dwh GmbH, DEXHELPP
 model_name: Austrian Agent-Based COVID-19 Model
 model_abbr: TUWien-AustrianCoVABM
-model_contributors: Martin Bicher (TU Wien) <martin.bicher@tuwien.ac.at>, Claire Rippinger (dwh GmbH) <claire.rippinger@dwh.at>, Dominik Brunmeir (dwh GmbH) <dominik.brunmeir@dwh.at>, Christoph Urach (dwh GmbH) <christoph.urach@dwh.at>, Melanie Zechmeister (dwh GmbH) <melanie.zechmeister@dwh.at>, Niki Popper (TU Wien, DEXHELPP) <nikolas.popper@tuwien.ac.at>
+model_contributors:
+  - name: Martin Bicher
+    affiliation: TU Wien
+    email: martin.bicher@tuwien.ac.at
+  - name: Claire Rippinger
+    affiliation: dwh GmbH
+    email: claire.rippinger@dwh.at
+  - name: Dominik Brunmeir
+    affiliation: dwh GmbH
+    email: dominik.brunmeir@dwh.at
+  - name: Christoph Urach
+    affiliation: dwh GmbH
+    email: christoph.urach@dwh.at
+  - name: Melanie Zechmeister
+    affiliation: dwh GmbH
+    email: melanie.zechmeister@dwh.at
+  - name: Niki Popper
+    affiliation: TU Wien, DEXHELPP
+    email: nikolas.popper@tuwien.ac.at
+    twitter: niki_popper
 website_url: https://www.dwh.at/en/projects/covid-19/
 license: cc-by-4.0
 team_model_designation: primary
 methods: time-continuous agent-based epidemics model supported by three meta-models - vaccination model, immunity waning model, hospitalization model.
 team_funding: model development and regular forecasts were and still are funded by various research funding agencies (FFG, WWTF, SMDM), the Austrian Ministry of Health and the Gesundheit Österreich GmbH
-twitter_handles: niki_popper
 data_inputs: inputs to the models(s) include strain dependent disease parameter values (infectiousness, durations, seasonality,...), vaccine dependent vaccination properties (manufacturer, shot number, prerequisites), immunization parameter values (base effectiveness and waning distribution per immunization event (recovery from specific variant, vaccine) and target (infection from specific variant, hospitalization, ICU hospitalization), test-system related parameter values (detection rate per age), demographic parameter values (regional, age and sex structure), and contact specific parameters (POLYMOD contact data, data for specifying the dispersion of the network, data for households, workplaces, schools, as well as OD-matrices for mobility, and tourism data to model the import of new variants). Additionally, the model uses vaccination data and vaccination forecasts. The model furthermore applies a timeline with modelled policies (e.g. school closure, contact tracing, ...) and certain dynamic parameter-value-changes (e.g. detection rate, hospitalization rate). The model uses one free time-dependent factor multiplied to the transmissibility to calibrate the model to past incident cases per age and federal-state. The process is similar for hospitalizations in the corresponding meta-model (see below).
 methods_long: The overall process involves the use of four sequential models. First, a vaccination model develops a feasible vaccine forecast, second, an agent-based epidemics model (ABM) generates a forecast for the case numbers, third, an immunity waning model estimates the overall protection level of the population against hospitalization based in the results of the ABM, and finally, a hospitalization model creates a forecast for the hospital and ICU occupancy based on the results of the ABM and the waning-model.  The time-continuous (event-based) ABM is the most important part of this chain and uses contact locations (households, workplaces, schools) to spread the virus. Infections cause the person to pass on copy of the virus type object. Thereafter, a corresponding disease pathway is started for the infected agent which may include a testing-event which renders the case to be confirmed in the reporting system. Recovery from the infection may cause the agent to become immune for a sampled period – immunity is evaluated separately against all modelled strains. Immunity loss dates are drawn from a Weibull distribution. New variants are introduced via random infections from tourists. NPIs are partially modelled directly (e.g. closure of schools, tracing, …) and partially modelled via reduction of contact numbers or transmissibility (e.g. face mask wearing). Vaccinations are imported from external files and treated similarly to recovery events. The vaccination file is either taken directly from the official reporting system or, in case of a forecast, generated via a vaccination model that considers information about ordered vaccine doses, vaccination infrastructure, and assumptions about willingness. The outcomes of the ABM are afterwards reevaluated for immunization against (ICU) hospitalization using an individual based immunity-waning model. The results of the waning-model and the ABM are then passed on to a hospitalization model (stock-flow type).  For a full specification of the ABM, we refer to https://www.dwh.at/en/projects/covid-19/Covid19_Model_20210111.pdf. Information to the hospitalization model is found under https://www.medrxiv.org/content/10.1101/2020.10.18.20214767v3. Documentations for the other meta-models are currently work in progress.
 model_details:

@@ -1,0 +1,27 @@
+## `r model` {.tabset .tabset-pills}
+
+```{r}
+res_model <- results |> 
+  filter(model == .env$model)
+```
+
+```{r, results = 'asis', fig.width = 8, fig.height = length(unique(res_model$location)) * 4}
+for (target in unique(res_model$target_variable)) {
+  cat("\n")
+  cat("### ", tools::toTitleCase(gsub("^inc ", "", target)), "\n")
+  
+  print(
+    res_model |>
+      filter(target_variable == .env$target) |>
+      plot_scenarios(
+        truth = truth,
+        target_variable = target,
+        columns = "model",
+        model_colours = palette$models,
+        scenario_colours = palette$scenarios
+      )
+  )
+  
+  cat("\n")
+}
+```
