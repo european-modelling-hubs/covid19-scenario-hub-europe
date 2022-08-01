@@ -30,7 +30,7 @@ model_contributors:
     email: nagel@vsp.tu-berlin.de
     affiliation: TU Berlin
 website_url: https://covid-sim.info/
-license: AGPL-3.0
+license: agpl-3.0
 team_model_designation: primary
 methods: Agent-based simulation model for COVID-19 based on a traffic simulation and mobile phone data
 model_details:
