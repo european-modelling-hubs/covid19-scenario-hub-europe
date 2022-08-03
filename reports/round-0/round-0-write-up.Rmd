@@ -1,0 +1,35 @@
+---
+title: European COVID-19 Scenario Modelling Hub Round 0
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+  pdf_document:
+    default
+---
+```{r write-up, echo=FALSE, include=FALSE}
+# Create plots and report
+library(here)
+library(dplyr)
+library(purrr)
+library(readr)
+# get scenario metadata
+source(here("code", "load", "scenarios.R"))
+# get model projections
+source(here("code", "load", "load_local_results.R"))
+
+# Set round
+round <- 0
+
+# Get results
+scenario_round <- scenarios[[paste0("round_", round)]]
+results <- load_local_results(round = round)
+
+# Create reporting directory
+report_dir <- paste0(here("reports"), "/round-", round)
+if(!dir.exists(report_dir)){ dir.create(report_dir) }
+```
+
+This writeup is in the `round-0-writeup` branch of the repository, which contains both the report and the data needed to generate it.
