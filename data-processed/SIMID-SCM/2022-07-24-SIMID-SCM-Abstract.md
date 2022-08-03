@@ -56,17 +56,17 @@ Extra Booster after September 2022 (mRNA)  | - | - | 95% | 99% | scenario depend
 
 Immune classes are the following ones: previously infected, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA), extra Booster vaccinated (only mRNA) and "vaccinated and previously infected".
 
-The administration of a second booster dose before September 2023 is considered by taking an individual back to the booster vaccinated class with full protection restarted (according to the table). The booster campaign of September 2022-December 2022 is entirely done inside the extra Booster classes, so a 2nd booster for individuals without a 2nd booster yes, but a 3rd booster for individuals with a 2nd booster.
+The administration of a second booster dose before September 2023 is considered by taking an individual back to the booster vaccinated class with full protection restarted (according to the table). The booster campaign of September 2022-December 2022 is entirely done inside the extra Booster classes, so a 2nd booster for individuals without a 2nd booster yet, but a 3rd booster for individuals with a 2nd booster.
 
 All 1st dose, 2nd dose and booster dose classes are merged into a single classe "vaccinated and previously infected" after an infection, with no distinction on the number of doses.
 
    - ##### _if applicable:_ Initial distribution of susceptibility
 
-Derived from the evolution from March 2020
+Derived from the evolution from March 2020.
 
 - #### Seasonality implementation
 
-From September 2022 to December 2022, contact matrices and transmission are considered as the ones during June 2022 before summer holidays (with BA4/BA5 already present) with a smooth transition during the first month. From January 2023 to July 2023, contact matrices and transmission are taken from the period January 2022 to July 2022 where omicron was already present (with transmission adapted to BA4/BA5 variants), in order to mimic behavioural and seasonal changes during the year. The period before January 2022 is not used because it correspond to the delta variant, which quite different transmission parameters.
+From September 2022 to December 2022, contact matrices and transmission are considered as the ones during June 2022 before summer holidays (with BA4/BA5 already present) with a smooth transition during the first month. From January 2023 to July 2023, contact matrices and transmission are taken from the period January 2022 to July 2022 where omicron was already present (with transmission adapted to BA4/BA5 variants), in order to mimic behavioural and seasonal changes during the year. The contact matrices of the period before January 2022 are not used because they correspond to the delta variant, with quite different transmission parameters, and to a period with some NPIs.
 
 - #### Contact rate and/or behaviour assumptions
 
