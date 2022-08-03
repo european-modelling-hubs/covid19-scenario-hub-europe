@@ -7,6 +7,7 @@ Results concern scenario-based projections in Belgium.
 Important changes since Round 1:
 - Due to the consideration of BA4.BA5 variants, the increase of cases is more important in September 2022 than estimated in Round 1.
 - The behaviour/seasonal change is now not considered constant after September 2022, as explained in details in "Seasonality implementation", in order to mimic changes that occurred during last year. As a result, the model does not project stable equilibrium as long as changes like seasonality or holidays/schools opening provide perturbations.
+- Observed cases are not explicitly provided by the model, but symptomatic cases are now provided as a proxy.
 
 - #### Comments on observed dynamics given model assumptions
 
