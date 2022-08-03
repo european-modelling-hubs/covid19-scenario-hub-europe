@@ -1,0 +1,22 @@
+##### `r tools::toTitleCase(gsub("^inc ", "", target))`
+
+```{r}
+h <- results |> 
+  filter(target_variable == target) |> 
+  pull(location) |> 
+  n_distinct()
+```
+
+```{r, results='asis', fig.width = 8, fig.height = h * 2}
+print(
+  plot_scenarios(
+    results, truth,
+    round = params$round,
+    target_variable = target,
+    columns = "model",
+    model_colours = palette$models,
+    scenario_colours = palette$scenarios,
+    subsample = 0.2
+  ) 
+)
+```

@@ -3,31 +3,54 @@ Please copy this file and use the following fields where available to describe y
 
 ---
 
-### (a) Summary of results
+# Summary of results
  
+FILL
 
-### (b) Explanation of observed dynamics given model assumptions
+# Explanation of observed dynamics given model assumptions
 
+FILL
 
-### (c) Model assumptions
-- #### Number/type of immune classes considered
+# Model assumptions
 
-- #### _if available:_ Initial distribution of susceptibility
+## Number/type of immune classes considered
 
-   - ##### Proportion of people that were infected with Omicron before March 13
+FILL
 
-   - ##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
+## Initial distribution of susceptibility
 
-   - ##### Other
+### Proportion of people that were infected with Omicron before March 13
 
-- #### Initial variant characteristics (including Omicron transmissibility, immune escape, and how uncertainty or non-identifiability was handled) 
+FILL (if available)
 
-- #### Process for setting/calibrating P(hosp given current infection) and P(death given current infection)
+### Proportion of people that are naïve at start of projection (not vaccinated or infected)
 
-- #### Waning immunity details (e.g., distribution used)
+FILL (if available)
 
-- #### Seasonality implementation
+### Other
 
-- #### Emerging variant details (including introduction process)
+FILL (if available)
 
-- #### Nonpharmaceutical interventions 
+## Initial variant characteristics (including Omicron transmissibility, immune escape, and how uncertainty or non-identifiability was handled) 
+
+FILL
+
+## Process for setting/calibrating P(hosp given current infection) and P(death given current infection)
+
+FILL
+
+## Waning immunity details (e.g., distribution used)
+
+FILL
+
+## Seasonality implementation
+
+FILL
+
+## Emerging variant details (including introduction process)
+
+FILL
+
+## Nonpharmaceutical interventions 
+
+FILL
