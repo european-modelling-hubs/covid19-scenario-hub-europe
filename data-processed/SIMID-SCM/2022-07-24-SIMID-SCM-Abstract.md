@@ -38,7 +38,7 @@ mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%
 mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%
 Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
 2nd Booster before September 2022 (mRNA) | - | - | 95% | 99% | 67% | 90%
-Extra Booster after September 2022 (mRNA)  | - | - | scenario dependant | 99% | scenario dependant | 90%
+Extra Booster after September 2022 (mRNA)  | - | - | 95% | 99% | scenario dependant | 90%
 
 - #### Waning immunity 
 
