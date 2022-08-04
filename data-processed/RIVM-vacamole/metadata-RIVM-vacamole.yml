@@ -15,11 +15,11 @@ model_details:
   compliance_NPI: Not applicable
   contact_tracing: Not applicable
   testing: Not applicable
-  vaccine_efficacy_transmission: Depends on vaccine product and dose
-  vaccine_efficacy_delay: Depends on vaccine product and dose but typically between 7-14 days
+  vaccine_efficacy_transmission: Depends on age, vaccine product, and dose
+  vaccine_efficacy_delay: Depends on vaccine product and dose but between 7-28 days.
   vaccine_hesitancy: Not applicable
-  vaccine_immunity_duration: 'We assume vaccine effectiveness (VE) against transmission, infection, and hospitalisation wane at the same rate and follow a logistic function parameterized so that after 6 months vaccine-induced protection is reduced by 50% and reduced by 100% after 1 year (assuming no additional doses are received).'
-  natural_immunity_duration: We assume waning of natural immunity follows an Erlang distribution
+  vaccine_immunity_duration: 'We assume vaccine effectiveness (VE) against transmission and infection wanes following a logistic curve parameterized such that VE decreases by 25 percentage points within the first 6 months after vaccination (Higdon et al. 2022). We assume VE against hospitalisation also wanes following a logistic curve, but at a slower rate than VE against infection and transmission, specifically, that VE decreases by 10 percentage points in the first 6 months following vaccination (Higdon et al. 2022).'
+  natural_immunity_duration: We assume natural immunity wanes by 60% after 8 months and follows an Erlang distribution.
   case_fatality_rate: Not applicable
   infection_fatality_rate: Depends on age and vaccination status
   asymptomatics: Not applicable
