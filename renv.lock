@@ -73,9 +73,9 @@
       "RemoteHost": "api.github.com",
       "RemoteRepo": "HubValidations",
       "RemoteUsername": "covid19-forecast-hub-europe",
-      "RemoteRef": "origin-date",
-      "RemoteSha": "98b8587ee2a16b0528a25e98d5aa29be901a196a",
-      "Hash": "6b7eb116de2bd974ed81097da1ceb72e",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "d484f85b063cfefdd6027fe1d5ba209d4131965b",
+      "Hash": "3489476d8572ab461650dd5c348d2521",
       "Requirements": [
         "dplyr",
         "fs",
