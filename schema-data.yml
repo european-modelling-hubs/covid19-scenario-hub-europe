@@ -52,6 +52,11 @@ properties:
     items:
       type: integer
       minimum: 0
+  age_id:
+    type: array
+    items:
+      type: string
+      enum: ["child", "adult", "older"]
 additionalProperties: false
 required:
   - scenario_id
