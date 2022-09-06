@@ -62,3 +62,7 @@ We synthesise results both by exploring differences between and within models, a
 For each scenario round, we will create a standardised visualisation allowing all models’ scenario projections to be compared. This will be presented on the website and we will follow this with a narrative summary of model results, including information taken from model abstracts to demonstrate differences between teams’ approach to and results from scenarios.
 
 We aim to choose plausible scenarios that can inform policy but do not expect any of them to be an exact characterisation of the future. We therefore do not expect data to align with any one model result. Moreover, observed data would not align with any scenario output if the scenarios excluded a parameter that operated within the relevant timeframe and had substantial confounding effects across all of the scenarios.
+
+## European scenario hub team
+
+Originally set up in collaboration with the [Epiforecasts](https://epiforecasts.io) team the hub is now maintained by the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/).
