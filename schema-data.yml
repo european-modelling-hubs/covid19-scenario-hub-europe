@@ -6,50 +6,36 @@ description: >
   for more info.
 type: object
 properties:
-  origin_date:
-    description: The date at which the projections were established and submitted
-    type: array
-    items:
-      type: string
-      format: date
   scenario_id:
     description: A specified scenario ID
     type: array
     items:
       type: string
       enum:
-        - A-2022-05-22
-        - B-2022-05-22
-        - C-2022-05-22
-        - D-2022-05-22
-        - A-2022-07-24
-        - B-2022-07-24
-        - C-2022-07-24
-        - D-2022-07-24
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
   target_variable:
     description: '"inc case" or "inc death" or "inc hosp" or "inc infection" or "inc icu"'
     type: array
     items:
       type: string
       enum:
+        - inc dose
         - inc case
         - inc death
         - inc hosp
         - inc infection
         - inc icu
-        - inc hosp_icu
   horizon:
     description: The time horizon for the projections
     type: array
     items:
       type: string
-      pattern: ^\d{1,2} wk$
-  target_end_date:
-    description: Date as YYYY-MM-DD, the last day (Saturday) of the target week
-    type: array
-    items:
-      type: string
-      format: date
+      pattern: ^\d{1,3} wk$
   location:
     description: 'An ISO-2 country code'
     type: array
@@ -66,13 +52,16 @@ properties:
     items:
       type: integer
       minimum: 0
+  age_id:
+    type: array
+    items:
+      type: string
+      enum: ["child", "adult", "older"]
 additionalProperties: false
 required:
-  - origin_date
   - scenario_id
   - target_variable
   - horizon
-  - target_end_date
   - location
   - value
   - sample
