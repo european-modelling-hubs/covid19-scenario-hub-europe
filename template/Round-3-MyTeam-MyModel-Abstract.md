@@ -21,6 +21,9 @@ FILL
 #### Vaccination uptake in 60+ and <60 age groups 
 FILL
 
+#### Assumptions on next generation vaccines
+FILL (if applicable)
+
 #### Any variation from the scenarios as specified
 FILL (if applicable)
 
@@ -47,6 +50,12 @@ FILL (if applicable)
 ##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
 
 FILL (if applicable)
+
+#### Population ageing 
+FILL
+
+#### Assumptions on severity of infection of repeat infections
+FILL
 
 ##### Other
 
