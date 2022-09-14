@@ -18,6 +18,9 @@ FILL
 
 ### Vaccination campaigns
 
+#### Vaccination uptake in 60+ and <60 age groups 
+FILL
+
 #### Any variation from the scenarios as specified
 FILL (if applicable)
 
