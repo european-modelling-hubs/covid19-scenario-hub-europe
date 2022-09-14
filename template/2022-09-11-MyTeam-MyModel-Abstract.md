@@ -23,11 +23,8 @@ FILL (if applicable)
 
 ### New variants
 
-#### Optimistic variant scenario
-FILL
-
-#### Pessimistic variant scenario
-FILL
+#### Any variation from the scenarios as specified
+FILL (if applicable)
 
 
 ## Additional assumptions
