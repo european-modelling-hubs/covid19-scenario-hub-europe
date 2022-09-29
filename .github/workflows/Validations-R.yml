@@ -36,7 +36,8 @@ jobs:
               gh_repo = Sys.getenv("GITHUB_REPOSITORY"),
               pr_number = Sys.getenv("PR_NUMBER"),
               data_folder = "data-processed",
-              metadata_folder = "model-metadata"
+              metadata_folder = "model-metadata",
+              abstract_folder = "model-abstracts"
           )
           HubValidations::check_for_errors(v)
         shell: Rscript {0}
