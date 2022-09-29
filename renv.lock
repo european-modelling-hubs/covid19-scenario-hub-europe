@@ -73,9 +73,9 @@
       "RemoteUsername": "covid19-forecast-hub-europe",
       "RemoteRepo": "HubValidations",
       "RemoteRef": "origin-date",
-      "RemoteSha": "58afd1ab6fdb9ba1e4730cf94217e4bb47393fad",
+      "RemoteSha": "baf3665806f738ec7b6077dfe717952f28453bb6",
       "Remotes": "r-lib/rlang",
-      "Hash": "48df54cbd0baf32c3a6465e7417168b7",
+      "Hash": "e530a213730461b7e111e747de28ee38",
       "Requirements": [
         "dplyr",
         "fs",
