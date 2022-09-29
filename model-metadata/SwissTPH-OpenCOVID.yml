@@ -1,0 +1,38 @@
+team_name: SwissTPH
+model_name: OpenCOVID
+model_abbr: "SwissTPH-OpenCOVID"
+model_contributors:
+- name: "Andrew J. Shattock"
+  email: "andrewjames.shattock@swisstph.ch"
+  affiliation: "Swiss Tropical and Public Health Institute"
+- name: "Cassandra Alvarado"
+  email: "cassandra.alvarado@swisstph.ch"
+  affiliation: "Swiss Tropical and Public Health Institute"
+- name: "Melissa A. Penny"
+  email: "melissa.penny@swisstph.ch"
+  affiliation: "Swiss Tropical and Public Health Institute"
+team_funding: "Botnar Research Centre for Child Health"
+repo_url: "https://github.com/SwissTPH/OpenCOVID"
+citation: "https://pubmed.ncbi.nlm.nih.gov/34923396/"
+license: "gpl-3.0"
+team_model_designation: "primary"
+methods: 'xxx'
+methods_long: 'xxx'
+model_details:
+  modeling_NPI: 'xxx'
+  compliance_NPI: 'xxx'
+  contact_tracing: 'xxx'
+  testing: 'xxx'
+  vaccine_efficacy_transmission: 'xxx'
+  vaccine_efficacy_delay: 'xxx'
+  vaccine_hesitancy: 'xxx'
+  vaccine_immunity_duration: 'xxx'
+  natural_immunity_duration: 'xxx'
+  case_fatality_rate: 'xxx'
+  infection_fatality_rate: 'xxx'
+  asymptomatics: 'xxx'
+  age_groups: 'xxx'
+  importations: 'xxx'
+  confidence_interval_method: 'xxx'
+  calibration: 'xxx'
+  spatial_structure: 'xxx'
