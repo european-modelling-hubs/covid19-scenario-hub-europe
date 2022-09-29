@@ -1,10 +1,12 @@
 # Modeller commentary
 
 ## Summary comments on results Round 3
-FILL
+Reproducing previous year changes in contacts and transmission over year, the model project potential by-annual waves in Belgium (autumn and springs) at a similar level as latest omicron waves. However, under the pessimistic variant scenario, those waves might be more important.
 
 ## Comments on observed dynamics given model assumptions
-FILL
+With annual vaccination mostly dedicated to 60+, the reduction in term of hospital burden is very important (but less important concerning infections in general). With a bi-annual vaccination, the marginal benefit is almost negligible, except maybe for some springs waves under the pessimistic variant scenario.
+
+The model project kind of cumulative effect of recurrent vaccination campaign over years, but we don't know if it is something realistic or an artefact of the model.
 
 # Model assumptions
 
@@ -41,7 +43,7 @@ mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%
 mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%
 Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
 2nd Booster before September 2022 (mRNA) | - | - | 95% | 99% | 67% | 90%
-Next generation after September 2022 (unless immunity reduction)  | - | - | 95% | 99% | 95% | 90%
+Next generation after September 2022 (unless immunity reduction)  | - | - | 95% | 99% | 95% | 99%
 
 ### Number/type of immune classes considered
 Immune classes are the following ones: previously infected previous variant, previously infected current variant, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA), extra Booster vaccinated without updated vaccine, extra Booster vaccinated with updated vaccine, "vaccinated and previously infected previous variant" and  "vaccinated and previously infected current variant".
