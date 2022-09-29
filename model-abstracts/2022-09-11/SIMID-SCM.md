@@ -6,7 +6,7 @@ Reproducing previous year changes in contacts and transmission over year, the mo
 ## Comments on observed dynamics given model assumptions
 With annual vaccination mostly dedicated to 60+, the reduction in term of hospital burden is very important (but less important concerning infections in general). With a bi-annual vaccination, the marginal benefit is almost negligible, except maybe for some springs waves under the pessimistic variant scenario.
 
-The model project kind of cumulative effect of recurrent vaccination campaign over years, but we don't know if it is something realistic or an artefact of the model.
+The model project a kind of cumulative effect from recurrent vaccination campaign over years, but we don't know if it is something realistic or an artefact of the model.
 
 # Model assumptions
 
@@ -15,10 +15,13 @@ The model project kind of cumulative effect of recurrent vaccination campaign ov
 ### Vaccination campaigns
 
 #### Vaccination uptake in 60+ and <60 age groups 
-75% for 60+, 15% for 20-59
+Uptake: 75% for 60+, 15% for 20-59.
+
 Vaccination campaign over 3 months: 1st month 70+, 2nd month 60+, 3rd month 20+, starting September 15 or March 15
-The current planed campaign in Belgium is (almost) similar to this scenario
-If individuals are not eligible for vaccination (infected or non-waining state due to recent vaccination/infection), their vaccination is delayed are administered later
+
+The current planed campaign in Belgium is (almost) similar to this scenario.
+
+If individuals are not eligible for vaccination (infected or non-waining state due to recent vaccination/infection), their vaccination is delayed and administered later
 
 #### Assumptions on next generation vaccines
 VE (infection and severe case) similar to initial booster vs delta variant (vs VOCs >6months)
@@ -43,7 +46,7 @@ mRNA: 1st dose | 48% | 83% | 72% | 79% | 32% |65%
 mRNA: 2nd dose | 94% | 95% | 91% | 99% | 66% | 81%
 Booster (mRNA) | - | - | 95% | 99% | 67% | 90%
 2nd Booster before September 2022 (mRNA) | - | - | 95% | 99% | 67% | 90%
-Next generation after September 2022 (unless immunity reduction)  | - | - | 95% | 99% | 95% | 99%
+Next generation after September 2022 (unless immunity reduction from recent new variants)  | - | - | 95% | 99% | 95% | 99%
 
 ### Number/type of immune classes considered
 Immune classes are the following ones: previously infected previous variant, previously infected current variant, 1st dose vaccinated (Adeno, mRNA), 2nd dose vaccinated (Adeno, mRNA), Booster vaccinated (only mRNA), extra Booster vaccinated without updated vaccine, extra Booster vaccinated with updated vaccine, "vaccinated and previously infected previous variant" and  "vaccinated and previously infected current variant".
@@ -68,7 +71,7 @@ Not considered.
 Cf. contact rate
 
 ### Contact rate and/or behaviour assumptions
-Contact matrices and transmission are based each year on previous contact matrices (CoMix study) and previous estimated transmission related to each CoMix matrices:
+Contact matrices and transmission are based each year on previous contact matrices (CoMix study in Belgium) and previously estimated transmission related to each CoMix matrix:
 - for January to August: reference contact matrices are the ones from January to August 2022 
 - for September to December: since estimated transmission for Omicron-type variant is lacking for this period, contact matrices and transmission from June to March 2022 are considered backward as a proxy (to simulate variations and seasonality)
 
