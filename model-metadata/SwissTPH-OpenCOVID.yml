@@ -2,16 +2,17 @@ team_name: SwissTPH
 model_name: OpenCOVID
 model_abbr: "SwissTPH-OpenCOVID"
 model_contributors:
-- name: "Andrew J. Shattock"
-  email: "andrewjames.shattock@swisstph.ch"
-  affiliation: "Swiss Tropical and Public Health Institute"
-- name: "Cassandra Alvarado"
-  email: "cassandra.alvarado@swisstph.ch"
-  affiliation: "Swiss Tropical and Public Health Institute"
-- name: "Melissa A. Penny"
-  email: "melissa.penny@swisstph.ch"
-  affiliation: "Swiss Tropical and Public Health Institute"
-team_funding: "Botnar Research Centre for Child Health"
+- name: Andrew J. Shattock
+  email: andrewjames.shattock@unibas.ch
+  affiliation: "Swiss Tropical and Public Health Institute, University of Basel"
+- name: Cassandra Alvarado
+  email: cassandra.alvarado@unibas.ch
+  affiliation: "Swiss Tropical and Public Health Institute, University of Basel"
+- name: Melissa A. Penny
+  email: melissa.penny@unibas.ch
+  affiliation: "Swiss Tropical and Public Health Institute, University of Basel"
+team_funding: "Botnar Research Centre for Child Health, Swiss National Science Foundation (NRP78)"
+website_url: "https://github.com/SwissTPH/OpenCOVID"
 repo_url: "https://github.com/SwissTPH/OpenCOVID"
 citation: "https://pubmed.ncbi.nlm.nih.gov/34923396/"
 license: "gpl-3.0"
