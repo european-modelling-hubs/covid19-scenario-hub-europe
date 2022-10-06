@@ -1,0 +1,53 @@
+team_name: MODUS_Covid
+model_name: Episim
+model_abbr: MODUS_Covid-Episim
+model_contributors:
+  - name: Sebastian Müller
+    email: mueller@vsp.tu-berlin.de
+    affiliation: TU Berlin
+  - name: Billy Charlton
+    email: charlton@vsp.tu-berlin.de
+    affiliation: TU Berlin
+  - name: Ricardo Ewert
+    email: ewert@vsp.tu-berlin.de
+    affiliation: TU Berlin
+  - name: Sydney Paltra
+    email: paltra@vsp.tu-berlin.de
+    affiliation: TU berlin
+  - name: Christian Rakow
+    email: rakow@vsp.tu-berlin.de
+    affiliation: TU Berlin
+  - name: Jakob Rehmann
+    email: rehmann@vsp.tu-berlin.de
+    affiliation: TU Berlin
+  - name: Tim Conrad
+    email: conrad@zib.de
+    affiliation: ZIB Berlin
+  - name: Christof Schütte
+    email: schuette@zib.de
+    affiliation: ZIB Berlin
+  - name: Kai Nagel
+    email: nagel@vsp.tu-berlin.de
+    affiliation: TU Berlin
+website_url: https://covid-sim.info/
+license: agpl-3.0
+team_model_designation: primary
+methods: Agent-based simulation model for COVID-19 based on a traffic simulation and mobile phone data
+model_details:
+  modeling_NPI: Masks are worn on public transport, increased ventilation rate in schools compared to pre-pandemic behaviour, mobile phone data still shows a slight reduction in amount of time spent outside one's own home. This reduction is transferred to the activity levels in our model.
+  compliance_NPI: For masks on public transport we assume a 50% compliance, half of these wear a medical, half of these wear a FFP2 mask. For the venitalation rate we assume that windows are opened every 90 minutes.
+  contact_tracing: Contact tracing with minimal capacity and 50% success rate.
+  testing: No mandatory testing considered. Agents voluntarily perform one rapid antigen test every 2 weeks before a leisure activity.
+  vaccine_efficacy_transmission: Model vaccine efficacy is via our antibody model, which is built upon http://DOI.org/10.1056/NEJMc2119236 and http://DOI.org/10.1056/NEJMc2201607
+  vaccine_efficacy_delay: Not applicable
+  vaccine_hesitancy: No hesitancy integrate, but vaccination rates are based on vaccination numbers provided by RKI for the following age groups [5-11, 12-17, 18-59, 60+]
+  vaccine_immunity_duration: We assume an exponential decay rate (of antibody levels) with a half life of 60 days.
+  natural_immunity_duration: Waning occurs with the same rate as for vaccine induced immunity.
+  case_fatality_rate: Not applicable
+  infection_fatality_rate: Not applicable
+  asymptomatics: A rate of 0.2
+  age_groups: Agents can have any age between 0 and 99, but certain parameters and analyses employ different binning systems based on the available data.
+  importations: Based on disease import for 2021. Numbers were provided by the public health authorities in Cologne.
+  confidence_interval_method: Not applicable
+  calibration: Calibration against case numbers and shares of different VOCs.
+  spatial_structure: Home and activity locations of agents are simulated using transportation model MATSim (http://matsim.org); in Episim these contact locations are simulated as containers with activity specific parameters.

@@ -1,0 +1,67 @@
+$schema: "http://json-schema.org/draft-07/schema"
+title: ScenarioHub model data
+description: >
+  This is the schema of the scenario files, please refer to
+  https://github.com/epiforecasts/covid19-scenario-hub-europe/wiki/Submission-format
+  for more info.
+type: object
+properties:
+  scenario_id:
+    description: A specified scenario ID
+    type: array
+    items:
+      type: string
+      enum:
+        - A
+        - B
+        - C
+        - D
+        - E
+        - F
+  target_variable:
+    description: '"inc case" or "inc death" or "inc hosp" or "inc infection" or "inc icu"'
+    type: array
+    items:
+      type: string
+      enum:
+        - inc dose
+        - inc case
+        - inc death
+        - inc hosp
+        - inc infection
+        - inc icu
+  horizon:
+    description: The time horizon for the projections
+    type: array
+    items:
+      type: string
+      pattern: ^\d{1,3} wk$
+  location:
+    description: 'An ISO-2 country code'
+    type: array
+    items:
+      type: string
+      enum: ["H0", "AT", "BE", "BG", "CH", "CY", "CZ", "DK", "DE", "EE", "ES", "FI", "FR", "GB", "GR", "HR", "HU", "IE", "IS", "IT", "LI", "NO", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK"]
+  value:
+    type: array
+    items:
+      type: integer
+      minimum: 0
+  sample:
+    type: array
+    items:
+      type: integer
+      minimum: 0
+  age_id:
+    type: array
+    items:
+      type: string
+      enum: ["child", "adult", "older"]
+additionalProperties: false
+required:
+  - scenario_id
+  - target_variable
+  - horizon
+  - location
+  - value
+  - sample

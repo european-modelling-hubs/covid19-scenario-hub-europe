@@ -10,7 +10,7 @@ quantiles <- get_hub_config("forecast_type")[["quantiles"]]
 
 today <- lubridate::today()
 
-scenarios <- c(glue::glue("A-2022-02-25"), glue::glue("B-2022-02-25"))
+scenarios <- c(glue::glue("A-2022-05-22"), glue::glue("B-2022-05-22"))
 
 truth_eu <- covidHubUtils::load_truth(
   truth_source = "JHU",
@@ -28,8 +28,7 @@ template_eu <- truth_eu %>%
     origin_date = target_end_date,
     target_end_date = target_end_date + lubridate::weeks(1),
     horizon = "1 wk",
-    value = round(value * runif(2, min = 0.8, max = 1.2)),
-    type = "quantile",
+    value = round(value * runif(length(scenarios), min = 0.8, max = 1.2)),
     .keep = "unused"
   )
 
@@ -43,14 +42,23 @@ template_eu <- rbind(
     )
 )
 
-template_eu <- template_eu %>%
-  group_by(across()) %>%
-  summarise(
-    quantile = quantiles,
-    value = round(qnorm(quantiles, mean = value, sd = value / 5))
-  )
+samples <- replicate(100, {
+
+  template_eu$value <- as.integer(template_eu$value * rnorm(nrow(template_eu), mean = 5))
+
+  return(template_eu)
+
+}, simplify = FALSE)
+
+samples <- lapply(seq_along(samples), function(i) {
+  d <- samples[[i]]
+  d$sample <- i
+  return(d)
+})
+
+samples <- bind_rows(samples)
 
 origin_date <- unique(template_eu$origin_date)
 
-write_csv(template_eu, glue::glue("template/{origin_date}-example-model.csv"))
+write_csv(samples, glue::glue("template/{origin_date}-example-sample.csv"))
 

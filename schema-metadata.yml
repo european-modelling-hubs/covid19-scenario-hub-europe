@@ -1,0 +1,142 @@
+$schema: "http://json-schema.org/draft-07/schema"
+title: ForecastHub model metadata
+description: >
+  This is the schema of the metadata file, please refer to
+  https://github.com/epiforecasts/covid19-forecast-hub-europe/wiki/Metadata for
+  more info.
+type: object
+properties:
+  team_name:
+    description: The name of the team submitting the model
+    type: string
+  model_name:
+    type: string
+  model_abbr:
+    type: string
+    pattern: ^[a-zA-Z0-9_+]+-[a-zA-Z0-9_+]+$
+    maxLength: 32
+  model_version:
+    type: string
+  model_contributors:
+    type: array
+    items:
+      type: object
+      properties:
+        name:
+          type: string
+        affiliation:
+          type: string
+        orcid:
+          type: string
+          # This is a quite loose pattern. See https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
+          pattern: ^\d{4}\-\d{4}\-\d{4}\-[\dX]{4}$
+        email:
+          type: string
+          format: email
+        twitter:
+          type: string
+        additionalProperties: false
+  website_url:
+    type: string
+    format: uri
+  license:
+    type: string
+    enum:
+      - "apache-2.0"
+      - "cc-by-4.0"
+      - "cc-by-nc-4.0"
+      - "cc-by-nc-nd-4.0"
+      - "cc-by-sa-4.0"
+      - "gpl-3.0"
+      - "lgpl-3.0"
+      - "mit"
+      - "agpl-3.0"
+  team_model_designation:
+    type: string
+    enum:
+      - primary
+      - secondary
+      - proposed
+      - other
+  methods:
+    type: string
+    maxLength: 200
+  repo_url:
+    type: string
+    format: uri
+  this_model_is_an_ensemble:
+    type: boolean
+  citation:
+    type: string
+  team_funding:
+    type: string
+  data_inputs:
+    type: string
+  methods_long:
+    type: string
+  model_details:
+    type: object
+    properties:
+      modeling_NPI:
+        type: string
+      compliance_NPI:
+        type: string
+      contact_tracing:
+        type: string
+      testing:
+        type: string
+      vaccine_efficacy_transmission:
+        type: string
+      vaccine_efficacy_delay:
+        type: string
+      vaccine_hesitancy:
+        type: string
+      vaccine_immunity_duration:
+        type: string
+      natural_immunity_duration:
+        type: string
+      case_fatality_rate:
+        type: string
+      infection_fatality_rate:
+        type: string
+      asymptomatics:
+        type: string
+      age_groups:
+        type: string
+      importations:
+        type: string
+      confidence_interval_method:
+        type: string
+      calibration:
+        type: string
+      spatial_structure:
+        type: string
+    required:
+      - modeling_NPI
+      - compliance_NPI
+      - contact_tracing
+      - testing
+      - vaccine_efficacy_transmission
+      - vaccine_efficacy_delay
+      - vaccine_hesitancy
+      - vaccine_immunity_duration
+      - natural_immunity_duration
+      - case_fatality_rate
+      - infection_fatality_rate
+      - asymptomatics
+      - age_groups
+      - importations
+      - confidence_interval_method
+      - calibration
+      - spatial_structure
+    additionalProperties: false
+additionalProperties: false
+required:
+  - team_name
+  - model_name
+  - model_abbr
+  - model_contributors
+  - website_url
+  - license
+  - team_model_designation
+  - methods
