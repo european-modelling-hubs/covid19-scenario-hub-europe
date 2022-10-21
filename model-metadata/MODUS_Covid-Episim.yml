@@ -51,3 +51,4 @@ model_details:
   confidence_interval_method: Not applicable
   calibration: Calibration against case numbers and shares of different VOCs.
   spatial_structure: Home and activity locations of agents are simulated using transportation model MATSim (http://matsim.org); in Episim these contact locations are simulated as containers with activity specific parameters.
+
