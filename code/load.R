@@ -7,19 +7,24 @@ library(arrow)
 library(curl)
 
 
-load_results <- function(local = FALSE) {
+load_results <- function(local = FALSE,
+                         round = 1,
+                         n_model_min = 2) {
 
   # Load scenario data --------------------------------------
 
   if (local) {
     source(here("code", "load-from-local.R"))
-    results <- load_local_results(round = 1)
+    results <- load_local_results(round = round)
   } else {
+
     # get scenario metadata
     try(source("https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe-website/main/code/load/scenarios.R"))
-    # get round 1 path
+    # get round path
     data_path <- tempfile(fileext = ".parquet")
-    url <- "https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/releases/download/round1/round1.parquet"
+    url <- paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/releases/download/round",
+                  round, "/round", round,
+                  ".parquet")
     # download and load into R
     try(curl::curl_download(url, data_path))
     results <- try(arrow::read_parquet(data_path))
@@ -30,11 +35,12 @@ load_results <- function(local = FALSE) {
   # in round 1, USC submitted 2 results from the same model ("USC-SIkJalpha"),
   # using only new data ~3 weeks apart
   # keep the later version of the model: "USC-SIkJalpha_update"
+  if (round == 1) {
   results <- filter(results,
                     !grepl("^USC-SIkJalpha$", model))
+  }
 
   # Filter results to countries with multiple models
-  n_model_min <- 2
   multi_model_targets <- distinct(results, model, location, target_variable) %>%
     group_by(location, target_variable) %>%
     tally() %>%
