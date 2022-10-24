@@ -2,16 +2,16 @@ library(here)
 library(ggplot2)
 source(here("code", "load.R"))
 
-results <- load_results(local = FALSE,
+results_all <- load_results(local = FALSE,
                         round = 2,
                         n_model_min = 3)
 
 ## Look only at inc death target
-results_all <- split(results, results$target_variable)
-results <- results_all[["inc death"]]
+results_split <- split(results_all, results_all$target_variable)
+results_split_death <- results_split[["inc death"]]
 
 # score ------------------------------
-mae <- results |>
+mae <- results_split_death |>
   filter(!is.na(obs)) |>
   mutate(ae = abs(value_100k - obs_100k)) |>
   group_by(location, target_variable,
@@ -19,7 +19,7 @@ mae <- results |>
   summarise(mae = mean(ae))
 
 # join MAE to results
-results <- left_join(results, mae,
+results <- left_join(results_split_death, mae,
                      by = c("location",
                             "target_variable", "scenario_id",
                             "model", "sample"))
