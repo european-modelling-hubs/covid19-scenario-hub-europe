@@ -1,11 +1,11 @@
-# Get all submitted csv files, optionally by Round
+# Get all submitted csv files by Round
 library(here)
 library(dplyr)
 library(purrr)
+library(lubridate)
 library(covidHubUtils)
 library(arrow)
 library(curl)
-
 
 load_results <- function(local = FALSE,
                          round = 1,
@@ -16,8 +16,7 @@ load_results <- function(local = FALSE,
   if (local) {
     source(here("code", "load-from-local.R"))
     results <- load_local_results(round = round)
-  } else {
-
+  } else { # Load from remote host
     # get scenario metadata
     try(source("https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe-website/main/code/load/scenarios.R"))
     # get round path
@@ -25,23 +24,38 @@ load_results <- function(local = FALSE,
     url <- paste0("https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/releases/download/round",
                   round, "/round", round,
                   ".parquet")
-    # download and load into R
+    # Load from parquet storage
     try(curl::curl_download(url, data_path))
     results <- try(arrow::read_parquet(data_path))
+
+    # results loaded from parquet seem to have mixed target end dates
+    #    between models - fix this
+    results <- results |>
+      mutate(horizon = as.numeric(substr(horizon, 1, 2)),
+             target_end_date = scenarios[[paste0("round-", round)]][["origin_date"]] +
+               lubridate::weeks(horizon) - lubridate::days(1))
   }
 
   # -------------------------------------------------------------------------
   # models:
-  # in round 1, USC submitted 2 results from the same model ("USC-SIkJalpha"),
-  # using only new data ~3 weeks apart
-  # keep the later version of the model: "USC-SIkJalpha_update"
+  #   In round 1, USC submitted 2 results from the same model
+  #    ("USC-SIkJalpha"), using only new data ~3 weeks apart.
+  #    Note the parquet version saved to a github-release only included
+  #    the first of these.
+  #   If both "USC-SIkJalpha_update" and "USC-SIkJalpha" present,
+  #     keep "USC-SIkJalpha_update"
   if (round == 1) {
-  results <- filter(results,
-                    !grepl("^USC-SIkJalpha$", model))
+    models <- distinct(results, model) |>
+      filter(grepl("^USC-SIkJalpha", model))
+    if (nrow(models) > 1) {
+      results <- filter(results,
+                        !grepl("^USC-SIkJalpha$", model))
+    }
   }
 
   # Filter results to countries with multiple models
-  multi_model_targets <- distinct(results, model, location, target_variable) %>%
+  multi_model_targets <- distinct(results,
+                                  model, location, target_variable) %>%
     group_by(location, target_variable) %>%
     tally() %>%
     filter(n >= n_model_min) |>
