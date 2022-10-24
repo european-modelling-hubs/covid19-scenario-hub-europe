@@ -8,10 +8,10 @@ results_all <- load_results(local = FALSE,
 
 ## Look only at inc death target
 results_split <- split(results_all, results_all$target_variable)
-results_split_death <- results_split[["inc death"]]
+results <- results_split[["inc death"]]
 
 # score ------------------------------
-mae <- results_split_death |>
+mae <- results |>
   filter(!is.na(obs)) |>
   mutate(ae = abs(value_100k - obs_100k)) |>
   group_by(location, target_variable,
@@ -19,27 +19,13 @@ mae <- results_split_death |>
   summarise(mae = mean(ae))
 
 # join MAE to results
-results <- left_join(results_split_death, mae,
+results_mae <- left_join(results, mae,
                      by = c("location",
                             "target_variable", "scenario_id",
                             "model", "sample"))
 
-# explore MAE
-# quantile(mae$mae, c(0, 0.25, 0.5, 0.75, 1))
-# cases: top 25% MAE scores are off by <=10/100k
-# deaths: 0.17/100k
-
-# Plot mae
-mae |>
-  ggplot(aes(x = sample, col = model)) +
-  geom_point(aes(y = mae), alpha = 0.5) +
-  theme(legend.position = "bottom") +
-  facet_grid(rows = vars(location),
-             cols = vars(scenario_id),
-             scales = "free") +
-  theme_bw() +
-  theme(legend.position = "bottom")
-
+# explore MAE --------------------------------------
+# plot by frequency
 mae |>
   ggplot(aes(col = model)) +
   geom_histogram(aes(x = mae),
@@ -52,6 +38,16 @@ mae |>
   theme_bw() +
   theme(legend.position = "bottom")
 
+# by sample
+mae |>
+  ggplot(aes(x = sample, col = model)) +
+  geom_point(aes(y = mae), alpha = 0.5) +
+  theme(legend.position = "bottom") +
+  facet_grid(rows = vars(location),
+             cols = vars(scenario_id),
+             scales = "free") +
+  theme_bw() +
+  theme(legend.position = "bottom")
 
 # plot samples vs data ---------------------------
 plot_samples <- function(results,
@@ -61,8 +57,7 @@ plot_samples <- function(results,
       filter(target_end_date <= Sys.Date())
   }
   results |>
-    mutate(model_sample = paste0(model, sample),
-           inv_mae = (1/mae)/1000) |>
+    mutate(model_sample = paste0(model, sample)) |>
     ggplot(aes(x = target_end_date)) +
     # geom_point(aes(y = value_100k, col = model_sample), alpha = 0.5) +
     geom_line(aes(y = value_100k, col = model_sample), alpha = 0.3,
@@ -78,24 +73,24 @@ plot_samples <- function(results,
 }
 
 
-# plots -------------------
+# plots ------------------------------------
 
 # all samples
 plot_samples(results = results,
-             exclude_future = T)
+             exclude_future = F)
 
 # what are the most predictive samples across all targets / all locations?
 
-# lowest MAE
-threshold <- quantile(mae$mae, 0.01)
-best_mae_samples <- results |>
+# lowest 1% MAE
+threshold <- 0.01
+best_mae_samples <- results_mae |>
   group_by(location) |>  # not by scenario
   mutate(mae_threshold = quantile(mae, threshold)) |>
   filter(mae <= mae_threshold)
 
 plot_samples(results = best_mae_samples,
              exclude_future = T)
-
+# how many samples in that 1%
 top_one_pc <- best_mae_samples |>
   distinct(model, location, scenario_id, sample)
 
