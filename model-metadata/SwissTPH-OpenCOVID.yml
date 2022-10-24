@@ -38,3 +38,4 @@ model_details:
   calibration: Calibrated at the national-level using epidemioloical data to match 4 metrics (daily confirmed cases, deaths, hospital admissions, and ICU admissions) using a Gaussian Process and Latin Hypercube sampling. 
   spatial_structure: Not applicable
 data_inputs: "Cases, deaths, hospitlisations, and icu admission data provided by European Center for Disease Control"
+
