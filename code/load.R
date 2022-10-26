@@ -6,6 +6,7 @@ library(lubridate)
 library(covidHubUtils)
 library(arrow)
 library(curl)
+library(readr)
 
 load_results <- function(local = FALSE,
                          round = 1,
@@ -85,7 +86,7 @@ load_results <- function(local = FALSE,
 
   obs <- obs |>
     mutate(obs = value,
-           obs_100k = obs / population * 10000) |>
+           obs_100k = obs / population * 100000) |>
     select(-model, -value, -population) |>
     filter(target_end_date >= min(results$target_end_date))
 

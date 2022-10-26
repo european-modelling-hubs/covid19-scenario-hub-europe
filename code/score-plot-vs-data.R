@@ -3,7 +3,7 @@ library(ggplot2)
 source(here("code", "load.R"))
 
 # load results - only inc death target
-results <- load_results(local = FALSE,
+results <- load_results(local = T,
                         round = 1,
                         n_model_min = 2) |>
   filter(target_variable == "inc death")
@@ -66,7 +66,7 @@ plot_samples <- function(results,
 
 # all samples
 plot_samples(results = results,
-             exclude_future = F)
+             exclude_future = T)
 
 
 # Plot filtering by MAE ----------------------------
