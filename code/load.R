@@ -39,18 +39,16 @@ load_results <- function(local = FALSE,
 
   # -------------------------------------------------------------------------
   # models:
-  #   In round 1, USC submitted 2 results from the same model
-  #    ("USC-SIkJalpha"), using only new data ~3 weeks apart.
-  #    Note the parquet version saved to a github-release only included
-  #    the first of these.
-  #   If both "USC-SIkJalpha_update" and "USC-SIkJalpha" present,
-  #     keep "USC-SIkJalpha_update"
+  #   In round 1, USC submitted 2 sets of results from the same model
+  #    ("USC-SIkJalpha"), using only new data ~3 weeks apart ("USC-SIkJalpha_update").
+  #    Note the parquet version only includes the first of these.
+  #    If loading from local, use only "USC-SIkJalpha"
   if (round == 1) {
     models <- distinct(results, model) |>
       filter(grepl("^USC-SIkJalpha", model))
     if (nrow(models) > 1) {
       results <- filter(results,
-                        !grepl("^USC-SIkJalpha$", model))
+                        !grepl("^USC-SIkJalpha_update$", model))
     }
   }
 
@@ -74,14 +72,16 @@ load_results <- function(local = FALSE,
 
   # Load truth data ------------------------------------------------------
   if (local) {
-    # load a local copy (saved 2022-10-21)
-    obs <- read_csv(here("code", "20221021-obs.csv"))
+    # load a local copy
+    obs <- read_csv(here("code", "obs.csv"))
   } else {
     obs <- try(load_truth(
       truth_source = "JHU",
       temporal_resolution = "weekly",
       hub = "ECDC"
     ))
+    # and save
+    write_csv(obs, here("code", "obs.csv"))
   }
 
   obs <- obs |>
