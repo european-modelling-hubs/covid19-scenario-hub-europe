@@ -104,11 +104,10 @@ weights <- results |>
   # filter(mae <= 1) |>
   # take inverse
   mutate(inv_mae = 1/mae) |>
-  # weights should be in groupings: location, target date, and sample
-  #   (not weighted by scenario)
+  # weights should be in groups: location, target date,
+  #  sample
   group_by(target_end_date,
-           location, target_variable, scenario_id,
-           model, sample) |>
+           location, target_variable) |>
   # create weights
   mutate(sum_inv_mae = sum(inv_mae, na.rm = TRUE),
          weight = inv_mae / sum_inv_mae)
@@ -129,22 +128,23 @@ results_weighted <- left_join(results_weighted, obs,
 
 # PLOT weighted ensemble projection
 results_weighted |>
-  mutate(model_sample = paste0(model, sample)) |>
+  rename("Observed" = obs_100k, "Data-weighted pojection" = weighted_value_100k) |>
+  tidyr::pivot_longer(cols = c("Observed",
+                               "Data-weighted pojection"),
+                      names_to = "Type", values_to = "value") |>
   ggplot(aes(x = target_end_date,
-             y = weighted_value_100k,
-             col = model_sample), alpha = 0.5) +
+             y = value,
+             col = Type), alpha = 0.5) +
   geom_line() +
   geom_point() +
-  geom_point(aes(y = obs_100k), col = "black") +
-  geom_line(aes(y = obs_100k), col = "black") +
-  facet_grid(cols = vars(scenario_id),
-             rows = vars(location),
+  facet_grid(rows = vars(location),
              scales = "free") +
   labs(x = NULL,
        y = NULL,
        subtitle = "Projected weekly incident deaths per 100k") +
+  scale_color_brewer(type = "qual", palette = 2) +
   theme_bw() +
-  theme(legend.position = "none")
+  theme(legend.position = "bottom")
 
 
 # add uncertainty --------------------------------
