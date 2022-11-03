@@ -119,31 +119,26 @@ library(reldist)
 results_unweighted <- results |>
   group_by(location, target_end_date) |>
   summarise(
-    type = "unweighted quantiles",
+    ensemble = "unweighted quantiles",
+    q05 = quantile(value_100k, 0.05),
     q25 = quantile(value_100k, 0.25),
     q50 = quantile(value_100k, 0.5),
-    q75 = quantile(value_100k, 0.75))
+    q75 = quantile(value_100k, 0.75),
+    q95 = quantile(value_100k, 0.95))
 
 # weighted quantiles
 results_weighted <- results |>
   group_by(location, target_end_date) |>
   summarise(
-    type = "weighted quantiles",
+    ensemble = "weighted quantiles",
+    q05 = wtd.quantile(x = value_100k, q = 0.05, weight = weight),
     q25 = wtd.quantile(x = value_100k, q = 0.25, weight = weight),
     q50 = wtd.quantile(x = value_100k, q = 0.5, weight = weight),
-    q75 = wtd.quantile(x = value_100k, q = 0.75, weight = weight))
-
-# point
-results_point <- results |>
-  group_by(location, target_end_date) |>
-  summarise(
-    obs_100k = obs_100k[1],
-    type = "weighted point",
-    q50 = sum(value_100k * weight))
+    q75 = wtd.quantile(x = value_100k, q = 0.75, weight = weight),
+    q95 = wtd.quantile(x = value_100k, q = 0.95, weight = weight))
 
 # join
 results_plot <- bind_rows(results_weighted,
-                          #results_point,
                           results_unweighted
                           ) |>
   left_join(distinct(results,
@@ -153,13 +148,20 @@ results_plot <- bind_rows(results_weighted,
 # Plot projection ----------------------------------
 results_plot |>
   ggplot(aes(x = target_end_date)) +
+  # geom_ribbon(aes(ymin = q05, ymax = q95,
+  #                 fill = ensemble), alpha = 0.2) +
   geom_ribbon(aes(ymin = q25, ymax = q75,
-                  fill = type), alpha = 0.2) +
-  geom_line(aes(y = q50, col = type)) +
-  geom_point(aes(y = obs_100k)) +
-  facet_grid(rows = vars(location)) +
-  labs(x = NULL, y = "Incident deaths per 100,000") +
-  scale_color_brewer(type = "qual", palette = 2, aesthetics = c("col", "fill")) +
+                  fill = ensemble), alpha = 0.3) +
+  geom_line(aes(y = q50, col = ensemble),
+            alpha = 0.3,
+            size = 1) +
+  geom_point(aes(y = obs_100k), size = 0.9) +
+  facet_grid(rows = vars(location),
+             scales = "free") +
+  labs(x = NULL, y = "Incident deaths per 100,000",
+       caption = "Projections show median (line), 0.25-0.75 quantiles (shaded)") +
+  scale_color_brewer(type = "qual", palette = 2,
+                     aesthetics = c("col", "fill")) +
   theme_bw() +
   theme(legend.position = "bottom")
 
