@@ -2,6 +2,7 @@ interactive <- FALSE
 
 library(here)
 library(ggplot2)
+library(tidyr)
 source(here("code", "load.R"))
 
 # load results - only inc death target
@@ -80,7 +81,8 @@ if (interactive) {
 # join MAE to results
 results <- left_join(results, mae,
                      by = c("location",
-                            "target_variable", "scenario_id",
+                            "target_variable",
+                            "scenario_id",
                             "model", "sample"))
 
 if (interactive) {
@@ -98,63 +100,68 @@ if (interactive) {
                exclude_future = F)
 }
 
-# weight by MAE ----------------------------
-weights <- results |>
-  # exclude MAE over 1 (ie samples with mean errors > 1/100k)
-  # filter(mae <= 1) |>
+# weight by MAE ---------------------------------------------
+results <- results |>
   # take inverse
   mutate(inv_mae = 1/mae) |>
-  # weights should be in groups: location, target date,
-  #  sample
+  # weights should be in groups:
+  #   location, target date
   group_by(target_end_date,
            location, target_variable) |>
   # create weights
   mutate(sum_inv_mae = sum(inv_mae, na.rm = TRUE),
          weight = inv_mae / sum_inv_mae)
 
-# Use weights to summarise set of projected values
-results_weighted <- weights |>
-  summarise(weighted_value = sum(value * weight),
-            weighted_value_100k = sum(value_100k * weight))
+# with uncertainty -------------------------------------------
+# quantiles of the weighted samples
+library(reldist)
 
-# Add observations (for plotting)
-obs <- results |>
-  select(target_end_date, location, obs, obs_100k) |>
-  distinct() |>
-  tidyr::drop_na()
+results_unweighted <- results |>
+  group_by(location, target_end_date) |>
+  summarise(
+    type = "unweighted quantiles",
+    q25 = quantile(value_100k, 0.25),
+    q50 = quantile(value_100k, 0.5),
+    q75 = quantile(value_100k, 0.75))
 
-results_weighted <- left_join(results_weighted, obs,
-                      by = c("location", "target_end_date"))
+# weighted quantiles
+results_weighted <- results |>
+  group_by(location, target_end_date) |>
+  summarise(
+    type = "weighted quantiles",
+    q25 = wtd.quantile(x = value_100k, q = 0.25, weight = weight),
+    q50 = wtd.quantile(x = value_100k, q = 0.5, weight = weight),
+    q75 = wtd.quantile(x = value_100k, q = 0.75, weight = weight))
 
-# PLOT weighted ensemble projection
-results_weighted |>
-  rename("Observed" = obs_100k, "Data-weighted pojection" = weighted_value_100k) |>
-  tidyr::pivot_longer(cols = c("Observed",
-                               "Data-weighted pojection"),
-                      names_to = "Type", values_to = "value") |>
-  ggplot(aes(x = target_end_date,
-             y = value,
-             col = Type), alpha = 0.5) +
-  geom_line() +
-  geom_point() +
-  facet_grid(rows = vars(location),
-             scales = "free") +
-  labs(x = NULL,
-       y = NULL,
-       subtitle = "Projected weekly incident deaths per 100k") +
-  scale_color_brewer(type = "qual", palette = 2) +
+# point
+results_point <- results |>
+  group_by(location, target_end_date) |>
+  summarise(
+    obs_100k = obs_100k[1],
+    type = "weighted point",
+    q50 = sum(value_100k * weight))
+
+# join
+results_plot <- bind_rows(results_weighted,
+                          #results_point,
+                          results_unweighted
+                          ) |>
+  left_join(distinct(results,
+                     location, target_variable,
+                     target_end_date, obs_100k))
+
+# Plot projection ----------------------------------
+results_plot |>
+  ggplot(aes(x = target_end_date)) +
+  geom_ribbon(aes(ymin = q25, ymax = q75,
+                  fill = type), alpha = 0.2) +
+  geom_line(aes(y = q50, col = type)) +
+  geom_point(aes(y = obs_100k)) +
+  facet_grid(rows = vars(location)) +
+  labs(x = NULL, y = "Incident deaths per 100,000") +
+  scale_color_brewer(type = "qual", palette = 2, aesthetics = c("col", "fill")) +
   theme_bw() +
   theme(legend.position = "bottom")
-
-
-# add uncertainty --------------------------------
-# quantiles of the original samples?
-# leave one out for each observed data point?
-#
-
-
-
-
 
 
 
