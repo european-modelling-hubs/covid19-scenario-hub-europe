@@ -1,3 +1,5 @@
+# Scratchpad all in one script
+
 interactive <- FALSE
 
 library(here)
