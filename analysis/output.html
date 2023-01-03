@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Uncertainty when combining scenarios from multiple models</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="output_files/libs/clipboard/clipboard.min.js"></script>
+<script src="output_files/libs/quarto-html/quarto.js"></script>
+<script src="output_files/libs/quarto-html/popper.min.js"></script>
+<script src="output_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="output_files/libs/quarto-html/anchor.min.js"></script>
+<link href="output_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="output_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="output_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="output_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="output_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Uncertainty when combining scenarios from multiple models</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<div class="cell">
+
+</div>
+<ul>
+<li>Scenario modelling for infectious diseases
+<ul>
+<li>Understanding dynamics</li>
+<li>Policy relevance: continuous incidence, but also quantitites like: peaks, cumulative burden</li>
+</ul></li>
+<li>Uncertainty in scenario modelling
+<ul>
+<li>Epistemic and stochastic uncertainty</li>
+<li>Methods for modelling to approach each of these</li>
+</ul></li>
+<li>Collaborative modelling and ensembles
+<ul>
+<li>Compare models to compare not only results but range of uncertainty</li>
+<li>Use of ensembles in other scenario heavy fields (CMIP)</li>
+<li>Scenarios to inform long term COVD-19 management in Europe</li>
+</ul></li>
+<li>Representation of uncertainty in collaborative modelling projects
+<ul>
+<li>Hubs collect quantiles from each model because it’s resource efficient</li>
+<li>This necessarily creates some information loss</li>
+<li>We haven’t yet explored what information loss this creates or how this impacts the aim of the project</li>
+<li>Reason to think it might impact it with e.g.&nbsp;peaks as important features of epidemics</li>
+</ul></li>
+</ul>
+<p>Aim</p>
+<p>Compare results in terms of number of peaks (other policy relevant measures?) from different methods of combining scenario models, specifically:</p>
+<ul>
+<li>Raw samples
+<ul>
+<li>All raw samples</li>
+</ul></li>
+<li>Ensemble of raw samples
+<ul>
+<li>Unweighted median of all raw samples</li>
+</ul></li>
+<li>Ensemble of model quantiles
+<ul>
+<li>All samples from each model summarised in quantiles</li>
+<li>Unweighted median of model quantiles</li>
+</ul></li>
+</ul>
+<p>This demonstrates the information lost by asking modellers to submit quantiles of their model samples.</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<div class="cell">
+
+</div>
+<ul>
+<li>Setting scenarios and collection of samples
+<ul>
+<li>Scenarios co-created between ECDC and modellers</li>
+<li>Pilot and three rounds</li>
+<li>Ensemble of opportunity: open Hub</li>
+<li>Projections using any method, up to 1 year for any of 32 countries</li>
+</ul></li>
+<li>Difference between quantiles and raw samples</li>
+</ul>
+<ol type="1">
+<li>Load samples from multiple models.</li>
+</ol>
+<div class="cell">
+
+</div>
+<ol start="2" type="1">
+<li>Create ensemble A: unweighted median ensemble of models from all samples.</li>
+</ol>
+<div class="cell">
+
+</div>
+<ol start="3" type="1">
+<li>Create quantiles from raw samples for each model.</li>
+<li>Create ensemble B: unweighted median ensemble from the collection of quantiles.</li>
+<li>Compare differences in (qualitative, policy-relevant) information shown by ensembles A and B.
+<ol type="a">
+<li>Number of peaks</li>
+<li>Timing of peaks</li>
+<li>Duration of waves</li>
+<li>Cumulative burden</li>
+</ol></li>
+<li>Repeat and compare across multiple scenarios and locations.</li>
+</ol>
+<div class="cell">
+
+</div>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<ul>
+<li>In round # we collected # models in total with over 3 models contributing results for # locations</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[2]]</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[3]]</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[4]]</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[5]]</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Figure 1</em></p>
+<div class="cell">
+
+</div>
+<p><em>Figure 2</em></p>
+<ul>
+<li>Ensembles from quantiles show reduced uncertainty compared to ensemble from samples</li>
+<li>Neither ensemble captures the height of peaks</li>
+<li>Deaths in Belgium have an interesting double peak in only the ensemble from samples</li>
+</ul>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<ul>
+<li><p>Summary</p></li>
+<li><p>Strengths and limitations</p></li>
+<li><p>Further work</p></li>
+<li><p>Conclusions and recommendations</p></li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
