@@ -36,7 +36,7 @@ execute:
   - We haven't yet explored what information loss this creates or how this impacts the aim of the project
   - Reason to think it might impact it with e.g. peaks as important features of epidemics
 
-Aim
+#### Aim
 
 Compare results in terms of number of peaks (other policy relevant measures?) from different methods of combining scenario models, specifically: 
 
@@ -66,14 +66,15 @@ library(ggplot2)
   - Pilot and three rounds
   - Ensemble of opportunity: open Hub
   - Projections using any method, up to 1 year for any of 32 countries
+  - Round 2 scenarios with 3 models
 
 - Difference between quantiles and raw samples
 
 1. Load samples from multiple models.
 
 ```{r}
-source(here("analysis", "import-results.R"))
-source(here("analysis", "format-results.R"))
+source(here("analysis", "code", "import-results.R"))
+source(here("analysis", "code", "format-results.R"))
 results <- import_results(round = 2, local = TRUE)
 results <- format_results(results = results, n_model_min = 3, local = TRUE)
 ```
@@ -81,7 +82,7 @@ results <- format_results(results = results, n_model_min = 3, local = TRUE)
 2. Create ensemble A: unweighted median ensemble of models from all samples.
 
 ```{r}
-source(here("analysis", "create-ensembles.R"))
+source(here("analysis", "code", "create-ensembles.R"))
 ensembles <- create_ensembles(results = results, 
                               quantiles = c(0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99))
 ```
@@ -96,7 +97,7 @@ ensembles <- create_ensembles(results = results,
 6. Repeat and compare across multiple scenarios and locations.
 
 ```{r}
-source(here("analysis", "plot.R"))
+source(here("analysis", "code", "plot.R"))
 plot_set <- distinct(results, target_variable, location)
 plots <- list()
 for (i in 1:nrow(plot_set)) {
@@ -109,7 +110,7 @@ for (i in 1:nrow(plot_set)) {
 
 ## Results
 
-- In round # we collected # models in total with over 3 models contributing results for # locations
+- From # models contributing to round 2, 3 countries seeing results from >=3 models.
 
 ```{r, warning=FALSE}
 plots
@@ -122,8 +123,6 @@ _Figure 1_
 ```
 
 quantify by taking differences at each quantile level; plot sum differences
-
-_Figure 2_
 
 strong difference at outer bound of uncertainty: 95 to 99% confidence, where sample ensemble better represents across diff epidemic curves
 

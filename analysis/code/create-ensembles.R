@@ -1,7 +1,7 @@
 # Create ensembles from raw samples and from quantiles of each model
 library(here)
 library(dplyr)
-source(here("analysis", "score-samples.R"))
+source(here("analysis", "code", "score-samples.R"))
 
 # Example:
 # results <- load_results(round = 1, n_model_min = 3, local = TRUE)
