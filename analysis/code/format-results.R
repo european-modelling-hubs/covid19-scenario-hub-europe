@@ -12,6 +12,7 @@ library(covidHubUtils)
 # results <- format_results()
 
 format_results <- function(results,
+                           max_obs_date,
                            n_model_min = 3,
                            local = FALSE) {
 
@@ -38,10 +39,14 @@ format_results <- function(results,
     write_csv(obs, here("analysis", "data", "obs.csv"))
   }
 
+  if (missing(max_obs_date)) {
+    max_obs_date <- max(results$target_end_date)
+  }
+
   obs <- obs |>
     filter(between(target_end_date,
                    min(results$target_end_date),
-                   max(results$target_end_date))) |>
+                   max_obs_date)) |>
     rename(obs = value) |>
     select(-model)
 

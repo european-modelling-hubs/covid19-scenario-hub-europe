@@ -16,7 +16,7 @@ plot_ensemble_results <- function(ensembles, results,
   # samples
   samples <- results |>
     mutate(model_sample = paste0(scenario_id, "_", model, "_", sample),
-           model = "Raw samples") |>
+           model = "None") |>
     rename(q0.5 = value_100k) |>
     select(location, target_variable, target_end_date, scenario_id,
            model, model_sample, q0.5)
@@ -34,10 +34,10 @@ plot_ensemble_results <- function(ensembles, results,
   # Format for plotting
   plot_data <- plot_data |>
     # set order for facet rows
-    mutate(model = ordered(model,
-                           levels = c("Raw samples",
-                                      "All samples",
-                                      "Model quantiles"))) |>
+    mutate(Ensemble = ordered(model,
+                           levels = c("None",
+                                      "Samples",
+                                      "Quantiles"))) |>
     # get proper location names
     left_join(results |>
                 distinct(location, location_name),
@@ -52,21 +52,21 @@ plot_ensemble_results <- function(ensembles, results,
     # ----- Geoms
     # ensembles
     geom_ribbon(aes(ymin = q0.01, ymax = q0.99,
-                    fill = model), alpha = 0.2) +
+                    fill = Ensemble), alpha = 0.2) +
     geom_ribbon(aes(ymin = q0.05, ymax = q0.95,
-                    fill = model), alpha = 0.4) +
+                    fill = Ensemble), alpha = 0.4) +
     geom_ribbon(aes(ymin = q0.25, ymax = q0.75,
-                    fill = model), alpha = 0.6) +
+                    fill = Ensemble), alpha = 0.6) +
     geom_line(aes(y = median,
-                  col = model), size = 1) +
+                  col = Ensemble), size = 1) +
     # model samples
     geom_line(aes(y = q0.5,
-                  group = model_sample, col = model), alpha = 0.1) +
+                  group = model_sample, col = Ensemble), alpha = 0.1) +
     # observed data as points
     geom_point(aes(y = obs_100k), size = 0.7) +
     # ----- Structure
     # facets
-    facet_grid(rows = vars(model),
+    facet_grid(rows = vars(Ensemble),
                cols = vars(scenario_id),
                scales = "free") +
     # labels

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Uncertainty when combining scenarios from multiple models</title>
+<title>Information loss due to categorising uncertainty in epidemic modelling</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,7 +40,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Uncertainty when combining scenarios from multiple models</h1>
+<h1 class="title">Information loss due to categorising uncertainty in epidemic modelling</h1>
 </div>
 
 
@@ -60,151 +60,180 @@ ul.task-list{list-style: none;}
 
 </div>
 <ul>
-<li>Scenario modelling for infectious diseases
+<li>Scenario modelling as a source of information
 <ul>
-<li>Understanding dynamics</li>
-<li>Policy relevance: continuous incidence, but also quantitites like: peaks, cumulative burden</li>
+<li>Dynamics: trajectories of continuous incidence</li>
+<li>Characteristics: peaks, turning points, cumulative burden (final outbreak size)</li>
+<li>All modelling = choices of representation = uncertainty
+<ul>
+<li>Epistemic (system-wide) and stochastic (insufficient data) uncertainty</li>
+<li>Diversity of decisions / methods to handle each of these</li>
+<li>Summarise uncertainty by counting frequencies at different levels of credibility</li>
 </ul></li>
-<li>Uncertainty in scenario modelling
-<ul>
-<li>Epistemic and stochastic uncertainty</li>
-<li>Methods for modelling to approach each of these</li>
 </ul></li>
 <li>Collaborative modelling and ensembles
 <ul>
-<li>Compare models to compare not only results but range of uncertainty</li>
-<li>Use of ensembles in other scenario heavy fields (CMIP)</li>
-<li>Scenarios to inform long term COVD-19 management in Europe</li>
+<li>Comparing across models shows not only results but range of uncertainty</li>
+<li>Infectious disease modelling hubs for forecasting and scenario projections</li>
+<li>Two steps to combining information from multiple models:
+<ol type="1">
+<li>Create direct like for like comparisons of modelling results, through data harmonisation - standardised parameters and standardised format for representing modelling results</li>
+<li>Summarise across models, using ensemble methods (as in other fields like climate / CMIP)</li>
+</ol></li>
 </ul></li>
-<li>Representation of uncertainty in collaborative modelling projects
+<li>Information loss in the representation of uncertainty in infectious disease hubs
 <ul>
 <li>Hubs collect quantiles from each model because it’s resource efficient</li>
-<li>This necessarily creates some information loss</li>
-<li>We haven’t yet explored what information loss this creates or how this impacts the aim of the project</li>
-<li>Reason to think it might impact it with e.g.&nbsp;peaks as important features of epidemics</li>
+<li>This necessarily creates some information loss (similar to binned/categorical measures)</li>
+</ul></li>
+<li>We haven’t yet explored what information loss this creates or how this impacts the aim of the collaborations:
+<ul>
+<li>To provide information on epidemics</li>
+<li>To summarise uncertainty across multiple models</li>
+<li>To evaluate models and reduce uncertainty over time given observed data</li>
 </ul></li>
 </ul>
-<p>Aim</p>
-<p>Compare results in terms of number of peaks (other policy relevant measures?) from different methods of combining scenario models, specifically:</p>
+<section id="aims" class="level4">
+<h4 class="anchored" data-anchor-id="aims">Aims</h4>
 <ul>
-<li>Raw samples
+<li>Scenarios to inform long term COVD-19 management in Europe
 <ul>
-<li>All raw samples</li>
-</ul></li>
-<li>Ensemble of raw samples
-<ul>
-<li>Unweighted median of all raw samples</li>
-</ul></li>
-<li>Ensemble of model quantiles
-<ul>
-<li>All samples from each model summarised in quantiles</li>
-<li>Unweighted median of model quantiles</li>
+<li>Multiple modelling teams, hub structure</li>
+<li>Collaboration with policy team to identify information useful for decisions</li>
 </ul></li>
 </ul>
-<p>This demonstrates the information lost by asking modellers to submit quantiles of their model samples.</p>
+<p>To demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of:</p>
+<ol type="1">
+<li>Key epidemic characteristics</li>
+<li>Summarising uncertainty using an ensemble</li>
+<li>Exploring performance against observed data</li>
+</ol>
+</section>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<div class="cell">
-
-</div>
 <ul>
-<li>Setting scenarios and collection of samples
+<li>Background to setting scenarios and collection of samples
 <ul>
-<li>Scenarios co-created between ECDC and modellers</li>
-<li>Pilot and three rounds</li>
-<li>Ensemble of opportunity: open Hub</li>
+<li>open Hub, scenarios co-created between ECDC and modellers</li>
 <li>Projections using any method, up to 1 year for any of 32 countries</li>
+<li>Round 2 scenarios with 3 models</li>
 </ul></li>
-<li>Difference between quantiles and raw samples</li>
 </ul>
 <ol type="1">
-<li>Load samples from multiple models.</li>
+<li>Epidemic characteristics</li>
 </ol>
-<div class="cell">
-
-</div>
+<ul>
+<li>selection of frequently reported and policy relevant characteristics</li>
+</ul>
 <ol start="2" type="1">
-<li>Create ensemble A: unweighted median ensemble of models from all samples.</li>
+<li>Summarising uncertainty across multiple models: difference in ensembles from raw samples vs from quantiles</li>
 </ol>
-<div class="cell">
-
-</div>
+<ul>
+<li>Create unweighted median ensemble of models from all sample</li>
+<li>Take quantiles from raw samples for each model; then unweighted median ensemble from the collection of quantiles</li>
+<li>Compare differences in information shown by ensembles A and B., for each across multiple scenarios and locations.</li>
+</ul>
 <ol start="3" type="1">
-<li>Create quantiles from raw samples for each model.</li>
-<li>Create ensemble B: unweighted median ensemble from the collection of quantiles.</li>
-<li>Compare differences in (qualitative, policy-relevant) information shown by ensembles A and B.
-<ol type="a">
-<li>Number of peaks</li>
-<li>Timing of peaks</li>
-<li>Duration of waves</li>
-<li>Cumulative burden</li>
-</ol></li>
-<li>Repeat and compare across multiple scenarios and locations.</li>
+<li>Weighting samples by performance</li>
 </ol>
+<ul>
+<li>Mean absolute error for each sample: average for each sample trajectory of comparison to observed data at each available time point</li>
+<li>Differences between scenarios ignored: all samples treated as equal probability</li>
+<li>Inverse MAE for each sample used as a weight in a median ensemble (Harrel Davis weighted estimator)</li>
+</ul>
 <div class="cell">
 
 </div>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>We collected 3 models for each of the targets: cases in the Netherlands, Belgium, and Spain; and deaths in the Netherlands and Belgium.</p>
+<p>Result 1: Raw samples allow for number of peaks and cumulative burden</p>
 <ul>
-<li>In round # we collected # models in total with over 3 models contributing results for # locations</li>
+<li>We collected 296 sample trajectories from three models for each of five targets</li>
+<li>Peaks</li>
+<li>Turning points (timing of peak)</li>
+<li>Final outbreak size / cumulative burden</li>
+</ul>
+<p>Result 2: Ensembling from samples presents differently compared to ensembling from quantiles</p>
+<ul>
+<li>Ensembles from quantiles show reduced uncertainty compared to ensemble from samples</li>
+<li>Substantial difference at outer bound of uncertainty: compare 95 to 99% confidence, where sample ensemble better represents across diff epidemic curves</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Figure 1: Median average difference at each level of uncertainty in ensembles created from 100 samples versus 23 quantiles taken from the same 100 samples</em></p>
+<p>Result 3: Samples can be ensembled based on comparison to observations</p>
+<ul>
+<li>Relatively few samples were close to observations</li>
+<li>Weighting samples after six months considerably reduced uncertainty (Netherlands) and eliminated some epidemic shapes altogether (Belgium extended flat peak)</li>
+<li>Weighting impossible from quantiles</li>
 </ul>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 [[2]]</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 [[3]]</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 [[4]]</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 [[5]]</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><em>Figure 1</em></p>
-<div class="cell">
-
-</div>
-<p><em>Figure 2</em></p>
-<ul>
-<li>Ensembles from quantiles show reduced uncertainty compared to ensemble from samples</li>
-<li>Neither ensemble captures the height of peaks</li>
-<li>Deaths in Belgium have an interesting double peak in only the ensemble from samples</li>
-</ul>
+<p><em>Figure 2. Comparison of 100 samples, an ensemble of samples, an ensemble of quantiles, and a weighted ensemble of samples weighted by six month performance against observed data</em></p>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
 <ul>
-<li><p>Summary</p></li>
-<li><p>Strengths and limitations</p></li>
-<li><p>Further work</p></li>
-<li><p>Conclusions and recommendations</p></li>
+<li><p>Summary of results</p></li>
+<li><p>Strengths of using samples:</p>
+<ul>
+<li>Samples show trajectory shapes, peaks, and cumulative burdens</li>
+<li>Weighting only possible from samples - samples can continue to be used, quantiles are one-off results</li>
+</ul></li>
+<li><p>Limitations</p>
+<ul>
+<li>Simple ensemble still doesn’t solve the problem of combining multiple shapes in one epidemic curve</li>
+</ul></li>
+<li><p>Conclusions and recommendations</p>
+<ul>
+<li>Depends what the focus + longevity of the project is:</li>
+<li>Little difference (i.e.&nbsp;little information is lost) if the focus is one-off, or only on the central estimates</li>
+<li>Samples better if focus is long-term use of one set of results, on peaks and cumulative sizes, or on outer bounds of uncertainty</li>
+</ul></li>
+<li><p>Further work</p>
+<ul>
+<li>Number of samples to collect from each model</li>
+</ul></li>
 </ul>
 </section>
 <section id="references" class="level2">

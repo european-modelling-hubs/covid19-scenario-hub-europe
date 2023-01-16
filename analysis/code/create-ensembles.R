@@ -17,7 +17,7 @@ create_ensembles <- function(results,
       n = n(),
       value = quantile(value_100k, quantiles),
       quantile = paste0("q", quantiles),
-      model = "All samples",
+      model = "Samples",
       .groups = "drop"
     )
 
@@ -33,7 +33,7 @@ create_ensembles <- function(results,
                                                      probs = quantiles,
                                                      weights = weight),
       quantile = paste0("q", quantiles),
-      model = paste0("All samples"),
+      model = paste0("Samples"),
       scenario_id = "Weighted",
       .groups = "drop"
     )
@@ -54,7 +54,7 @@ create_ensembles <- function(results,
     summarise(
       n = n(),
       value = median(value),
-      model = "Model quantiles",
+      model = "Quantiles",
       .groups = "drop"
     )
 

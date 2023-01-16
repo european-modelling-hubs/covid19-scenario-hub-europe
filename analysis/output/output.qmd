@@ -1,5 +1,5 @@
 ---
-title: "Uncertainty when combining scenarios from multiple models"
+title: "Information loss due to categorising uncertainty in epidemic modelling"
 format: 
   html:
     code-fold: true
@@ -15,44 +15,6 @@ execute:
 # opts_chunk$set(eval = TRUE, echo = FALSE,
 #                message = FALSE, warning = FALSE,
 #                eval.after = "fig.cap")
-```
-
-- Scenario modelling for infectious diseases
-  - Understanding dynamics
-  - Policy relevance: continuous incidence, but also quantitites like: peaks, cumulative burden
-
-- Uncertainty in scenario modelling
-  - Epistemic and stochastic uncertainty
-  - Methods for modelling to approach each of these
-
-- Collaborative modelling and ensembles
-  - Compare models to compare not only results but range of uncertainty
-  - Use of ensembles in other scenario heavy fields (CMIP)
-  - Scenarios to inform long term COVD-19 management in Europe
-
-- Representation of uncertainty in collaborative modelling projects
-  - Hubs collect quantiles from each model because it's resource efficient
-  - This necessarily creates some information loss
-  - We haven't yet explored what information loss this creates or how this impacts the aim of the project
-  - Reason to think it might impact it with e.g. peaks as important features of epidemics
-
-#### Aim
-
-Compare results in terms of number of peaks (other policy relevant measures?) from different methods of combining scenario models, specifically: 
-
-- Raw samples
-  - All raw samples
-- Ensemble of raw samples
-  - Unweighted median of all raw samples
-- Ensemble of model quantiles
-  - All samples from each model summarised in quantiles
-  - Unweighted median of model quantiles
-
-This demonstrates the information lost by asking modellers to submit quantiles of their model samples.
-
-## Methods
-
-```{r}
 # Workspace -----
 library(here)
 library(dplyr)
@@ -61,42 +23,112 @@ library(purrr)
 library(ggplot2)
 ```
 
-- Setting scenarios and collection of samples
-  - Scenarios co-created between ECDC and modellers
-  - Pilot and three rounds
-  - Ensemble of opportunity: open Hub
-  - Projections using any method, up to 1 year for any of 32 countries
-  - Round 2 scenarios with 3 models
+- Scenario modelling as a source of information
+  - Dynamics: trajectories of continuous incidence
+  - Characteristics: peaks, turning points, cumulative burden (final outbreak size)
+  - All modelling = choices of representation = uncertainty
+    - Epistemic (system-wide) and stochastic (insufficient data) uncertainty
+    - Diversity of decisions / methods to handle each of these
+    - Summarise uncertainty by counting frequencies at different levels of credibility
 
-- Difference between quantiles and raw samples
+- Collaborative modelling and ensembles
+  - Comparing across models shows not only results but range of uncertainty
+  - Infectious disease modelling hubs for forecasting and scenario projections
+  - Two steps to combining information from multiple models:
+    1. Create direct like for like comparisons of modelling results, through data harmonisation - standardised parameters and standardised format for representing modelling results
+    2. Summarise across models, using ensemble methods (as in other fields like climate / CMIP)
+  
+- Information loss in the representation of uncertainty in infectious disease hubs
+  - Hubs collect quantiles from each model because it's resource efficient
+  - This necessarily creates some information loss (similar to binned/categorical measures)
 
-1. Load samples from multiple models.
+- We haven't yet explored what information loss this creates or how this impacts the aim of the collaborations:
+  - To provide information on epidemics
+  - To summarise uncertainty across multiple models
+  - To evaluate models and reduce uncertainty over time given observed data
+
+#### Aims
+
+- Scenarios to inform long term COVD-19 management in Europe
+  - Multiple modelling teams, hub structure
+  - Collaboration with policy team to identify information useful for decisions
+  
+- To demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of:
+
+1. Key epidemic characteristics
+2. Summarising uncertainty using an ensemble 
+3. Exploring performance against observed data
+
+## Methods
+
+Background to setting scenarios and collection of samples
+- open Hub, scenarios co-created between ECDC and modellers
+- Projections using any method, up to 1 year for any of 32 countries
+- Round 2 scenarios with 3 models
+
+Exploring information loss
+
+1. Epidemic characteristics
+  - selection of frequently reported and policy relevant characteristics 
+
+2. Summarising uncertainty across multiple models: difference in ensembles from raw samples vs from quantiles
+  - Create unweighted median ensemble of models from all sample
+  - Take quantiles from raw samples for each model; then unweighted median ensemble from the collection of quantiles
+  - Compare differences in information shown by ensembles A and B., for each across multiple scenarios and locations.
+
+3. Weighting samples by performance
+  - Mean absolute error for each sample: average for each sample trajectory of comparison to observed data at each available time point
+  - Differences between scenarios ignored: all samples treated as equal probability
+  - Inverse MAE for each sample used as a weight in a median ensemble (Harrel Davis weighted estimator)
 
 ```{r}
+# Load samples from all models
 source(here("analysis", "code", "import-results.R"))
-source(here("analysis", "code", "format-results.R"))
 results <- import_results(round = 2, local = TRUE)
-results <- format_results(results = results, n_model_min = 3, local = TRUE)
-```
 
-2. Create ensemble A: unweighted median ensemble of models from all samples.
-
-```{r}
+# Clean and include observed data where available
+source(here("analysis", "code", "format-results.R"))
+results <- format_results(results = results, 
+                          n_model_min = 3, local = FALSE)
+# Create three ensembles ("Sample", "Quantile", "Weighted")
 source(here("analysis", "code", "create-ensembles.R"))
 ensembles <- create_ensembles(results = results, 
-                              quantiles = c(0.01, 0.05, 0.25, 0.5, 0.75, 0.95, 0.99))
+                              quantiles = c(0.01, 0.05, 0.25, 0.5, 
+                                            0.75, 0.95, 0.99))
 ```
 
-3. Create quantiles from raw samples for each model.
-4. Create ensemble B: unweighted median ensemble from the collection of quantiles.
-5. Compare differences in (qualitative, policy-relevant) information shown by ensembles A and B.
-    a. Number of peaks
-    b. Timing of peaks
-    c. Duration of waves
-    d. Cumulative burden
-6. Repeat and compare across multiple scenarios and locations.
+## Results
+
+We collected 3 models for each of the targets: cases in the Netherlands, Belgium, and Spain; and deaths in the Netherlands and Belgium.
+
+Result 1: Raw samples allow for number of peaks and cumulative burden
+
+- We collected 296 sample trajectories from three models for each of five targets
+- Peaks
+- Turning points (timing of peak)
+- Final outbreak size / cumulative burden
+
+Result 2: Ensembling from samples presents differently compared to ensembling from quantiles
+
+- Ensembles from quantiles show reduced uncertainty in the upper bound of incidence compared to ensemble from samples
+- Substantial difference at outer bound of uncertainty: compare 95 to 99% confidence, where sample ensemble better represents across diff epidemic curves
+
+```{r, warning=FALSE}
+# differences at each quantile level
+source(here("analysis", "code", "compare-ensembles.R"))
+diffs_plot
+```
+
+_Figure 1: Median average difference at each level of uncertainty in ensembles created from 100 samples versus 23 quantiles taken from the same 100 samples_
+
+Result 3: Samples can be ensembled based on comparison to observations
+
+- Relatively few samples were close to observations
+- Weighting samples after six months considerably reduced uncertainty (Netherlands) and eliminated some epidemic shapes altogether (Belgium extended flat peak)
+- Weighting impossible from quantiles
 
 ```{r}
+# All targets' trajectories over time by ensemble
 source(here("analysis", "code", "plot.R"))
 plot_set <- distinct(results, target_variable, location)
 plots <- list()
@@ -106,44 +138,30 @@ for (i in 1:nrow(plot_set)) {
                                         plot_set[["target_variable"]][[i]],
                                       set_location = plot_set[["location"]][[i]])
 }
-```
-
-## Results
-
-- From # models contributing to round 2, 3 countries seeing results from >=3 models.
-
-```{r, warning=FALSE}
 plots
 ```
 
-_Figure 1_
-
-```{r, warning=FALSE}
-
-```
-
-quantify by taking differences at each quantile level; plot sum differences
-
-strong difference at outer bound of uncertainty: 95 to 99% confidence, where sample ensemble better represents across diff epidemic curves
-
-no ensemble was particularly sharp or close to observations, and relatively few samples were either 
-
-(implication: samples better but limited practical diff if focus is on median)
-
-
-- Ensembles from quantiles show reduced uncertainty compared to ensemble from samples
-- Neither ensemble captures the height of peaks
-- Deaths in Belgium have an interesting double peak in only the ensemble from samples
+_Figure 2. Comparison of 100 samples, an ensemble of samples, an ensemble of quantiles, and a weighted ensemble of samples weighted by six month performance against observed data_ 
 
 
 ## Discussion
 
-- Summary
+- Summary of results
 
-- Strengths and limitations
+- Strengths of using samples:
+  - Samples show trajectory shapes, peaks, and cumulative burdens
+  - Weighting only possible from samples - samples can continue to be used, quantiles are one-off results
 
-- Further work
+- Limitations
+   - Simple ensemble still doesn't solve the problem of combining multiple shapes in one epidemic curve
 
 - Conclusions and recommendations
+   - Depends what the focus + longevity of the project is: 
+    - Little difference (i.e. little information is lost) if the focus is one-off, or only on the central estimates
+    - Samples better if focus is long-term use of one set of results, on peaks and cumulative sizes, or on outer bounds of uncertainty
+
+- Further work
+   - Number of samples to collect from each model
+   - Ensemble by shape of epidemic curve
 
 ## References
