@@ -80,7 +80,7 @@ We think that there are no variations.
 
 ### Waning immunity 
 
-The waning time (time between the maximum and minimum efficacies) is 8 months. Waning was modelled following a gamma distribution both for natural immunity and vaccine-related immunity. The maximum and minimum values are depicted in �Vaccine effectiveness� Section.
+The waning time (time between the maximum and minimum efficacies) is 8 months. Waning was modelled following a gamma distribution both for natural immunity and vaccine-related immunity. The maximum and minimum values are depicted in "Vaccine effectiveness" Section.
 
 
 ### Vaccine effectiveness
@@ -102,9 +102,9 @@ In the initialization process we have used a distribution of infections similar 
 The new variants introduced (one every 9 months) have the similar characteristics (R0 values, severity) as the BA.5 variant. 
 
 
-##### Proportion of people that are na�ve at start of projection (not vaccinated or infected)
+##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
 
-Simulation starts on December 1 2020, with 100% na�ve population. Then, we use historical data to infect/vaccinate the individuals until the beginning of the forecast period (October 2022). At this time almost 100% of the population has been already vaccinated or infected. There is also a fraction of the population that has been reinfected. Note that because of immunity waning the real protection of each individual depends on the vaccination and infection times.  
+Simulation starts on December 1 2020, with 100% naïve population. Then, we use historical data to infect/vaccinate the individuals until the beginning of the forecast period (October 2022). At this time almost 100% of the population has been already vaccinated or infected. There is also a fraction of the population that has been reinfected. Note that because of immunity waning the real protection of each individual depends on the vaccination and infection times.  
 
 
 #### Population ageing 
