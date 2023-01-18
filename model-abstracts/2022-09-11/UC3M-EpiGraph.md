@@ -16,13 +16,13 @@ The main findings are:
 
 * The optimistic variant scenarios (scenarios A, B and C) exhibit a much smaller incidence than the pessimistic ones. For instance, scenario A has an aggregated incidence 4 times smaller than D. The magnitude of the waves after 2016 seems to be smaller than the ones before this time. 
 
-* When considering the pessimistic variant scenario E we observe that the introduction of an annual vaccination reduces the number of infections and hospitalizations by 7.5% and 7.7%, respectively, compared to the baseline scenario (scenario D).
+* When considering the pessimistic variant scenario E we observe that the introduction of an annual vaccination reduces the number of infections, hospitalizations and deaths by {0.0%, 4.1%, 12.9%}, {0.0%, 10.8%, 10.3%} and {0.0%, 0.8%, 17.2%} respectively (where each triplet of percentages represents relative reduction for children, adults and elder, respectively), compared to the baseline scenario (scenario D). Here, we have not considered hospitalizations and deaths for children, leaving the value to zero in all simulations.
 
-* For the pessimistic variant scenario F, the introduction of a bi-annual vaccination reduces the number of infections and hospitalizations by 12.2% and 16.9%, respectively, compared to the baseline scenario (scenario D).
+* For the pessimistic variant scenario F, the introduction of a bi-annual vaccination reduces the number of infections, hospitalizations and deaths by {-0.3%, 6.7%, 26.7%}, {0.0%, 21.4%, 21.3%} and {0.0%, 3.7%, 40.2%} respectively, compared to the baseline scenario (scenario D). Despite the negative value for incidence in children (meaning an increase in incidence between scenarios D and F), we can assume the cause to be the randomness of the simulation, as the percentage is very close to 0.
 
-* For the optimistic variant scenario B, the introduction of an annual vaccination reduces the number of infections and hospitalizations by 13.7% and 16.0%, respectively, compared to the baseline scenario (scenario A).
+* For the optimistic variant scenario B, the introduction of an annual vaccination reduces the number of infections, hospitalizations and deaths by {3.2%, 7.0%, 13.3%}, {0.0%, 11.4%, 11.2%} and {0.0%, 7.6%, 21.1%}, respectively, compared to the baseline scenario (scenario A).
 
-* For the optimistic variant scenario C, we observe that the introduction of a bi-annual vaccination reduces the number of infections and hospitalizations by 21.9% and 27.4%, respectively, compared to the baseline scenario (scenario A).
+* For the optimistic variant scenario C, we observe that the introduction of a bi-annual vaccination reduces the number of infections, hospitalizations and deaths by {5.0%, 10.5%, 25.2%}, {0.0%, 21.9%, 21.8%} and {0.0%, 15.1%, 43.5%}, respectively, compared to the baseline scenario (scenario A).
 
 
 ## Comments on observed dynamics given model assumptions
@@ -46,12 +46,14 @@ For the 1st, 2nd and 3rd doses we have used approximately the same vaccination p
 
 The following list shows the percentage of the population at the beginning of the simulation (October 2022) with at least one dose broken down by ages 
 
-[0-10]	[10-20]	[20-30]	[30-40]	[40-50]	[50-60]	[60-70]	[70-80]	[80-90]	[90-100]
+ [0-10]	[10-20]	[20-30]	[30-40]	[40-50]	[50-60]	[60-70]	[70-80]	[80-90]	[90-100]
+
 0.00%	10.30%	85.50%	84.90%	85.10%	85.10%	89.60%	95.60%	95.60%	96.50%
 
 The following list shows the percentage of the population at the beginning of the simulation (October 2022) with two doses + 1 booster broken down by ages:
 
 [0-10]	[10-20]	[20-30]	[30-40]	[40-50]	[50-60]	[60-70]	[70-80]	[80-90]	[90-100]
+
 0.00%	0.00%	47.60%	47.60%	47.10%	47.60%	64.20%	86.40%	86.50%	86.10%
 
 For the extra booster campaign, we assume that 50% of the population will receive the booster. This means that 43% of the population 70+ will receive a booster and only 23.8% of the population between 20 and 60 years will be vaccinated with boosters. Note that these small coverages will limit the effectiveness of the vaccination campaign. 
@@ -78,7 +80,7 @@ We think that there are no variations.
 
 ### Waning immunity 
 
-The waning time (time between the maximum and minimum efficacies) is 8 months. Waning was modelled following a gamma distribution both for natural immunity and vaccine-related immunity. The maximum and minimum values are depicted in “Vaccine effectiveness” Section.
+The waning time (time between the maximum and minimum efficacies) is 8 months. Waning was modelled following a gamma distribution both for natural immunity and vaccine-related immunity. The maximum and minimum values are depicted in "Vaccine effectiveness" Section.
 
 
 ### Vaccine effectiveness
@@ -95,14 +97,14 @@ We have considered natural and vaccination-related immunities. We have considere
 
 #### Initial distribution of susceptibility
 
-In the initialization process we have used a distribution of infections similar to the existing conditions in Spain for the period from 1/1/2020 to 1/10/2022. We have considered the variants wild, Alpha, Beta, Delta, and Omicron’s BA.1, BA.275, BA.4 and BA.5. 
+In the initialization process we have used a distribution of infections similar to the existing conditions in Spain for the period from 1/1/2020 to 1/10/2022. We have considered the variants wild, Alpha, Beta, Delta, and Omicron's BA.1, BA.275, BA.4 and BA.5. 
 
 The new variants introduced (one every 9 months) have the similar characteristics (R0 values, severity) as the BA.5 variant. 
 
 
-##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
+##### Proportion of people that are naÃ¯ve at start of projection (not vaccinated or infected)
 
-Simulation starts on December 1 2020, with 100% naïve population. Then, we use historical data to infect/vaccinate the individuals until the beginning of the forecast period (October 2022). At this time almost 100% of the population has been already vaccinated or infected. There is also a fraction of the population that has been reinfected. Note that because of immunity waning the real protection of each individual depends on the vaccination and infection times.  
+Simulation starts on December 1 2020, with 100% naÃ¯ve population. Then, we use historical data to infect/vaccinate the individuals until the beginning of the forecast period (October 2022). At this time almost 100% of the population has been already vaccinated or infected. There is also a fraction of the population that has been reinfected. Note that because of immunity waning the real protection of each individual depends on the vaccination and infection times.  
 
 
 #### Population ageing 
@@ -145,3 +147,4 @@ The case notification rates do not introduce any changes in the simulated popula
 
 * Booster Vaccination campaigns are carried out in age-descending order. In this way the most vulnerable part of the population is vaccinated at the very beginning of the campaign.
 * Due to a problem generating the log files, it was not possible to record the number of doses applied after week 399 for scenarios C and F. For these two scenarios we provided extrapolated values in the csv files after week 399. Note that in the current simulations the vaccination pattern repeats itself for each new booster round, thus the extrapolation will accurately consider the applied vaccines in this missing time interval. 
+
