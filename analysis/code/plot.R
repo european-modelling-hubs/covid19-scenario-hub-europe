@@ -75,7 +75,7 @@ plot_ensemble_results <- function(ensembles, results,
          subtitle = paste0(unique(plot_data$location_name),
                            " ", gsub("inc ", "", set_target_variable), " ",
                            "multi-model projections, 2022-23"),
-         caption = "Showing median, 50%, 95%, and 99% confidence") +
+         caption = "Showing median, 75%, 95%, and 99% confidence") +
     # colours
     scale_colour_brewer(type = "qual", palette = "Dark2",
                         aesthetics = c("colour", "fill")) +

@@ -7,12 +7,14 @@ library(lubridate)
 
 # ----- Score samples by MAE
 score_samples <- function(results,
-                          n_weeks = "all") {
+                          truncate_weeks = "none") {
 
-  if (n_weeks == "all") {
-    n_weeks <- length(unique(results$target_end_date))
+  if (truncate_weeks == "none") {
+    truncate_weeks <- length(unique(results$target_end_date))
+    last_data_point <- max(results$target_end_date)
+  } else {
+    last_data_point <- max(results$target_end_date) - (7 * truncate_weeks)
   }
-  last_data_point <- min(results$target_end_date) + (7 * n_weeks)
 
   # ----- Score
   mae <- results |>

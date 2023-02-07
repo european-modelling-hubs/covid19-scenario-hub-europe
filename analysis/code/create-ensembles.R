@@ -8,6 +8,7 @@ source(here("analysis", "code", "score-samples.R"))
 # ensembles <- create_ensembles(results, c(0.01, 0.5, 0.99))
 
 create_ensembles <- function(results,
+                             truncate_score_weeks = 2,
                              quantiles = c(0.01, 0.25, 0.5, 0.75, 0.99)) {
 
   # Create simple ensemble of samples -----
@@ -22,10 +23,9 @@ create_ensembles <- function(results,
     )
 
   # Ensemble of samples weighted by predictive accuracy -----
-  n_weeks <- "all"
   ensemble_weighted <- results |>
     # ---- score
-    score_samples(n_weeks = n_weeks) |>
+    score_samples(truncate_weeks = truncate_score_weeks) |>
     # ---- ensemble
     group_by(round, location, target_variable, target_end_date) |>
     summarise(
