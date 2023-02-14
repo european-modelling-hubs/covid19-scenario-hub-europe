@@ -17,9 +17,10 @@ FILL
 ## Round 4 scenarios
 
 ### Waning of protection against infection
+FILL
 
 #### Optimistic waning of protection against infection 
-FILL
+FILL (if applicable)
 
 #### Pessimistic waning of protection against infection
 FILL (if applicable)
@@ -34,6 +35,9 @@ FILL (if applicable)
 
 
 ## Additional assumptions
+
+### Age groups 
+FILL 
 
 ### Vaccination
 FILL
