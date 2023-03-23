@@ -68,10 +68,10 @@ plot_ensemble_results <- function(ensembles, results,
     # facets
     facet_grid(rows = vars(Ensemble),
                cols = vars(scenario_id),
-               scales = "free") +
+               scales = "fixed") +
     # labels
     labs(x = NULL,
-         y = paste0("Incidence per 100,000"),
+         y = paste0("Incidence per 100,000"), x = "2022-2023",
          subtitle = paste0(unique(plot_data$location_name),
                            " ", gsub("inc ", "", set_target_variable), " ",
                            "multi-model projections, 2022-23"),

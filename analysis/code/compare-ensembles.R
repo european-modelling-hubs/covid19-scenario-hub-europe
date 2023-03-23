@@ -35,6 +35,9 @@ diffs_plot <- diffs |>
              scales = "free_y") +
   theme_bw()
 
+# ---------------------------------
+# width plot
+
 interval_ensembles <- ensembles |>
   mutate(quantile = as.numeric(as.character(sub("q0", "", quantile))),
          interval = round(2 * abs(0.5 - quantile), 2),
@@ -42,28 +45,37 @@ interval_ensembles <- ensembles |>
 duplicate_median <- interval_ensembles |>
   filter(quantile == 0.5) |>
   mutate(type = "upper")
+
 width <- interval_ensembles |>
   bind_rows(duplicate_median) |>
   filter(scenario_id != "Weighted") |>
   select(-quantile) |>
   pivot_wider(names_from = "type") |>
+  # Average across all scenarios and dates
   group_by(round, location, target_variable, model, interval) |>
-  summarise(upper = mean(upper), lower = mean(lower), .groups = "drop")
+  summarise(upper = mean(upper),
+            lower = mean(lower),
+            .groups = "drop")
 
 width_plot <- width |>
-  ggplot(aes(x = interval, ymin = lower, ymax = upper,
+  ggplot(aes(x = interval,
+             ymin = lower, ymax = upper,
              group = model,
              colour = model, fill = model)) +
   geom_ribbon(alpha = 0.25) +
+  geom_linerange(alpha = 0.25) +
+  geom_point(aes(y = lower), alpha = 0.5) +
+  geom_point(aes(y = upper), alpha = 0.5) +
   scale_colour_brewer(palette = "Set1") +
   scale_fill_brewer(palette = "Set1") +
-  geom_hline(aes(yintercept = 0), lty = 3, alpha = 0.5) +
-  labs(y = "Lower and upper interval bound (per 100k)",
+  labs(y = "Mean lower and upper interval bound per 100k",
        x = "Interval width",
-       fill = "Model",
-       colour = "Model",
-       subtitle = "Mean central prediction intervals across time and scenarios",
-       caption = "Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles") +
+       fill = "Ensemble data source",
+       colour = "Ensemble data source") +
   facet_wrap(~location + target_variable,
              scales = "free_y") +
-  theme_bw()
+  theme_bw() +
+  theme(legend.position = "bottom")
+
+
+# caption <- "Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
