@@ -1,5 +1,10 @@
 ---
 title: "An applied example of information loss due to categorising variability in epidemic model comparisons"
+output: html_document
+date: '2023-03-27'
+---
+---
+title: "An applied example of information loss due to categorising uncertainty in epidemic modelling"
 format: 
   html:
     code-fold: true
