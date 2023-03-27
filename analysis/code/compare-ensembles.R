@@ -85,7 +85,7 @@ width <- interval_ensembles |>
   select(-quantile) |>
   pivot_wider(names_from = "type") |>
   # Average across all scenarios and dates
-  group_by(round, location, target_variable, model, interval) |>
+  group_by(round, target, model, interval) |>
   summarise(upper = mean(upper),
             lower = mean(lower),
             .groups = "drop")
@@ -105,7 +105,7 @@ width_plot <- width |>
        x = "Interval width",
        fill = "Ensemble data source",
        colour = "Ensemble data source") +
-  facet_wrap(~location + target_variable,
+  facet_wrap(~target, nrow = 1,
              scales = "free_y") +
   theme_bw() +
   theme(legend.position = "bottom")
