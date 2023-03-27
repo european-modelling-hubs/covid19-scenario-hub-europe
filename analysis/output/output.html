@@ -59,132 +59,56 @@ ul.task-list{list-style: none;}
 <div class="cell">
 
 </div>
-<p>Scenario modelling aims to bound the uncertainty around some future outcome over some time frame. This is important for both understanding and acting upon systems with complex cause and effect dynamics, including outbreaks of infectious disease. Scenario modelling is a source of information on epidemic dynamics: trajectories of continuous incidence; and epidemic characteristics: peaks, turning points, cumulative burden (final outbreak size).</p>
-<p>From a methodological perspective, the process of modelling is making choices about how to reduce and simplify a system in order to represent it. This comes with various forms of uncertainty, classifiable into either epistemic (unmeasurable uncertainty about the nature of the system) or aleatoric (stochastic, or random, uncertainty associated with imperfect measurement). In practice, modellers take decisions about how their model is structured (handling epistemic uncertainty) and processes observed data (managing stochastic uncertainty), with a diverse variety of approaches and methods in constant development. This results in a range of valid decisions, and we can compare the effect of these decisions by comparing across outputs produced by different models.</p>
-<p>In order to perform any comparison, model outputs must be in a standardised format. One method of doing this is to specify a set of probabilities which modellers then assign values to, for example by counting the frequency of occurence.</p>
-<ul>
-<li>Collaborative modelling and ensembles
-<ul>
-<li>Comparing across models shows not only results but range of uncertainty</li>
-<li>Infectious disease modelling hubs for forecasting and scenario projections</li>
-<li>Two steps to combining information from multiple models:
-<ol type="1">
-<li>Create direct like for like comparisons of modelling results, through data harmonisation - standardised parameters and standardised format for representing modelling results</li>
-<li>Summarise across models, using ensemble methods (as in other fields like climate / CMIP)</li>
-</ol></li>
-</ul></li>
-<li>Information loss in the representation of uncertainty in infectious disease hubs
-<ul>
-<li>Hubs collect quantiles from each model because it’s resource efficient</li>
-<li>This necessarily creates some information loss (similar to binned/categorical measures)</li>
-</ul></li>
-<li>We haven’t yet explored what information loss this creates or how this impacts the aim of the collaborations:
-<ul>
-<li>To provide information on epidemics</li>
-<li>To summarise uncertainty across multiple models</li>
-<li>To evaluate models and reduce uncertainty over time given observed data</li>
-</ul></li>
-</ul>
-<section id="aims" class="level4">
-<h4 class="anchored" data-anchor-id="aims">Aims</h4>
-<p>We set up a scenario modelling collaboration to inform long term COVD-19 management in Europe. In collaboration with a policy team at the European Centre for Disease Prevention and Control, multiple modelling teams provided model outputs arising from a range of standardised scenarios designed to inform policy management.</p>
-<p>Here we aim to demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of:</p>
-<ol type="1">
-<li>Key epidemic characteristics</li>
-<li>Summarising uncertainty using an ensemble</li>
-<li>Exploring performance against observed data</li>
-</ol>
-</section>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<p>Background to setting scenarios and collection of samples - open Hub, scenarios co-created between ECDC and modellers - Projections using any method, up to 1 year for any of 32 countries - Round 2 scenarios with 3 models</p>
-<ol type="1">
-<li>Epidemic characteristics</li>
-</ol>
-<ul>
-<li>selection of frequently reported and policy relevant characteristics</li>
-</ul>
-<ol start="2" type="1">
-<li>Aggregation in order to summarise uncertainty across multiple models: difference in ensembles from raw samples vs from quantiles</li>
-</ol>
-<ul>
-<li>Create unweighted median ensemble of models from all sample</li>
-<li>Take quantiles from raw samples for each model; then unweighted median ensemble from the collection of quantiles</li>
-<li>Compare differences in information shown by ensembles A and B., for each across multiple scenarios and locations.</li>
-</ul>
-<ol start="3" type="1">
-<li>Weighting samples by performance</li>
-</ol>
-<ul>
-<li>Mean absolute error for each sample: average for each sample trajectory of comparison to observed data at each available time point. Truncated by 2 weeks</li>
-<li>Differences between scenarios ignored: all samples treated as equal probability</li>
-<li>Inverse MAE for each sample used as a weight in a median ensemble (Harrel Davis weighted estimator)</li>
-</ul>
 </section>
 <section id="results" class="level2">
 <h2 class="anchored" data-anchor-id="results">Results</h2>
 <div class="cell">
 
 </div>
-<p>We collected 3 models for each of five targets: reported COVID-19 cases in Spain, the Netherlands, Belgium; and deaths in the Netherlands and Belgium. In total we received 296 sample trajectories for each target.</p>
-<p>Result 1: Raw samples allow for number of peaks and cumulative burden</p>
-<p>We calculated the cumulative incidence of each trajectory and compared this to the previous 52 weeks’ cumulative total.</p>
-<ul>
-<li>Peaks</li>
-<li>Turning points (timing of peak)</li>
-<li>Final outbreak size / cumulative burden</li>
-</ul>
+<p>A total of six modelling teams submitted projections to the European COVID-19 Scenario Hub in Round 2 (# to # 2022). Teams selected which targets to model from a large set of possible projection targets (32 countries, 2 outcomes), with only two teams submitting projections for nearly all targets. Teams were asked to model four scenarios for each target.</p>
+<p>Here we only consider targets with results from three or more models for all four scenarios. This included weekly incident cases in Spain, the Netherlands, and Belgium; and weekly incident deaths in the Netherlands and Belgium. For each of these five targets, three teams contributed separate projections for each of the four scenarios. Two teams contributed 100 samples each, and one team contributed 96 samples. Therefore in total we consider 5920 samples (1480 samples for each of four scenarios), where each sample comprises a weekly time-series projection over up to one year.</p>
+<section id="result-1" class="level4">
+<h4 class="anchored" data-anchor-id="result-1">Result 1</h4>
+<p>First we explore epidemic characteristics using sample trajectories. We summarised information about cumulative outbreak size over the projection period. For each target, we compared the cumulative number of projected outcomes to a threshold of the cumulative total over the one year before projections started (to July 2022). Across all 5,920 trajectories for all targets, 10% saw a cumulative total exceeding the relevant threshold. This varied widely, for example in Belgium where 25% and 2.5% of all trajectories would see a cumulative total exceeding the previous year’s total number of cases and deaths respectively.</p>
+<p>Sample trajectories also allowed us to explore projected peaks in incidence. We looked at peaks both over the entire projection period, and over only the autumn-winter period (October through March). In summarising peak characteristics, we considered both the timing and maximum weekly incidence of each peak, and the total number of peaks, representing distinct epidemic waves and the timing of their turning points.</p>
+<p>These epidemic characteristics could not be meaningfully estimated from the same results summarised into quantiles, as this sequence of summaries has no theoretical continuity through the time-series.</p>
+</section>
+<section id="result-2" class="level4">
+<h4 class="anchored" data-anchor-id="result-2">Result 2</h4>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="output_files/figure-html/score-samples-1.png" class="img-fluid" width="672"></p>
+<p><img src="output_files/figure-html/create-ensembles-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The forecasting performance of each sample varied substantially between both models and targets (figure #). When weighted by inverse MAE, no sample received more than 0.33% weight (among n=1184 samples for each target). Weighting across samples was heavily skewed for some targets, for example cases in Spain and Belgium with a cluster of highly weighted predictive samples each from one model. Meanwhile, multiple models had highly predictive samples, for example two models with similarly performing samples in the</p>
-<p>Weights were more uniform across samples’ forecast performance for deaths in the Netherlands and Belgium (with a median weight of 0.1% and 0.09% respectively across samples).</p>
+<p><em>Figure 1. Comparison of trajectories, an ensemble of trajectories, an ensemble of quantiles, and a weighted ensemble of trajectories weighted by performance against 28 weeks’ observed data</em></p>
+<p>Next we took a set of 23 quantiles from the distribution of samples provided by each model for each target. We created an ensemble using a median average at each quantile interval. We compared this ensemble (figure 1B), to taking the same set of quantiles directly from the entire set of samples provided by all models (figure 1C).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/width-ensembles-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles</em></p>
+<p>We created two ensemble projections derived from the same set of samples, with an identical set of quantile intervals representing a probabilistic projection at each time point. To compare between the two ensembles, we took the average of values at each quantile across all time points and scenarios (figure 2).</p>
+<p>This showed both ensembles produced similar values around the centre of the distribution, with no noticeable difference between the median values of each projection. However, the two ensembles increasingly diverged in projecting the outer upper limit of the probabilistic distribution. At the upper 98% probability interval, ensemble projections for cases in Spain averaged nearly six times higher incidence when drawn from 100 samples compared to when drawn from quantiles (respectively averaging 1016 and 173 weekly new cases per 100,000 population). Across all five targets, the pattern held that an ensemble based on samples produced sharply increasing uncertainty between the 90% to 98% intervals. Meanwhile in an ensemble based on quantiles projected values were closer across upper bound probabilistic intervals.</p>
+</section>
+<section id="result-3" class="level4">
+<h4 class="anchored" data-anchor-id="result-3">Result 3</h4>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="output_files/figure-html/samples-weights-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Figure 3. Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks’ observed data, meaning higher weight reflects better forecasting performance.</em></p>
+<p>We then considered the forecasting performance of individual samples against 28 weeks’ observed data (figure 3). The performance of each sample varied substantially between both models and targets. When weighted by inverse MAE, no sample received more than 0.33% weight (among n=1184 samples for each target). Weighting was heavily skewed across samples for some targets, including cases in Spain and Belgium with outlying clusters of highly weighted predictive samples from one model. Weights were more uniform across samples’ forecast performance for deaths in the Netherlands and Belgium.</p>
+<p>Creating an ensemble using the weighted performance of samples helped reduce the uncertainty of the future projection (figure 1D).</p>
 <div class="cell">
 
 </div>
-<div class="cell">
-
-</div>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[[1]]</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[2]]</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[3]]</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[4]]</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid" width="672"></p>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-[[5]]</code></pre>
-</div>
-<div class="cell-output-display">
-<p><img src="output_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p><em>Figure #. Comparison of 100 samples, an ensemble of samples, an ensemble of quantiles, and a weighted ensemble of samples weighted by six month performance against observed data</em></p>
+<p>In the Netherlands in the final week of projections for deaths, the most extreme single trajectory projected an incident 2.8 per 100,000 in the final week of projections. However when we weighted all trajectories by performance and took quantiles from this distribution, the upper limit of 99% probability suggested an incidence over 8 times lower, at 0.33 per 100,000.</p>
+</section>
 </section>
 <section id="discussion" class="level2">
 <h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
@@ -215,6 +139,7 @@ ul.task-list{list-style: none;}
 <li>Ensemble by shape of epidemic curve</li>
 </ul></li>
 </ul>
+<p>Weighting by performance meant we narrowed our set of trajectories to increasingly plausible projections of the future. Conditioning on observed data meant we excluded epidemic shapes based on autocorrelations to unrealised events</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

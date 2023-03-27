@@ -8,9 +8,7 @@ execute:
   warning: false
 ---
 
-## Background
-
-```{r}
+```{r set-up}
 # Document settings -----
 knitr::opts_chunk$set(eval = TRUE, echo = FALSE,
                       message = FALSE, warning = FALSE,
@@ -22,60 +20,9 @@ library(dplyr)
 library(tidyr)
 library(purrr)
 library(ggplot2)
+library(patchwork)
 local <- TRUE # download or use saved data 
 ```
-
-Scenario modelling aims to bound the uncertainty around some future outcome over some time frame. This is important for both understanding and acting upon systems with complex cause and effect dynamics, including outbreaks of infectious disease. Scenario modelling is a source of information on epidemic dynamics: trajectories of continuous incidence; and epidemic characteristics: peaks, turning points, cumulative burden (final outbreak size).
-
-From a methodological perspective, the process of modelling is making choices about how to reduce and simplify a system in order to represent it. This comes with various forms of uncertainty, classifiable into either epistemic (unmeasurable uncertainty about the nature of the system) or aleatoric (stochastic, or random, uncertainty associated with imperfect measurement). In practice, modellers take decisions about how their model is structured (handling epistemic uncertainty) and processes observed data (managing stochastic uncertainty), with a diverse variety of approaches and methods in constant development. This results in a range of valid decisions, and we can compare the effect of these decisions by comparing across outputs produced by different models.
-
-In order to perform any comparison, model outputs must be in a standardised format. One method of doing this is to specify a set of probabilities which modellers then assign values to, for example by counting the frequency of occurence. 
-
-- Collaborative modelling and ensembles
-  - Comparing across models shows not only results but range of uncertainty
-  - Infectious disease modelling hubs for forecasting and scenario projections
-  - Two steps to combining information from multiple models:
-    1. Create direct like for like comparisons of modelling results, through data harmonisation - standardised parameters and standardised format for representing modelling results
-    2. Summarise across models, using ensemble methods (as in other fields like climate / CMIP)
-  
-- Information loss in the representation of uncertainty in infectious disease hubs
-  - Hubs collect quantiles from each model because it's resource efficient
-  - This necessarily creates some information loss (similar to binned/categorical measures)
-
-- We haven't yet explored what information loss this creates or how this impacts the aim of the collaborations:
-  - To provide information on epidemics
-  - To summarise uncertainty across multiple models
-  - To evaluate models and reduce uncertainty over time given observed data
-
-#### Aims
-
-We set up a scenario modelling collaboration to inform long term COVD-19 management in Europe. In collaboration with a policy team at the European Centre for Disease Prevention and Control, multiple modelling teams provided model outputs arising from a range of standardised scenarios designed to inform policy management.
-
-Here we aim to demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of:
-
-1. Key epidemic characteristics
-2. Summarising uncertainty using an ensemble 
-3. Exploring performance against observed data
-
-## Methods
-
-Background to setting scenarios and collection of samples
-- open Hub, scenarios co-created between ECDC and modellers
-- Projections using any method, up to 1 year for any of 32 countries
-- Round 2 scenarios with 3 models
-
-1. Epidemic characteristics
-  - selection of frequently reported and policy relevant characteristics 
-
-2. Aggregation in order to summarise uncertainty across multiple models: difference in ensembles from raw samples vs from quantiles
-  - Create unweighted median ensemble of models from all sample
-  - Take quantiles from raw samples for each model; then unweighted median ensemble from the collection of quantiles
-  - Compare differences in information shown by ensembles A and B., for each across multiple scenarios and locations.
-
-3. Weighting samples by performance
-  - Mean absolute error for each sample: average for each sample trajectory of comparison to observed data at each available time point. Truncated by 2 weeks
-  - Differences between scenarios ignored: all samples treated as equal probability
-  - Inverse MAE for each sample used as a weight in a median ensemble (Harrel Davis weighted estimator)
 
 
 ## Results
@@ -91,89 +38,13 @@ results <- format_results(results = results,
                           n_model_min = 3, local = local)
 ```
 
-A total of six modelling teams submitted projections to the European COVID-19 Scenario Hub in Round 2 (# to # 2022). Teams selected which targets to model from a large set of possible projection targets (32 countries, 2 outcomes), with only two teams submitting projections for nearly all targets. Teams were asked to model four scenarios for each target.
+A total of six modelling teams submitted projections to the European COVID-19 Scenario Hub in Round 2. All teams contributed projections for all four scenarios. Two teams submitted projections for nearly all countries and targets. Here we focus on multi-model comparison and use only projection targets with three contributing models. These targets included 4 scenarios for 52 weeks’ case and death incidence for the Netherlands and Belgium, and 41 weeks’ case incidence for Spain. Of three models for each of these targets, two sampled 100 simulations and one sampled 96 simulations. In total we consider `r nrow(results)` data points from 5920 simulations, where each data point is the estimated weekly incidence at one time step in a simulated trajectory of an outcome in a target country and scenario over up to one year.
 
-Here we only consider targets with results from three or more models for all four scenarios. This included weekly incident cases in Spain, the Netherlands, and Belgium; and weekly incident deaths in the Netherlands and Belgium. For each of these five targets, three teams contributed separate projections for each of the four scenarios. Two teams contributed 100 samples each, and one team contributed 96 samples. Therefore in total we consider 5920 samples (1480 samples for each of four scenarios), where each sample comprises a weekly time-series projection over up to one year.
+First we explore epidemic characteristics using sample trajectories. We summarised information about cumulative outbreak size over the projection period. For each target, we compared the cumulative number of projected outcomes to a threshold of the cumulative total over the one year before projections started (to July 2022). Across all 5920 simulations for all targets, 10% saw a cumulative total exceeding the relevant threshold. This varied widely, for example in Belgium where 25% and 2.5% of all trajectories would see a cumulative total exceeding the previous year’s total number of cases and deaths respectively.
 
-
-#### Result 1
-
-```{r cumulative}
-cumulative_proj <- results |>
-  group_by(location, target_variable, scenario_id, 
-           model, sample) |>
-  arrange(target_end_date) |>
-  mutate(proj_cumulative = cumsum(value)) |>
-  filter(target_end_date == max(target_end_date)) |>
-  ungroup() |> 
-  mutate(proj_cumulative_p = proj_cumulative / population * 100)
-
-cumulative_past <- read_csv(here("analysis", "data", "obs.csv")) |> 
-  filter(target_end_date >= min(results$target_end_date) - lubridate::weeks(52) & 
-           target_end_date < min(results$target_end_date) &
-           location %in% unique(results$location) &
-           target_variable %in% unique(results$target_variable)) |> 
-  group_by(location, target_variable) |>
-  arrange(target_end_date) |>
-  mutate(past_cumulative = cumsum(value)) |>
-  filter(target_end_date == max(target_end_date)) |>
-  ungroup() |> 
-  mutate(past_cumulative_p = past_cumulative / population * 100) |> 
-  select(location, target_variable, past_cumulative_p)
-
-cumulative <- left_join(cumulative_proj, cumulative_past)
-cumulative_exceeding <- cumulative |> 
-  group_by(location, target_variable) |> 
-  summarise(exceed = sum(proj_cumulative_p > past_cumulative_p),
-            n = n(),
-            exceed_p = exceed / n() * 100)
-```
-
-First we explore epidemic characteristics using sample trajectories. We summarised information about cumulative outbreak size over the projection period. For each target, we compared the cumulative number of projected outcomes to a threshold of the cumulative total over the one year before projections started (to July 2022). Across all 5,920 trajectories for all targets, 10% saw a cumulative total exceeding the relevant threshold. This varied widely, for example in Belgium where 25% and 2.5% of all trajectories would see a cumulative total exceeding the previous year’s total number of cases and deaths respectively.
-
-```{r peaks}
-span <- 3
-peaks <- results |>
-  mutate(sample_id = paste(location, target_variable, scenario_id, model, sample, 
-                           sep = "-")) |> 
-  group_by(sample_id) |>
-  mutate(target_variable = as.factor(target_variable),
-         peak_val = splus2R::peaks(x = value, span = span),
-         peak_obs = splus2R::peaks(x = obs, span = span),
-         peak_t_pos = peak_val & peak_obs,
-         peak_t_neg = !peak_val & !peak_obs,
-         peak_f_pos = peak_val & !peak_obs,
-         peak_f_neg = !peak_val & peak_obs) |> 
-    filter(!is.na(obs)) # 28 weeks of data
-
-peak_obs <- peaks |>
-  summarise(n = n(),
-            true_pos = sum(peak_t_pos),
-            true_neg = sum(peak_t_neg),
-            false_pos = sum(peak_f_pos),
-            false_neg = sum(peak_f_neg),
-            sty = true_pos / (true_pos + false_neg),
-            spy = true_neg / (false_pos + true_neg))
-
-plot_obs <- peaks |> 
-  ungroup() |> 
-  select(target_end_date, location, target_variable, obs, peak_obs) |> 
-  distinct() |> 
-  mutate(target = paste(location, target_variable))
-
-plot_obs |> 
-  ggplot(aes(x = target_end_date, y = obs, col = target)) +
-  geom_line() +
-  geom_point(aes(alpha = peak_obs)) +
-  facet_wrap(~ target, scales = "free_y")
-```
-    
-Sample trajectories also allowed us to explore projected peaks in incidence. We looked at peaks both over the entire projection period, and over only the autumn-winter period (October through March). In summarising peak characteristics, we considered both the timing and maximum weekly incidence of each peak, and the total number of peaks, representing distinct epidemic waves and the timing of their turning points.
-
-These epidemic characteristics could not be meaningfully estimated from the same results summarised into quantiles, as this sequence of summaries has no theoretical continuity through the time-series.
+Sample trajectories also allowed us to explore projected peaks in incidence. We looked at peaks both over the entire projection period, and over only the autumn-winter period (October through March). In summarising peak characteristics, we considered both the timing and maximum weekly incidence of each peak, and the total number of peaks, representing distinct epidemic waves and the timing of their turning points. These epidemic characteristics could not be meaningfully estimated from the same results summarised into quantiles, as this sequence of summaries has no theoretical continuity through the time-series.
 
 
-#### Result 2
 ```{r create-ensembles}
 # Create three ensembles ("Sample", "Quantile", "Weighted")
 source(here("analysis", "code", "create-ensembles.R"))
@@ -182,36 +53,34 @@ ensembles <- create_ensembles(results = results,
                               truncate_weeks = truncate_weeks,
                               quantiles = c(0.01, 0.05, 0.25, 0.5, 
                                             0.75, 0.95, 0.99))
-```
-
-```{r, plot-ensembles}
-# All targets' trajectories over time by ensemble
+# Plot: All targets' trajectories over time and by ensemble
 source(here("analysis", "code", "plot.R"))
-plot_set <- distinct(results, target_variable, location)
-plots <- list()
-for (i in 1:nrow(plot_set)) {
-  plots[[i]] <- plot_ensemble_results(ensembles, results,
-                                      set_target_variable = 
-                                        plot_set[["target_variable"]][[i]],
-                                      set_location = plot_set[["location"]][[i]])
-}
-plots
+targets <- distinct(results, location, target_variable) |> 
+  mutate(target = paste(location, target_variable))
+plots <- purrr::map(targets$target,
+                    ~ plot_ensemble_results(ensembles, results, 
+                                            set_target = .x))
+
+wrap_plots(plots, 
+           ncol = length(plots), 
+           guides = "collect") &
+  theme(legend.position = "top")
+
+caption <- "Projections of incidence per 100,000 population, showing median, 50%, and 99% probabilistic intervals, using: A) no ensemble method (100 samples per model); B) a median across each model's projections at a given quantile interval; C) quantile intervals of the distribution across all samples; D) a weighted median across samples with each sample weighted by its own performance against observed data."
 ```
 
-_Figure #. Comparison of 100 samples, an ensemble of samples, an ensemble of quantiles, and a weighted ensemble of samples weighted by six month performance against observed data_ 
+_Figure 1. Comparison of trajectories, an ensemble of trajectories, an ensemble of quantiles, and a weighted ensemble of trajectories weighted by performance against 28 weeks' observed data_ 
 
-Next we took a set of 23 quantiles from the distribution of samples provided by each model for each target. We created an ensemble using a median average at each quantile interval. We compared this ensemble ("Q") to taking the same set of quantiles directly from the entire set of samples provided by all models ("S"), figure #.
+Next we took a set of 23 quantiles from the distribution of samples provided by each model for each target. We created an ensemble using a median average at each quantile interval. We compared this ensemble (figure 1B), to taking the same set of quantiles directly from the entire set of samples provided by all models (figure 1C). To compare between the two ensembles, we took the average of values at each quantile across all time points and scenarios (figure 2). 
 
 ```{r width-ensembles}
 source(here("analysis", "code", "compare-ensembles.R"))
 width_plot
 caption <- "Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
 ```
-We created two ensemble projections derived from the same set of samples, with an identical set of quantile intervals representing a probabilistic projection at each time point. To compare between the two ensembles, we took the average of values at each quantile across all time points and scenarios (Figure #). 
+_Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles_
 
 This showed both ensembles produced similar values around the centre of the distribution, with no noticeable difference between the median values of each projection. However, the two ensembles increasingly diverged in projecting the outer upper limit of the probabilistic distribution. At the upper 98% probability interval, ensemble projections for cases in Spain averaged nearly six times higher incidence when drawn from 100 samples compared to when drawn from quantiles  (respectively averaging 1016 and 173 weekly new cases per 100,000 population). Across all five targets, the pattern held that an ensemble based on samples produced sharply increasing uncertainty between the 90% to 98% intervals. Meanwhile in an ensemble based on quantiles projected values were closer across upper bound probabilistic intervals.
-
-#### Result 3
 
 ```{r samples-weights}
 # Score samples
@@ -250,34 +119,25 @@ plot_sample_weights <- weights |>
 plot_sample_weights
 caption <- "Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks' observed data, meaning higher weight reflects better forecasting performance."
 ```
+_Figure 3. Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks' observed data, meaning higher weight reflects better forecasting performance._
 
-We then considered the forecasting performance of individual samples against 28 weeks' observed data. The performance of each sample varied substantially between both models and targets (Figure #). When weighted by inverse MAE, no sample received more than `r max(weights$weight)*100`% weight (among n=`r nrow(weights)/length(unique(weights$target))` samples for each target). Weighting was heavily skewed across samples for some targets, including cases in Spain and Belgium with outlying clusters of highly weighted predictive samples from one model. Weights were more uniform across samples' forecast performance for deaths in the Netherlands and Belgium.
+We then considered the forecasting performance of individual samples against 28 weeks' observed data (figure 3). The performance of each sample varied substantially between both models and targets. When weighted by inverse MAE, no sample received more than `r max(weights$weight)*100`% weight (among n=`r nrow(weights)/length(unique(weights$target))` samples for each target). Weighting was heavily skewed across samples for some targets, including cases in Spain and Belgium with outlying clusters of highly weighted predictive samples from one model. Weights were more uniform across samples' forecast performance for deaths in the Netherlands and Belgium.
 
-Creating an ensemble using weighted performance of samples 
+Creating an ensemble using the weighted performance of samples helped reduce the uncertainty of the future projection (figure 1D).
 
+```{r end-projection-uncertainty}
+proj_end <- ensembles |> 
+  filter(scenario_id == "Weighted") |> 
+  group_by(location, target_variable) |> 
+  filter(target_end_date == max(target_end_date) & 
+           quantile == "q0.99") |> 
+  filter(value == max(value))
 
-## Discussion
+end_max <- results |> 
+  group_by(location, target_variable) |>
+  filter(target_end_date == max(target_end_date)) |> 
+  filter(value_100k == max(value_100k))
 
-- Summary of results
+```
 
-- Strengths of using samples:
-  - Samples show trajectory shapes, peaks, and cumulative burdens
-  - Weighting only possible from samples - samples can continue to be used, quantiles are one-off results
-
-- Limitations
-   - Simple ensemble still doesn't solve the problem of combining multiple shapes in one epidemic curve
-
-We collected three models for five targets in Spain, the Netherlands, and Belgium. Data reporting quality varied substantially between these targets. However, assuming all models had access to the same data sources, our conclusions with respect to the process of reducing samples to quantiles remain valid.
-
-Scenarios offer a way to explore epistemic uncertainty by explicitly varying assumptions about system characteristics. However, the reduction of model outputs to quantile probabilities limits this possibility.
-
-- Conclusions and recommendations
-   - Depends what the focus + longevity of the project is: 
-    - Little difference (i.e. little information is lost) if the focus is one-off, or only on the central estimates
-    - Samples better if focus is long-term use of one set of results, on peaks and cumulative sizes, or on outer bounds of uncertainty
-
-- Further work
-   - Number of samples to collect from each model
-   - Ensemble by shape of epidemic curve
-
-## References
+In the Netherlands in the final week of projections for deaths, the most extreme single trajectory projected an incident 2.8 per 100,000 in the final week of projections. However when we weighted all trajectories by performance and took quantiles from this distribution, the upper limit of 99% probability suggested an incidence over 8 times lower, at 0.33 per 100,000. 
