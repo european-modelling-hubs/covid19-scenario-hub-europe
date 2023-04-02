@@ -17,12 +17,16 @@ library(purrr)
 library(ggplot2)
 library(patchwork)
 local <- TRUE # download or use saved data 
-ensemble_caption <- "Figure 1. Projections of incidence per 100,000 population, showing median, 50%, and 99% probabilistic intervals, using: A) no ensemble method (100 samples per model); B) a median across each model's projections at a given quantile interval; C) quantile intervals of the distribution across all samples; D) a weighted median across samples with each sample weighted by its own performance against observed data."
-width_plot_caption <- "Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
-weights_caption <- "Figure 3. Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks' observed data, meaning higher weight reflects better forecasting performance."
 target_levels <- c("ES inc case", "BE inc case", "NL inc case", "BE inc death", "NL inc death")
 target_labels <- c("ES inc case", "BE inc case", "NL inc case", "BE inc death", "NL inc death")
 names(target_levels) <-  target_labels
+
+# colours for scenarios
+scenario_colours <- c("A" = "#e66101",
+                      "B" = "#fdb863",
+                      "C" = "#5e3c99",
+                      "D" = "#b2abd2",
+                      "Weighted" = "grey50")
 ```
 
 
@@ -48,10 +52,12 @@ First we explore epidemic characteristics using sample trajectories. We summaris
 Sample trajectories also allowed us to explore projected peaks in incidence. We looked at peaks both over the entire projection period, and over only the autumn-winter period (October through March). In summarising peak characteristics, we considered both the timing and maximum weekly incidence of each peak, and the total number of peaks, representing distinct epidemic waves and the timing of their turning points. These epidemic characteristics could not be meaningfully estimated from the same results summarised into quantiles, as this sequence of summaries has no theoretical continuity through the time-series.
 
 
-```{r create-ensembles, fig.caption=ensemble_caption, fig.height=8, fig.width=12}
+```{r create-ensembles, fig.height=8, fig.width=12}
+ensemble_caption <- "Figure 1. Projections of incidence per 100,000 population, showing median, 50%, and 99% probabilistic intervals, using: A) no ensemble method (100 samples per model); B) a median across each model's projections at a given quantile interval; C) quantile intervals of the distribution across all samples; D) a weighted median across samples with each sample weighted by its own performance against observed data."
+
 # Create three ensembles ("Sample", "Quantile", "Weighted")
 source(here("analysis", "code", "create-ensembles.R"))
-truncate_weeks <- 2
+truncate_weeks <- 2 # scoring evaluation against all data -2 weeks before now
 ensembles <- create_ensembles(results = results, 
                               truncate_weeks = truncate_weeks,
                               quantiles = c(0.01, 0.05, 0.25, 0.5, 
@@ -62,7 +68,8 @@ ensembles <- create_ensembles(results = results,
 source(here("analysis", "code", "plot.R"))
 plots <- purrr::map(target_labels,
                     ~ plot_ensemble_results(ensembles, results, 
-                                            set_target = .x))
+                                            set_target = .x,
+                                            scenario_colours = scenario_colours))
 
 wrap_plots(plots, 
            ncol = length(plots), 
@@ -74,6 +81,8 @@ wrap_plots(plots,
 Next we took a set of 23 quantiles from the distribution of samples provided by each model for each target. We created an ensemble using a median average at each quantile interval. We compared this ensemble (figure 1B), to taking the same set of quantiles directly from the entire set of samples provided by all models (figure 1C). To compare between the two ensembles, we took the average of values at each quantile across all time points and scenarios (figure 2). 
 
 ```{r width-ensembles, fig.cap=width_plot_caption, fig.width = 12}
+width_plot_caption <- "Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
+
 source(here("analysis", "code", "compare-ensembles.R"))
 width_plot
 ```
@@ -81,10 +90,11 @@ width_plot
 
 This showed both ensembles produced similar values around the centre of the distribution, with no noticeable difference between the median values of each projection. However, the two ensembles increasingly diverged in projecting the outer upper limit of the probabilistic distribution. At the upper 98% probability interval, ensemble projections for cases in Spain averaged nearly six times higher incidence when drawn from 100 samples compared to when drawn from quantiles  (respectively averaging 1016 and 173 weekly new cases per 100,000 population). Across all five targets, the pattern held that an ensemble based on samples produced sharply increasing uncertainty between the 90% to 98% intervals. Meanwhile in an ensemble based on quantiles projected values were closer across upper bound probabilistic intervals.
 
-```{r samples-weights, fig.caption=weights_caption, fig.width = 12}
+```{r samples-weights, fig.width = 12}
+weights_caption <- "Figure 3. Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks' observed data, meaning higher weight reflects better forecasting performance."
+
 # Score samples
 source(here("analysis", "code", "score-samples.R"))
-truncate_weeks <- 2
 samples_weighted <- score_samples(results = results, 
                                   truncate_weeks = truncate_weeks) |> 
   ungroup()
@@ -109,9 +119,9 @@ weights_over_01 <- sum(weights$weight >= 0.001)
 plot_sample_weights <- weights |> 
   ggplot(aes(x = target, y = weight * 100)) +
   geom_boxplot(outlier.shape = NA) +
-  geom_jitter(aes(col = model), size = 0.5, alpha = 1) +
-  scale_colour_brewer(type = "qual", palette = 6) +
-  labs(x = NULL, y = "% weight of each sample", col = "Model") +
+  geom_jitter(aes(col = scenario_id), size = 0.5, alpha = 1) +
+  scale_colour_manual(values = scenario_colours) +
+  labs(x = NULL, y = "% weight of each sample", col = "Scenario") +
   theme_bw() +
   theme(legend.position = "bottom") +
   guides(color = guide_legend(override.aes = list(size = 2, alpha = 1)))

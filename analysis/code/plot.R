@@ -9,7 +9,8 @@ library(dplyr)
 library(ggplot2)
 
 plot_ensemble_results <- function(ensembles, results,
-                                  set_target) {
+                                  set_target,
+                                  scenario_colours) {
 
   latest_data <- max(subset(results, !is.na(obs))$target_end_date)
   # Reshape data for plotting -----
@@ -55,13 +56,6 @@ plot_ensemble_results <- function(ensembles, results,
                                       "C. Simulations",
                                       "D. Weighted")),
            obs_100k = ifelse(model %in% c("Quantiles", "Samples"), NA, obs_100k))
-
-  # colours for scenarios
-  scenario_colours <- c("A" = "#e66101",
-                        "B" = "#fdb863",
-                        "C" = "#5e3c99",
-                        "D" = "#b2abd2",
-                        "Weighted" = "grey50")
 
   # Plot --------------------------------------------------------------
   plot <- plot_data |>
