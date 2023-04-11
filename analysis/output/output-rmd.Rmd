@@ -71,10 +71,13 @@ plots <- purrr::map(target_labels,
                                             set_target = .x,
                                             scenario_colours = scenario_colours))
 
-wrap_plots(plots, 
+figure_1 <- wrap_plots(plots, 
            ncol = length(plots), 
            guides = "collect") &
   theme(legend.position = "top")
+ggsave(figure_1, here("output", "figure-1.jpg"))
+
+figure_1
 ```
 `r ensemble_caption`
 
