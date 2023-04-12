@@ -65,14 +65,17 @@ plot_ensemble_results <- function(ensembles, results,
                fill = scenario_id, col = scenario_id)) +
     # ----- Geoms
     # ensembles
-    geom_ribbon(aes(ymin = q0.01, ymax = q0.99), alpha = 0.2, col = NA) +
-    geom_ribbon(aes(ymin = q0.25, ymax = q0.75), alpha = 0.6, col = NA) +
+    geom_ribbon(aes(ymin = q0.01, ymax = q0.99),
+                alpha = 0.1, col = NA) +
+    geom_ribbon(aes(ymin = q0.25, ymax = q0.75),
+                alpha = 0.4, col = NA) +
     geom_line(aes(y = median), size = 1) +
     # model samples
-    geom_line(aes(y = q0.5, group = model_sample), alpha = 0.1) +
+    geom_line(aes(y = q0.5, group = model_sample),
+              alpha = 0.1) +
     # observed data as points
-    geom_point(aes(y = obs_100k), colour = "black", size = 0.5,
-               show.legend = FALSE) +
+    geom_point(aes(y = obs_100k),
+               colour = "black", size = 0.6, show.legend = FALSE) +
     # ----- Structure
     # facets
     facet_wrap(~ model,

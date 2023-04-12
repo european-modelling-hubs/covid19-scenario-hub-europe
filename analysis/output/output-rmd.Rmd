@@ -1,5 +1,5 @@
 ---
-title: "Information loss due to categorising variability in epidemic model comparisons"
+title: "Characterising information loss due to aggregating epidemic model outputs"
 output: html_document
 ---
 
@@ -18,14 +18,15 @@ library(ggplot2)
 library(patchwork)
 local <- TRUE # download or use saved data 
 target_levels <- c("ES inc case", "BE inc case", "NL inc case", "BE inc death", "NL inc death")
-target_labels <- c("ES inc case", "BE inc case", "NL inc case", "BE inc death", "NL inc death")
-names(target_levels) <-  target_labels
+target_labels <- c("ES cases", "BE cases", "NL cases", 
+                   "BE deaths", "NL deaths")
+names(target_levels) <- target_labels
 
 # colours for scenarios
 scenario_colours <- c("A" = "#e66101",
-                      "B" = "#fdb863",
-                      "C" = "#5e3c99",
-                      "D" = "#b2abd2",
+                      "B" = "#ca0020",
+                      "C" = "#0571b0",
+                      "D" = "#5e3c99",
                       "Weighted" = "grey50")
 ```
 
@@ -66,7 +67,7 @@ ensembles <- create_ensembles(results = results,
                           labels = target_labels))
 # Plot: All targets' trajectories over time and by ensemble
 source(here("analysis", "code", "plot.R"))
-plots <- purrr::map(target_labels,
+plots <- purrr::map(target_levels,
                     ~ plot_ensemble_results(ensembles, results, 
                                             set_target = .x,
                                             scenario_colours = scenario_colours))
@@ -75,7 +76,9 @@ figure_1 <- wrap_plots(plots,
            ncol = length(plots), 
            guides = "collect") &
   theme(legend.position = "top")
-ggsave(figure_1, here("output", "figure-1.jpg"))
+
+ggsave(filename = here("analysis", "output", "figure-1.jpg"),
+       plot = figure_1, height = 8, width = 12)
 
 figure_1
 ```
@@ -87,6 +90,8 @@ Next we took a set of 23 quantiles from the distribution of samples provided by 
 width_plot_caption <- "Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
 
 source(here("analysis", "code", "compare-ensembles.R"))
+ggsave(filename = here("analysis", "output", "figure-2.jpg"),
+       plot = width_plot, width = 12)
 width_plot
 ```
 `r width_plot_caption`
@@ -129,6 +134,8 @@ plot_sample_weights <- weights |>
   theme(legend.position = "bottom") +
   guides(color = guide_legend(override.aes = list(size = 2, alpha = 1)))
 
+ggsave(filename = here("analysis", "output", "figure-3.jpg"),
+       plot = plot_sample_weights, width = 12)
 plot_sample_weights
 ```
 `r weights_caption`
