@@ -5,28 +5,25 @@ This work aims to demonstrate what information is lost in the process of summari
 
 Work led by Kath Sherratt on behalf of the European Scenario Modelling Hub (Round 2). See [authors](#authors).
 
-Read the [current draft under co-author review](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf).
+Read the [current draft under co-author review](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf). All [code](code) and [data](data) are available: the best place to start is the [results Rmarkdown document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd).
 
 ---
 
 #### Current status
 
 - We are currently at pre-submission stage
-- A full working draft is under review by co-authors
+   - A full working draft is under review by co-authors
+   - See [current draft (pdf)](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf)
 - Next steps will be to add to medRxiv and submit to Epidemics
-- See [current draft](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf)
 
----
+#### Development
 
-#### Guide to code
-
-All [code](code) and [data](data) are available.
-- All comments and feedback, as well as requests for guidance on using the code, are very welcome - please [open an Issue](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/issues) or contact [Kath Sherratt](https://github.com/kathsherratt)
-
-This analysis is written in Google docs and R markdown (see [output](output)):
-- [Google doc](https://docs.google.com/document/d/1Kh_vvFbWwnLhfChRS-yMyARCnkL0ttAvDXsJQIwwFcY/edit)
-- [Results section presented in html](https://htmlpreview.github.io/?https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/analysis/analysis/output/output-rmd.html)
-- [Results section generated from Rmd document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
+- Code
+   - Results are generated from an [Rmd document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
+   - All comments and feedback, as well as requests for guidance on using the code, are very welcome - please [open an Issue](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/issues) or contact [Kath Sherratt](https://github.com/kathsherratt)
+- Analysis
+   - Write up is currently in a [Google doc](https://docs.google.com/document/d/1Kh_vvFbWwnLhfChRS-yMyARCnkL0ttAvDXsJQIwwFcY/edit)
+   - The results section is also available in [html](https://htmlpreview.github.io/?https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/analysis/analysis/output/output-rmd.html)
 
 ---
 
@@ -35,8 +32,6 @@ This analysis is written in Google docs and R markdown (see [output](output)):
 Katharine Sherratt 1, Ajitesh Srivastava 2, Kylie Ainslie 3, David E. Singh 4, Aymar Cublier 4, Miguel Guzman Merino 4, Maria Cristina Marinescu 5, Jesus Carretero 4, Alberto Cascajo Garcia 4, Nicolas Franco 6, Lander Willem 7, Steven Abrams 8, Christel Faes 8, Philippe Beutels 8, Niel Hens 8, Sebastian Müller 9, Billy Charlton 9, Ricardo Ewert 9, Sydney Paltra 9, Christian Rakow 9, Jakob Rehmann 9, Tim Conrad 10, Christof Schütte 10, Kai Nagel 9, Rok Grah 11, Rene Niehus 11, Bastian Prasse 11, Frank Sandmann 11, Sebastian Funk 1
 
 _1 London School of Hygiene and Tropical Medicine, London, UK; 2 University of Southern California, Los Angeles, USA; 3 RIVM, Bilthoven, Netherlands; 4 Universidad Carlos III de Madrid, Madrid, Spain; 5 Barcelona Supercomputing Center, Barcelona, Spain; 6 University of Namur (Belgium), Namur, Belgium; 7 University of Antwerp (Belgium), Antwerp, Belgium; 8 University of Hasselt (Belgium), Hasselt, Belgium; 9 TU Berlin, Berlin, Germany; 10 ZIB Berlin, Berlin, Germany; 11 ECDC, Stockholm, Sweden_
-
-----
 
 #### Abstract
 
