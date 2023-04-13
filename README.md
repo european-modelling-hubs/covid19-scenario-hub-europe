@@ -1,20 +1,12 @@
 # European COVID-19 Scenario Hub
 
-> ### Round 1
-> Following completion of the pilot round we are now welcoming modelling contributions to round 1. For the full scenario specifications in this round, applied to the [32 countries](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/main/data-locations/locations_eu.csv) of the Hub, see:
-> - [Scenario details: Round 1](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/wiki/Round-1)
->
->  For updates, please [request to join the mailing list](https://groups.google.com/u/0/g/euro-covid19-scenario-hub) including your name/introduction.
-
----
-
 ## Background
 
 Scenario models for COVID-19 aim to bound the uncertainty around future outcomes over some time frame. Each potential scenario is composed of one or more variables (which could be, for example, biological parameters such as the rate of immunity waning, or assumed future changes in contact behaviours) deemed plausible. The scenario models encode the influence of these variables on COVID-19 outcomes, and results from scenario models show possible outcomes within the given timeframe assuming that present causal relationships hold in the future. The definition of scenario variables and values depends on the intended use of scenario results. One purpose of scenario modelling is to support comparisons of possible actions taken in the present with long term effects. Separately, scenarios can also be used to understand the sensitivity of future outcomes to varying parameter conditions. 
 
 Each single model provides a framework for estimating the upper and lower limits of uncertainty in COVID-19 outcomes corresponding to each scenario. However, there is no objectively best framework for modelling the transmission of SARS-CoV-2 and resulting dynamics of COVID-19, meaning the true range of uncertainty may be most appropriately expressed by results from multiple alternative models.
 
-We aim to create a European Scenario Hub that brings together scenario modellers for the purpose of better understanding possible COVID-19 futures in a way that informs short-term policy strategies for managing COVID-19 across Europe. This follows previous work to produce collaborative forecasts and scenarios in Europe and the United States (<https://covid19forecasthub.org/>, <https://github.com/KITmetricslab/covid19-forecast-hub-de>, <https://covid19scenariomodelinghub.org/>). The following text aims to ensure transparent principles and criteria to guide all participants in the Hub and interpretation of Hub results.
+We created the European Scenario Hub to bring together scenario modellers for the purpose of better understanding possible COVID-19 futures in a way that informs short-term policy strategies for managing COVID-19 across Europe. This follows previous work to produce collaborative forecasts and scenarios in Europe and the United States (<https://covid19forecasthub.org/>, <https://github.com/KITmetricslab/covid19-forecast-hub-de>, <https://covid19scenariomodelinghub.org/>). The following text aims to ensure transparent principles and criteria to guide all participants in the Hub and interpretation of Hub results.
 
 ## Aims
 
@@ -45,7 +37,7 @@ We are creating scenarios at 4-8 week intervals with each set of scenarios (a ro
 
 #### Variables
 
-We aim to include one variable that is biologically intrinsic to COVID-19, and one variable that can be influenced extrinsically by national-level policy action. For each variable we identify one or more observable parameters that represent the causal pathway from the variable to the outcome. 
+We usually include one variable that is biologically intrinsic to COVID-19, and one variable that can be influenced extrinsically by national-level policy action. For each variable we identify one or more observable parameters that represent the causal pathway from the variable to the outcome. 
 
 For each scenario round, we collaborate with the European Centre for Disease Prevention and Contorl (ECDC) to define the relevant variables, based on their interactions with national policy-makers and assessment of possible policy options. We will draw on the epidemiology of COVID-19 in Europe to suggest themes for the biologically intrinsic variable. After an initial consultation with the ECDC, we share and seek suggestions for the scenario variables from participating teams. 
 
@@ -70,3 +62,7 @@ We synthesise results both by exploring differences between and within models, a
 For each scenario round, we will create a standardised visualisation allowing all models’ scenario projections to be compared. This will be presented on the website and we will follow this with a narrative summary of model results, including information taken from model abstracts to demonstrate differences between teams’ approach to and results from scenarios.
 
 We aim to choose plausible scenarios that can inform policy but do not expect any of them to be an exact characterisation of the future. We therefore do not expect data to align with any one model result. Moreover, observed data would not align with any scenario output if the scenarios excluded a parameter that operated within the relevant timeframe and had substantial confounding effects across all of the scenarios.
+
+## European scenario hub team
+
+Originally set up in collaboration with the [Epiforecasts](https://epiforecasts.io) team the hub is now maintained by the [European Centre for Disease Prevention and Control](https://www.ecdc.europa.eu/).
