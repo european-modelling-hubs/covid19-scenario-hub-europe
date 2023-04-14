@@ -1,11 +1,13 @@
 
 ## Characterising information loss due to aggregating epidemic model outputs
 
-This work aims to demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of key epidemic characteristics; summarising uncertainty using an ensemble; and exploring performance against observed data. See the [Abstract](#abstract).
+This work aims to demonstrate what information is lost in the process of summarising model output in quantiles when contributing to a multi-model epidemic modelling hub, in terms of key epidemic characteristics; summarising uncertainty using an ensemble; and exploring performance against observed data. 
 
 Work led by Kath Sherratt on behalf of the European Scenario Modelling Hub (Round 2). See [authors](#authors).
 
-Read the [current draft under co-author review](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf). All [code](code) and [data](data) are available: the best place to start is the [results Rmarkdown document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd).
+- See the [Abstract](#abstract) and [presentation](https://docs.google.com/presentation/d/1tktKl41Sa7KMzwUHpLcJVFEechMlHut5aoKC6lX6tbc/edit#slide=id.g2177422d982_0_45)
+- Read the [current draft under co-author review](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf). 
+- All [code](code) and [data](data) are available: the best place to start is the [results Rmarkdown document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
 
 ---
 
