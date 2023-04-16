@@ -7,7 +7,6 @@ Work led by Kath Sherratt on behalf of the European Scenario Modelling Hub (Roun
 
 - See the [Abstract](#abstract) and [presentation](https://docs.google.com/presentation/d/1tktKl41Sa7KMzwUHpLcJVFEechMlHut5aoKC6lX6tbc/edit#slide=id.g2177422d982_0_45)
 - Read the [current draft under co-author review](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/Co-author%20review_%20Characterising%20information%20loss%20due%20to%20aggregating%20epidemic%20model%20outputs.pdf). 
-- All [code](code) and [data](data) are available: the best place to start is the [results Rmarkdown document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
 
 ---
 
@@ -21,11 +20,11 @@ Work led by Kath Sherratt on behalf of the European Scenario Modelling Hub (Roun
 #### Development
 
 - Code
-   - Results are generated from an [Rmd document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
-   - All comments and feedback, as well as requests for guidance on using the code, are very welcome - please [open an Issue](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/issues) or contact [Kath Sherratt](https://github.com/kathsherratt)
+   - All [code](code) and [data](data) are available: the best place to start is the [results Rmarkdown document](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/blob/analysis/analysis/output/output-rmd.rmd)
+   - Comments and feedback, as well as requests for guidance on using the code, are very welcome - please [open an Issue](https://github.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/issues) or contact [Kath Sherratt](https://github.com/kathsherratt)
 - Analysis
    - Write up is currently in a [Google doc](https://docs.google.com/document/d/1Kh_vvFbWwnLhfChRS-yMyARCnkL0ttAvDXsJQIwwFcY/edit)
-   - The results section is also available in [html](https://htmlpreview.github.io/?https://raw.githubusercontent.com/covid19-forecast-hub-europe/covid19-scenario-hub-europe/analysis/analysis/output/output-rmd.html)
+   - The results section is also available in [html](https://htmlpreview.github.io/?https://raw.githubusercontent.com/covid19-forecast-hub-europe/aggregation-info-loss/main/output/output-rmd.html)
 
 ---
 
