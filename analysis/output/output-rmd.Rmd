@@ -1,0 +1,158 @@
+---
+title: "Characterising information loss due to aggregating epidemic model outputs"
+output: html_document
+---
+
+```{r set-up, include=FALSE}
+# Document settings -----
+knitr::opts_chunk$set(eval = TRUE, echo = FALSE,
+                      message = FALSE, warning = FALSE,
+                      eval.after = "fig.cap")
+options(digits = 2)
+# Workspace -----
+library(here)
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(ggplot2)
+library(patchwork)
+local <- TRUE # download or use saved data 
+target_levels <- c("ES inc case", "BE inc case", "NL inc case", "BE inc death", "NL inc death")
+target_labels <- c("ES cases", "BE cases", "NL cases", 
+                   "BE deaths", "NL deaths")
+names(target_levels) <- target_labels
+
+# colours for scenarios
+scenario_colours <- c("A" = "#e66101",
+                      "B" = "#ca0020",
+                      "C" = "#0571b0",
+                      "D" = "#5e3c99",
+                      "Weighted" = "grey50")
+```
+
+
+## Results
+
+```{r load-samples}
+# Load samples from all models
+source(here("analysis", "code", "import-results.R"))
+results <- import_results(round = 2, local = local)
+
+# Clean and include observed data where available
+source(here("analysis", "code", "format-results.R"))
+results <- format_results(results = results, 
+                          n_model_min = 3, local = local) |> 
+  mutate(target = ordered(x = paste(location, target_variable),
+                          labels = target_labels))
+```
+
+A total of six modelling teams submitted projections to the European COVID-19 Scenario Hub in Round 2. All teams contributed projections for all four scenarios. Two teams submitted projections for nearly all countries and targets. Here we focus on multi-model comparison and use only projection targets with three contributing models. These targets included 4 scenarios for 52 weeks’ case and death incidence for the Netherlands and Belgium, and 41 weeks’ case incidence for Spain. Of three models for each of these targets, two sampled 100 simulations and one sampled 96 simulations. In total we consider `r nrow(results)` data points from 5920 simulations, where each data point is the estimated weekly incidence at one time step in a simulated trajectory of an outcome in a target country and scenario over up to one year.
+
+First we explore epidemic characteristics using sample trajectories. We summarised information about cumulative outbreak size over the projection period. For each target, we compared the cumulative number of projected outcomes to a threshold of the cumulative total over the one year before projections started (to July 2022). Across all 5920 simulations for all targets, 10% saw a cumulative total exceeding the relevant threshold. This varied widely, for example in Belgium where 25% and 2.5% of all trajectories would see a cumulative total exceeding the previous year’s total number of cases and deaths respectively.
+
+Sample trajectories also allowed us to explore projected peaks in incidence. We looked at peaks both over the entire projection period, and over only the autumn-winter period (October through March). In summarising peak characteristics, we considered both the timing and maximum weekly incidence of each peak, and the total number of peaks, representing distinct epidemic waves and the timing of their turning points. These epidemic characteristics could not be meaningfully estimated from the same results summarised into quantiles, as this sequence of summaries has no theoretical continuity through the time-series.
+
+
+```{r create-ensembles, fig.height=8, fig.width=12}
+ensemble_caption <- "Figure 1. Projections of incidence per 100,000 population, showing median, 50%, and 99% probabilistic intervals, using: A) no ensemble method (100 samples per model); B) a median across each model's projections at a given quantile interval; C) quantile intervals of the distribution across all samples; D) a weighted median across samples with each sample weighted by its own performance against observed data."
+
+# Create three ensembles ("Sample", "Quantile", "Weighted")
+source(here("analysis", "code", "create-ensembles.R"))
+truncate_weeks <- 2 # scoring evaluation against all data -2 weeks before now
+ensembles <- create_ensembles(results = results, 
+                              truncate_weeks = truncate_weeks,
+                              quantiles = c(0.01, 0.05, 0.25, 0.5, 
+                                            0.75, 0.95, 0.99)) |> 
+  mutate(target = ordered(x = paste(location, target_variable),
+                          labels = target_labels))
+# Plot: All targets' trajectories over time and by ensemble
+source(here("analysis", "code", "plot.R"))
+plots <- purrr::map(target_levels,
+                    ~ plot_ensemble_results(ensembles, results, 
+                                            set_target = .x,
+                                            scenario_colours = scenario_colours))
+
+figure_1 <- wrap_plots(plots, 
+           ncol = length(plots), 
+           guides = "collect") &
+  theme(legend.position = "top")
+
+ggsave(filename = here("analysis", "output", "figure-1.jpg"),
+       plot = figure_1, height = 8, width = 12)
+
+figure_1
+```
+`r ensemble_caption`
+
+Next we took a set of 23 quantiles from the distribution of samples provided by each model for each target. We created an ensemble using a median average at each quantile interval. We compared this ensemble (figure 1B), to taking the same set of quantiles directly from the entire set of samples provided by all models (figure 1C). To compare between the two ensembles, we took the average of values at each quantile across all time points and scenarios (figure 2). 
+
+```{r width-ensembles, fig.cap=width_plot_caption, fig.width = 12}
+width_plot_caption <- "Figure 2. Mean central prediction intervals across time and scenarios. Mean lower and upper interval bounds: 52 week mean of quantiles in the sample and quantile ensembles"
+
+source(here("analysis", "code", "compare-ensembles.R"))
+ggsave(filename = here("analysis", "output", "figure-2.jpg"),
+       plot = width_plot, width = 12)
+width_plot
+```
+`r width_plot_caption`
+
+This showed both ensembles produced similar values around the centre of the distribution, with no noticeable difference between the median values of each projection. However, the two ensembles increasingly diverged in projecting the outer upper limit of the probabilistic distribution. At the upper 98% probability interval, ensemble projections for cases in Spain averaged nearly six times higher incidence when drawn from 100 samples compared to when drawn from quantiles  (respectively averaging 1016 and 173 weekly new cases per 100,000 population). Across all five targets, the pattern held that an ensemble based on samples produced sharply increasing uncertainty between the 90% to 98% intervals. Meanwhile in an ensemble based on quantiles projected values were closer across upper bound probabilistic intervals.
+
+```{r samples-weights, fig.width = 12}
+weights_caption <- "Figure 3. Weight of individual samples in an ensemble across all available samples for each of five projection targets. Samples were weighted by the inverse of mean absolute error against 28 weeks' observed data, meaning higher weight reflects better forecasting performance."
+
+# Score samples
+source(here("analysis", "code", "score-samples.R"))
+samples_weighted <- score_samples(results = results, 
+                                  truncate_weeks = truncate_weeks) |> 
+  ungroup()
+
+# summarise weights
+weights <- samples_weighted |> 
+  mutate(target = ordered(x = paste(location_name, target_variable),
+                          labels = target_labels)) |> 
+  group_by(target) |> 
+  filter(horizon == 1)
+
+weight_summary <- weights |> 
+  summarise(n = n(),
+            mean_weight = mean(weight),
+            min = min(weight),
+            q25 = quantile(weight, 0.25),
+            q50 = median(weight),
+            q75 = quantile(weight, 0.75),
+            max = max(weight),
+            weight = sum(weight))
+weights_over_01 <- sum(weights$weight >= 0.001)
+plot_sample_weights <- weights |> 
+  ggplot(aes(x = target, y = weight * 100)) +
+  geom_boxplot(outlier.shape = NA) +
+  geom_jitter(aes(col = scenario_id), size = 0.5, alpha = 1) +
+  scale_colour_manual(values = scenario_colours) +
+  labs(x = NULL, y = "% weight of each sample", col = "Scenario") +
+  theme_bw() +
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(override.aes = list(size = 2, alpha = 1)))
+
+ggsave(filename = here("analysis", "output", "figure-3.jpg"),
+       plot = plot_sample_weights, width = 12)
+plot_sample_weights
+```
+`r weights_caption`
+
+We then considered the forecasting performance of individual samples against 28 weeks' observed data (figure 3). The performance of each sample varied substantially between both models and targets. When weighted by inverse MAE, no sample received more than `r max(weights$weight)*100`% weight (among n=`r nrow(weights)/length(unique(weights$target))` samples for each target). Weighting was heavily skewed across samples for some targets, including cases in Spain and Belgium with outlying clusters of highly weighted predictive samples from one model. Weights were more uniform across samples' forecast performance for deaths in the Netherlands and Belgium.
+
+```{r end-projection-uncertainty}
+proj_end <- ensembles |> 
+  filter(scenario_id == "Weighted") |> 
+  group_by(location, target_variable) |> 
+  filter(target_end_date == max(target_end_date) & 
+           quantile == "q0.99") |> 
+  filter(value == max(value))
+
+end_max <- results |> 
+  group_by(location, target_variable) |>
+  filter(target_end_date == max(target_end_date)) |> 
+  filter(value_100k == max(value_100k))
+```
+Creating an ensemble using the weighted performance of samples reduced the uncertainty of the future projection (figure 1D). In the Netherlands in the final week of projections for deaths, the most extreme single trajectory projected an incident 2.8 per 100,000 in the final week of projections. However when we weighted all trajectories by performance and took quantiles from this distribution, the upper limit of 99% probability suggested an incidence over 8 times lower, at 0.33 per 100,000. 
