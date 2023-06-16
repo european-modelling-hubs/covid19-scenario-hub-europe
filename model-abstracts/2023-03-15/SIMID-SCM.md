@@ -10,7 +10,7 @@ The impact of the waning hypothesis concerning severe outcomes is more important
 ## Comments on observed dynamics given model assumptions
 Comments concerning the calibration:
 - The new waning hypotheses (especially using median instead of mean) provide slower waning. With the optimistic waning hypothesis, the remaining pool of susceptible is so low at some periods that the calibration is difficult.
-- The new waning hypotheses imply an almost complete recalibration of the model. Since some of them were not successful, we only kept around 20 independent Markov chains. Hence the 100 runs provided are based on 20 independent calibrations times several stochastic realisations.
+- The new waning hypotheses imply an almost complete recalibration of the model. Since some of them were not successful, we only kept around 50 independent Markov chains. Hence the 100 runs provided are based on 50 independent calibrations times two stochastic realisations.
 - The mortality rate seems not perfectly calibrated concerning the current variant, so the "inc death" projections are probably less trustable. 
 - In general, the behaviour (and severity parameters) since the emergence of the last variant xbb1.5 in Belgium cannot be very perfectly captured since this variant is not present for a long time in the country. This particularly happens with the optimistic waning hypothesis.
 
