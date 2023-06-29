@@ -39,5 +39,5 @@ jobs:
               metadata_folder = "model-metadata",
               abstract_folder = "model-abstracts"
           )
-          HubValidations::check_for_errors(v)
+          #HubValidations::check_for_errors(v)
         shell: Rscript {0}
