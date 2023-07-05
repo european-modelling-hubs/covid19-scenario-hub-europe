@@ -32,7 +32,7 @@ model_details:
   case_fatality_rate: The probability of severe disease is a function of age, current level of acquired immunity, current level of vaccine-indiced immunity
   infection_fatality_rate: Age related probability given a person is critical; logistic with upper bound of 2, lower bound of 9, half life of 90, and slope of 14.
   asymptomatics: Assumed to be 33% of those infected.
-  age_groups: [5-17, 18-59, 60+]
+  age_groups: '[5-17, 18-59, 60+]'
   importations: Assume 1.5 importated infections per day per 100,000 people
   confidence_interval_method: xxx
   calibration: Calibrated at the national-level using epidemioloical data to match 4 metrics (daily confirmed cases, deaths, hospital admissions, and ICU admissions) using a Gaussian Process and Latin Hypercube sampling. 
