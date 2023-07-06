@@ -32,12 +32,16 @@ jobs:
         env:
           PR_NUMBER: ${{ github.event.number }}
         run: |
-          v <- HubValidations::validate_pr(
-              gh_repo = Sys.getenv("GITHUB_REPOSITORY"),
-              pr_number = Sys.getenv("PR_NUMBER"),
-              data_folder = "data-processed",
-              metadata_folder = "model-metadata",
-              abstract_folder = "model-abstracts"
-          )
+          if (nchar(Sys.getenv("PR_NUMBER")) > 0) {
+            v <- HubValidations::validate_pr(
+                gh_repo = Sys.getenv("GITHUB_REPOSITORY"),
+                pr_number = Sys.getenv("PR_NUMBER"),
+                data_folder = "data-processed",
+                metadata_folder = "model-metadata",
+                abstract_folder = "model-abstracts"
+            )
+          } else {
+            v <- HubValidations::validate_repository()
+          }
           HubValidations::check_for_errors(v)
         shell: Rscript {0}
