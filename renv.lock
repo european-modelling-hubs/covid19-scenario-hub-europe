@@ -58,11 +58,11 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "covid19-forecast-hub-europe",
       "RemoteRepo": "HubValidations",
       "RemoteRef": "origin-date",
-      "RemoteSha": "904fd71bcead19d2eb0d753c50fa73185d1ed4ae",
-      "RemoteHost": "api.github.com",
+      "RemoteSha": "1787e834821926f209b91f7c025436a91a642de2",
       "Remotes": "r-lib/rlang",
       "Requirements": [
         "dplyr",
@@ -76,7 +76,7 @@
         "rlang",
         "yaml"
       ],
-      "Hash": "155f24c9094b64dac43045452df97407"
+      "Hash": "0a6e0847b48555707ceed72eec4b53f9"
     },
     "MASS": {
       "Package": "MASS",
@@ -218,6 +218,28 @@
       ],
       "Hash": "85986a8a9f63af35ad24a022dfa48fdb"
     },
+    "arrow": {
+      "Package": "arrow",
+      "Version": "12.0.1",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "R",
+        "R6",
+        "assertthat",
+        "bit64",
+        "cpp11",
+        "glue",
+        "methods",
+        "purrr",
+        "rlang",
+        "stats",
+        "tidyselect",
+        "utils",
+        "vctrs"
+      ],
+      "Hash": "6f47141e9d2f266b3cd87ac0cb013031"
+    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
@@ -227,6 +249,16 @@
         "sys"
       ],
       "Hash": "e8a22846fff485f0be3770c2da758713"
+    },
+    "assertthat": {
+      "Package": "assertthat",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "tools"
+      ],
+      "Hash": "50c838a310445e954bc13f26f26a6ecf"
     },
     "backports": {
       "Package": "backports",
