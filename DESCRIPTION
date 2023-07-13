@@ -1,6 +1,6 @@
 Package: covid19-scenario-hub-europe
 Version: 0.1
-Suggests:
+Depends:
   HubValidations
 Remotes:
-  covid19-forecast-hub-europe/HubValidations
+  covid19-forecast-hub-europe/HubValidations@origin-date
