@@ -58,11 +58,11 @@
       "Version": "0.0.0.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "covid19-forecast-hub-europe",
       "RemoteRepo": "HubValidations",
       "RemoteRef": "origin-date",
-      "RemoteSha": "ea27cd08d8575c602d5e0b1245df4620ba50bdb3",
+      "RemoteSha": "904fd71bcead19d2eb0d753c50fa73185d1ed4ae",
+      "RemoteHost": "api.github.com",
       "Remotes": "r-lib/rlang",
       "Requirements": [
         "dplyr",
@@ -76,7 +76,7 @@
         "rlang",
         "yaml"
       ],
-      "Hash": "806f484d2b8e3631b20639c372ac6a0f"
+      "Hash": "155f24c9094b64dac43045452df97407"
     },
     "MASS": {
       "Package": "MASS",
