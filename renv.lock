@@ -1775,14 +1775,14 @@
     },
     "scoringutils": {
       "Package": "scoringutils",
-      "Version": "1.1.4",
+      "Version": "1.1.5",
       "Source": "GitHub",
       "RemoteType": "github",
+      "RemoteHost": "api.github.com",
       "RemoteUsername": "epiforecasts",
       "RemoteRepo": "scoringutils",
-      "RemoteRef": "master",
-      "RemoteSha": "255721ae31b309d26e85d90e67c446447c190d39",
-      "RemoteHost": "api.github.com",
+      "RemoteRef": "main",
+      "RemoteSha": "3bf41d82364d2d9097357a88cf6537c551f195b7",
       "Requirements": [
         "R",
         "data.table",
@@ -1794,7 +1794,7 @@
         "scoringRules",
         "stats"
       ],
-      "Hash": "df722dee60a8c592c83b44f7ede5ea90"
+      "Hash": "5336a7b72d28c6024b6e9f998b24d527"
     },
     "selectr": {
       "Package": "selectr",
