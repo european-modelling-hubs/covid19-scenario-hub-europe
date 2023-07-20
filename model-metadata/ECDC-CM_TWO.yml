@@ -1,6 +1,6 @@
 team_name: ECDC
-model_name: CM_ONE
-model_abbr: ECDC-CM_ONE
+model_name: CM_TWO
+model_abbr: ECDC-CM_TWO
 model_contributors:
   - name: Rok Grah
     affiliation: ECDC
