@@ -16,7 +16,7 @@ model_contributors:
     email: frank.sandmann@ecdc.europa.eu
 website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
-team_model_designation: primary
+team_model_designation: secondary
 methods: 'Discrete-time, deterministic, mean-field SEIR-type compartmental model on metapopulation level. Population divided by age, vaccination status, and previous recovery; incl. seasonality, BA2 & behavior.'
 model_details:
   modeling_NPI: 'Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour'
