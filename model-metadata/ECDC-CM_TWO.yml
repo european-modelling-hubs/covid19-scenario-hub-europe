@@ -1,6 +1,6 @@
 team_name: ECDC
-model_name: CM_ONE
-model_abbr: ECDC-CM_ONE
+model_name: CM_TWO
+model_abbr: ECDC-CM_TWO
 model_contributors:
   - name: Rok Grah
     affiliation: ECDC
@@ -11,9 +11,6 @@ model_contributors:
   - name: Bastian Prasse
     affiliation: ECDC
     email: bastian.prasse@ecdc.europa.eu
-  - name: Frank Sandmann
-    affiliation: ECDC
-    email: frank.sandmann@ecdc.europa.eu
 website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
 team_model_designation: primary
