@@ -14,7 +14,7 @@ model_contributors:
 website_url: https://www.ecdc.europa.eu/en
 license: cc-by-nc-4.0
 team_model_designation: primary
-methods: 'Discrete-time, deterministic, mean-field SEIRS-type compartmental model on metapopulation level. Population divided by age, vaccination status, and time since last recovery; incl. seasonality, (sub-)variants, and behaviour.'
+methods: 'Discrete-time, deterministic, mean-field SEIRS-type compartmental model on metapopulation level. Population divided by age, vaccination status, and time since last recovery.'
 model_details:
   modeling_NPI: 'Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour'
   compliance_NPI: Not applicable
