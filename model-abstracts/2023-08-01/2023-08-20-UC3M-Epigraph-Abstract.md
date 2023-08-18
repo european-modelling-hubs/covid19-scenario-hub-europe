@@ -137,5 +137,7 @@ The case notification rates do not introduce any changes in the simulated popula
 
 ### Other
 
+The calibration was done by fitting the simulator results with data of COVID-19 cases, hospitalizations and deaths. This calibration was done using a waning value that is located between the optimistic and pessimistic scenarios. 
+
 For the considered scenario (Spain) we have used the real incidence data provided by a model developed in our team. This model overcomes the main limitation of the existing official incidence data—which only accounts for people over 60—by combining information from different Spanish notification sources (SiVIES, SiVIRA, and hospitalization incidence) to estimate the real incidence for Spain, accounting for the entire population.
 
