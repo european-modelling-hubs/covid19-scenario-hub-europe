@@ -18,6 +18,7 @@ We have modelled the eight scenarios of Round 5 with an upgraded version of EpiG
 
 ## Comments on observed dynamics given model assumptions
 
+* We have analyzed the overall immunity levels -average value among all the population 60+- related to scenarios G and H and both of them are very similar and slightly better than F. Based on this we conclude that, according to EpiGraph model, scenarios G and H produce similar results in terms of protection against infection, hospitalization and death. 
 
 * Given that the vaccination is applied only to a subset of the entire simulated population, its ability to reduce the number of infections is limited. 
 
