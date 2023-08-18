@@ -9,10 +9,10 @@ Projected vaccination campaigns have a stronger impact with projections using th
 
 Projected vaccination campaigns using the optimistic assumption have a counterbalanced effet starting from March 2024.
 
-Optimistic vaccination scenarios seems to lead to a double benefice than pessimistic vaccination scenarios. The benefice from Upper boundary vaccination seems more marginal.
+Optimistic vaccination scenarios seems to lead to a double benefice than pessimistic vaccination scenarios. The benefice from upper boundary vaccination seems more marginal.
 
 ## Comments on observed dynamics given model assumptions
-The main noticeable difference between assumptions is that, if the benefice from the vaccination campaign on the projections using the pessimistic waning assumption is always positive, the benefice from the vaccination campaign on the projections using the optimistic waning assumption is positive during the period November 2023-February 2024 but negative during the period March 2024-April 2024. This might be due to a lower circulation during the first period leading to a weaker total protection during the second period, or to the differences in the dynamics coming from the calibration using this assumption as detailed in the "Optimistic waning of protection against infection" section (higher numbers of infections, more immune evasion or co-circulation of different variants).
+The main noticeable difference between assumptions is that, if the benefice from the vaccination campaign on the projections using the pessimistic waning assumption is always positive, the benefice from the vaccination campaign on the projections using the optimistic waning assumption is positive during the period November 2023-February 2024 but negative during the period March 2024-April 2024. This might be due to a lower circulation during the first period leading to a weaker global protection during the second period, or to the differences in the dynamics coming from the calibration using this assumption as detailed in the "Optimistic waning of protection against infection" section (higher numbers of infections, more immune evasion or co-circulation of different variants).
 
 # Model assumptions
 
@@ -37,7 +37,7 @@ The waning concerning protection after vaccination is performed as specified in 
 The waning still leads to a state of constant partial protection which could be considered as a plateau. However, using a leaky approach of vaccination individuals cannot stay in that state forever.
 
 The data used are up to June 27th, 2023 since Belgium entered into sentinel surveillance after this date. Projection are performed form June 28th, 2023.
-The data used are the one provided by Sciensano, the health institute for Belgium. Those data are similar to the one collected by ECDC, excepted some retrospective error corrections in past periods. 
+The data used are the one provided by Sciensano, the health institute for Belgium. Those data are similar to the one collected by ECDC, excepted some retrospective error corrections in past periods. The model is mainly calibrated on new hospitalisations of people with covid, including individuals not hospitalised for covid (i.e. for other diseases). However, the output "inc hosp" is an estimation of the hospital admissions for covid only.
 
 ### Vaccination
 
