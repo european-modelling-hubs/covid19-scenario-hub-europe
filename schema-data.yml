@@ -18,6 +18,26 @@ properties:
         - D
         - E
         - F
+        - G
+        - H
+        - I
+        - J
+        - K
+        - L
+        - M
+        - N
+        - O
+        - P
+        - Q
+        - R
+        - S
+        - T
+        - U
+        - V
+        - W
+        - X
+        - Y
+        - Z
   target_variable:
     description: '"inc case" or "inc death" or "inc hosp" or "inc infection" or "inc icu"'
     type: array
