@@ -1,0 +1,36 @@
+team_name: ECDC
+model_name: CM_TWO
+model_abbr: ECDC-CM_TWO
+model_contributors:
+  - name: Rok Grah
+    affiliation: ECDC
+    email: rok.grah@ecdc.europa.eu
+  - name: Rene Niehus
+    affiliation: ECDC
+    email: rene.niehus@ecdc.europa.eu
+  - name: Bastian Prasse
+    affiliation: ECDC
+    email: bastian.prasse@ecdc.europa.eu
+website_url: https://www.ecdc.europa.eu/en
+license: cc-by-nc-4.0
+team_model_designation: primary
+methods: 'Discrete-time, deterministic, mean-field SEIRS-type compartmental model on metapopulation level. Population divided by age, vaccination status, and time since last recovery.'
+model_details:
+  modeling_NPI: 'Considered that behaviour converges to a "new normal", which may be close, but not equal to, pre-pandemic behaviour'
+  compliance_NPI: Not applicable
+  contact_tracing: Not applicable
+  testing: Not applicable
+  vaccine_efficacy_transmission: See vaccine_immunity_duration
+  vaccine_efficacy_delay: Not applicable
+  vaccine_hesitancy: Not applicable
+  vaccine_immunity_duration: 'We assume exponential waning of neutralisation levels that is related to vaccine efficacy (VE) against infection via the following paper: https://doi.org/10.1038/s41591-021-01377-8. The starting VEs against infections for each vaccine product and age group is obtained from literature. Using this approach, the waning curves are sigmoid shaped and fit data points on waned VE over time well. Assuming an X% decrease of VE against infection after Z months (X and Z are defined either by the scenario round or by literature if waning speed was not specified), we obtain the exponential decay time of neutralisation levels to fit to the two VE points Z months apart. We assume no plateau of VE against infection. A similar approach is taken for VE again severe outcomes.'
+  natural_immunity_duration: 'The naturally-acquired protection and its waning over time is obtained from: https://www.thelancet.com/action/showPdf?pii=S1473-3099%2822%2900801-5. Hybrid protection (HE) is assumed to be independently impacted by vaccine-induced (VE) and naturally-acquired (RE) protection by the following formula: HE= 1 - (1-VE)*(1-RE) at ever time t.'
+  case_fatality_rate: Depending on age and vaccination status, obtained by calibrating to case and hospitalisation data.
+  infection_fatality_rate: Depending on age and vaccination status, obtained by calibrating to case and hospitalisation data provided an underascertainment factor (infections/cases) that is drawn from a prior distribution.
+  asymptomatics: Not applicable
+  age_groups: '[0-4, 5-9, 10-14, 15-17, 18-24, 25-49, 50-59, 60-69, 70-79, 80+]'
+  importations: Not considered relevant for this submission round, but model does provide the functionality to specify importation of cases
+  confidence_interval_method: Quantiles followed from prior distribution of parameters
+  calibration: The vector composed of all compartments and all groups is considered to be proportional (parallel) to the steady-state vector. The proportionality scalar is calibrated to reported cases, hospitalisations and deaths (or a subset if not all three observations are available for a country). 
+  spatial_structure: Not applicable
+methods_long: 'We use a discrete-time, deterministic, mean-field compartmental model to describe the spread of COVID-19 on a metapopulation level in a given country. The population is divided into ten age groups, six vaccination groups (0, 1, 2, 3, 4 or 5 vaccine doses), and 12 recovered groups (R1, ..., R12) that capture the time since last infection. Individuals in the recovered compartments can be reinfected, and the more recovered compartments an individual traversed, the smaller their protection against infection. Hence, there are 720 population groups in total. To estimate the contact network between age groups, we make use of POLYMOD contact data. For every group, the disease progression follows an SEIRS-type model, with additional compartments that correspond to individuals in a pre-symptomatic, infectious, hospitalised, or deceased state. We obtain the average of the infection rate between population groups by fitting the model to past data by populating the compartments proportionally to the steady state. For the remaining parameters, we specified the prior distribution based on values from literature and expert opinions. The model includes seasonality, the impact of (sub-)variants and behaviour.'
