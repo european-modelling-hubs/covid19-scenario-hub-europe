@@ -31,7 +31,7 @@ FILL (if applicable)
 ### Vaccination
 
 #### Any variation from the scenarios as specified
-FILL (if applicable)
+We assume that Comirnaty XBB.1.5 is the only type of vaccination distributed during the vaccination campaign. This monovalent vaccine is assumed to provide the same protection against an infection with XBB.1.5. as the original mRNA vaccines protected against the wild-type of SARS-CoV-2. In the "pessimistic" and "optimistic" cases, we specified that agents could only get the new vaccinations if they hadn't been infected or vaccinated in the last year (as per STIKO reccomendation) and that only agents who were already vaccinated (+ potentially boostered) could recieve the booster. For the "upper-limit" case, we reduced the wait period to 6 months and also allowed unvaccinated agents to receive the booster. 
 
 
 ## Additional assumptions
@@ -43,19 +43,19 @@ FILL
 FILL
 
 ### Vaccine effectiveness
-FILL
+
 
 ### Number/type of immune classes considered
 FILL (if applicable)
 
 #### Initial distribution of susceptibility 
-FILL (if applicable)
+In our model, whenever an agent recovers, they are automatically considered susceptible again. They never reach full immunity. Hence, every agent is (to a certain extent) susceptible.
 
 ##### Proportion of people that are naïve at start of projection (not vaccinated or infected)
 FILL (if applicable)
 
 #### Population ageing 
-FILL
+Not implemented
 
 #### Assumptions on severity of infection of repeat infections
 FILL
@@ -66,17 +66,17 @@ FILL (if applicable)
 
 ### Seasonality implementation
 
-FILL (if applicable)
+Based on weather data, we set up the so-called "outdoor fraction", which determines the percentage of activities performed outside instead of inside.
 
 ### Contact rate and/or behaviour assumptions
 
 #### Non-pharmaceutical interventions
 
-FILL (if applicable)
+None. 
 
 #### Behaviour in response to case notification rates
 
-FILL (if applicable)
+Not implemented
 
 ### Other
 
