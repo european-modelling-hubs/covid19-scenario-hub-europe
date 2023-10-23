@@ -10,7 +10,8 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 FILL
 
 ## Comments on observed dynamics given model assumptions
-FILL
+
+
 
 # Model assumptions
 
@@ -20,10 +21,10 @@ FILL
 In our model we assume that receiving the monovalent booster XBB1.5 or being infected with the XBB1.5 strain results in a protection against infection of XX%. We hereby assume the the novel monovalent XBB1.5. booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type. We assume the same waning speed for all agents.
 
 #### Optimistic waning of protection against infection 
-Within 6 months the protection wanes to 70% of the initial immunty, resulting in a VE against infection of XX%.
+Within 6 months the protection wanes to 70% of the initial immunty, resulting in a VE against infection of <mark>XX%</mark>.
 
 #### Pessimistic waning of protection against infection
-Within 6 months the protection wanes to 40% of the initial immunty, resulting in a VE against infection of XX%.
+Within 6 months the protection wanes to 40% of the initial immunty, resulting in a VE against infection of <mark>XX%</mark>.
 
 #### Any variation from the scenarios as specified
 FILL (if applicable)
@@ -66,7 +67,7 @@ None.
 
 ### Seasonality implementation
 
-Based on weather data, we set up the so-called "outdoor fraction", which determines the percentage of activities performed outside instead of inside. The introduction of the ''outdoor fraction'' is motivated by the fact that the effect of temperature is mostly transmitted via an indoors/outdoors dynamic and that it therefore needs to saturate: Below a certain tempersture threshold because eventually all activities are indoors and above a certain temperature threshold because at most all activities can be outdoors.
+Based on weather data, we set up the so-called "outdoor fraction", which determines the percentage of activities performed outside instead of inside. The introduction of the ''outdoor fraction'' is motivated by the fact that the effect of temperature is mostly transmitted via an indoors/outdoors dynamic and that it therefore needs to saturate: Below a certain temperature threshold because eventually all activities are indoors and above a certain temperature threshold because at most all activities can be outdoors.  (With air conditioning, the situation would probably be different, but Germany has little of that.)
 
 ### Contact rate and/or behaviour assumptions
 
