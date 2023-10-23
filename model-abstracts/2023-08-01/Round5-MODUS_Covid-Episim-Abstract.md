@@ -33,7 +33,7 @@ We assume the same waning speed for all agents.
 
 For the present study, the speed of the exponential decrease is adjusted such that the specified reduction of immunity emerges.
 
-In our model we assume that receiving the monovalent booster XBB1.5 <mark>~~or being infected with the XBB1.5 strain ~~</mark>results in an initial protection against infection with XBB1.5 of 98%. We hereby assume that the novel monovalent XBB1.5 booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type.
+In our model we assume that receiving the monovalent booster XBB1.5 results in an initial protection against infection with XBB1.5 of 98%. We hereby assume that the novel monovalent XBB1.5 booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type.
 
 Protection against escape variants is smaller.
 
