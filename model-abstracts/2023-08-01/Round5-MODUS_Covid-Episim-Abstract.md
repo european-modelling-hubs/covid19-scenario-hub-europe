@@ -15,7 +15,7 @@ For both optimistic and pessimistic waning we observe the above-mentioned waves 
 
 ## Comments on observed dynamics given model assumptions
 
-For future virus variants, we assume that they are introduced every 30 days, with a constant and relatively small immune escape speed (no "game-changer" variants).  Earlier simulations have shown that without seasonal effects this leads, within a small number of years, to a dying out of the waves and in consequence to a constant incidence.  Once we include seasonal effects, this leads to a self-selection of a wave length that fits into the annual cycle, e.g. one or two or three waves per year. With currently plausible parameters, these wave lengths are much longer than the above 30 days, meaning that only _some_ of the new virus variants trigger a new wave.
+For future virus variants, we assume that they are introduced every 30 days, with a constant and <mark>relatively small immune escape speed (no "game-changer" variants).</mark>  Earlier simulations have shown that without seasonal effects this leads, within a small number of years, to a dying out of the waves and in consequence to a constant incidence.  Once we include seasonal effects, this leads to a self-selection of a wave length that fits into the annual cycle, e.g. one or two or three waves per year. With currently plausible parameters, these wave lengths are much longer than the above 30 days, meaning that only _some_ of the new virus variants trigger a new wave.
 
 The wave length is determined by the waning speed of the immunity <mark>multiplied with</mark> the escape speed of the virus variants -- the slower the waning speed and the slower the escape speed, the longer the wave length.  It is to be expected that both get slower, and indeed the data from 2023 implies that the overall dynamics has made considerable progress in this direction.  
 
@@ -89,7 +89,7 @@ None.
 
 #### Behaviour in response to case notification rates
 
-Not implemented.
+None.
 
 ### Other
 
