@@ -11,7 +11,11 @@ FILL
 
 ## Comments on observed dynamics given model assumptions
 
+For future virus variants, we assume that they are introduced every 30 days, with a constant immune escape speed.  Earlier simulations have shown that without seasonal effects this leads, within a small number of years, to a dying out of the waves and in consequence to a constant incidence.  Once we include seasonal effects, this leads to a self-selection of a wave length that fits into the annual cycle, e.g. one or two or three waves per year.   With currently plausible parameters, these wave lengths are much longer than the above 30 days, meaning that only _some_ of the new virus variants trigger a new wave.
 
+The wave length is determined by the waning speed of the immunity <mark>multiplied with</mark> the escape speed of the virus variants -- the slower the waning speed and the slower the escape speed, the longer the wave length.  It is to be expected that both get slower, and indeed the data from 2023 implies that the overall dynamics has made considerable progress in this direction.  
+
+Our model predicts (still) two waves per year for both the "optimistic" and the "pessimistic" waning assumption of the ECDC scenario.  However, in the "optimistic" case, the maximum amplitude of the summer wave is considerably reduced, from about 5800 to about 4200 (incidence per 100k inhabitants).  <mark>Going further into the same direction, i.e. slower waning and slower escape, our model predicts that this trend will continue, and the amplitude of the summer wave will in the average further decrease from year to year, and eventually dying out.</mark>
 
 # Model assumptions
 
