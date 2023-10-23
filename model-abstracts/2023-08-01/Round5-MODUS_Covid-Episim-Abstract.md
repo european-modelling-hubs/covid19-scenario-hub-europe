@@ -7,10 +7,10 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 # Modeller commentary
 
 ## Summary comments on results
-**Difference between vaccination campaigns**
+**Difference between vaccination campaigns:**
 No matter which vaccination campaign we assume, we observe an infection wave in October 2023 and a smaller infection wave in March 2024. The differences in heights of peaks and valleys between the different campaigns are negligible small. We believe that we hardly see a difference in infection numbers when considering the different campaigns, as the vaccine's effect is outsized for progression to a more severe disease state, especially for the elderly (60+) population.
 
-**Difference between optimistic and pessimistic waning**
+**Difference between optimistic and pessimistic waning:**
 For both optimistic and pessimistic waning we observe the above-mentioned waves in October 2023 and March 2024. The heights of the peaks and valleys are lower when assuming optimistic waning. We believe that the difference in waning speed is too small to have any significant effect on the structure of the infection curve in our model. 
 
 ## Comments on observed dynamics given model assumptions
