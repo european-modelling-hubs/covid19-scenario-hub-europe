@@ -33,7 +33,7 @@ Our ABM explicitly models effective antibody levels of each agent in response to
 We assume the same waning speed for all agents.
 
 #### Optimistic waning of protection against infection 
-Based on the Round 5 guidlines, the protection wanes to 70% of the initial immunty (VE = 98%) within 6 months, resulting in a VE against infection of <mark>69%</mark>.
+Based on the Round 5 guidlines, the protection wanes to 70% of the initial immunity (VE = 98%) within 6 months, resulting in a VE against infection of <mark>69%</mark>.
 
 #### Pessimistic waning of protection against infection
 Within 6 months the protection wanes to 40% of the initial immunty (VE = 98%), resulting in a VE against infection of <mark>39%</mark>.
