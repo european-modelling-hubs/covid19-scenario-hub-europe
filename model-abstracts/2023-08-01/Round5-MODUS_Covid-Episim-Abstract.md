@@ -87,7 +87,7 @@ The likelihood to experience a more severe state is not increased when an agent 
 
 ##### Other
 
-None.
+The model is implemented for the region of Cologne, not for all of Germany.  We believe that it is still indicative for the overall situation in all of Germany.
 
 ### Seasonality implementation
 
@@ -105,5 +105,7 @@ None.
 
 ### Other
 
-None.
+Our results were submitted towards the end of October 2023, later than most if not all other simulation results.  However, the SARS-CoV-2 wastewater surveillance data available to us, against which we calibrate our model, ends at the end of June 2023.  In consequence, we may have used more general information about the progression of SARS-CoV-2 than the other projects, but the time period for which we could calibrate was not any longer.
+
+We thank the public health authority of Cologne (Gesundheitsamt Köln) for making the wastewater surveillance data available to us.
 
