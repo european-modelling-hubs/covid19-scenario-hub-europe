@@ -10,15 +10,12 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 **Difference between vaccination campaigns:**
 No matter which vaccination campaign we assume, we observe an infection wave in October 2023 and a smaller infection wave in March 2024. The differences in heights of peaks and valleys between the different campaigns are small. 
 
-[//]: # (We believe that we hardly see a difference in infection numbers when considering the different campaigns, as the vaccine's effect is outsized for progression to a more severe disease state, especially for the elderly &#40;60+&#41; population.)
-
 **Difference between optimistic and pessimistic waning:**
 For both optimistic and pessimistic waning we observe the above-mentioned waves in Fall 2023 and Spring 2024; with the optimistic waning scenarios, the waves occur several weeks later than in the pessimistic waning scenarios. The valley between the Fall & Spring waves, as well as the Spring peak have lower infections in the optimistic waning scenarios than in the pessimistic waning scenarios. 
 
 ## Comments on observed dynamics given model assumptions
 
-For future virus variants, we assume that they are introduced every 30 days, with a constant and relatively small immune escape speed.
-Earlier simulations have shown that without seasonal effects this leads, within a small number of years, to a dying out of the waves and in consequence to a constant incidence.  Once we include seasonal effects, this leads to a self-selection of a wave length that fits into the annual cycle, e.g. one or two or three waves per year. With currently plausible parameters, these wave lengths are much longer than the above 30 days, meaning that only _some_ of the new virus variants trigger a new wave.
+For future virus variants, we assume that they are introduced every 30 days, with a constant and relatively small immune escape speed. Earlier simulations have shown that without seasonal effects this leads, within a small number of years, to a dying out of the waves and in consequence to a constant incidence.  Once we include seasonal effects, this leads to a self-selection of a wave length that fits into the annual cycle, e.g. one or two or three waves per year. With currently plausible parameters, these wave lengths are much longer than the above 30 days, meaning that only _some_ of the new virus variants trigger a new wave.
 
 The wave length is determined by the waning speed of the immunity and the the escape speed of the virus variants -- the slower the waning speed and the slower the escape speed, the longer the wave length.  It is to be expected that both get slower, and indeed the data from 2023 implies that the overall dynamics has made considerable progress in this direction.  
 
@@ -36,7 +33,7 @@ We assume the same waning speed for all agents.
 
 For the present study, the speed of the exponential decrease is adjusted such that the specified reduction of immunity emerges.
 
-In our model we assume that receiving the monovalent booster XBB1.5 or being infected with the XBB1.5 strain results in an initial protection against infection with XBB1.5 of 98%. We hereby assume that the novel monovalent XBB1.5 booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type.
+In our model we assume that receiving the monovalent booster XBB1.5 <mark>~~or being infected with the XBB1.5 strain ~~</mark>results in an initial protection against infection with XBB1.5 of 98%. We hereby assume that the novel monovalent XBB1.5 booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type.
 
 Protection against escape variants is smaller.
 
@@ -56,7 +53,7 @@ None.
 
 
 #### Any variation from the scenarios as specified
-We assume that Comirnaty XBB.1.5 is the only type of vaccination distributed during the vaccination campaign. This monovalent vaccine is assumed to provide the same protection against an infection with XBB.1.5. as the original mRNA vaccines protected against the wild-type of SARS-CoV-2. Synthetic persons could only get the new vaccinations if they hadn't been infected or vaccinated within the last 12 months (as per [STIKO](https://www.rki.de/DE/Content/Kommissionen/STIKO/Empfehlungen/Stellungnahme-COVID-19-Varianten-adaptierte-Impfstoffe.html) recommendation) and only agents who were already vaccinated (+ potentially boostered) could receive the booster. For the "upper-limit" vaccination case, we reduced the wait period to 6 months and also allowed unvaccinated agents to receive the booster. 
+We assume that Comirnaty XBB.1.5 is the only type of vaccination distributed during the vaccination campaign. This monovalent vaccine is assumed to provide the same protection against an infection with XBB.1.5. as the original mRNA vaccines protected against the wild-type of SARS-CoV-2. Synthetic persons could only get the new vaccinations if they hadn't been infected or vaccinated within the last 12 months (as per [STIKO](https://www.rki.de/DE/Content/Kommissionen/STIKO/Empfehlungen/Stellungnahme-COVID-19-Varianten-adaptierte-Impfstoffe.html) recommendation) and only agents who were already vaccinated (+ potentially boostered) could receive the booster. For the "upper-boundary" vaccination case, we reduced the wait period to 6 months and also allowed unvaccinated agents to receive the booster. 
 
 
 ## Additional assumptions
