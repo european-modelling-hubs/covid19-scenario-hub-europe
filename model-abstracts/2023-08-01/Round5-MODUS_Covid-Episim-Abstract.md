@@ -26,7 +26,11 @@ Our model predicts (still) two waves per year for both the "optimistic" and the 
 ## Round 5 scenarios
 
 ### Waning of protection against infection
-In our model we assume that receiving the monovalent booster XBB1.5 or being infected with the XBB1.5 strain results in a protection against infection of 98%. We hereby assume the the novel monovalent XBB1.5. booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type. We assume the same waning speed for all agents.
+In our model we assume that receiving the monovalent booster XBB1.5 or being infected with the XBB1.5 strain results in a protection against infection of 98%. We hereby assume the the novel monovalent XBB1.5. booster protects as well against the XBB1.5. variant as the initial mRNA vaccine protected against the wild type. 
+
+We model protection against infection ...  <mark>bitte erklären.</mark>
+
+We assume the same waning speed for all agents.
 
 #### Optimistic waning of protection against infection 
 Within 6 months the protection wanes to 70% of the initial immunty, resulting in a VE against infection of <mark>69%</mark>.
