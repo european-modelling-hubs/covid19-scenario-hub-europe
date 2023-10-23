@@ -34,6 +34,7 @@ license: agpl-3.0
 team_model_designation: primary
 methods: Agent-based simulation model for COVID-19 based on a traffic simulation and mobile phone data
 model_details:
+  contact_tracing: Contact tracing with minimal capacity and 50% success rate.
   modeling_NPI: No NPIs are implemented.
   compliance_NPI: Not applicable.
   testing: No mandatory testing considered.
