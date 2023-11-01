@@ -54,9 +54,7 @@ Based on the Round 5 guidelines, the speed of the exponential decrease is adjust
 The protection against hospitalisation is calculated from the maximum effective antibody levels the agent has ever reached. There is no waning. 
 
 #### Pessimistic waning of protection against hospitalisation
-To derive the protection against hospitalisation, we apply waning to the maximum effective antibody level the agent has ever reached. We apply an exponential decay function with a half-life of 60 days to this effective antibody level. For the time-period, we take the number of days since the last immunisation event. 
-
-The 60 day half-life was calculated based on the ECDC assumption: "6 months median time to transition to 80% of the initial immunity."
+The guidelines for round 5 demand a "6 months median time to transition to 80% of the initial immunity". Our initial protection against hospitalisation (VE) is assumed to be 98%. Consequently, after 6 months we assume P(Hospitalisation | Infection) = 0.78. The protection against hospitalisation decays exponentially. 
 
 #### Any variation from the scenarios as specified
 
