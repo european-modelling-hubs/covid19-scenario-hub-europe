@@ -9,9 +9,9 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 ## Summary comments on results
 
 **Difference between optimistic and pessimistic waning:**
-For both optimistic and pessimistic waning we observe the above-mentioned waves in Fall 2023 and Spring 2024; with the optimistic waning scenarios, the waves occur several weeks later than in the pessimistic waning scenarios. The valley between the Fall & Spring waves, as well as the Spring peak have lower infections in the optimistic waning scenarios than in the pessimistic waning scenarios. 
+For both optimistic and pessimistic waning we observe the above-mentioned waves in Fall 2023 and Spring 2024; with the optimistic waning scenarios, the waves occur several weeks later than in the pessimistic waning scenarios. The optimistic waning scenarios generally have lower infections than the pessimisitic ones; the expection is the Fall/Winter wave in 2023, wherein the optimistic waning cases lead to a higher wave. This can be explained by the fact that the wave is pushed back temporally into the season of colder weather; this leads to more leisure activities occuring indoors, which, in turn, increases the case numbers.
 
-In terms of hospitalisations, however, the pessimistic waning scenarios have up 5x higher waves than the opimistic waning scenarios.
+In terms of hospitalisations, the divide between the optimistic and pessimistic waning scenarios is very clear: the pessimistic scenarios have up to 5x higher waves than the opimistic ones. This stark divide can be explained by the multiplicative effect of the two types of pessimistic waning: not only do a higher proportion of agents become infected with SARS-CoV-2, but also a higher proportion of those agents are hospitalised. 
 
 **Difference between vaccination campaigns:**
 No matter which vaccination campaign we assume, we observe an infection wave in October 2023 and a smaller infection wave in March 2024. The differences in heights of peaks and valleys between the different campaigns are small. This is also true for hospitalisations.
