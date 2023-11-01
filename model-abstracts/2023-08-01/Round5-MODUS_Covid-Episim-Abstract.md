@@ -7,11 +7,14 @@ _Usage: Please copy this file and save in your team's `data-processed` folder, r
 # Modeller commentary
 
 ## Summary comments on results
-**Difference between vaccination campaigns:**
-No matter which vaccination campaign we assume, we observe an infection wave in October 2023 and a smaller infection wave in March 2024. The differences in heights of peaks and valleys between the different campaigns are small. 
 
 **Difference between optimistic and pessimistic waning:**
 For both optimistic and pessimistic waning we observe the above-mentioned waves in Fall 2023 and Spring 2024; with the optimistic waning scenarios, the waves occur several weeks later than in the pessimistic waning scenarios. The valley between the Fall & Spring waves, as well as the Spring peak have lower infections in the optimistic waning scenarios than in the pessimistic waning scenarios. 
+
+In terms of hospitalisations, however, the pessimistic waning scenarios have up 5x higher waves than the opimistic waning scenarios.
+
+**Difference between vaccination campaigns:**
+No matter which vaccination campaign we assume, we observe an infection wave in October 2023 and a smaller infection wave in March 2024. The differences in heights of peaks and valleys between the different campaigns are small. This is also true for hospitalisations.
 
 ## Comments on observed dynamics given model assumptions
 
@@ -41,9 +44,19 @@ Protection against escape variants is smaller.
 
 Based on the Round 5 guidelines, the speed of the exponential decrease is adjusted such that the initial protection (VE) of 98% is reduced to 70% of 98% = 69% after 6 months. 
 
+
+
 #### Pessimistic waning of protection against infection
 
 Based on the Round 5 guidelines, the speed of the exponential decrease is adjusted such that the initial protection (VE) of 98% is reduced to 40% of 98% = 39% after 6 months. 
+
+#### Optimistic (= no) waning of protection against hospitalisation
+The protection against hospitalisation is calculated from the maximum effective antibody levels the agent has ever reached. There is no waning. 
+
+#### Pessimistic waning of protection against hospitalisation
+To derive the protection against hospitalisation, we apply waning to the maximum effective antibody level the agent has ever reached. We apply an exponential decay function with a half-life of 60 days to this effective antibody level. For the time-period, we take the number of days since the last immunisation event. 
+
+The 60 day half-life was calculated based on the ECDC assumption: "6 months median time to transition to 80% of the initial immunity."
 
 #### Any variation from the scenarios as specified
 
