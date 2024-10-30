@@ -1,5 +1,8 @@
 # European COVID-19 Scenario Hub
 
+> [!NOTE]
+> This repository contains COVID-19 scenarios realised in 2022 and 2023. To explore more recent scenarios relative to both COVID-19 and Influenza visit the new [ECDC's Respiratory Diseases Scenario Hub: RespiCompass](https://github.com/european-modelling-hubs/RespiCompass).
+
 ## Background
 
 Scenario models for COVID-19 aim to bound the uncertainty around future outcomes over some time frame. Each potential scenario is composed of one or more variables (which could be, for example, biological parameters such as the rate of immunity waning, or assumed future changes in contact behaviours) deemed plausible. The scenario models encode the influence of these variables on COVID-19 outcomes, and results from scenario models show possible outcomes within the given timeframe assuming that present causal relationships hold in the future. The definition of scenario variables and values depends on the intended use of scenario results. One purpose of scenario modelling is to support comparisons of possible actions taken in the present with long term effects. Separately, scenarios can also be used to understand the sensitivity of future outcomes to varying parameter conditions. 
